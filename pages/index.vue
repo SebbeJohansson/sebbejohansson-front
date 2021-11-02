@@ -1,25 +1,32 @@
-<template>
-  <div class="index">
-    <div class="index__intro">
-      <h1 class="index__title">
-      </h1>
-      <p class="index__about">
-      </p>
-    </div>
-  </div>
-</template>
-
 <script lang="ts">
-  import { defineComponent, ref, watch } from '@nuxtjs/composition-api';
+  import { defineComponent } from '@nuxtjs/composition-api';
+  import ContentWithTitle from "~/components/content/ContentWithTitle.vue";
+  import PortfolioList from "~/components/content/PortfolioList.vue";
   
   export default defineComponent({
-    setup(){
-      
+    components: {
+      ContentWithTitle,
+      PortfolioList,
     },
-    async fetch() {
-    }
   });
 </script>
+
+<template>
+  <div class="index">
+    <content-with-title
+      :title="'Who am I?'"
+    >
+			<p>
+        My name is Sebastian Johansson. I am a web developer/designer, game developer and all around geek. 
+		  	My greatest interest is of course computers and the internet, and I love tech and gadgets.
+			</p>
+			<p>
+				Anyway... I hope you enjoy your stay.
+			</p>
+    </content-with-title>
+    <portfolio-list />
+  </div>
+</template>
 
 <style>
 
