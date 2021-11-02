@@ -417,3 +417,11 @@ template {
 [hidden] {
   display: none;
 }
+
+/*
+  Adds the correct box sizing.
+*/
+
+* {
+  box-sizing: border-box;
+}
