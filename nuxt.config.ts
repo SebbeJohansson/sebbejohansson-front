@@ -9,7 +9,7 @@ export default {
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'example-nuxt-ts-site',
+    title: 'SebbeJohansson',
     htmlAttrs: {
       lang: 'en'
     },
@@ -39,8 +39,18 @@ export default {
   buildModules: [
     // https://go.nuxtjs.dev/typescript
     '@nuxt/typescript-build',
-    '@nuxtjs/composition-api'
+    '@nuxtjs/composition-api',
+    '@nuxtjs/axios',
   ],
+
+  // Modules: https://go.nuxtjs.dev/config-modules
+  modules: [
+    '@nuxtjs/axios',
+  ],
+    
+  axios: {
+    proxy: false    
+  },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
@@ -75,5 +85,8 @@ export default {
       preset: {
       },
     }
+  },
+  env: {
+    apiUrl: process.env.API_URL || 'http://localhost/api'
   }
 }
