@@ -37,6 +37,7 @@ export default defineComponent({
 
       const data = [
         "fields slug,entryPic,title,description,size;",
+        "filter status=1;",
         "sort orderID asc;",
       ];
 

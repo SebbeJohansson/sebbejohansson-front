@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { defineComponent, PropType, computed } from "@nuxtjs/composition-api";
-import BaseComponent from "~/components/parts/atoms/BaseComponent.vue";
 
 export default defineComponent({
   components: {},

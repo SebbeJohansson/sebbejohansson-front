@@ -2,11 +2,13 @@
 import { defineComponent } from "@nuxtjs/composition-api";
 import ContentWithTitle from "~/components/content/ContentWithTitle.vue";
 import PortfolioList from "~/components/content/PortfolioList.vue";
+import StalkList from "~/components/content/StalkList.vue";
 
 export default defineComponent({
   components: {
     ContentWithTitle,
     PortfolioList,
+    StalkList,
   },
 });
 </script>
@@ -37,6 +39,7 @@ export default defineComponent({
         />
       </a>
     </div>
+    <stalk-list />
   </div>
 </template>
 
