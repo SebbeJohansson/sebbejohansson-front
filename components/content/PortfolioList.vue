@@ -18,7 +18,7 @@ export default defineComponent({
   },
   setup() {
     let portfolioEntries = ref<PortfolioEntry[]>();
-    const fetchUsers = async () => {
+    const fetchEntries = async () => {
       const header = {
         "Content-Type": "application/x-www-form-urlencoded",
         "Access-Control-Allow-Origin": "*",
@@ -45,9 +45,9 @@ export default defineComponent({
         console.log(error);
       }
     };
-    onMounted(fetchUsers);
+    onMounted(fetchEntries);
 
-    return { portfolioEntries, fetchUsers };
+    return { portfolioEntries, fetchEntries };
   },
 });
 </script>
@@ -63,6 +63,7 @@ export default defineComponent({
           :title="entry.title"
           :description="entry.description || null"
           :picture="entry.entryPic"
+          :slug="entry.slug"
         />
       </div>
     </content-with-title>

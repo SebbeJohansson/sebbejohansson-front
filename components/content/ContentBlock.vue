@@ -1,18 +1,18 @@
 <script setup lang="ts">
-import { defineComponent } from '@nuxtjs/composition-api'
+import { defineComponent } from "@nuxtjs/composition-api";
 
-export default defineComponent({
-})
+export default defineComponent({});
 </script>
 
 <template>
   <div class="content-block">
-    <slot/>
+    <slot />
   </div>
 </template>
 
 <style scoped>
-.content-block{
+.content-block {
+  width: 100%;
   max-width: 1300px;
   padding: 30px;
   margin: 10px auto 10px;

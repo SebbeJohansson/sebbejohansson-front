@@ -26,8 +26,14 @@ export default defineComponent({
         : "null";
     });
 
+    const entryUrl = computed((): string | undefined => {
+      console.log(props.slug);
+      return props.slug ? `portfolio/${props.slug}` : undefined;
+    });
+
     return {
       imageUrl,
+      entryUrl,
     };
   },
   methods: {
@@ -38,16 +44,22 @@ export default defineComponent({
 
 <template>
   <div class="big-portfolio-entry">
-    <nuxt-link v-if="slug" :to="slug" class="big-portfolio-entry__container">
+    <nuxt-link
+      v-if="entryUrl"
+      :to="entryUrl"
+      class="big-portfolio-entry__container"
+    >
       <div
         class="big-portfolio-entry__image"
         :style="`background-image: url(${imageUrl})`"
         :alt="title"
       />
-      <h3 v-if="title" class="big-portfolio-entry__title">{{ title }}</h3>
-      <p v-if="description" class="big-portfolio-entry__description">
-        {{ description }}
-      </p>
+      <div class="big-portfolio-entry__content">
+        <h3 v-if="title" class="big-portfolio-entry__title">{{ title }}</h3>
+        <p v-if="description" class="big-portfolio-entry__description">
+          {{ description }}
+        </p>
+      </div>
     </nuxt-link>
     <div v-else class="big-portfolio-entry__container">
       <div
@@ -55,37 +67,49 @@ export default defineComponent({
         :style="`background-image: url(${imageUrl})`"
         :alt="title"
       />
-      <h3 v-if="title" class="big-portfolio-entry__title">{{ title }}</h3>
-      <p v-if="description" class="big-portfolio-entry__description">
-        {{ description }}
-      </p>
+      <div class="big-portfolio-entry__content">
+        <h3 v-if="title" class="big-portfolio-entry__title">{{ title }}</h3>
+        <p v-if="description" class="big-portfolio-entry__description">
+          {{ description }}
+        </p>
+      </div>
     </div>
   </div>
 </template>
 
 <style scoped>
 .big-portfolio-entry {
+  padding: 0.5em;
 }
 .big-portfolio-entry__container {
   display: flex;
   flex-direction: column;
+  height: 100%;
   padding: 10px;
-  margin: 0 0 2.5% 2.5%;
   background: #fff;
   border: 1px solid #ddd;
   font-size: 1rem;
   vertical-align: top;
   box-shadow: 0 0 5px #ddd;
+  text-decoration: none;
+  color: black;
 }
 .big-portfolio-entry__image {
   width: 100%;
   margin: 0 0 10px;
   border-radius: 10px;
-  height: 78%;
-  object-fit: cover;
-  object-position: bottom;
+  height: 27em;
+  background-size: cover;
+  background-position: bottom center;
+  background-repeat: no-repeat;
+}
+.big-portfolio-entry__content {
+  flex-grow: 1;
 }
 .big-portfolio-entry__title {
+  text-align: center;
+  font-family: Roboto, Helvetica, Arial, Verdana, sans-serif;
+  font-weight: 400;
   margin: 0 0 5px;
 }
 .big-portfolio-entry__description {
