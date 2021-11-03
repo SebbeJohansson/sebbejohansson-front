@@ -8,7 +8,7 @@ export default defineComponent({
       type: String,
       required: true,
     },
-    slug: {
+    link: {
       type: String,
       required: true,
     },
@@ -21,7 +21,7 @@ export default defineComponent({
     });
 
     const entryUrl = computed((): string | undefined => {
-      return props.slug ? `portfolio/${props.slug}` : undefined;
+      return props.link ? `https://${props.link}` : undefined;
     });
 
     return {
@@ -36,10 +36,10 @@ export default defineComponent({
 </script>
 
 <template>
-  <div class="stalk-entry">
-    <nuxt-link v-if="entryUrl" :to="entryUrl" class="stalk-entry__container">
+  <div v-if="entryUrl" class="stalk-entry">
+    <a :href="entryUrl" target="_blank" class="stalk-entry__container">
       <img :src="imageUrl" class="stalk-entry__image" />
-    </nuxt-link>
+    </a>
   </div>
 </template>
 

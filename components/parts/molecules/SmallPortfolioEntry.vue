@@ -8,18 +8,9 @@ export default defineComponent({
       type: String,
       required: true,
     },
-    slug: {
+    link: {
       type: String,
     },
-  },
-  setup(props) {
-    const entryUrl = computed((): string | undefined => {
-      return props.slug ? `portfolio/${props.slug}` : undefined;
-    });
-
-    return {
-      entryUrl,
-    };
   },
   methods: {
     method() {},
@@ -28,23 +19,12 @@ export default defineComponent({
 </script>
 
 <template>
-  <div class="small-portfolio-entry">
-    <nuxt-link
-      v-if="entryUrl"
-      :to="entryUrl"
-      class="
-        small-portfolio-entry__container small-portfolio-entry__container--link
-      "
-    >
+  <div v-if="link" class="small-portfolio-entry">
+    <a :href="link" target="_blank" class="small-portfolio-entry__container">
       <span class="small-portfolio-entry__title">
         {{ title }}
       </span>
-    </nuxt-link>
-    <div v-else class="small-portfolio-entry__container">
-      <span class="small-portfolio-entry__title">
-        {{ title }}
-      </span>
-    </div>
+    </a>
   </div>
 </template>
 
@@ -57,14 +37,12 @@ export default defineComponent({
   font-family: Roboto, Helvetica, Arial, Verdana, sans-serif;
   font-weight: 400;
   margin: 0 0 5px;
-}
-
-.small-portfolio-entry__container--link {
   color: black;
   text-decoration: none;
 }
-.small-portfolio-entry__container--link:hover,
-.small-portfolio-entry__container--link:focus {
+
+.small-portfolio-entry__container:hover,
+.small-portfolio-entry__container:focus {
   color: #1084ff;
   text-decoration: underline;
 }

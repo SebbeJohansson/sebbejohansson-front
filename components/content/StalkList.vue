@@ -57,7 +57,7 @@ export default defineComponent({
       <stalk-entry
         v-for="entry in stalkEntries"
         :key="entry.id"
-        :slug="entry.link"
+        :link="entry.link"
         :picture="entry.entryPic"
       />
     </div>

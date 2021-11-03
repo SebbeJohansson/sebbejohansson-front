@@ -15,6 +15,7 @@ interface PortfolioEntry {
   description: string;
   slug: string;
   entryPic: string;
+  link: string;
   size: number;
 }
 
@@ -36,7 +37,7 @@ export default defineComponent({
       };
 
       const data = [
-        "fields slug,entryPic,title,description,size;",
+        "fields slug,entryPic,title,description,size,link;",
         "filter status=1;",
         "sort orderID asc;",
       ];
@@ -87,7 +88,7 @@ export default defineComponent({
         v-for="entry in smallPortfolioEntries"
         :key="entry.id"
         :title="entry.title"
-        :slug="entry.slug"
+        :link="entry.link"
       />
     </content-with-title>
   </div>
