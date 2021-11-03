@@ -7,11 +7,15 @@ export default defineComponent({});
 <template>
   <div class="footer">
     <div class="footer__left" id="contact">
-      <img class="footer__left-icon" src="/images/icon.png"/>
-      <a class="footer__address" href="mailto:hello@sebbejohansson.com">hello@sebbejohansson.com</a>
+      <img class="footer__left-icon" src="/images/icon.png" />
+      <a class="footer__address" href="mailto:hello@sebbejohansson.com"
+        >hello@sebbejohansson.com</a
+      >
     </div>
     <div class="footer__right">
-      <p class="footer__right-text">designed and developed by Sebastian Johansson</p>
+      <p class="footer__right-text">
+        designed and developed by Sebastian Johansson
+      </p>
     </div>
   </div>
 </template>
@@ -22,12 +26,14 @@ export default defineComponent({});
   min-height: 100px;
   width: 100%;
   margin-top: auto;
+  display: flex;
 }
 
 .footer__right {
-  float: right;
   height: 100px;
-  width: 49%;
+  width: 50%;
+  display: flex;
+  align-items: center;
 }
 
 .footer__right-text {
@@ -35,34 +41,55 @@ export default defineComponent({});
   font-family: Montserrat, Arial, sans-serif;
   color: white;
   font-weight: 100;
-  margin: 45px 30px 0px 10px;
-  float: right;
+  text-align: right;
+  margin-right: 30px;
+  width: 100%;
 }
 
 .footer__left {
-  float: left;
   width: 50%;
   border-right: 1px dimgray solid;
   height: 100px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
 }
 
 .footer__left-icon {
   width: 60px;
-  -webkit-filter: invert(100%);
-  margin: 20px 10px 10px 20px;
+  filter: invert(100%);
+  margin-left: 20px;
   float: left;
 }
 
 .footer__address {
   font-size: 16px;
-  float: left;
   font-family: Montserrat, Arial, sans-serif;
   color: white;
   font-weight: 100;
   text-decoration: none;
-  margin: 45px 0px 0px 20px;
+  margin-left: 45px;
 }
-.footer__address:hover{
+.footer__address:hover {
   text-decoration: underline;
+}
+
+@media (--phone) {
+  .footer {
+    flex-direction: column;
+  }
+  .footer__left {
+    width: 100%;
+    border-bottom: 1px solid #696969;
+    border-right: none;
+  }
+  .footer__right {
+    width: 100%;
+  }
+  .footer__right-text {
+    text-align: center;
+    margin-right: 0;
+  }
 }
 </style>

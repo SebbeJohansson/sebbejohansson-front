@@ -11,7 +11,7 @@ module.exports = {
     '@vue/typescript/recommended',
   ],
   rules: {
-    'max-len': ["error", { "code": 170 }]                                                                                                                                
+    'max-len': ["error", { "code": 240 }]                                                                                                                                
   },
   globals: {
     $nuxt: true

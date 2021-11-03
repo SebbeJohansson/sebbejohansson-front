@@ -1,23 +1,34 @@
 <script setup lang="ts">
-import { defineComponent, onMounted, ref } from "@nuxtjs/composition-api";
+import {
+  defineComponent,
+  onMounted,
+  ref,
+  reactive,
+} from "@nuxtjs/composition-api";
 import axios from "~/plugins/axios";
 import ContentWithTitle from "~/components/content/ContentWithTitle.vue";
 import BigPortfolioEntry from "~/components/parts/molecules/BigPortfolioEntry.vue";
+import SmallPortfolioEntry from "~/components/parts/molecules/SmallPortfolioEntry.vue";
 
 interface PortfolioEntry {
   title: string;
   description: string;
   slug: string;
   entryPic: string;
+  size: number;
 }
 
 export default defineComponent({
   components: {
     ContentWithTitle,
     BigPortfolioEntry,
+    SmallPortfolioEntry,
   },
   setup() {
-    let portfolioEntries = ref<PortfolioEntry[]>();
+    let bigPortfolioEntries = reactive<PortfolioEntry[]>(<PortfolioEntry[]>[]);
+    let smallPortfolioEntries = reactive<PortfolioEntry[]>(
+      <PortfolioEntry[]>[]
+    );
     const fetchEntries = async () => {
       const header = {
         "Content-Type": "application/x-www-form-urlencoded",
@@ -25,8 +36,7 @@ export default defineComponent({
       };
 
       const data = [
-        "fields slug,entryPic,title,description;",
-        "filter size=0;",
+        "fields slug,entryPic,title,description,size;",
         "sort orderID asc;",
       ];
 
@@ -35,8 +45,13 @@ export default defineComponent({
           .post("/portfolios/get", data.join(""))
           .then((response) => {
             const entries = response.data as PortfolioEntry[];
-            console.log(entries[0].title);
-            portfolioEntries.value = response.data as PortfolioEntry[];
+            entries.forEach((entry) => {
+              if (entry.size === 0) {
+                bigPortfolioEntries.push(entry);
+              } else {
+                smallPortfolioEntries.push(entry);
+              }
+            });
           })
           .catch((error) => {
             console.log(error.response);
@@ -47,7 +62,7 @@ export default defineComponent({
     };
     onMounted(fetchEntries);
 
-    return { portfolioEntries, fetchEntries };
+    return { bigPortfolioEntries, smallPortfolioEntries, fetchEntries };
   },
 });
 </script>
@@ -58,7 +73,7 @@ export default defineComponent({
       <div class="portfolio-list__grid">
         <big-portfolio-entry
           class="portfolio-list__entry"
-          v-for="entry in portfolioEntries"
+          v-for="entry in bigPortfolioEntries"
           :key="entry.id"
           :title="entry.title"
           :description="entry.description || null"
@@ -66,6 +81,13 @@ export default defineComponent({
           :slug="entry.slug"
         />
       </div>
+      <h3 class="portfolio-list__title">Other Projects</h3>
+      <small-portfolio-entry
+        v-for="entry in smallPortfolioEntries"
+        :key="entry.id"
+        :title="entry.title"
+        :slug="entry.slug"
+      />
     </content-with-title>
   </div>
 </template>
@@ -74,6 +96,15 @@ export default defineComponent({
 .portfolio-list__grid {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
+}
+
+.portfolio-list__title {
+  margin: 0px;
+  text-align: center;
+  font-family: raleway, Helvetica, Arial, Verdana, sans-serif;
+  font-size: 2em;
+  font-weight: 400;
+  margin-top: 10px;
 }
 
 @media (--phone) {

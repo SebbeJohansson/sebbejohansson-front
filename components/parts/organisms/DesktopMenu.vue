@@ -1,8 +1,7 @@
 <script setup lang="ts">
-import { defineComponent } from '@nuxtjs/composition-api'
+import { defineComponent } from "@nuxtjs/composition-api";
 
-export default defineComponent({
-})
+export default defineComponent({});
 </script>
 
 <template>
@@ -10,13 +9,21 @@ export default defineComponent({
     <div class="desktop-menu__container-wrapper">
       <div class="desktop-menu__container">
         <div class="desktop-menu__logo-wrapper">
-          <nuxt-link class="desktop-menu__logo" to="/#">Sebastian Johansson</nuxt-link>
+          <nuxt-link class="desktop-menu__logo" to="/#"
+            >Sebastian Johansson</nuxt-link
+          >
         </div>
 
         <div class="desktop-menu__departments">
-          <nuxt-link to="/#portfolio" class="desktop-menu__department">Portfolio</nuxt-link>
-          <nuxt-link to="/#contact" class="desktop-menu__department">Contact</nuxt-link>
-          <nuxt-link to="/blog/" class="desktop-menu__department">Blog</nuxt-link>
+          <nuxt-link to="/#portfolio" class="desktop-menu__department"
+            >Portfolio</nuxt-link
+          >
+          <nuxt-link to="/#contact" class="desktop-menu__department"
+            >Contact</nuxt-link
+          >
+          <nuxt-link to="/blog/" class="desktop-menu__department"
+            >Blog</nuxt-link
+          >
         </div>
       </div>
     </div>
@@ -27,19 +34,18 @@ export default defineComponent({
 </template>
 
 <style scoped>
-
-.desktop-menu{
+.desktop-menu {
   position: relative;
   padding: 1rem 0;
 }
 
-.desktop-menu__container-wrapper{
+.desktop-menu__container-wrapper {
   position: relative;
   z-index: 10;
   background-color: rgba(219, 219, 219, 0.49);
 }
 
-.desktop-menu__container{
+.desktop-menu__container {
   width: 100%;
   height: 100%;
   display: flex;
@@ -48,43 +54,44 @@ export default defineComponent({
   z-index: 10;
 }
 
-.desktop-menu__logo-wrapper{
+.desktop-menu__logo-wrapper {
   margin: 1.5rem 0;
   margin-right: 2rem;
 }
 
-.desktop-menu__logo, .desktop-menu__department{
+.desktop-menu__logo,
+.desktop-menu__department {
   display: block;
   text-decoration: none;
   color: white;
   font-family: Montserrat, Arial, sans-serif;
 }
 
-.desktop-menu__logo{
+.desktop-menu__logo {
   font-weight: 600;
   font-size: 20px;
   line-height: 1;
 }
 
-.desktop-menu__departments{
+.desktop-menu__departments {
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
 }
 
-.desktop-menu__department{
+.desktop-menu__department {
   padding: 1.5rem 1rem;
 }
 
-.desktop-menu__background{
+.desktop-menu__background {
   position: absolute;
   width: 100%;
   height: 100%;
   top: 0;
   z-index: 5;
 }
-.desktop-menu__background-image{
+.desktop-menu__background-image {
   background-image: url(/images/picnr7.jpg);
   height: 100%;
   background-repeat: no-repeat;
@@ -92,4 +99,13 @@ export default defineComponent({
   background-position: center center;
 }
 
+@media (--phone) {
+  .desktop-menu__container {
+    flex-direction: column;
+  }
+  .desktop-menu__logo-wrapper {
+    margin: 1.5rem 0;
+    text-align: center;
+  }
+}
 </style>
