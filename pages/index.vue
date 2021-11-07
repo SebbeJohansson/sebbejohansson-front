@@ -23,7 +23,7 @@ export default defineComponent({
       </p>
       <p>Anyway... I hope you enjoy your stay.</p>
     </content-with-title>
-    <portfolio-list />
+    <portfolio-list id="portfolio" />
     <div class="index__trakt">
       <a
         target="_blank"
@@ -39,7 +39,7 @@ export default defineComponent({
         />
       </a>
     </div>
-    <stalk-list />
+    <stalk-list class="index__stalk" />
   </div>
 </template>
 

@@ -10,4 +10,7 @@
   "editor.defaultFormatter": "dbaeumer.vscode-eslint",
   "editor.tabSize": 2,
   "npm-scripts.showStartNotification": false,
+  "[vue]": {
+    "editor.defaultFormatter": "octref.vetur"
+  },
 }
