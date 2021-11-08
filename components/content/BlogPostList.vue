@@ -3,9 +3,10 @@ import {
   defineComponent,
   onMounted,
   reactive,
+  ref,
   computed,
-  useContext,
-  useRouter,
+  useFetch,
+  useStatic,
 } from "@nuxtjs/composition-api";
 import axios from "~/plugins/axios";
 import ContentWithTitle from "~/components/content/ContentWithTitle.vue";
@@ -30,17 +31,56 @@ interface Dictionary<T> {
   [Key: string]: T;
 }
 
+interface BlogEntries {
+  entries: BlogEntry[];
+}
+
 export default defineComponent({
   components: {
     ContentWithTitle,
     BlogEntry,
   },
   setup() {
-    const { route } = useContext();
-    const router = useRouter();
+    const id = ref();
+    const rawBlogEntries = useStatic<BlogEntries>(
+      async (id) => {
+        const blogEntriesLocal: BlogEntries = {
+          entries: [],
+        };
+        console.log("fetch");
+        const data = [
+          "fields id,title,slug,content,author,date,cat;",
+          "filter status=1;",
+          "sort date desc;",
+        ];
 
-    let blogEntries = reactive<BlogEntry[]>(<BlogEntry[]>[]);
-    const fetchEntries = async () => {
+        try {
+          await axios
+            .post("/blogs/get", data.join(""))
+            .then((response) => {
+              const entries = response.data as BlogEntry[];
+              entries.forEach((entry) => {
+                blogEntriesLocal.entries.push(entry);
+              });
+            })
+            .catch((error) => {
+              console.log(error.response);
+            });
+        } catch (error) {
+          console.log(error);
+        }
+        return blogEntriesLocal;
+      },
+      id,
+      "blogentries"
+    );
+    const blogEntries = computed<BlogEntry[]>((): BlogEntry[] => {
+      console.log(rawBlogEntries.value);
+      return rawBlogEntries.value?.entries as BlogEntry[];
+    });
+
+    /*const { fetch, fetchState } = useFetch(async () => {
+      console.log("fetch");
       const data = [
         "fields id,title,slug,content,author,date,cat;",
         "filter status=1;",
@@ -62,6 +102,32 @@ export default defineComponent({
       } catch (error) {
         console.log(error);
       }
+    });
+
+    fetch();*/
+
+    const fetchEntries = async () => {
+      /*const data = [
+        "fields id,title,slug,content,author,date,cat;",
+        "filter status=1;",
+        "sort date desc;",
+      ];
+
+      try {
+        await axios
+          .post("/blogs/get", data.join(""))
+          .then((response) => {
+            const entries = response.data as BlogEntry[];
+            entries.forEach((entry) => {
+              blogEntries.push(entry);
+            });
+          })
+          .catch((error) => {
+            console.log(error.response);
+          });
+      } catch (error) {
+        console.log(error);
+      }*/
     };
     onMounted(fetchEntries);
 
@@ -76,7 +142,6 @@ export default defineComponent({
             const entries = response.data as BlogCategory[];
             entries.forEach((entry) => {
               blogCategories.push(entry);
-              toggleCategory(entry.name);
             });
           })
           .catch((error) => {
@@ -88,53 +153,51 @@ export default defineComponent({
     };
     onMounted(fetchCategories);
 
-    const selectedCategories = computed((): string[] => {
+    let unselectedCategories = ref(<string[]>[]);
+    /*|const unselectedCategories = computed((): string[] => {
       const query: string[] = [];
       if ("categories" in route.value.query) {
         const categories = (route.value.query.categories as string).split(",");
         query.push(...categories);
       }
       return query;
-    });
+    });*/
 
-    const selectedCategoriesStyling = computed((): string => {
+    const unselectedCategoriesStyling = computed((): string => {
       let style = "";
-      selectedCategories.value.forEach((category) => {
-        style += `.blog-post-list__entry.blog-post-list__entry--${category} { display: block; }`;
+      console.log(unselectedCategories);
+      unselectedCategories.value.forEach((category, index) => {
+        style += `.blog-post-list__entry.blog-post-list__entry--${category} { display: none; }`;
       });
       return style;
     });
 
     function isCategoryChecked(category: string): boolean {
-      return selectedCategories.value.indexOf(category) >= 0;
+      return unselectedCategories.value.indexOf(category) >= 0;
     }
 
     function toggleCategory(category: string) {
-      const query: string[] = selectedCategories.value;
       if (isCategoryChecked(category)) {
-        const index = query.indexOf(category);
+        const index = unselectedCategories.value.indexOf(category);
         if (index > -1) {
-          query.splice(index, 1);
+          unselectedCategories.value.splice(index, 1);
         }
       } else {
-        query.push(category);
+        unselectedCategories.value.push(category);
       }
 
-      const filteredQuery = query.filter((item, index) => {
-        return query.indexOf(item) == index;
-      });
-
-      router.push({
-        path: route.value.path,
-        query: { categories: filteredQuery.join(",") },
-      });
+      unselectedCategories.value = unselectedCategories.value.filter(
+        (item, index) => {
+          return unselectedCategories.value.indexOf(item) == index;
+        }
+      );
     }
 
     return {
       blogEntries,
       blogCategories,
-      selectedCategories,
-      selectedCategoriesStyling,
+      unselectedCategories,
+      unselectedCategoriesStyling,
       fetchEntries,
       fetchCategories,
       isCategoryChecked,
@@ -183,9 +246,9 @@ export default defineComponent({
     <component
       :is="'style'"
       type="text/css"
-      v-if="selectedCategoriesStyling != ''"
+      v-if="unselectedCategoriesStyling != ''"
     >
-      {{ selectedCategoriesStyling }}
+      {{ unselectedCategoriesStyling }}
     </component>
   </div>
 </template>
@@ -200,7 +263,7 @@ export default defineComponent({
 }
 .blog-post-list__entry {
   padding: 0.5em 0;
-  display: none;
+  display: block;
 }
 .blog-post-list__categories {
   margin: 0.5rem 0 0 0.5rem;
