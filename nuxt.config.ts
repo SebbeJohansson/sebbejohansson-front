@@ -1,3 +1,5 @@
+
+import axios from "axios"
 export default {
   telemetry: false,
 
@@ -30,6 +32,7 @@ export default {
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
+    {src: '~/plugins/blog.js', ssr: false}
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -45,7 +48,7 @@ export default {
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
-    '@nuxtjs/axios',
+    '@nuxtjs/axios'
   ],
     
   axios: {
@@ -88,5 +91,96 @@ export default {
   },
   env: {
     apiUrl: process.env.API_URL || 'http://localhost/api'
+  },
+  generate: {
+    async routes() {
+      interface PortfolioEntry {
+        title: string;
+        description: string;
+        slug: string;
+        entryPic: string;
+        link: string;
+        size: number;
+      }
+      const data = [
+        "fields slug,entryPic,title,description,size,link;",
+        "filter status=1;",
+        "sort orderID asc;",
+      ];
+      console.log(process.env.API_URL);
+      const portfolioEntries = await axios
+        .post(process.env.API_URL+"/portfolios/get", data.join(""))
+        .then((response) => {
+          //console.log(response.data);
+          const entries = response.data as PortfolioEntry[];
+          console.log(entries);
+          return entries;
+          const routes = response.data?.map(entry => {
+            return {
+              route: '/portfolio/' + entry.slug,
+              payload: entry,
+            }
+          })
+        })
+        .catch((error) => {
+          console.log(error.response);
+        }) as PortfolioEntry[];
+
+      /*const [articles, pages] = await Promise.all([
+        api.list('/articles'),
+        api.list('/pages'),
+      ]);*/
+      
+      return [
+        // Instead of returning only the slug of
+        // each article or page, we provide an object
+        // which also contains the data as payload.
+        ...portfolioEntries.map(entry => ({
+          route: entry.slug,
+          payload: entry,
+        })),
+        /*...articles.map(article => ({
+          route: article.slug,
+          payload: article.data,
+        })),
+        ...pages.map(page => ({
+          route: page.slug,
+          payload: page.data,
+        })),*/
+      ];
+    },
+    /*routes(callback) {
+      interface PortfolioEntry {
+        title: string;
+        description: string;
+        slug: string;
+        entryPic: string;
+        link: string;
+        size: number;
+      }
+      const data = [
+        "fields slug,entryPic,title,description,size,link;",
+        "filter status=1;",
+        "sort orderID asc;",
+      ];
+      console.log(process.env.API_URL);
+      axios
+        .post(process.env.API_URL+"/portfolios/get", data.join(""))
+        .then((response) => {
+          console.log(response.data);
+          const entries = response.data as PortfolioEntry[];
+          const routes = response.data?.map(entry => {
+            return {
+              route: '/portfolio/' + entry.slug,
+              payload: entry,
+            }
+          })
+          callback(null, routes);
+        })
+        .catch((error) => {
+          console.log(error.response);
+          callback();
+        });
+    }*/
   }
 }

@@ -9,6 +9,7 @@ import {
   useStatic,
 } from "@nuxtjs/composition-api";
 import axios from "~/plugins/axios";
+import blog from "~/plugins/blog";
 import ContentWithTitle from "~/components/content/ContentWithTitle.vue";
 import BlogEntry from "~/components/parts/molecules/BlogEntry.vue";
 
