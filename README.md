@@ -1,8 +1,5 @@
-<<<<<<< HEAD
-# steamdeckdb-frontoffice
-=======
-# example-nuxt-ts-site
-An example of how to setup a nuxt site with Typescript, Postcss, i18n and autoprefixer.
+# sebbejohansson-front
+Nuxt typescript front for sebbejohansson.com
 
 ## Build Setup
 
@@ -20,6 +17,3 @@ $ yarn start
 # generate static project
 $ yarn generate
 ```
-
-For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).
->>>>>>> 06407b7 (Initali Commit)
