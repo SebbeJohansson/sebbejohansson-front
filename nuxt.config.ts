@@ -9,6 +9,10 @@ export default {
   // Target: https://go.nuxtjs.dev/config-target
   target: 'static',
 
+  router: {
+    trailingSlash: true
+  },
+
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     title: 'SebbeJohansson',
@@ -107,13 +111,13 @@ export default {
         "filter status=1;",
         "sort orderID asc;",
       ];
-      console.log(process.env.API_URL);
+      // console.log(process.env.API_URL);
       const portfolioEntries = await axios
         .post(process.env.API_URL+"/portfolios/get", data.join(""))
         .then((response) => {
-          //console.log(response.data);
+          //// console.log(response.data);
           const entries = response.data as PortfolioEntry[];
-          console.log(entries);
+          // console.log(entries);
           return entries;
           const routes = response.data?.map(entry => {
             return {
@@ -123,7 +127,7 @@ export default {
           })
         })
         .catch((error) => {
-          console.log(error.response);
+          // console.log(error.response);
         }) as PortfolioEntry[];
 
       /*const [articles, pages] = await Promise.all([
@@ -135,10 +139,13 @@ export default {
         // Instead of returning only the slug of
         // each article or page, we provide an object
         // which also contains the data as payload.
-        ...portfolioEntries.map(entry => ({
-          route: entry.slug,
-          payload: entry,
-        })),
+        ...portfolioEntries.map((entry) => {
+          console.log(entry);
+          return {
+            route: '/portfolio/' + entry.slug + "/",
+            payload: entry,
+          }
+        }),
         /*...articles.map(article => ({
           route: article.slug,
           payload: article.data,
@@ -163,11 +170,11 @@ export default {
         "filter status=1;",
         "sort orderID asc;",
       ];
-      console.log(process.env.API_URL);
+      // console.log(process.env.API_URL);
       axios
         .post(process.env.API_URL+"/portfolios/get", data.join(""))
         .then((response) => {
-          console.log(response.data);
+          // console.log(response.data);
           const entries = response.data as PortfolioEntry[];
           const routes = response.data?.map(entry => {
             return {
@@ -178,7 +185,7 @@ export default {
           callback(null, routes);
         })
         .catch((error) => {
-          console.log(error.response);
+          // console.log(error.response);
           callback();
         });
     }*/

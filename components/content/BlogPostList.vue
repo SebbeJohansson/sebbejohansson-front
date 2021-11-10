@@ -48,7 +48,7 @@ export default defineComponent({
         const blogEntriesLocal: BlogEntries = {
           entries: [],
         };
-        console.log("fetch");
+        // console.log("fetch");
         const data = [
           "fields id,title,slug,content,author,date,cat;",
           "filter status=1;",
@@ -65,10 +65,10 @@ export default defineComponent({
               });
             })
             .catch((error) => {
-              console.log(error.response);
+              // console.log(error.response);
             });
         } catch (error) {
-          console.log(error);
+          // console.log(error);
         }
         return blogEntriesLocal;
       },
@@ -76,12 +76,12 @@ export default defineComponent({
       "blogentries"
     );
     const blogEntries = computed<BlogEntry[]>((): BlogEntry[] => {
-      console.log(rawBlogEntries.value);
+      // console.log(rawBlogEntries.value);
       return rawBlogEntries.value?.entries as BlogEntry[];
     });
 
     /*const { fetch, fetchState } = useFetch(async () => {
-      console.log("fetch");
+      // console.log("fetch");
       const data = [
         "fields id,title,slug,content,author,date,cat;",
         "filter status=1;",
@@ -98,10 +98,10 @@ export default defineComponent({
             });
           })
           .catch((error) => {
-            console.log(error.response);
+            // console.log(error.response);
           });
       } catch (error) {
-        console.log(error);
+        // console.log(error);
       }
     });
 
@@ -124,10 +124,10 @@ export default defineComponent({
             });
           })
           .catch((error) => {
-            console.log(error.response);
+            // console.log(error.response);
           });
       } catch (error) {
-        console.log(error);
+        // console.log(error);
       }*/
     };
     onMounted(fetchEntries);
@@ -146,10 +146,10 @@ export default defineComponent({
             });
           })
           .catch((error) => {
-            console.log(error.response);
+            // console.log(error.response);
           });
       } catch (error) {
-        console.log(error);
+        // console.log(error);
       }
     };
     onMounted(fetchCategories);
@@ -166,7 +166,7 @@ export default defineComponent({
 
     const unselectedCategoriesStyling = computed((): string => {
       let style = "";
-      console.log(unselectedCategories);
+      // console.log(unselectedCategories);
       unselectedCategories.value.forEach((category, index) => {
         style += `.blog-post-list__entry.blog-post-list__entry--${category} { display: none; }`;
       });

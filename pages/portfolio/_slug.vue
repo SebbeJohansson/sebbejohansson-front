@@ -33,7 +33,7 @@ export default defineComponent({
     let portfolio = ref<Portfolio>();
     useAsync(() => {
       const { route, payload } = useContext();
-      console.log(payload);
+      // console.log(payload);
       const data = [
         "fields entryPic,title,description,content,entryPic,duration,code,link,role;",
         `filter slug=${slug.value};`,
@@ -70,15 +70,15 @@ export default defineComponent({
         await axios
           .post("/portfolios/get", data.join(""))
           .then((response) => {
-            console.log(response);
+            // console.log(response);
             portfolio.value = response.data[0] as Portfolio;
-            console.log("fetched portfolio");
+            // console.log("fetched portfolio");
           })
           .catch((error) => {
-            console.log(error.response);
+            // console.log(error.response);
           });
       } catch (error) {
-        console.log(error);
+        // console.log(error);
       }
     };
     onMounted(fetchPortfolio);*/
@@ -103,6 +103,14 @@ export default defineComponent({
     console.log("portfolio async data");
     console.log(payload);
     if (payload) return { article: payload };
+  },
+  async middleware({ params, payload, store }) {
+    console.log("middleware");
+    console.log(payload);
+  },
+  async fetch({ params, payload, store }) {
+    console.log("fetch");
+    console.log(payload);
   },
 });
 </script>

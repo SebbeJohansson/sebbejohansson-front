@@ -34,13 +34,13 @@ export default defineComponent({
             entries.forEach((entry) => {
               stalkEntries.push(entry);
             });
-            console.log(stalkEntries);
+            // console.log(stalkEntries);
           })
           .catch((error) => {
-            console.log(error.response);
+            // console.log(error.response);
           });
       } catch (error) {
-        console.log(error);
+        // console.log(error);
       }
     };
     onMounted(fetchEntries);
