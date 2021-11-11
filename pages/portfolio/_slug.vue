@@ -40,13 +40,10 @@ export default defineComponent({
 
         let localPortfolio = {} as Portfolio;
 
-        console.log("usestatic");
-
         try {
           await axios
             .post("/portfolios/get", data.join(""))
             .then((response) => {
-              console.log(response);
               localPortfolio = response.data[0] as Portfolio;
             })
             .catch((error) => {});
