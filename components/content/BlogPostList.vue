@@ -242,4 +242,20 @@ export default defineComponent({
   overflow-wrap: unset;
   white-space: nowrap;
 }
+
+@media (--phoneAndTablet) {
+  .blog-post-list__content {
+    flex-direction: column-reverse;
+    align-items: normal;
+  }
+  .blog-post-list__categories {
+    margin: 0;
+    width: 100%;
+    padding: 10px 4em;
+  }
+  .blog-entry__content img {
+    width: 100%;
+    height: auto;
+  }
+}
 </style>

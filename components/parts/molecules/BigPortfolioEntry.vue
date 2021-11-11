@@ -115,4 +115,10 @@ export default defineComponent({
   line-height: 1.5em;
   color: #999;
 }
+
+@media (--phoneAndTablet) {
+  .big-portfolio-entry__image {
+    height: 16em;
+  }
+}
 </style>

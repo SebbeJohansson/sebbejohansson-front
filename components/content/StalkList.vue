@@ -87,4 +87,11 @@ export default defineComponent({
 .stalk-list__grid {
   display: flex;
 }
+
+@media (--phoneAndTablet) {
+  .stalk-list {
+    max-width: 100%;
+    padding: 6px;
+  }
+}
 </style>

@@ -21,4 +21,10 @@ export default defineComponent({});
   border-bottom: 1px solid rgb(206, 206, 206);
   box-shadow: 0 0 3px #c0c1c2;
 }
+
+@media (--phoneAndTablet) {
+  .content-block {
+    padding: 15px;
+  }
+}
 </style>
