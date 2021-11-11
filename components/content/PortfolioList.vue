@@ -4,6 +4,8 @@ import {
   onMounted,
   ref,
   reactive,
+  useStatic,
+  computed,
 } from "@nuxtjs/composition-api";
 import axios from "~/plugins/axios";
 import ContentWithTitle from "~/components/content/ContentWithTitle.vue";
@@ -19,6 +21,10 @@ interface PortfolioEntry {
   size: number;
 }
 
+interface PortfolioEntries {
+  entries: PortfolioEntry[];
+}
+
 export default defineComponent({
   components: {
     ContentWithTitle,
@@ -26,45 +32,56 @@ export default defineComponent({
     SmallPortfolioEntry,
   },
   setup() {
-    let bigPortfolioEntries = reactive<PortfolioEntry[]>(<PortfolioEntry[]>[]);
-    let smallPortfolioEntries = reactive<PortfolioEntry[]>(
-      <PortfolioEntry[]>[]
-    );
-    const fetchEntries = async () => {
-      const header = {
-        "Content-Type": "application/x-www-form-urlencoded",
-        "Access-Control-Allow-Origin": "*",
-      };
+    const portfolioId = ref();
+    const rawPortfolioEntries = useStatic<PortfolioEntries>(
+      async (portfolioId) => {
+        const portfolioEntriesLocal: PortfolioEntries = {
+          entries: [],
+        };
+        const data = [
+          "fields slug,entryPic,title,description,size,link;",
+          "filter status=1;",
+          "sort orderID asc;",
+        ];
 
-      const data = [
-        "fields slug,entryPic,title,description,size,link;",
-        "filter status=1;",
-        "sort orderID asc;",
-      ];
-
-      try {
-        await axios
-          .post("/portfolios/get", data.join(""))
-          .then((response) => {
-            const entries = response.data as PortfolioEntry[];
-            entries.forEach((entry) => {
-              if (entry.size === 0) {
-                bigPortfolioEntries.push(entry);
-              } else {
-                smallPortfolioEntries.push(entry);
-              }
+        try {
+          await axios
+            .post("/portfolios/get", data.join(""))
+            .then((response) => {
+              const entries = response.data as PortfolioEntry[];
+              entries.forEach((entry) => {
+                portfolioEntriesLocal.entries.push(entry);
+              });
+            })
+            .catch((error) => {
+              console.log(error.response);
             });
-          })
-          .catch((error) => {
-            // console.log(error.response);
-          });
-      } catch (error) {
-        // console.log(error);
-      }
-    };
-    onMounted(fetchEntries);
+        } catch (error) {
+          console.log(error);
+        }
+        return portfolioEntriesLocal;
+      },
+      portfolioId,
+      "portfolioentries"
+    );
 
-    return { bigPortfolioEntries, smallPortfolioEntries, fetchEntries };
+    const bigPortfolioEntries = computed<PortfolioEntry[]>(
+      (): PortfolioEntry[] => {
+        return rawPortfolioEntries.value?.entries.filter(
+          (entry) => entry.size === 0
+        ) as PortfolioEntry[];
+      }
+    );
+
+    const smallPortfolioEntries = computed<PortfolioEntry[]>(
+      (): PortfolioEntry[] => {
+        return rawPortfolioEntries.value?.entries.filter(
+          (entry) => entry.size === 1
+        ) as PortfolioEntry[];
+      }
+    );
+
+    return { bigPortfolioEntries, smallPortfolioEntries };
   },
 });
 </script>

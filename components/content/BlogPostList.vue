@@ -9,7 +9,6 @@ import {
   useStatic,
 } from "@nuxtjs/composition-api";
 import axios from "~/plugins/axios";
-import blog from "~/plugins/blog";
 import ContentWithTitle from "~/components/content/ContentWithTitle.vue";
 import BlogEntry from "~/components/parts/molecules/BlogEntry.vue";
 
@@ -28,8 +27,8 @@ interface BlogCategory {
   about: string;
 }
 
-interface Dictionary<T> {
-  [Key: string]: T;
+interface BlogCategories {
+  entries: BlogCategory[];
 }
 
 interface BlogEntries {
@@ -48,7 +47,6 @@ export default defineComponent({
         const blogEntriesLocal: BlogEntries = {
           entries: [],
         };
-        // console.log("fetch");
         const data = [
           "fields id,title,slug,content,author,date,cat;",
           "filter status=1;",
@@ -65,10 +63,10 @@ export default defineComponent({
               });
             })
             .catch((error) => {
-              // console.log(error.response);
+              console.log(error.response);
             });
         } catch (error) {
-          // console.log(error);
+          console.log(error);
         }
         return blogEntriesLocal;
       },
@@ -76,97 +74,46 @@ export default defineComponent({
       "blogentries"
     );
     const blogEntries = computed<BlogEntry[]>((): BlogEntry[] => {
-      // console.log(rawBlogEntries.value);
       return rawBlogEntries.value?.entries as BlogEntry[];
     });
 
-    /*const { fetch, fetchState } = useFetch(async () => {
-      // console.log("fetch");
-      const data = [
-        "fields id,title,slug,content,author,date,cat;",
-        "filter status=1;",
-        "sort date desc;",
-      ];
-
-      try {
-        await axios
-          .post("/blogs/get", data.join(""))
-          .then((response) => {
-            const entries = response.data as BlogEntry[];
-            entries.forEach((entry) => {
-              blogEntries.push(entry);
-            });
-          })
-          .catch((error) => {
-            // console.log(error.response);
-          });
-      } catch (error) {
-        // console.log(error);
-      }
-    });
-
-    fetch();*/
-
-    const fetchEntries = async () => {
-      /*const data = [
-        "fields id,title,slug,content,author,date,cat;",
-        "filter status=1;",
-        "sort date desc;",
-      ];
-
-      try {
-        await axios
-          .post("/blogs/get", data.join(""))
-          .then((response) => {
-            const entries = response.data as BlogEntry[];
-            entries.forEach((entry) => {
-              blogEntries.push(entry);
-            });
-          })
-          .catch((error) => {
-            // console.log(error.response);
-          });
-      } catch (error) {
-        // console.log(error);
-      }*/
-    };
-    onMounted(fetchEntries);
-
-    let blogCategories = reactive<BlogCategory[]>(<BlogCategory[]>[]);
-    const fetchCategories = async () => {
-      const data = ["fields name,about;"];
-
-      try {
-        await axios
-          .post("/blogcats/get", data.join(""))
-          .then((response) => {
-            const entries = response.data as BlogCategory[];
-            entries.forEach((entry) => {
-              blogCategories.push(entry);
-            });
-          })
-          .catch((error) => {
-            // console.log(error.response);
-          });
-      } catch (error) {
-        // console.log(error);
-      }
-    };
-    onMounted(fetchCategories);
-
     let unselectedCategories = ref(<string[]>[]);
-    /*|const unselectedCategories = computed((): string[] => {
-      const query: string[] = [];
-      if ("categories" in route.value.query) {
-        const categories = (route.value.query.categories as string).split(",");
-        query.push(...categories);
-      }
-      return query;
-    });*/
+
+    const categoryId = ref();
+    const rawBlogCategories = useStatic<BlogCategories>(
+      async (categoryId) => {
+        const blogCategoriesLocal: BlogCategories = {
+          entries: [],
+        };
+        const data = ["fields name,about;"];
+
+        try {
+          await axios
+            .post("/blogcats/get", data.join(""))
+            .then((response) => {
+              const entries = response.data as BlogCategory[];
+              entries.forEach((entry) => {
+                blogCategoriesLocal.entries.push(entry);
+              });
+            })
+            .catch((error) => {
+              console.log(error.response);
+            });
+        } catch (error) {
+          console.log(error);
+        }
+        return blogCategoriesLocal;
+      },
+      categoryId,
+      "blogcategories"
+    );
+
+    const blogCategories = computed<BlogCategory[]>((): BlogCategory[] => {
+      return rawBlogCategories.value?.entries as BlogCategory[];
+    });
 
     const unselectedCategoriesStyling = computed((): string => {
       let style = "";
-      // console.log(unselectedCategories);
       unselectedCategories.value.forEach((category, index) => {
         style += `.blog-post-list__entry.blog-post-list__entry--${category} { display: none; }`;
       });
@@ -174,17 +121,17 @@ export default defineComponent({
     });
 
     function isCategoryChecked(category: string): boolean {
-      return unselectedCategories.value.indexOf(category) >= 0;
+      return !(unselectedCategories.value.indexOf(category) >= 0);
     }
 
     function toggleCategory(category: string) {
       if (isCategoryChecked(category)) {
+        unselectedCategories.value.push(category);
+      } else {
         const index = unselectedCategories.value.indexOf(category);
         if (index > -1) {
           unselectedCategories.value.splice(index, 1);
         }
-      } else {
-        unselectedCategories.value.push(category);
       }
 
       unselectedCategories.value = unselectedCategories.value.filter(
@@ -199,8 +146,6 @@ export default defineComponent({
       blogCategories,
       unselectedCategories,
       unselectedCategoriesStyling,
-      fetchEntries,
-      fetchCategories,
       isCategoryChecked,
       toggleCategory,
     };
@@ -258,9 +203,11 @@ export default defineComponent({
 .blog-post-list__content {
   display: flex;
   flex-direction: row;
+  align-items: flex-start;
 }
 .blog-post-list__list {
   margin-right: 0.5rem;
+  flex-grow: 1;
 }
 .blog-post-list__entry {
   padding: 0.5em 0;

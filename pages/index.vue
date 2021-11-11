@@ -39,7 +39,7 @@ export default defineComponent({
         />
       </a>
     </div>
-    <stalk-list class="index__stalk" />
+    <stalk-list class="index__stalk" id="contact" />
   </div>
 </template>
 

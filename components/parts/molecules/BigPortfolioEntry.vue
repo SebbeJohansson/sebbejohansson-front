@@ -27,7 +27,7 @@ export default defineComponent({
     });
 
     const entryUrl = computed((): string | undefined => {
-      return props.slug ? `portfolio/${props.slug}` : undefined;
+      return props.slug ? `portfolio/${props.slug}/` : undefined;
     });
 
     return {
