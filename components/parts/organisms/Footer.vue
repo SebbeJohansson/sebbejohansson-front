@@ -58,6 +58,7 @@ export default defineComponent({});
 
 .footer__left-icon {
   width: 60px;
+  height: 60px;
   filter: invert(100%);
   margin-left: 20px;
   float: left;
