@@ -41,9 +41,9 @@ export default defineComponent({
     BlogEntry,
   },
   setup() {
-    const id = ref();
+    const pageId = ref("default");
     const rawBlogEntries = useStatic<BlogEntries>(
-      async (id) => {
+      async (pageId) => {
         const blogEntriesLocal: BlogEntries = {
           entries: [],
         };
@@ -70,7 +70,7 @@ export default defineComponent({
         }
         return blogEntriesLocal;
       },
-      id,
+      pageId,
       "blogentries"
     );
     const blogEntries = computed<BlogEntry[]>((): BlogEntry[] => {
@@ -79,9 +79,8 @@ export default defineComponent({
 
     let unselectedCategories = ref(<string[]>[]);
 
-    const categoryId = ref();
     const rawBlogCategories = useStatic<BlogCategories>(
-      async (categoryId) => {
+      async (pageId) => {
         const blogCategoriesLocal: BlogCategories = {
           entries: [],
         };
@@ -104,7 +103,7 @@ export default defineComponent({
         }
         return blogCategoriesLocal;
       },
-      categoryId,
+      pageId,
       "blogcategories"
     );
 

@@ -1,11 +1,12 @@
 <script lang="ts">
+import { MetaInfo } from "vue-meta";
 import {
   defineComponent,
   computed,
   useContext,
   ref,
-  onMounted,
   useAsync,
+  useStatic,
 } from "@nuxtjs/composition-api";
 import ContentBlock from "~/components/content/ContentBlock.vue";
 import axios from "~/plugins/axios";
@@ -26,29 +27,40 @@ export default defineComponent({
   },
   setup(props) {
     const { route, payload } = useContext();
-    const slug = computed((): string | undefined => {
-      return route.value.params.slug;
-    });
 
-    let portfolio = ref<Portfolio>();
-    useAsync(() => {
-      const data = [
-        "fields entryPic,title,description,content,entryPic,duration,code,link,role;",
-        `filter slug=${slug.value};`,
-        "limit 1;",
-        "sort orderID asc;",
-      ];
+    const pageSlug = ref(route.value.params.slug);
+    const rawPortfolio = useStatic<Portfolio>(
+      async (pageSlug) => {
+        const data = [
+          "fields entryPic,title,description,content,entryPic,duration,code,link,role;",
+          `filter slug=${pageSlug};`,
+          "limit 1;",
+          "sort orderID asc;",
+        ];
 
-      let localPortfolio = {} as Portfolio;
+        let localPortfolio = {} as Portfolio;
 
-      axios
-        .post("/portfolios/get", data.join(""))
-        .then((response) => {
-          localPortfolio = response.data[0] as Portfolio;
-          portfolio.value = localPortfolio;
-          return localPortfolio;
-        })
-        .catch((error) => {});
+        console.log("usestatic");
+
+        try {
+          await axios
+            .post("/portfolios/get", data.join(""))
+            .then((response) => {
+              console.log(response);
+              localPortfolio = response.data[0] as Portfolio;
+            })
+            .catch((error) => {});
+        } catch (error) {
+          console.log(error);
+        }
+
+        return localPortfolio;
+      },
+      pageSlug,
+      "portfolio"
+    );
+    const portfolio = computed<Portfolio>((): Portfolio => {
+      return rawPortfolio.value as Portfolio;
     });
 
     const imageUrl = computed((): string => {
@@ -58,10 +70,15 @@ export default defineComponent({
     });
 
     return {
-      slug,
+      pageSlug,
       portfolio,
       imageUrl,
       payload,
+    };
+  },
+  head(): MetaInfo {
+    return {
+      title: `${this.portfolio?.title} - SebbeJohansson`,
     };
   },
 });
@@ -115,8 +132,6 @@ export default defineComponent({
         </div>
       </div>
     </content-block>
-    {{ portfolio }}
-    {{ payload }}
   </div>
 </template>
 

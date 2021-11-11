@@ -32,7 +32,7 @@ export default defineComponent({
     SmallPortfolioEntry,
   },
   setup() {
-    const portfolioId = ref();
+    const portfolioId = ref("default");
     const rawPortfolioEntries = useStatic<PortfolioEntries>(
       async (portfolioId) => {
         const portfolioEntriesLocal: PortfolioEntries = {
