@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { defineComponent } from "@nuxtjs/composition-api";
+import { defineComponent } from '@nuxtjs/composition-api';
 
 export default defineComponent({});
 </script>
@@ -9,26 +9,38 @@ export default defineComponent({});
     <div class="desktop-menu__container-wrapper">
       <div class="desktop-menu__container">
         <div class="desktop-menu__logo-wrapper">
-          <nuxt-link class="desktop-menu__logo" to="/#"
-            >Sebastian Johansson</nuxt-link
+          <nuxt-link
+            class="desktop-menu__logo"
+            to="/#"
           >
+            Sebastian Johansson
+          </nuxt-link>
         </div>
 
         <div class="desktop-menu__departments">
-          <nuxt-link to="/#portfolio" class="desktop-menu__department"
-            >Portfolio</nuxt-link
+          <nuxt-link
+            to="/#portfolio"
+            class="desktop-menu__department"
           >
-          <nuxt-link to="/#contact" class="desktop-menu__department"
-            >Contact</nuxt-link
+            Portfolio
+          </nuxt-link>
+          <nuxt-link
+            to="/#contact"
+            class="desktop-menu__department"
           >
-          <nuxt-link to="/blog/" class="desktop-menu__department"
-            >Blog</nuxt-link
+            Contact
+          </nuxt-link>
+          <nuxt-link
+            to="/blog/"
+            class="desktop-menu__department"
           >
+            Blog
+          </nuxt-link>
         </div>
       </div>
     </div>
     <div class="desktop-menu__background">
-      <div class="desktop-menu__background-image"></div>
+      <div class="desktop-menu__background-image" />
     </div>
   </div>
 </template>

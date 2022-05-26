@@ -1,4 +1,4 @@
-import { Module, VuexModule, Mutation } from 'vuex-module-decorators'
+import { Module, VuexModule } from 'vuex-module-decorators';
 
 @Module({
   name: 'localizationmodule',
@@ -8,4 +8,4 @@ import { Module, VuexModule, Mutation } from 'vuex-module-decorators'
 class Localization extends VuexModule {
 }
 
-export default Localization
+export default Localization;

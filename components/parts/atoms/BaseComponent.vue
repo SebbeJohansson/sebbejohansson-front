@@ -1,30 +1,29 @@
 <script setup lang="ts">
-import { defineComponent, PropType } from '@nuxtjs/composition-api'
-import BaseComponent from "~/components/parts/atoms/BaseComponent.vue";
+import { defineComponent, PropType } from '@nuxtjs/composition-api';
+import BaseComponent from '~/components/parts/atoms/BaseComponent.vue';
 
 export default defineComponent({
   components: {
   },
   props: {
     prop: {
-      type: String as PropType<String>,
-      required: true
-    } 
+      type: String as PropType<string>,
+      required: true,
+    },
   },
   setup(props) {
     return {
-    }
+    };
   },
-  methods:{
+  methods: {
     method() {
     },
-  }
-})
+  },
+});
 </script>
 
 <template>
-  <div class="component-name">
-  </div>
+  <div class="component-name" />
 </template>
 
 <style scoped>

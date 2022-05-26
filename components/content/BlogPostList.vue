@@ -1,16 +1,13 @@
 <script setup lang="ts">
 import {
   defineComponent,
-  onMounted,
-  reactive,
   ref,
   computed,
-  useFetch,
   useStatic,
-} from "@nuxtjs/composition-api";
-import axios from "~/plugins/axios";
-import ContentWithTitle from "~/components/content/ContentWithTitle.vue";
-import BlogEntry from "~/components/parts/molecules/BlogEntry.vue";
+} from '@nuxtjs/composition-api';
+import axios from '~/plugins/axios';
+import ContentWithTitle from '~/components/content/ContentWithTitle.vue';
+import BlogEntry from '~/components/parts/molecules/BlogEntry.vue';
 
 interface BlogEntry {
   id: string;
@@ -41,21 +38,21 @@ export default defineComponent({
     BlogEntry,
   },
   setup() {
-    const pageId = ref("default");
+    const pageId = ref('default');
     const rawBlogEntries = useStatic<BlogEntries>(
       async (pageId) => {
         const blogEntriesLocal: BlogEntries = {
           entries: [],
         };
         const data = [
-          "fields id,title,slug,content,author,date,cat;",
-          "filter status=1;",
-          "sort date desc;",
+          'fields id,title,slug,content,author,date,cat;',
+          'filter status=1;',
+          'sort date desc;',
         ];
 
         try {
           await axios
-            .post("/blogs/get", data.join(""))
+            .post('/blogs/get', data.join(''))
             .then((response) => {
               const entries = response.data as BlogEntry[];
               entries.forEach((entry) => {
@@ -71,24 +68,22 @@ export default defineComponent({
         return blogEntriesLocal;
       },
       pageId,
-      "blogentries"
+      'blogentries',
     );
-    const blogEntries = computed<BlogEntry[]>((): BlogEntry[] => {
-      return rawBlogEntries.value?.entries as BlogEntry[];
-    });
+    const blogEntries = computed<BlogEntry[]>((): BlogEntry[] => rawBlogEntries.value?.entries as BlogEntry[]);
 
-    let unselectedCategories = ref(<string[]>[]);
+    const unselectedCategories = ref(<string[]>[]);
 
     const rawBlogCategories = useStatic<BlogCategories>(
       async (pageId) => {
         const blogCategoriesLocal: BlogCategories = {
           entries: [],
         };
-        const data = ["fields name,about;"];
+        const data = ['fields name,about;'];
 
         try {
           await axios
-            .post("/blogcats/get", data.join(""))
+            .post('/blogcats/get', data.join(''))
             .then((response) => {
               const entries = response.data as BlogCategory[];
               entries.forEach((entry) => {
@@ -104,15 +99,13 @@ export default defineComponent({
         return blogCategoriesLocal;
       },
       pageId,
-      "blogcategories"
+      'blogcategories',
     );
 
-    const blogCategories = computed<BlogCategory[]>((): BlogCategory[] => {
-      return rawBlogCategories.value?.entries as BlogCategory[];
-    });
+    const blogCategories = computed<BlogCategory[]>((): BlogCategory[] => rawBlogCategories.value?.entries as BlogCategory[]);
 
     const unselectedCategoriesStyling = computed((): string => {
-      let style = "";
+      let style = '';
       unselectedCategories.value.forEach((category, index) => {
         style += `.blog-post-list__entry.blog-post-list__entry--${category} { display: none; }`;
       });
@@ -120,7 +113,7 @@ export default defineComponent({
     });
 
     function isCategoryChecked(category: string): boolean {
-      return !(unselectedCategories.value.indexOf(category) >= 0);
+      return !(unselectedCategories.value.includes(category));
     }
 
     function toggleCategory(category: string) {
@@ -134,9 +127,7 @@ export default defineComponent({
       }
 
       unselectedCategories.value = unselectedCategories.value.filter(
-        (item, index) => {
-          return unselectedCategories.value.indexOf(item) == index;
-        }
+        (item, index) => unselectedCategories.value.indexOf(item) == index,
       );
     }
 
@@ -158,10 +149,10 @@ export default defineComponent({
       <div class="blog-post-list__content">
         <div class="blog-post-list__list">
           <blog-entry
-            class="blog-post-list__entry"
             v-for="entry in blogEntries"
-            :class="`blog-post-list__entry--` + entry.cat"
             :key="entry.id"
+            class="blog-post-list__entry"
+            :class="`blog-post-list__entry--` + entry.cat"
             :title="entry.title"
             :content="entry.content || null"
             :slug="entry.slug"
@@ -169,18 +160,20 @@ export default defineComponent({
           />
         </div>
         <div class="blog-post-list__categories">
-          <h2 class="blog-post-list__categories-title">Categories</h2>
+          <h2 class="blog-post-list__categories-title">
+            Categories
+          </h2>
           <div
-            class="blog-post-list__category-line"
             v-for="entry in blogCategories"
             :key="entry.id"
+            class="blog-post-list__category-line"
             @click="toggleCategory(entry.name)"
           >
             <input
               class="blog-post-list__category-line-box"
               type="checkbox"
               :checked="isCategoryChecked(entry.name)"
-            />
+            >
             <span class="blog-post-list__category-line-text">
               {{ entry.about }}
             </span>
@@ -190,8 +183,8 @@ export default defineComponent({
     </content-with-title>
     <component
       :is="'style'"
-      type="text/css"
       v-if="unselectedCategoriesStyling != ''"
+      type="text/css"
     >
       {{ unselectedCategoriesStyling }}
     </component>

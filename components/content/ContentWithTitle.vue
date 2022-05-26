@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { defineComponent, PropType } from "@nuxtjs/composition-api";
-import ContentBlock from "~/components/content/ContentBlock.vue";
+import { defineComponent, PropType } from '@nuxtjs/composition-api';
+import ContentBlock from '~/components/content/ContentBlock.vue';
 
 export default defineComponent({
   components: {
@@ -8,7 +8,7 @@ export default defineComponent({
   },
   props: {
     title: {
-      type: String as PropType<String>,
+      type: String as PropType<string>,
       required: true,
     },
   },
@@ -18,7 +18,9 @@ export default defineComponent({
 <template>
   <div class="content-with-title">
     <content-block>
-      <h2 class="content-with-title__title">{{ title }}</h2>
+      <h2 class="content-with-title__title">
+        {{ title }}
+      </h2>
       <div class="content-with-title__content">
         <slot />
       </div>

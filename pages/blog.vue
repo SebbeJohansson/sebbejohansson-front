@@ -1,7 +1,7 @@
 <script lang="ts">
-import { MetaInfo } from "vue-meta";
-import { defineComponent } from "@nuxtjs/composition-api";
-import BlogPostList from "~/components/content/BlogPostList.vue";
+import { MetaInfo } from 'vue-meta';
+import { defineComponent } from '@nuxtjs/composition-api';
+import BlogPostList from '~/components/content/BlogPostList.vue';
 
 export default defineComponent({
   components: {
@@ -9,7 +9,7 @@ export default defineComponent({
   },
   head(): MetaInfo {
     return {
-      title: "Blog - SebbeJohansson",
+      title: 'Blog - SebbeJohansson',
     };
   },
 });

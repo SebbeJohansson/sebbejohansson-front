@@ -1,15 +1,14 @@
 <script lang="ts">
-import { MetaInfo } from "vue-meta";
+import { MetaInfo } from 'vue-meta';
 import {
   defineComponent,
   computed,
   useContext,
   ref,
-  useAsync,
   useStatic,
-} from "@nuxtjs/composition-api";
-import ContentBlock from "~/components/content/ContentBlock.vue";
-import axios from "~/plugins/axios";
+} from '@nuxtjs/composition-api';
+import ContentBlock from '~/components/content/ContentBlock.vue';
+import axios from '~/plugins/axios';
 
 interface Portfolio {
   title: string;
@@ -25,28 +24,27 @@ export default defineComponent({
   components: {
     ContentBlock,
   },
-  setup(props) {
+  setup() {
     const { route, payload } = useContext();
 
     const pageSlug = ref(route.value.params.slug);
     const rawPortfolio = useStatic<Portfolio>(
       async (pageSlug) => {
         const data = [
-          "fields entryPic,title,description,content,entryPic,duration,code,link,role;",
+          'fields entryPic,title,description,content,entryPic,duration,code,link,role;',
           `filter slug=${pageSlug};`,
-          "limit 1;",
-          "sort orderID asc;",
+          'limit 1;',
+          'sort orderID asc;',
         ];
 
         let localPortfolio = {} as Portfolio;
 
         try {
           await axios
-            .post("/portfolios/get", data.join(""))
+            .post('/portfolios/get', data.join(''))
             .then((response) => {
               localPortfolio = response.data[0] as Portfolio;
-            })
-            .catch((error) => {});
+            });
         } catch (error) {
           console.log(error);
         }
@@ -54,17 +52,13 @@ export default defineComponent({
         return localPortfolio;
       },
       pageSlug,
-      "portfolio"
+      'portfolio',
     );
-    const portfolio = computed<Portfolio>((): Portfolio => {
-      return rawPortfolio.value as Portfolio;
-    });
+    const portfolio = computed<Portfolio>((): Portfolio => rawPortfolio.value as Portfolio);
 
-    const imageUrl = computed((): string => {
-      return portfolio.value?.entryPic
-        ? `https://admin.sebbejohansson.com/images/${portfolio.value?.entryPic}`
-        : "null";
-    });
+    const imageUrl = computed((): string => (portfolio.value?.entryPic
+      ? `https://admin.sebbejohansson.com/images/${portfolio.value?.entryPic}`
+      : 'null'));
 
     return {
       pageSlug,
@@ -97,7 +91,7 @@ export default defineComponent({
             class="portfolio__image"
             :src="imageUrl"
             :alt="portfolio.title"
-          />
+          >
           <div v-if="portfolio.duration" class="portfolio__sidebar-line">
             <span class="portfolio__sidebar-line-title">Duration</span>
             {{ portfolio.duration }}

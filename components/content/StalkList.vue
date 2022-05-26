@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { defineComponent, onMounted, reactive } from "@nuxtjs/composition-api";
-import axios from "~/plugins/axios";
-import StalkEntry from "~/components/parts/molecules/StalkEntry.vue";
+import { defineComponent, onMounted, reactive } from '@nuxtjs/composition-api';
+import axios from '~/plugins/axios';
+import StalkEntry from '~/components/parts/molecules/StalkEntry.vue';
 
 interface StalkEntry {
   link: string;
@@ -13,22 +13,22 @@ export default defineComponent({
     StalkEntry,
   },
   setup() {
-    let stalkEntries = reactive<StalkEntry[]>(<StalkEntry[]>[]);
+    const stalkEntries = reactive<StalkEntry[]>(<StalkEntry[]>[]);
     const fetchEntries = async () => {
       const header = {
-        "Content-Type": "application/x-www-form-urlencoded",
-        "Access-Control-Allow-Origin": "*",
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Access-Control-Allow-Origin': '*',
       };
 
       const data = [
-        "fields entryPic,link;",
-        "filter status=1;",
-        "sort orderID asc;",
+        'fields entryPic,link;',
+        'filter status=1;',
+        'sort orderID asc;',
       ];
 
       try {
         await axios
-          .post("/stalk/get", data.join(""))
+          .post('/stalk/get', data.join(''))
           .then((response) => {
             const entries = response.data as StalkEntry[];
             entries.forEach((entry) => {
@@ -51,7 +51,9 @@ export default defineComponent({
 
 <template>
   <div class="stalk-list">
-    <h3 class="stalk-list__title">Contact me</h3>
+    <h3 class="stalk-list__title">
+      Contact me
+    </h3>
     <div class="stalk-list__grid">
       <stalk-entry
         v-for="entry in stalkEntries"

@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { defineComponent, PropType, computed } from "@nuxtjs/composition-api";
-import BaseComponent from "~/components/parts/atoms/BaseComponent.vue";
+import { defineComponent, PropType, computed } from '@nuxtjs/composition-api';
+import BaseComponent from '~/components/parts/atoms/BaseComponent.vue';
 
 export default defineComponent({
   components: {},
@@ -20,15 +20,11 @@ export default defineComponent({
     },
   },
   setup(props) {
-    const imageUrl = computed((): string => {
-      return props.picture
-        ? `https://admin.sebbejohansson.com/images/${props.picture}`
-        : "null";
-    });
+    const imageUrl = computed((): string => (props.picture
+      ? `https://admin.sebbejohansson.com/images/${props.picture}`
+      : 'null'));
 
-    const entryUrl = computed((): string | undefined => {
-      return props.slug ? `portfolio/${props.slug}/` : undefined;
-    });
+    const entryUrl = computed((): string | undefined => (props.slug ? `portfolio/${props.slug}/` : undefined));
 
     return {
       imageUrl,
@@ -54,7 +50,9 @@ export default defineComponent({
         :alt="title"
       />
       <div class="big-portfolio-entry__content">
-        <h3 v-if="title" class="big-portfolio-entry__title">{{ title }}</h3>
+        <h3 v-if="title" class="big-portfolio-entry__title">
+          {{ title }}
+        </h3>
         <p v-if="description" class="big-portfolio-entry__description">
           {{ description }}
         </p>
@@ -67,7 +65,9 @@ export default defineComponent({
         :alt="title"
       />
       <div class="big-portfolio-entry__content">
-        <h3 v-if="title" class="big-portfolio-entry__title">{{ title }}</h3>
+        <h3 v-if="title" class="big-portfolio-entry__title">
+          {{ title }}
+        </h3>
         <p v-if="description" class="big-portfolio-entry__description">
           {{ description }}
         </p>

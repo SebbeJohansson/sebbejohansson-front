@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { defineComponent, PropType, computed } from "@nuxtjs/composition-api";
+import { defineComponent, PropType, computed } from '@nuxtjs/composition-api';
 
 export default defineComponent({
   components: {},
@@ -14,15 +14,11 @@ export default defineComponent({
     },
   },
   setup(props) {
-    const imageUrl = computed((): string => {
-      return props.picture
-        ? `https://admin.sebbejohansson.com/images/${props.picture}`
-        : "null";
-    });
+    const imageUrl = computed((): string => (props.picture
+      ? `https://admin.sebbejohansson.com/images/${props.picture}`
+      : 'null'));
 
-    const entryUrl = computed((): string | undefined => {
-      return props.link ? `https://${props.link}` : undefined;
-    });
+    const entryUrl = computed((): string | undefined => (props.link ? `https://${props.link}` : undefined));
 
     return {
       entryUrl,
@@ -38,7 +34,7 @@ export default defineComponent({
 <template>
   <div v-if="entryUrl" class="stalk-entry">
     <a :href="entryUrl" target="_blank" class="stalk-entry__container">
-      <img :src="imageUrl" class="stalk-entry__image" />
+      <img :src="imageUrl" class="stalk-entry__image">
     </a>
   </div>
 </template>

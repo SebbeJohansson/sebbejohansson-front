@@ -6,11 +6,11 @@ import {
   reactive,
   useStatic,
   computed,
-} from "@nuxtjs/composition-api";
-import axios from "~/plugins/axios";
-import ContentWithTitle from "~/components/content/ContentWithTitle.vue";
-import BigPortfolioEntry from "~/components/parts/molecules/BigPortfolioEntry.vue";
-import SmallPortfolioEntry from "~/components/parts/molecules/SmallPortfolioEntry.vue";
+} from '@nuxtjs/composition-api';
+import axios from '~/plugins/axios';
+import ContentWithTitle from '~/components/content/ContentWithTitle.vue';
+import BigPortfolioEntry from '~/components/parts/molecules/BigPortfolioEntry.vue';
+import SmallPortfolioEntry from '~/components/parts/molecules/SmallPortfolioEntry.vue';
 
 interface PortfolioEntry {
   title: string;
@@ -32,21 +32,21 @@ export default defineComponent({
     SmallPortfolioEntry,
   },
   setup() {
-    const portfolioId = ref("default");
+    const portfolioId = ref('default');
     const rawPortfolioEntries = useStatic<PortfolioEntries>(
       async (portfolioId) => {
         const portfolioEntriesLocal: PortfolioEntries = {
           entries: [],
         };
         const data = [
-          "fields slug,entryPic,title,description,size,link;",
-          "filter status=1;",
-          "sort orderID asc;",
+          'fields slug,entryPic,title,description,size,link;',
+          'filter status=1;',
+          'sort orderID asc;',
         ];
 
         try {
           await axios
-            .post("/portfolios/get", data.join(""))
+            .post('/portfolios/get', data.join(''))
             .then((response) => {
               const entries = response.data as PortfolioEntry[];
               entries.forEach((entry) => {
@@ -62,23 +62,19 @@ export default defineComponent({
         return portfolioEntriesLocal;
       },
       portfolioId,
-      "portfolioentries"
+      'portfolioentries',
     );
 
     const bigPortfolioEntries = computed<PortfolioEntry[]>(
-      (): PortfolioEntry[] => {
-        return rawPortfolioEntries.value?.entries.filter(
-          (entry) => entry.size === 0
-        ) as PortfolioEntry[];
-      }
+      (): PortfolioEntry[] => rawPortfolioEntries.value?.entries.filter(
+        (entry) => entry.size === 0,
+      ) as PortfolioEntry[],
     );
 
     const smallPortfolioEntries = computed<PortfolioEntry[]>(
-      (): PortfolioEntry[] => {
-        return rawPortfolioEntries.value?.entries.filter(
-          (entry) => entry.size === 1
-        ) as PortfolioEntry[];
-      }
+      (): PortfolioEntry[] => rawPortfolioEntries.value?.entries.filter(
+        (entry) => entry.size === 1,
+      ) as PortfolioEntry[],
     );
 
     return { bigPortfolioEntries, smallPortfolioEntries };
@@ -91,16 +87,18 @@ export default defineComponent({
     <content-with-title :title="'Portfolio'">
       <div class="portfolio-list__grid">
         <big-portfolio-entry
-          class="portfolio-list__entry"
           v-for="entry in bigPortfolioEntries"
           :key="entry.id"
+          class="portfolio-list__entry"
           :title="entry.title"
           :description="entry.description || null"
           :picture="entry.entryPic"
           :slug="entry.slug"
         />
       </div>
-      <h3 class="portfolio-list__title">Other Projects</h3>
+      <h3 class="portfolio-list__title">
+        Other Projects
+      </h3>
       <small-portfolio-entry
         v-for="entry in smallPortfolioEntries"
         :key="entry.id"

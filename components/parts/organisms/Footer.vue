@@ -1,16 +1,17 @@
 <script setup lang="ts">
-import { defineComponent } from "@nuxtjs/composition-api";
+import { defineComponent } from '@nuxtjs/composition-api';
 
 export default defineComponent({});
 </script>
 
 <template>
   <div class="footer">
-    <div class="footer__left" id="contact">
-      <img class="footer__left-icon" src="/images/icon.png" />
-      <a class="footer__address" href="mailto:hello@sebbejohansson.com"
-        >hello@sebbejohansson.com</a
-      >
+    <div id="contact" class="footer__left">
+      <img class="footer__left-icon" src="/images/icon.png">
+      <a
+        class="footer__address"
+        href="mailto:hello@sebbejohansson.com"
+      >hello@sebbejohansson.com</a>
     </div>
     <div class="footer__right">
       <p class="footer__right-text">

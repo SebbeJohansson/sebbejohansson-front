@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { defineComponent, PropType, computed } from "@nuxtjs/composition-api";
-import BaseComponent from "~/components/parts/atoms/BaseComponent.vue";
+import { defineComponent, PropType, computed } from '@nuxtjs/composition-api';
+import BaseComponent from '~/components/parts/atoms/BaseComponent.vue';
 
 export default defineComponent({
   components: {},
@@ -20,9 +20,7 @@ export default defineComponent({
     },
   },
   setup(props) {
-    const entryUrl = computed((): string | undefined => {
-      return props.slug ? `portfolio/${props.slug}` : undefined;
-    });
+    const entryUrl = computed((): string | undefined => (props.slug ? `portfolio/${props.slug}` : undefined));
 
     return {
       entryUrl,
@@ -38,9 +36,13 @@ export default defineComponent({
   <div class="blog-entry">
     <div class="blog-entry__container">
       <div class="blog-entry__content">
-        <h3 v-if="title" class="blog-entry__title">{{ title }}</h3>
-        <h5 v-if="date" class="blog-entry__date">- {{ date }}</h5>
-        <div v-if="content" v-html="content" class="blog-entry__content" />
+        <h3 v-if="title" class="blog-entry__title">
+          {{ title }}
+        </h3>
+        <h5 v-if="date" class="blog-entry__date">
+          - {{ date }}
+        </h5>
+        <div v-if="content" class="blog-entry__content" v-html="content" />
       </div>
     </div>
   </div>
