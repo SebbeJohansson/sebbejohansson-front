@@ -27,8 +27,8 @@
     "graceful-fs": "^4.2.6",
     "nuxt": "^2.15.8",
     "ohmyfetch": "^0.4.2",
-    "vue": "^2.6.12",
     "postcss-css-variables": "^0.17.0",
+    "vue": "^2.6.12",
     "vuex-module-decorators": "^1.0.1"
   },
   "devDependencies": {
