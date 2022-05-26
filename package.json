@@ -8,37 +8,41 @@
     "start": "nuxt start",
     "generate": "nuxt generate",
     "lint:js": "eslint --ext \".js,.vue\" --ignore-path .gitignore .",
-    "lint": "yarn lint:js"
+    "yarnlint": "yarn lint:js",
+    "lint": "eslint --ext .ts,.js,.vue ."
   },
   "dependencies": {
     "@nuxt/typescript-runtime": "^2.0.1",
     "@nuxtjs/axios": "^5.13.6",
     "@nuxtjs/composition-api": "^0.22.1",
     "@nuxtjs/gtm": "^2.4.0",
+    "@typescript-eslint/eslint-plugin": "^5.26.0",
     "@vue/composition-api": "^1.0.0-rc.5",
     "@vue/eslint-config-typescript": "^7.0.0",
     "core-js": "^3.8.3",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-vue-scoped-css": "^2.2.0",
     "fs": "0.0.1-security",
     "fs-extra": "^9.1.0",
     "graceful-fs": "^4.2.6",
     "nuxt": "^2.15.8",
     "ohmyfetch": "^0.4.2",
-    "vue": "^2.6.12"
+    "vue": "^2.6.12",
+    "postcss-css-variables": "^0.17.0",
+    "vuex-module-decorators": "^1.0.1"
   },
   "devDependencies": {
     "@nuxt/types": "^2.14.12",
     "@nuxt/typescript": "^2.8.1",
     "@nuxt/typescript-build": "^2.0.4",
-    "@nuxtjs/eslint-config-typescript": "^5.0.0",
+    "@nuxtjs/eslint-config-typescript": "^10.0.0",
     "@nuxtjs/eslint-module": "^3.0.2",
     "@vue/eslint-config-airbnb": "^5.3.0",
     "babel-eslint": "^10.1.0",
-    "eslint": "^7.22.0",
-    "eslint-config-airbnb-typescript": "^12.3.1",
+    "eslint": "^8.16.0",
+    "eslint-config-airbnb-typescript": "^17.0.0",
     "eslint-plugin-jsx-a11y": "^6.4.1",
     "eslint-plugin-nuxt": "^2.0.0",
-    "eslint-plugin-vue": "^7.5.0",
-    "postcss-css-variables": "^0.17.0",
-    "vuex-module-decorators": "^1.0.1"
+    "eslint-plugin-vue": "^7.5.0"
   }
 }
