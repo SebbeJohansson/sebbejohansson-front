@@ -36,6 +36,7 @@ export default {
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
+    "~/plugins/media-handler.ts",
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -65,6 +66,16 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
+    extend(config, {isDev, isClient}) {
+      config.resolve.extensions.push(".ts", ".tsx", ".js");
+
+      config.module.rules.push(
+        {
+          test: /\.(svg|woff|woff2|eot|ttf)$/,
+          loader: 'file-loader',
+        }
+      );
+    },
     postcss: {
       plugins: {
         'postcss-import': {},

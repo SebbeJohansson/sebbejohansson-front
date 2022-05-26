@@ -7,7 +7,7 @@ export default defineComponent({});
 <template>
   <div class="footer">
     <div id="contact" class="footer__left">
-      <img class="footer__left-icon" src="/images/icon.png">
+      <img class="footer__left-icon" src="/images/icon.png" loading="lazy">
       <a
         class="footer__address"
         href="mailto:hello@sebbejohansson.com"

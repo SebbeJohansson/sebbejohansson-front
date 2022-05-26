@@ -29,10 +29,10 @@
     "ohmyfetch": "^0.4.2",
     "postcss-css-variables": "^0.17.0",
     "vue": "^2.6.12",
-    "vuex-module-decorators": "^1.0.1"
+    "vuex-module-decorators": "^1.0.1",
+    "@nuxt/types": "^2.14.12"
   },
   "devDependencies": {
-    "@nuxt/types": "^2.14.12",
     "@nuxt/typescript": "^2.8.1",
     "@nuxt/typescript-build": "^2.0.4",
     "@nuxtjs/eslint-config-typescript": "^10.0.0",

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { defineComponent, computed } from '@nuxtjs/composition-api';
+import { defineComponent, computed, useContext } from '@nuxtjs/composition-api';
 
 export default defineComponent({
   components: {},
@@ -13,21 +13,24 @@ export default defineComponent({
     },
     picture: {
       type: String,
+      default: 'fallback',
     },
     slug: {
       type: String,
     },
   },
   setup(props) {
-    const imageUrl = computed((): string => (props.picture
-      ? `https://admin.sebbejohansson.com/images/${props.picture}`
-      : 'null'));
+    const context = useContext();
+    const imageUrl = computed((): string | undefined => (props.picture
+      ? context.$toMediaUrl(props.picture, { maxHeight: 100, maxWidth: 100 })
+      : undefined));
 
     const entryUrl = computed((): string | undefined => (props.slug ? `portfolio/${props.slug}/` : undefined));
 
     return {
       imageUrl,
       entryUrl,
+      componentType: computed((): string => (entryUrl.value ? 'nuxt-link' : 'div')),
     };
   },
   methods: {
@@ -38,16 +41,17 @@ export default defineComponent({
 
 <template>
   <div class="big-portfolio-entry">
-    <nuxt-link
-      v-if="entryUrl"
+    <component
+      :is="componentType"
       :to="entryUrl"
       class="big-portfolio-entry__container"
     >
-      <div
+      <img
         class="big-portfolio-entry__image"
-        :style="`background-image: url(${imageUrl})`"
         :alt="title"
-      />
+        :src="imageUrl"
+        loading="lazy"
+      >
       <div class="big-portfolio-entry__content">
         <h3 v-if="title" class="big-portfolio-entry__title">
           {{ title }}
@@ -56,22 +60,7 @@ export default defineComponent({
           {{ description }}
         </p>
       </div>
-    </nuxt-link>
-    <div v-else class="big-portfolio-entry__container">
-      <div
-        class="big-portfolio-entry__image"
-        :style="`background-image: url(${imageUrl})`"
-        :alt="title"
-      />
-      <div class="big-portfolio-entry__content">
-        <h3 v-if="title" class="big-portfolio-entry__title">
-          {{ title }}
-        </h3>
-        <p v-if="description" class="big-portfolio-entry__description">
-          {{ description }}
-        </p>
-      </div>
-    </div>
+    </component>
   </div>
 </template>
 
@@ -97,9 +86,8 @@ export default defineComponent({
   margin: 0 0 10px;
   border-radius: 10px;
   height: 27em;
-  background-size: cover;
-  background-position: bottom center;
-  background-repeat: no-repeat;
+  object-fit: cover;
+  object-position: bottom;
 }
 .big-portfolio-entry__content {
   flex-grow: 1;

@@ -34,7 +34,7 @@ export default defineComponent({
 <template>
   <div v-if="entryUrl" class="stalk-entry">
     <a :href="entryUrl" target="_blank" class="stalk-entry__container">
-      <img :src="imageUrl" class="stalk-entry__image">
+      <img :src="imageUrl" class="stalk-entry__image" loading="lazy">
     </a>
   </div>
 </template>
