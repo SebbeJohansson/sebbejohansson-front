@@ -7,7 +7,7 @@ import {
 } from '@nuxtjs/composition-api';
 import axios from '~/plugins/axios';
 import ContentWithTitle from '~/components/content/ContentWithTitle.vue';
-import BlogEntry from '~/components/parts/molecules/BlogEntry.vue';
+import BlogEntryComponent from '~/components/parts/molecules/BlogEntry.vue';
 
 interface BlogEntry {
   id: string;
@@ -35,12 +35,12 @@ interface BlogEntries {
 export default defineComponent({
   components: {
     ContentWithTitle,
-    BlogEntry,
+    BlogEntryComponent,
   },
   setup() {
     const pageId = ref('default');
     const rawBlogEntries = useStatic<BlogEntries>(
-      async (pageId) => {
+      async () => {
         const blogEntriesLocal: BlogEntries = {
           entries: [],
         };
@@ -75,7 +75,7 @@ export default defineComponent({
     const unselectedCategories = ref(<string[]>[]);
 
     const rawBlogCategories = useStatic<BlogCategories>(
-      async (pageId) => {
+      async () => {
         const blogCategoriesLocal: BlogCategories = {
           entries: [],
         };
@@ -106,7 +106,7 @@ export default defineComponent({
 
     const unselectedCategoriesStyling = computed((): string => {
       let style = '';
-      unselectedCategories.value.forEach((category, index) => {
+      unselectedCategories.value.forEach((category) => {
         style += `.blog-post-list__entry.blog-post-list__entry--${category} { display: none; }`;
       });
       return style;
@@ -127,7 +127,7 @@ export default defineComponent({
       }
 
       unselectedCategories.value = unselectedCategories.value.filter(
-        (item, index) => unselectedCategories.value.indexOf(item) == index,
+        (item, index) => unselectedCategories.value.indexOf(item) === index,
       );
     }
 
@@ -148,7 +148,7 @@ export default defineComponent({
     <content-with-title :title="'Blog'">
       <div class="blog-post-list__content">
         <div class="blog-post-list__list">
-          <blog-entry
+          <blog-entry-component
             v-for="entry in blogEntries"
             :key="entry.id"
             class="blog-post-list__entry"

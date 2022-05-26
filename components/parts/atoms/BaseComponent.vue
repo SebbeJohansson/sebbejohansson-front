@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { defineComponent, PropType } from '@nuxtjs/composition-api';
-import BaseComponent from '~/components/parts/atoms/BaseComponent.vue';
 
 export default defineComponent({
   components: {
@@ -10,10 +9,6 @@ export default defineComponent({
       type: String as PropType<string>,
       required: true,
     },
-  },
-  setup(props) {
-    return {
-    };
   },
   methods: {
     method() {

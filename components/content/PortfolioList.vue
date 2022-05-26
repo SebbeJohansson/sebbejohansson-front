@@ -1,9 +1,7 @@
 <script setup lang="ts">
 import {
   defineComponent,
-  onMounted,
   ref,
-  reactive,
   useStatic,
   computed,
 } from '@nuxtjs/composition-api';
@@ -34,7 +32,7 @@ export default defineComponent({
   setup() {
     const portfolioId = ref('default');
     const rawPortfolioEntries = useStatic<PortfolioEntries>(
-      async (portfolioId) => {
+      async () => {
         const portfolioEntriesLocal: PortfolioEntries = {
           entries: [],
         };

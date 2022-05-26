@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { defineComponent, onMounted, reactive } from '@nuxtjs/composition-api';
 import axios from '~/plugins/axios';
-import StalkEntry from '~/components/parts/molecules/StalkEntry.vue';
+import StalkEntryComponent from '~/components/parts/molecules/StalkEntry.vue';
 
 interface StalkEntry {
   link: string;
@@ -10,16 +10,11 @@ interface StalkEntry {
 
 export default defineComponent({
   components: {
-    StalkEntry,
+    StalkEntryComponent,
   },
   setup() {
     const stalkEntries = reactive<StalkEntry[]>(<StalkEntry[]>[]);
     const fetchEntries = async () => {
-      const header = {
-        'Content-Type': 'application/x-www-form-urlencoded',
-        'Access-Control-Allow-Origin': '*',
-      };
-
       const data = [
         'fields entryPic,link;',
         'filter status=1;',
@@ -55,7 +50,7 @@ export default defineComponent({
       Contact me
     </h3>
     <div class="stalk-list__grid">
-      <stalk-entry
+      <stalk-entry-component
         v-for="entry in stalkEntries"
         :key="entry.id"
         :link="entry.link"

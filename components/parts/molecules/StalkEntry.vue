@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { defineComponent, PropType, computed } from '@nuxtjs/composition-api';
+import { defineComponent, computed } from '@nuxtjs/composition-api';
 
 export default defineComponent({
   components: {},
