@@ -1,14 +1,13 @@
-<script setup lang="ts">
-import { defineComponent, onMounted, reactive } from '@nuxtjs/composition-api';
+<script lang="ts">
+import { defineNuxtComponent } from "#app";
 import axios from '~/plugins/axios';
-import StalkEntryComponent from '~/components/parts/molecules/StalkEntry.vue';
 
 interface StalkEntry {
   link: string;
   entryPic: string;
 }
 
-export default defineComponent({
+export default defineNuxtComponent({
   components: {
     StalkEntryComponent,
   },
@@ -50,12 +49,8 @@ export default defineComponent({
       Contact me
     </h3>
     <div class="stalk-list__grid">
-      <stalk-entry-component
-        v-for="entry in stalkEntries"
-        :key="entry.id"
-        :link="entry.link"
-        :picture="entry.entryPic"
-      />
+      <stalk-entry-component v-for="entry in stalkEntries" :key="entry.id" :link="entry.link"
+        :picture="entry.entryPic" />
     </div>
   </div>
 </template>
@@ -73,6 +68,7 @@ export default defineComponent({
   margin-top: 30px;
   margin-bottom: -10px;
 }
+
 .stalk-list__title {
   margin: 0px;
   text-align: center;
@@ -81,6 +77,7 @@ export default defineComponent({
   font-weight: 200;
   margin-top: 10px;
 }
+
 .stalk-list__grid {
   display: flex;
 }

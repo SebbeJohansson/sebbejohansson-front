@@ -1,7 +1,7 @@
-<script setup lang="ts">
-import { defineComponent, computed } from '@nuxtjs/composition-api';
+<script lang="ts">
+import { defineNuxtComponent } from "#app";
 
-export default defineComponent({
+export default defineNuxtComponent({
   components: {},
   props: {
     picture: {
@@ -26,7 +26,7 @@ export default defineComponent({
     };
   },
   methods: {
-    method() {},
+    method() { },
   },
 });
 </script>
@@ -44,11 +44,13 @@ export default defineComponent({
   width: 5em;
   margin: 0.8em;
 }
+
 .stalk-entry__container {
   width: 100%;
   height: 100%;
   display: block;
 }
+
 .stalk-entry__image {
   border-radius: 100%;
   width: 100%;

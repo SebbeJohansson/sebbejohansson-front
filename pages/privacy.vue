@@ -1,8 +1,8 @@
 <script lang="ts">
 import { MetaInfo } from 'vue-meta';
-import { defineComponent } from '@nuxtjs/composition-api';
+import { defineNuxtComponent } from "#app";
 
-export default defineComponent({
+export default defineNuxtComponent({
   head(): MetaInfo {
     return {
       title: 'SebbeJohansson',
@@ -61,10 +61,7 @@ export default defineComponent({
         <div class="col-2">
           <div class="col-12 quick-links2 gen-text-center">
             Fair Information Practices
-            <div
-              class="col-8 gen-text-left gen-xs-text-center"
-              style="font-size: 12px; position: relative; left: 20px"
-            >
+            <div class="col-8 gen-text-left gen-xs-text-center" style="font-size: 12px; position: relative; left: 20px">
               Fair information<br>
               Practices
             </div>
@@ -283,12 +280,14 @@ export default defineComponent({
   margin: 0 auto;
   text-align: justify;
 }
+
 #ppHeader {
   font-family: verdana;
   font-size: 21pt;
   width: 100%;
   margin: 0 auto;
 }
+
 .ppConsistencies {
   display: none;
 }

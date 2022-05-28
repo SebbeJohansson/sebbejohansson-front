@@ -1,7 +1,7 @@
-<script setup lang="ts">
-import { defineComponent, computed } from '@nuxtjs/composition-api';
+<script lang="ts">
+import { defineNuxtComponent } from "#app";
 
-export default defineComponent({
+export default defineNuxtComponent({
   components: {},
   props: {
     title: {
@@ -26,7 +26,7 @@ export default defineComponent({
     };
   },
   methods: {
-    method() {},
+    method() { },
   },
 });
 </script>
@@ -61,21 +61,25 @@ export default defineComponent({
   text-decoration: none;
   color: black;
 }
+
 .blog-entry__content {
   flex-grow: 1;
 }
+
 .blog-entry__title {
   text-align: left;
   font-family: Roboto, Helvetica, Arial, Verdana, sans-serif;
   font-weight: 400;
   margin: 0 0 5px;
 }
+
 .blog-entry__date {
   text-align: left;
   font-family: Roboto, Helvetica, Arial, Verdana, sans-serif;
   font-weight: 400;
   margin: 0 0 5px;
 }
+
 .blog-entry__content {
   line-height: 1.5em;
   text-align: left;

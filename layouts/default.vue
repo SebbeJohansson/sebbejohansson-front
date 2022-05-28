@@ -1,14 +1,8 @@
 <script lang="ts">
 import { MetaInfo } from 'vue-meta';
-import { defineComponent } from '@nuxtjs/composition-api';
-import DesktopMenu from '~/components/parts/organisms/DesktopMenu.vue';
-import Footer from '~/components/parts/organisms/Footer.vue';
+import { defineNuxtComponent } from "#app";
 
-export default defineComponent({
-  components: {
-    DesktopMenu,
-    Footer,
-  },
+export default defineNuxtComponent({
   head(): MetaInfo {
     const link = [];
 

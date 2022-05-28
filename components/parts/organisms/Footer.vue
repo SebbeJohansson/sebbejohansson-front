@@ -1,17 +1,8 @@
-<script setup lang="ts">
-import { defineComponent } from '@nuxtjs/composition-api';
-
-export default defineComponent({});
-</script>
-
 <template>
   <div class="footer">
     <div id="contact" class="footer__left">
       <img class="footer__left-icon" src="/images/icon.png" loading="lazy">
-      <a
-        class="footer__address"
-        href="mailto:hello@sebbejohansson.com"
-      >hello@sebbejohansson.com</a>
+      <a class="footer__address" href="mailto:hello@sebbejohansson.com">hello@sebbejohansson.com</a>
     </div>
     <div class="footer__right">
       <p class="footer__right-text">
@@ -73,6 +64,7 @@ export default defineComponent({});
   text-decoration: none;
   margin-left: 45px;
 }
+
 .footer__address:hover {
   text-decoration: underline;
 }
@@ -81,14 +73,17 @@ export default defineComponent({});
   .footer {
     flex-direction: column;
   }
+
   .footer__left {
     width: 100%;
     border-bottom: 1px solid #696969;
     border-right: none;
   }
+
   .footer__right {
     width: 100%;
   }
+
   .footer__right-text {
     text-align: center;
     margin-right: 0;

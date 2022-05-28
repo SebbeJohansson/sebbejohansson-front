@@ -1,7 +1,7 @@
-<script setup lang="ts">
-import { defineComponent } from '@nuxtjs/composition-api';
+<script lang="ts">
+import { defineNuxtComponent } from "#app";
 
-export default defineComponent({
+export default defineNuxtComponent({
   components: {},
   props: {
     title: {
@@ -13,7 +13,7 @@ export default defineComponent({
     },
   },
   methods: {
-    method() {},
+    method() { },
   },
 });
 </script>
@@ -32,6 +32,7 @@ export default defineComponent({
 .small-portfolio-entry {
   padding: 0.2em;
 }
+
 .small-portfolio-entry__title {
   text-align: center;
   font-family: Roboto, Helvetica, Arial, Verdana, sans-serif;

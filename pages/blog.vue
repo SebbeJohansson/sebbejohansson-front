@@ -1,12 +1,8 @@
 <script lang="ts">
 import { MetaInfo } from 'vue-meta';
-import { defineComponent } from '@nuxtjs/composition-api';
-import BlogPostList from '~/components/content/BlogPostList.vue';
+import { defineNuxtComponent } from "#app";
 
-export default defineComponent({
-  components: {
-    BlogPostList,
-  },
+export default defineNuxtComponent({
   head(): MetaInfo {
     return {
       title: 'Blog - SebbeJohansson',

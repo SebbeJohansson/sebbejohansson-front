@@ -11,7 +11,7 @@
   "editor.tabSize": 2,
   "npm-scripts.showStartNotification": false,
   "[vue]": {
-    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+    "editor.defaultFormatter": "Vue.volar"
   },
   "[javascript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"

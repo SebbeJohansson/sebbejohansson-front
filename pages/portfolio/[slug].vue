@@ -1,13 +1,6 @@
 <script lang="ts">
 import { MetaInfo } from 'vue-meta';
-import {
-  defineComponent,
-  computed,
-  useContext,
-  ref,
-  useStatic,
-} from '@nuxtjs/composition-api';
-import ContentBlock from '~/components/content/ContentBlock.vue';
+import { defineNuxtComponent } from "#app";
 import axios from '~/plugins/axios';
 
 interface Portfolio {
@@ -20,10 +13,7 @@ interface Portfolio {
   role: string;
 }
 
-export default defineComponent({
-  components: {
-    ContentBlock,
-  },
+export default defineNuxtComponent({
   setup() {
     const { route, payload } = useContext();
 
@@ -84,12 +74,7 @@ export default defineComponent({
             {{ portfolio.title }}
           </h3>
           <div class="portfolio__sidebar">
-            <img
-              v-if="imageUrl"
-              class="portfolio__image"
-              :src="imageUrl"
-              :alt="portfolio.title"
-            >
+            <img v-if="imageUrl" class="portfolio__image" :src="imageUrl" :alt="portfolio.title">
             <div class="portfolio__info-box">
               <div v-if="portfolio.duration" class="portfolio__sidebar-line">
                 <span class="portfolio__sidebar-line-title">Duration</span>
@@ -101,21 +86,13 @@ export default defineComponent({
               </div>
               <div v-if="portfolio.link" class="portfolio__sidebar-line">
                 <span class="portfolio__sidebar-line-title">View</span>
-                <a
-                  :href="portfolio.link"
-                  target="_blank"
-                  class="portfolio__sidebar-line-link"
-                >
+                <a :href="portfolio.link" target="_blank" class="portfolio__sidebar-line-link">
                   Click Here
                 </a>
               </div>
               <div v-if="portfolio.code" class="portfolio__sidebar-line">
                 <span class="portfolio__sidebar-line-title">Code</span>
-                <a
-                  :href="portfolio.code"
-                  target="_blank"
-                  class="portfolio__sidebar-line-link"
-                >
+                <a :href="portfolio.code" target="_blank" class="portfolio__sidebar-line-link">
                   Click Here
                 </a>
               </div>
@@ -137,6 +114,7 @@ export default defineComponent({
   gap: 20px;
   width: 100%;
 }
+
 .portfolio__title {
   font-family: Roboto, Helvetica, Arial, Verdana, sans-serif;
   font-size: 2em;
@@ -145,17 +123,20 @@ export default defineComponent({
   grid-column: 1 / 4;
   grid-row: 1;
 }
+
 .portfolio__content {
   flex-grow: 1;
   display: grid;
   grid-template-rows: auto;
   grid-template-columns: repeat(4, 1fr);
 }
+
 .portfolio__content p {
   margin: 0;
   font-size: 16px;
   line-height: 1.618em;
 }
+
 .portfolio__text {
   grid-column: 1 / 4;
   grid-row: 2/5;
@@ -168,6 +149,7 @@ export default defineComponent({
   grid-column: 4 / 5;
   grid-row: 1 / 8;
 }
+
 .portfolio__image {
   max-width: 100%;
   margin: auto;
@@ -176,20 +158,23 @@ export default defineComponent({
 
   margin-bottom: 20px;
 }
-.portfolio__info-box {
 
-}
+.portfolio__info-box {}
+
 .portfolio__sidebar-line {
   margin-top: 10px;
 }
+
 .portfolio__sidebar-line-title {
   font-weight: bold;
   margin-right: 10px;
 }
+
 .portfolio__sidebar-line-link {
   color: black;
   text-decoration: none;
 }
+
 .portfolio__sidebar-line-link:hover,
 .portfolio__sidebar-line-link:focus {
   color: #1084ff;
@@ -200,6 +185,7 @@ export default defineComponent({
   .portfolio__title {
     grid-column: 1/5;
   }
+
   .portfolio__text {
     grid-column: 1/5;
     grid-row: 3;
@@ -211,9 +197,11 @@ export default defineComponent({
     display: flex;
     margin-bottom: 10px;
   }
+
   .portfolio__image {
     max-width: 31%;
   }
+
   .portfolio__info-box {
     margin-top: -10px;
     margin-left: 10px;

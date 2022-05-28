@@ -1,13 +1,7 @@
-<script setup lang="ts">
-import {
-  defineComponent,
-  ref,
-  computed,
-  useStatic,
-} from '@nuxtjs/composition-api';
+<script lang="ts">
+import { defineNuxtComponent } from "#app";
 import axios from '~/plugins/axios';
-import ContentWithTitle from '~/components/content/ContentWithTitle.vue';
-import BlogEntryComponent from '~/components/parts/molecules/BlogEntry.vue';
+
 
 interface BlogEntry {
   id: string;
@@ -32,7 +26,7 @@ interface BlogEntries {
   entries: BlogEntry[];
 }
 
-export default defineComponent({
+export default defineNuxtComponent({
   components: {
     ContentWithTitle,
     BlogEntryComponent,
@@ -148,32 +142,17 @@ export default defineComponent({
     <content-with-title :title="'Blog'">
       <div class="blog-post-list__content">
         <div class="blog-post-list__list">
-          <blog-entry-component
-            v-for="entry in blogEntries"
-            :key="entry.id"
-            class="blog-post-list__entry"
-            :class="`blog-post-list__entry--` + entry.cat"
-            :title="entry.title"
-            :content="entry.content || null"
-            :slug="entry.slug"
-            :date="entry.date"
-          />
+          <blog-entry-component v-for="entry in blogEntries" :key="entry.id" class="blog-post-list__entry"
+            :class="`blog-post-list__entry--` + entry.cat" :title="entry.title" :content="entry.content || null"
+            :slug="entry.slug" :date="entry.date" />
         </div>
         <div class="blog-post-list__categories">
           <h2 class="blog-post-list__categories-title">
             Categories
           </h2>
-          <div
-            v-for="entry in blogCategories"
-            :key="entry.id"
-            class="blog-post-list__category-line"
-            @click="toggleCategory(entry.name)"
-          >
-            <input
-              class="blog-post-list__category-line-box"
-              type="checkbox"
-              :checked="isCategoryChecked(entry.name)"
-            >
+          <div v-for="entry in blogCategories" :key="entry.id" class="blog-post-list__category-line"
+            @click="toggleCategory(entry.name)">
+            <input class="blog-post-list__category-line-box" type="checkbox" :checked="isCategoryChecked(entry.name)">
             <span class="blog-post-list__category-line-text">
               {{ entry.about }}
             </span>
@@ -181,11 +160,7 @@ export default defineComponent({
         </div>
       </div>
     </content-with-title>
-    <component
-      :is="'style'"
-      v-if="unselectedCategoriesStyling != ''"
-      type="text/css"
-    >
+    <component :is="'style'" v-if="unselectedCategoriesStyling != ''" type="text/css">
       {{ unselectedCategoriesStyling }}
     </component>
   </div>
@@ -197,14 +172,17 @@ export default defineComponent({
   flex-direction: row;
   align-items: flex-start;
 }
+
 .blog-post-list__list {
   margin-right: 0.5rem;
   flex-grow: 1;
 }
+
 .blog-post-list__entry {
   padding: 0.5em 0;
   display: block;
 }
+
 .blog-post-list__categories {
   margin: 0.5rem 0 0 0.5rem;
   padding: 10px;
@@ -214,6 +192,7 @@ export default defineComponent({
   text-decoration: none;
   color: black;
 }
+
 .blog-post-list__categories-title {
   margin: 1rem 0;
   font-family: raleway, Helvetica, Arial, Verdana, sans-serif;
@@ -227,9 +206,11 @@ export default defineComponent({
   justify-content: flex-start;
   cursor: pointer;
 }
+
 .blog-post-list__category-line-box {
   margin-right: 0.5rem;
 }
+
 .blog-post-list__category-line-text {
   overflow-wrap: unset;
   white-space: nowrap;
@@ -240,11 +221,13 @@ export default defineComponent({
     flex-direction: column-reverse;
     align-items: normal;
   }
+
   .blog-post-list__categories {
     margin: 0;
     width: 100%;
     padding: 10px 4em;
   }
+
   .blog-entry__content img {
     width: 100%;
     height: auto;

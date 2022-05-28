@@ -1,7 +1,7 @@
-<script setup lang="ts">
-import { defineComponent, computed, useContext } from '@nuxtjs/composition-api';
+<script lang="ts">
+import { defineNuxtComponent } from "#app";
 
-export default defineComponent({
+export default defineNuxtComponent({
   components: {},
   props: {
     title: {
@@ -34,24 +34,15 @@ export default defineComponent({
     };
   },
   methods: {
-    method() {},
+    method() { },
   },
 });
 </script>
 
 <template>
   <div class="big-portfolio-entry">
-    <component
-      :is="componentType"
-      :to="entryUrl"
-      class="big-portfolio-entry__container"
-    >
-      <img
-        class="big-portfolio-entry__image"
-        :alt="title"
-        :src="imageUrl"
-        loading="lazy"
-      >
+    <component :is="componentType" :to="entryUrl" class="big-portfolio-entry__container">
+      <img class="big-portfolio-entry__image" :alt="title" :src="imageUrl" loading="lazy">
       <div class="big-portfolio-entry__content">
         <h3 v-if="title" class="big-portfolio-entry__title">
           {{ title }}
@@ -68,6 +59,7 @@ export default defineComponent({
 .big-portfolio-entry {
   padding: 0.5em;
 }
+
 .big-portfolio-entry__container {
   display: flex;
   flex-direction: column;
@@ -81,6 +73,7 @@ export default defineComponent({
   text-decoration: none;
   color: black;
 }
+
 .big-portfolio-entry__image {
   width: 100%;
   margin: 0 0 10px;
@@ -89,15 +82,18 @@ export default defineComponent({
   object-fit: cover;
   object-position: bottom;
 }
+
 .big-portfolio-entry__content {
   flex-grow: 1;
 }
+
 .big-portfolio-entry__title {
   text-align: center;
   font-family: Roboto, Helvetica, Arial, Verdana, sans-serif;
   font-weight: 400;
   margin: 0 0 5px;
 }
+
 .big-portfolio-entry__description {
   line-height: 1.5em;
   color: #999;
