@@ -14,7 +14,7 @@ export default defineNuxtComponent({
 </script>
 
 <template>
-  <div class="index">
+  <div class="page index">
     <content-with-title :title="'Who am I?'">
       <p>
         My name is Sebastian Johansson. I am a web developer/designer,

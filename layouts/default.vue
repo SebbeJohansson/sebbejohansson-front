@@ -46,7 +46,7 @@ export default defineNuxtComponent({
 <template>
   <div class="default-layout">
     <parts-organisms-desktop-menu />
-    <slot class="default-layout__content" />
+    <slot />
     <parts-organisms-footer />
   </div>
 </template>
@@ -60,7 +60,7 @@ export default defineNuxtComponent({
   background-color: #f9f6f6;
 }
 
-.default-layout__content {
+.default-layout .page {
   flex-grow: 1;
   display: flex;
   flex-direction: column;

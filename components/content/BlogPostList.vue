@@ -40,8 +40,8 @@ export default defineNuxtComponent({
           'sort date desc;',
         ];
 
-        try {
-          /*await axios
+        /*try {
+          await axios
             .post('/blogs/get', data.join(''))
             .then((response) => {
               const entries = response.data as BlogEntry[];
@@ -55,8 +55,8 @@ export default defineNuxtComponent({
         } catch (error) {
           console.log(error);
         }*/
-          return blogEntriesLocal;
-        }
+        return blogEntriesLocal;
+      }
     );
     const blogEntries = computed<BlogEntry[]>((): BlogEntry[] => rawBlogEntries.value?.entries as BlogEntry[]);
 
@@ -135,7 +135,7 @@ export default defineNuxtComponent({
     <content-with-title :title="'Blog'">
       <div class="blog-post-list__content">
         <div class="blog-post-list__list">
-          <blog-entry-component v-for="entry in blogEntries" :key="entry.id" class="blog-post-list__entry"
+          <parts-molecules-blog-entry v-for="entry in blogEntries" :key="entry.id" class="blog-post-list__entry"
             :class="`blog-post-list__entry--` + entry.cat" :title="entry.title" :content="entry.content || null"
             :slug="entry.slug" :date="entry.date" />
         </div>
