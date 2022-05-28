@@ -1,6 +1,5 @@
 <script lang="ts">
 import { defineNuxtComponent } from "#app";
-import axios from '~/plugins/axios';
 
 interface StalkEntry {
   link: string;
@@ -8,9 +7,6 @@ interface StalkEntry {
 }
 
 export default defineNuxtComponent({
-  components: {
-    StalkEntryComponent,
-  },
   setup() {
     const stalkEntries = reactive<StalkEntry[]>(<StalkEntry[]>[]);
     const fetchEntries = async () => {
@@ -20,21 +16,21 @@ export default defineNuxtComponent({
         'sort orderID asc;',
       ];
 
-      try {
-        await axios
-          .post('/stalk/get', data.join(''))
-          .then((response) => {
-            const entries = response.data as StalkEntry[];
-            entries.forEach((entry) => {
-              stalkEntries.push(entry);
-            });
-          })
-          .catch((error) => {
-            console.log(error.response);
-          });
-      } catch (error) {
-        console.log(error);
-      }
+      /* try {
+         await axios
+           .post('/stalk/get', data.join(''))
+           .then((response) => {
+             const entries = response.data as StalkEntry[];
+             entries.forEach((entry) => {
+               stalkEntries.push(entry);
+             });
+           })
+           .catch((error) => {
+             console.log(error.response);
+           });
+       } catch (error) {
+         console.log(error);
+       } */
     };
     onMounted(fetchEntries);
 
@@ -49,7 +45,7 @@ export default defineNuxtComponent({
       Contact me
     </h3>
     <div class="stalk-list__grid">
-      <stalk-entry-component v-for="entry in stalkEntries" :key="entry.id" :link="entry.link"
+      <parts-molecules-stalk-entry v-for="entry in stalkEntries" :key="entry.id" :link="entry.link"
         :picture="entry.entryPic" />
     </div>
   </div>

@@ -1,6 +1,5 @@
 <script lang="ts">
 import { defineNuxtComponent } from "#app";
-import axios from '~/plugins/axios';
 
 
 interface BlogEntry {
@@ -27,14 +26,11 @@ interface BlogEntries {
 }
 
 export default defineNuxtComponent({
-  components: {
-    ContentWithTitle,
-    BlogEntryComponent,
-  },
   setup() {
     const pageId = ref('default');
-    const rawBlogEntries = useStatic<BlogEntries>(
-      async () => {
+    const rawBlogEntries = useState<BlogEntries>(
+      'rawBlogEntries',
+      () => {
         const blogEntriesLocal: BlogEntries = {
           entries: [],
         };
@@ -45,7 +41,7 @@ export default defineNuxtComponent({
         ];
 
         try {
-          await axios
+          /*await axios
             .post('/blogs/get', data.join(''))
             .then((response) => {
               const entries = response.data as BlogEntry[];
@@ -58,24 +54,23 @@ export default defineNuxtComponent({
             });
         } catch (error) {
           console.log(error);
+        }*/
+          return blogEntriesLocal;
         }
-        return blogEntriesLocal;
-      },
-      pageId,
-      'blogentries',
     );
     const blogEntries = computed<BlogEntry[]>((): BlogEntry[] => rawBlogEntries.value?.entries as BlogEntry[]);
 
     const unselectedCategories = ref(<string[]>[]);
 
-    const rawBlogCategories = useStatic<BlogCategories>(
-      async () => {
+    const rawBlogCategories = useState<BlogCategories>(
+      'rawBlogCategories',
+      () => {
         const blogCategoriesLocal: BlogCategories = {
           entries: [],
         };
         const data = ['fields name,about;'];
 
-        try {
+        /*try {
           await axios
             .post('/blogcats/get', data.join(''))
             .then((response) => {
@@ -89,11 +84,9 @@ export default defineNuxtComponent({
             });
         } catch (error) {
           console.log(error);
-        }
+        }*/
         return blogCategoriesLocal;
       },
-      pageId,
-      'blogcategories',
     );
 
     const blogCategories = computed<BlogCategory[]>((): BlogCategory[] => rawBlogCategories.value?.entries as BlogCategory[]);

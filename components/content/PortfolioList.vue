@@ -1,6 +1,5 @@
 <script lang="ts">
 import { defineNuxtComponent } from '#app'
-import axios from '~/plugins/axios'
 
 interface PortfolioEntry {
   title: string;
@@ -16,15 +15,11 @@ interface PortfolioEntries {
 }
 
 export default defineNuxtComponent({
-  components: {
-    ContentWithTitle,
-    BigPortfolioEntry,
-    SmallPortfolioEntry
-  },
-  setup () {
+  setup() {
     const portfolioId = ref('default')
-    const rawPortfolioEntries = useStatic<PortfolioEntries>(
-      async () => {
+    const rawPortfolioEntries = useState<PortfolioEntries>(
+      'rawPortfolioEntries',
+      () => {
         const portfolioEntriesLocal: PortfolioEntries = {
           entries: []
         }
@@ -34,7 +29,7 @@ export default defineNuxtComponent({
           'sort orderID asc;'
         ]
 
-        try {
+        /* try {
           await axios
             .post('/portfolios/get', data.join(''))
             .then((response) => {
@@ -48,11 +43,9 @@ export default defineNuxtComponent({
             })
         } catch (error) {
           console.log(error)
-        }
+        }*/
         return portfolioEntriesLocal
       },
-      portfolioId,
-      'portfolioentries'
     )
 
     const bigPortfolioEntries = computed<PortfolioEntry[]>(
@@ -76,13 +69,14 @@ export default defineNuxtComponent({
   <div class="portfolio-list">
     <content-with-title :title="'Portfolio'">
       <div class="portfolio-list__grid">
-        <big-portfolio-entry v-for="entry in bigPortfolioEntries" :key="entry.id" class="portfolio-list__entry"
-          :title="entry.title" :description="entry.description || null" :picture="entry.entryPic" :slug="entry.slug" />
+        <parts-molecules-big-portfolio-entry v-for="entry in bigPortfolioEntries" :key="entry.id"
+          class="portfolio-list__entry" :title="entry.title" :description="entry.description || null"
+          :picture="entry.entryPic" :slug="entry.slug" />
       </div>
       <h3 class="portfolio-list__title">
         Other Projects
       </h3>
-      <small-portfolio-entry v-for="entry in smallPortfolioEntries" :key="entry.id" :title="entry.title"
+      <parts-molecules-small-portfolio-entry v-for="entry in smallPortfolioEntries" :key="entry.id" :title="entry.title"
         :link="entry.link" />
     </content-with-title>
   </div>

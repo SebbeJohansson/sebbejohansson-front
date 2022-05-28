@@ -1,5 +1,5 @@
 <script lang="ts">
-import { defineNuxtComponent } from "#app";
+import { defineNuxtComponent, useNuxtApp } from "#app";
 
 export default defineNuxtComponent({
   components: {},
@@ -20,9 +20,9 @@ export default defineNuxtComponent({
     },
   },
   setup(props) {
-    const context = useContext();
+    const nuxtApp = useNuxtApp();
     const imageUrl = computed((): string | undefined => (props.picture
-      ? context.$toMediaUrl(props.picture, { maxHeight: 100, maxWidth: 100 })
+      ? nuxtApp.$toMediaUrl(props.picture, { maxHeight: 100, maxWidth: 100 })
       : undefined));
 
     const entryUrl = computed((): string | undefined => (props.slug ? `portfolio/${props.slug}/` : undefined));

@@ -14,8 +14,9 @@ export default defineNuxtComponent({
     },
   },
   setup(props) {
+    const nuxtApp = useNuxtApp();
     const imageUrl = computed((): string => (props.picture
-      ? `https://admin.sebbejohansson.com/images/${props.picture}`
+      ? nuxtApp.$toMediaUrl(props.picture, { maxHeight: 100, maxWidth: 100 })
       : 'null'));
 
     const entryUrl = computed((): string | undefined => (props.link ? `https://${props.link}` : undefined));
