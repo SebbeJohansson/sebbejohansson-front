@@ -45,9 +45,9 @@ export default defineNuxtComponent({
 
 <template>
   <div class="default-layout">
-    <desktop-menu />
+    <parts-organisms-desktop-menu />
     <slot class="default-layout__content" />
-    <Footer />
+    <parts-organisms-footer />
   </div>
 </template>
 

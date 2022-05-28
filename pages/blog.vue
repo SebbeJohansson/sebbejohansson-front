@@ -13,7 +13,7 @@ export default defineNuxtComponent({
 
 <template>
   <div class="index">
-    <blog-post-list />
+    <content-blog-post-list />
   </div>
 </template>
 

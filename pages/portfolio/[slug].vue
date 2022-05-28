@@ -1,7 +1,6 @@
 <script lang="ts">
 import { MetaInfo } from 'vue-meta';
 import { defineNuxtComponent } from "#app";
-import axios from '~/plugins/axios';
 
 interface Portfolio {
   title: string;
@@ -18,8 +17,9 @@ export default defineNuxtComponent({
     const { route, payload } = useContext();
 
     const pageSlug = ref(route.value.params.slug);
-    const rawPortfolio = useStatic<Portfolio>(
-      async () => {
+    const rawPortfolio = useState<Portfolio>(
+      'rawPortfolio',
+      () => {
         const data = [
           'fields entryPic,title,description,content,entryPic,duration,code,link,role;',
           `filter slug=${pageSlug.value};`,
@@ -29,7 +29,7 @@ export default defineNuxtComponent({
 
         let localPortfolio = {} as Portfolio;
 
-        try {
+        /* try {
           await axios
             .post('/portfolios/get', data.join(''))
             .then((response) => {
@@ -37,12 +37,10 @@ export default defineNuxtComponent({
             });
         } catch (error) {
           console.log(error);
-        }
+        }*/
 
         return localPortfolio;
       },
-      pageSlug,
-      'portfolio',
     );
     const portfolio = computed<Portfolio>((): Portfolio => rawPortfolio.value as Portfolio);
 
