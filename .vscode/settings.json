@@ -19,4 +19,7 @@
   "[css]": {
     "editor.defaultFormatter": "sibiraj-s.vscode-scss-formatter"
   },
+  "[typescript]": {
+    "editor.defaultFormatter": "vscode.typescript-language-features"
+  },
 }

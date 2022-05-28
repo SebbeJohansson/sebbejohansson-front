@@ -421,7 +421,7 @@
     unimport "^0.1.6"
     untyped "^0.4.4"
 
-"@nuxt/kit@^3.0.0-rc.2", "@nuxt/kit@^3.0.0-rc.3":
+"@nuxt/kit@^3.0.0-rc.3":
   version "3.0.0-rc.3"
   resolved "https://registry.yarnpkg.com/@nuxt/kit/-/kit-3.0.0-rc.3.tgz#9bbedf5be268578d4002766be8eb59b976892cc6"
   integrity sha512-aD993HKXZ76cwxkM2LCwWRQaOI3RjLCg/kj+8ZS6qN4VrpwrZp4xM59YYIYs3/Vze4OG3D4+0gr0u5zdgf8v8g==
@@ -627,28 +627,6 @@
   dependencies:
     estree-walker "^2.0.1"
     picomatch "^2.2.2"
-
-"@storyblok/js@^1.1.0":
-  version "1.2.1"
-  resolved "https://registry.yarnpkg.com/@storyblok/js/-/js-1.2.1.tgz#58524378910f70644f6f61c2aa0a7fbd6d3f9b94"
-  integrity sha512-DBXKXQ+WJyIzZ9OHKN1IGpf2O3BnbBNuXi7EzIQal8hk1Ode2o1NxOtMTfTAUVCLDPmGaTWUDdhDMscm5Qa1ig==
-  dependencies:
-    storyblok-js-client "^4.5.2"
-
-"@storyblok/nuxt@^4.0.1":
-  version "4.0.1"
-  resolved "https://registry.yarnpkg.com/@storyblok/nuxt/-/nuxt-4.0.1.tgz#66098849bb5310d0ba1a63564e102040abf4a551"
-  integrity sha512-bZke7+lfpJeHkLcIvaygWfa62PUYrDFquMdCLH8zIBTAQTHAlCZDCb0LLyOtIv0S+6u6iZAGiJu7W3Z+tuRCDQ==
-  dependencies:
-    "@nuxt/kit" "^3.0.0-rc.2"
-    "@storyblok/vue" "^6.0.3"
-
-"@storyblok/vue@^6.0.3":
-  version "6.0.3"
-  resolved "https://registry.yarnpkg.com/@storyblok/vue/-/vue-6.0.3.tgz#c1ed81c0e2379cf3e245f4cfe45efe81a6723680"
-  integrity sha512-eGCwocDQRGS/6ddzKzBKY6DENUmd66UCUQoJOIwWPZPShKjEb1wAjRoaLlRhm9htKerpEAhm4wDjhtsYgtpZgw==
-  dependencies:
-    "@storyblok/js" "^1.1.0"
 
 "@trysound/sax@0.2.0":
   version "0.2.0"
@@ -4434,11 +4412,6 @@ prelude-ls@^1.2.1:
   resolved "https://registry.yarnpkg.com/prelude-ls/-/prelude-ls-1.2.1.tgz#debc6489d7a6e6b0e7611888cec880337d316396"
   integrity sha512-vkcDPrRZo1QZLbn5RLGPpg/WmIQ65qoWWhcGKf/b5eplkkarX0m9z8ppCat4mlOqUsWpyNuYgO3VRyrYHSzX5g==
 
-prettier@^2.5.1:
-  version "2.6.2"
-  resolved "https://registry.yarnpkg.com/prettier/-/prettier-2.6.2.tgz#e26d71a18a74c3d0f0597f55f01fb6c06c206032"
-  integrity sha512-PkUpF+qoXTqhOeWL9fu7As8LXsIUZ1WYaJiY/a7McAQzxjk82OF0tibkFXVCDImZtWxbvojFjerkiLb0/q8mew==
-
 pretty-bytes@^6.0.0:
   version "6.0.0"
   resolved "https://registry.yarnpkg.com/pretty-bytes/-/pretty-bytes-6.0.0.tgz#928be2ad1f51a2e336add8ba764739f9776a8140"
@@ -4675,11 +4648,6 @@ rimraf@^3.0.2:
   integrity sha512-JZkJMZkAGFFPP2YqXZXPbMlMBgsxzE8ILs4lMIX/2o0L9UBw9O/Y3o6wFw/i9YLapcUJWwqbi3kdxIPdC62TIA==
   dependencies:
     glob "^7.1.3"
-
-rollup-plugin-mjs-entry@^0.1.1:
-  version "0.1.1"
-  resolved "https://registry.yarnpkg.com/rollup-plugin-mjs-entry/-/rollup-plugin-mjs-entry-0.1.1.tgz#b3ab47e8d49ddb1916e36ba2480dc8a62a22d533"
-  integrity sha512-uii0Txyrn4YCgP++fypLqsT3LgO3Fx0gAZLZlWRSwKCuZ+bdSzAzdVbJFATmCHcBNlO61i65EgemOVdVQYONHA==
 
 rollup-plugin-terser@^7.0.2:
   version "7.0.2"
@@ -4973,14 +4941,6 @@ std-env@^3.1.1:
   version "3.1.1"
   resolved "https://registry.yarnpkg.com/std-env/-/std-env-3.1.1.tgz#1f19c4d3f6278c52efd08a94574a2a8d32b7d092"
   integrity sha512-/c645XdExBypL01TpFKiG/3RAa/Qmu+zRi0MwAmrdEkwHNuN0ebo8ccAXBBDa5Z0QOJgBskUIbuCK91x0sCVEw==
-
-storyblok-js-client@^4.5.2:
-  version "4.5.2"
-  resolved "https://registry.yarnpkg.com/storyblok-js-client/-/storyblok-js-client-4.5.2.tgz#f93ae4822fd5710737a516d474a5dd40ee80b96c"
-  integrity sha512-86On+EyREZdbTcYTV+0dRQ1E4Gy0hPWs43MxK5VOv6DRwbf1A7haXq6dUL8nm9i5+xgOB0GLJW0f3B9CHbq4sQ==
-  dependencies:
-    prettier "^2.5.1"
-    rollup-plugin-mjs-entry "^0.1.1"
 
 strict-uri-encode@^2.0.0:
   version "2.0.0"

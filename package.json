@@ -1,8 +1,8 @@
 {
   "private": true,
   "scripts": {
-    "build": "nuxt build",
     "dev": "nuxt dev",
+    "build": "nuxt build",
     "generate": "nuxt generate",
     "preview": "nuxt preview"
   },
@@ -11,12 +11,11 @@
     "@typescript-eslint/eslint-plugin": "^5.26.0",
     "@typescript-eslint/parser": "^5.26.0",
     "eslint": "^8.16.0",
-    "eslint-plugin-vue": "^9.0.1",
+    "eslint-plugin-vue": "^9.0.1"
+  },
+  "dependencies": {
     "nuxt": "3.0.0-rc.3",
     "typescript": "^4.7.2",
     "vite-plugin-eslint": "^1.6.1"
-  },
-  "dependencies": {
-    "@storyblok/nuxt": "^4.0.1"
   }
 }

@@ -10,6 +10,10 @@ export default defineNuxtConfig({
   // Target: https://go.nuxtjs.dev/config-target
   target: 'static',
 
+  generate: {
+    crawler: true,
+  },
+
   router: {
     trailingSlash: true
   },
@@ -38,23 +42,19 @@ export default defineNuxtConfig({
         })(window,document,'script','dataLayer','${process.env.GTM_ID}');`,
           type: 'text/javascript'
         }
-      ]
+      ],
     }
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
-    '~/styles/index'
-  ],
-
-  // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: [
-    '~/plugins/media-handler.ts'
+    '~/assets/styles/index.css',
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
-    '@storyblok/nuxt'
+    //'@nuxtjs/axios',
+    //'@storyblok/nuxt',
   ],
 
   storyblok: {
@@ -63,7 +63,7 @@ export default defineNuxtConfig({
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
-    extend (config, { isDev, isClient }) {
+    extend(config, { isDev, isClient }) {
       config.resolve.extensions.push('.ts', '.tsx', '.js')
 
       config.module.rules.push(
@@ -95,8 +95,8 @@ export default defineNuxtConfig({
             }
           ]
         },
-        'postcss-preset-env': { },
-        cssnano: { },
+        'postcss-preset-env': {},
+        cssnano: {},
         autoprefixer: {
           overrideBrowserslist: ['last 2 versions', 'Firefox ESR', '> 1%', 'ie >= 8', 'iOS >= 8', 'Android >= 4']
         }
@@ -108,43 +108,4 @@ export default defineNuxtConfig({
   env: {
     apiUrl: process.env.API_URL || 'http://localhost/api'
   },
-  generate: {
-    async routes () {
-      interface PortfolioEntry {
-        title: string;
-        description: string;
-        slug: string;
-        entryPic: string;
-        link: string;
-        size: number;
-      }
-      const data = [
-        'fields slug,entryPic,title,description,size,link;',
-        'filter status=1;',
-        'sort orderID asc;'
-      ]
-
-      const portfolioEntries = await axios
-        .post(process.env.API_URL + '/portfolios/get', data.join(''))
-        .then((response) => {
-          const entries = response.data as PortfolioEntry[]
-          return entries
-        })
-        .catch((error) => {
-          console.log(error.response)
-        }) as PortfolioEntry[]
-
-      return [
-        ...portfolioEntries.map((entry) => {
-          return {
-            route: '/portfolio/' + entry.slug + '/',
-            payload: entry
-          }
-        })
-      ]
-    },
-    vite: {
-      plugins: [eslintPlugin()]
-    }
-  }
 })
