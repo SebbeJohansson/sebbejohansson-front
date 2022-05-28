@@ -1,6 +1,6 @@
+import { defineNuxtConfig } from "nuxt";
 
-import axios from "axios"
-export default {
+export default defineNuxtConfig({
   telemetry: false,
 
   // Disable servenr-side rendering: https://go.nuxtjs.dev/ssr-mode
@@ -42,26 +42,18 @@ export default {
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
 
-  // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
-  buildModules: [
-    // https://go.nuxtjs.dev/typescript
-    '@nuxt/typescript-build',
-    '@nuxtjs/composition-api',
-    '@nuxtjs/axios',
-  ],
-
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
-    '@nuxtjs/axios',
     '@nuxtjs/gtm',
+    "@storyblok/nuxt",
   ],
-
-  axios: {
-    proxy: false
-  },
 
   gtm: {
     id: 'GTM-KLS6G4B'
+  },
+
+  storyblok: {
+    accessToken: process.env.STORYBLOK_API_TOKEN
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
@@ -148,4 +140,4 @@ export default {
       ];
     },
   }
-}
+});

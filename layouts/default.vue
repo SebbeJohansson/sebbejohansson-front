@@ -52,7 +52,7 @@ export default defineComponent({
 <template>
   <div class="default-layout">
     <desktop-menu />
-    <Nuxt class="default-layout__content" />
+    <slot class="default-layout__content" />
     <Footer />
   </div>
 </template>
