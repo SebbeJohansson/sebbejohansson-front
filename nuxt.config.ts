@@ -14,10 +14,6 @@ export default defineNuxtConfig({
     crawler: true,
   },
 
-  router: {
-    trailingSlash: true
-  },
-
   app: {
     head: {
       title: 'SebbeJohansson',
@@ -104,8 +100,5 @@ export default defineNuxtConfig({
       preset: {
       }
     }
-  },
-  env: {
-    apiUrl: process.env.API_URL || 'http://localhost/api'
   },
 })

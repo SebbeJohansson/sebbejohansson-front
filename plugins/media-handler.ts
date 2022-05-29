@@ -5,17 +5,17 @@ export default defineNuxtPlugin(useNuxtApp => {
     skipAutoFormat?: boolean | undefined;
   }
 
-  function toMediaUrl(url: string, { maxHeight, maxWidth, skipAutoFormat = false }: MediaArguments) {
+  function toMediaUrl(url: string, { maxHeight = null, maxWidth = null, skipAutoFormat = false }: MediaArguments) {
     const qs = [];
 
     if (!skipAutoFormat) {
-      qs.push('auto=format');
+      qs.push('m/');
     }
 
     let imageUrl = url;
 
     if (qs.length) {
-      imageUrl += `?${qs.join('&')}`;
+      imageUrl += `/${qs.join('/')}`;
     }
 
     return imageUrl;
@@ -23,23 +23,3 @@ export default defineNuxtPlugin(useNuxtApp => {
   // accessible directly with useNuxtApp()
   useNuxtApp.provide('toMediaUrl', toMediaUrl);
 })
-
-/* import { Plugin } from '@nuxt/types';
-
-declare module '@nuxt/types' {
-  interface NuxtAppOptions {
-    $toMediaUrl(slug: string, args: MediaArguments): string
-  }
-  interface Context {
-    $toMediaUrl(slug: string, args: MediaArguments): string
-  }
-}
-
-const mediaHandler: Plugin = (context, inject) => {
-  context.$toMediaUrl = toMediaUrl;
-  inject('toMediaUrl', toMediaUrl);
-};
-
-export default mediaHandler;
-
-*/

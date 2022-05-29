@@ -56,9 +56,9 @@ export default defineNuxtComponent({
         rawPortfolioEntries.push({
           title: story.content.title || story.name,
           description: story.content.description,
-          slug: story.slug,
-          entryPic: story.content.cover.filename,
-          link: story.content.link,
+          slug: story.full_slug || story.content.slug || story.slug,
+          entryPic: story.content.cover?.filename,
+          link: story.content.link?.url || story.content.link?.url || null,
           size: story.content.size
         });
       });

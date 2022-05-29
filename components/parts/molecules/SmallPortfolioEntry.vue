@@ -10,6 +10,7 @@ export default defineNuxtComponent({
     },
     link: {
       type: String,
+      required: true,
     },
   },
   methods: {
@@ -20,11 +21,11 @@ export default defineNuxtComponent({
 
 <template>
   <div v-if="link" class="small-portfolio-entry">
-    <a :href="link" target="_blank" class="small-portfolio-entry__container">
+    <NuxtLink :href="link" target="_blank" class="small-portfolio-entry__container">
       <span class="small-portfolio-entry__title">
         {{ title }}
       </span>
-    </a>
+    </NuxtLink>
   </div>
 </template>
 

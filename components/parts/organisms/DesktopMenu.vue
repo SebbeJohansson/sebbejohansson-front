@@ -3,21 +3,21 @@
     <div class="desktop-menu__container-wrapper">
       <div class="desktop-menu__container">
         <div class="desktop-menu__logo-wrapper">
-          <a href="/#" class="desktop-menu__logo">
+          <NuxtLink href="/#" class="desktop-menu__logo">
             Sebastian Johansson
-          </a>
+          </NuxtLink>
         </div>
 
         <div class="desktop-menu__departments">
-          <a href="/#portfolio" class="desktop-menu__department">
+          <NuxtLink href="/#portfolio" class="desktop-menu__department">
             Portfolio
-          </a>
-          <a href="/#contact" class="desktop-menu__department">
+          </NuxtLink>
+          <NuxtLink href="/#contact" class="desktop-menu__department">
             Contact
-          </a>
-          <nuxt-link to="/blog/" class="desktop-menu__department">
+          </NuxtLink>
+          <NuxtLink to="/blog/" class="desktop-menu__department">
             Blog
-          </nuxt-link>
+          </NuxtLink>
         </div>
       </div>
     </div>

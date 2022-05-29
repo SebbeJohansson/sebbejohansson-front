@@ -24,10 +24,12 @@ export default defineNuxtComponent({
   setup(props) {
     const nuxtApp = useNuxtApp();
     const imageUrl = computed((): string | undefined => (props.picture
-      ? nuxtApp.$toMediaUrl(props.picture, { maxHeight: 100, maxWidth: 100 })
+      ? nuxtApp.$toMediaUrl(props.picture, {})
       : undefined));
 
-    const entryUrl = computed((): string | undefined => (props.slug ? `portfolio/${props.slug}/` : undefined));
+
+    console.log(props.slug);
+    const entryUrl = computed((): string | undefined => (props.slug ? `/${props.slug}/` : undefined));
 
     return {
       imageUrl,
@@ -43,7 +45,7 @@ export default defineNuxtComponent({
 
 <template>
   <div class="big-portfolio-entry">
-    <component :is="componentType" :to="entryUrl" class="big-portfolio-entry__container">
+    <component :is="componentType" :href="entryUrl" class="big-portfolio-entry__container">
       <img class="big-portfolio-entry__image" :alt="title" :src="imageUrl" loading="lazy">
       <div class="big-portfolio-entry__content">
         <h3 v-if="title" class="big-portfolio-entry__title">
