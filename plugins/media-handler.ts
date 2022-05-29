@@ -5,14 +5,14 @@ export default defineNuxtPlugin(useNuxtApp => {
     skipAutoFormat?: boolean | undefined;
   }
 
-  function toMediaUrl(slug: string, { maxHeight, maxWidth, skipAutoFormat = false }: MediaArguments) {
+  function toMediaUrl(url: string, { maxHeight, maxWidth, skipAutoFormat = false }: MediaArguments) {
     const qs = [];
 
     if (!skipAutoFormat) {
       qs.push('auto=format');
     }
 
-    let imageUrl = `https://sebbejohansson.imgix.net/${slug}`;
+    let imageUrl = url;
 
     if (qs.length) {
       imageUrl += `?${qs.join('&')}`;

@@ -1,5 +1,7 @@
 <script lang="ts">
 import { defineNuxtComponent, useNuxtApp } from "#app";
+import { ConcreteComponent } from "vue";
+const NuxtLink = resolveComponent('NuxtLink')
 
 export default defineNuxtComponent({
   components: {},
@@ -30,7 +32,7 @@ export default defineNuxtComponent({
     return {
       imageUrl,
       entryUrl,
-      componentType: computed((): string => (entryUrl.value ? 'nuxt-link' : 'div')),
+      componentType: computed((): string | ConcreteComponent => (entryUrl.value ? NuxtLink : 'div')),
     };
   },
   methods: {

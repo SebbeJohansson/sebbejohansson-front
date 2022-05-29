@@ -14,6 +14,8 @@
     "eslint-plugin-vue": "^9.0.1"
   },
   "dependencies": {
+    "@storyblok/nuxt": "^4.0.1",
+    "axios": "^0.27.2",
     "nuxt": "3.0.0-rc.3",
     "typescript": "^4.7.2",
     "vite-plugin-eslint": "^1.6.1"

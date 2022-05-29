@@ -7,16 +7,12 @@ interface PortfolioEntry {
   slug: string;
   entryPic: string;
   link: string;
-  size: number;
-}
-
-interface PortfolioEntries {
-  entries: PortfolioEntry[];
+  size: string;
 }
 
 export default defineNuxtComponent({
-  setup() {
-    const portfolioId = ref('default')
+  async setup() {
+    /* const portfolioId = ref('default')
     const rawPortfolioEntries = useState<PortfolioEntries>(
       'rawPortfolioEntries',
       () => {
@@ -29,7 +25,7 @@ export default defineNuxtComponent({
           'sort orderID asc;'
         ]
 
-        /* try {
+        try {
           await axios
             .post('/portfolios/get', data.join(''))
             .then((response) => {
@@ -43,20 +39,41 @@ export default defineNuxtComponent({
             })
         } catch (error) {
           console.log(error)
-        }*/
+        }
         return portfolioEntriesLocal
       },
-    )
+    ) */
+
+    const rawPortfolioEntries: PortfolioEntry[] = [];
+    const storyblokApi = useStoryblokApi();
+    await storyblokApi.get("cdn/stories", {
+      starts_with: "portfolio/",
+      version: "published"
+    }).then((response) => {
+      console.log(response.data.stories);
+      response.data.stories.forEach((story) => {
+        console.log(story);
+        rawPortfolioEntries.push({
+          title: story.content.title || story.name,
+          description: story.content.description,
+          slug: story.slug,
+          entryPic: story.content.cover.filename,
+          link: story.content.link,
+          size: story.content.size
+        });
+      });
+      console.log(rawPortfolioEntries);
+    });
 
     const bigPortfolioEntries = computed<PortfolioEntry[]>(
-      (): PortfolioEntry[] => rawPortfolioEntries.value?.entries.filter(
-        entry => entry.size === 0
+      (): PortfolioEntry[] => rawPortfolioEntries.filter(
+        entry => entry.size === "big"
       ) as PortfolioEntry[]
     )
 
     const smallPortfolioEntries = computed<PortfolioEntry[]>(
-      (): PortfolioEntry[] => rawPortfolioEntries.value?.entries.filter(
-        entry => entry.size === 1
+      (): PortfolioEntry[] => rawPortfolioEntries.filter(
+        entry => entry.size === "small"
       ) as PortfolioEntry[]
     )
 

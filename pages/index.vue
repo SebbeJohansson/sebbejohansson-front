@@ -15,6 +15,7 @@ export default defineNuxtComponent({
 
 <template>
   <div class="page index">
+    {{ stories }}
     <content-with-title :title="'Who am I?'">
       <p>
         My name is Sebastian Johansson. I am a web developer/designer,
