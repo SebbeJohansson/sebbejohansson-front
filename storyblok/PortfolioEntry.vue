@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const route = useRoute()
+import { RichTextRenderer } from '@marvr/storyblok-rich-text-vue-renderer';
 const props = defineProps({ blok: Object, rawBlog: Object });
 const nuxtApp = useNuxtApp();
 
@@ -11,7 +11,10 @@ const duration = computed((): string | null => null);
 const role = computed((): string | null => null);
 const link = computed((): string => props.blok.link?.url || props.blok.link?.url || null);
 const code = computed((): string | null => null);
-const content = computed((): string => props.blok.description);
+const content = computed((): {} | string => props.blok.content?.[0].text || props.blok.description);
+console.log(props.blok.content?.[0].text);
+console.log(props.blok.content?.[0].text?.type === 'doc');
+
 </script>
 
 <template>
@@ -48,7 +51,10 @@ const content = computed((): string => props.blok.description);
               </div>
             </div>
           </div>
-          <div v-if="content" class="portfolio__text" v-html="content" />
+          <div class="portfolio__text">
+            <RichTextRenderer v-if="blok.content?.[0].text?.type === 'doc'" :document="(content as DocumentNode)" />
+            <div v-else v-html="content" />
+          </div>
         </div>
       </div>
     </content-block>
@@ -82,7 +88,7 @@ const content = computed((): string => props.blok.description);
 }
 
 .portfolio__content p {
-  margin: 0;
+  margin: 0 0 10px 0;
   font-size: 16px;
   line-height: 1.618em;
 }

@@ -99,6 +99,9 @@ export default defineNuxtConfig({
       },
       preset: {
       }
-    }
+    },
+    build: {
+      transpile: ['@marvr/storyblok-rich-text-vue-renderer']
+    },
   },
 })

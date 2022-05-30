@@ -364,6 +364,21 @@
     semver "^7.3.5"
     tar "^6.1.11"
 
+"@marvr/storyblok-rich-text-types@3.2.1":
+  version "3.2.1"
+  resolved "https://registry.yarnpkg.com/@marvr/storyblok-rich-text-types/-/storyblok-rich-text-types-3.2.1.tgz#b005cbf86cd78f9ae6889f33d43ce2212b33ce4b"
+  integrity sha512-W6iiJi8dPi7Dz4qGwnd+Zxtf7ltl+apjslHyWobikCoX8w6P4o7rpE1nBTsDjWK0ORncwId1B5bEPE0fpfILhg==
+
+"@marvr/storyblok-rich-text-vue-renderer@^3.2.1":
+  version "3.2.1"
+  resolved "https://registry.yarnpkg.com/@marvr/storyblok-rich-text-vue-renderer/-/storyblok-rich-text-vue-renderer-3.2.1.tgz#c4d3d4c60b85d1531c5524c390b1b3730be2ff95"
+  integrity sha512-6FQVhAu+TjyQs4Mu4PTkTX1LW7QIdfOnIEPy1TdVGK8px6VEIALm5j0/7o4tvqJhyxNTU2P9oB4bLO15Kn1qfA==
+  dependencies:
+    "@marvr/storyblok-rich-text-types" "3.2.1"
+    vue "^3.2.27"
+  optionalDependencies:
+    vue-router "^4.0.10"
+
 "@netlify/functions@^1.0.0":
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/@netlify/functions/-/functions-1.0.0.tgz#5b6c02fafc567033c93b15a080cc021e5f10f254"
@@ -5616,14 +5631,14 @@ vue-eslint-parser@^9.0.1:
     lodash "^4.17.21"
     semver "^7.3.6"
 
-vue-router@^4.0.15:
+vue-router@^4.0.10, vue-router@^4.0.15:
   version "4.0.15"
   resolved "https://registry.yarnpkg.com/vue-router/-/vue-router-4.0.15.tgz#b4a0661efe197f8c724e0f233308f8776e2c3667"
   integrity sha512-xa+pIN9ZqORdIW1MkN2+d9Ui2pCM1b/UMgwYUCZOiFYHAvz/slKKBDha8DLrh5aCG/RibtrpyhKjKOZ85tYyWg==
   dependencies:
     "@vue/devtools-api" "^6.0.0"
 
-vue@^3.2.33:
+vue@^3.2.27, vue@^3.2.33:
   version "3.2.36"
   resolved "https://registry.yarnpkg.com/vue/-/vue-3.2.36.tgz#8daa996e2ced521708de97d066c7c998e8bc3378"
   integrity sha512-5yTXmrE6gW8IQgttzHW5bfBiFA6mx35ZXHjGLDmKYzW6MMmYvCwuKybANRepwkMYeXw2v1buGg3/lPICY5YlZw==
