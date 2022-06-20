@@ -70,38 +70,38 @@ export default defineNuxtConfig({
       )
     },
     postcss: {
-      plugins: {
-        'postcss-import': {},
-        'postcss-css-variables': {
-          variables: {
+      postcssOptions: {
+        plugins: {
+          'postcss-import': {},
+          'postcss-css-variables': {
+            variables: {
+            },
+            preserveAtRulesOrder: true,
+            preserve: true
           },
-          preserveAtRulesOrder: true,
-          preserve: true
-        },
-        'postcss-custom-media': {
-          importFrom: [
-            {
-              customMedia: {
-                '--phone': '(max-width: 767px)',
-                '--phoneAndTablet': '(max-width: 1023px)',
-                '--tablet': '(min-width: 768px) and (max-width: 1023px)',
-                '--tabletAndDesktop': '(min-width: 768px)',
-                '--desktop': '(min-width: 1024px)'
+          'postcss-custom-media': {
+            importFrom: [
+              {
+                customMedia: {
+                  '--phone': '(max-width: 767px)',
+                  '--phoneAndTablet': '(max-width: 1023px)',
+                  '--tablet': '(min-width: 768px) and (max-width: 1023px)',
+                  '--tabletAndDesktop': '(min-width: 768px)',
+                  '--desktop': '(min-width: 1024px)'
+                }
               }
-            }
-          ]
+            ]
+          },
+          'postcss-preset-env': {},
+          cssnano: {},
         },
-        'postcss-preset-env': {},
-        cssnano: {},
-        autoprefixer: {
-          overrideBrowserslist: ['last 2 versions', 'Firefox ESR', '> 1%', 'ie >= 8', 'iOS >= 8', 'Android >= 4']
+        preset: {
+          autoprefixer: {
+            overrideBrowserslist: ['last 2 versions', 'Firefox ESR', '> 1%', 'ie >= 8', 'iOS >= 8', 'Android >= 4']
+          }
         }
-      },
-      preset: {
       }
     },
-    build: {
-      transpile: ['@marvr/storyblok-rich-text-vue-renderer']
-    },
+    transpile: ['@marvr/storyblok-rich-text-vue-renderer'],
   },
 })
