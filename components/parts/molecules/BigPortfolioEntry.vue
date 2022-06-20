@@ -27,8 +27,6 @@ export default defineNuxtComponent({
       ? nuxtApp.$toMediaUrl(props.picture, {})
       : undefined));
 
-
-    console.log(props.slug);
     const entryUrl = computed((): string | undefined => (props.slug ? `/${props.slug}/` : undefined));
 
     return {

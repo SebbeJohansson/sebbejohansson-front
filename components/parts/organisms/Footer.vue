@@ -22,7 +22,7 @@
 }
 
 .footer__right {
-  height: 100px;
+  padding: 2rem 0;
   width: 50%;
   display: flex;
   align-items: center;
@@ -41,7 +41,7 @@
 .footer__left {
   width: 50%;
   border-right: 1px dimgray solid;
-  height: 100px;
+  padding: 2rem 0;
   display: flex;
   flex-direction: row;
   justify-content: flex-start;

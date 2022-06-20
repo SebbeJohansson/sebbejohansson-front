@@ -1,15 +1,16 @@
 <script lang="ts">
 import { defineNuxtComponent } from "#app";
+import { RichTextRenderer } from '@marvr/storyblok-rich-text-vue-renderer';
 
 export default defineNuxtComponent({
-  components: {},
+  components: { RichTextRenderer },
   props: {
     title: {
       type: String,
       required: true,
     },
     content: {
-      type: String,
+      type: Object,
     },
     slug: {
       type: String,
@@ -41,7 +42,8 @@ export default defineNuxtComponent({
         <h5 v-if="date" class="blog-entry__date">
           - {{ date }}
         </h5>
-        <div v-if="content" class="blog-entry__content" v-html="content" />
+        <StoryblokComponent v-if="content && Array.isArray(content) && content.length > 0" v-for="block in content"
+          :key="block._uid" :blok="block" />
       </div>
     </div>
   </div>

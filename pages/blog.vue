@@ -1,13 +1,7 @@
-<script lang="ts">
-import { MetaInfo } from 'vue-meta';
-import { defineNuxtComponent } from "#app";
+<script setup lang="ts">
 
-export default defineNuxtComponent({
-  head(): MetaInfo {
-    return {
-      title: 'Blog - SebbeJohansson',
-    };
-  },
+useHead({
+  titleTemplate: (title) => `Blog - ${title}`,
 });
 </script>
 

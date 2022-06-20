@@ -12,47 +12,13 @@ interface PortfolioEntry {
 
 export default defineNuxtComponent({
   async setup() {
-    /* const portfolioId = ref('default')
-    const rawPortfolioEntries = useState<PortfolioEntries>(
-      'rawPortfolioEntries',
-      () => {
-        const portfolioEntriesLocal: PortfolioEntries = {
-          entries: []
-        }
-        const data = [
-          'fields slug,entryPic,title,description,size,link;',
-          'filter status=1;',
-          'sort orderID asc;'
-        ]
-
-        try {
-          await axios
-            .post('/portfolios/get', data.join(''))
-            .then((response) => {
-              const entries = response.data as PortfolioEntry[]
-              entries.forEach((entry) => {
-                portfolioEntriesLocal.entries.push(entry)
-              })
-            })
-            .catch((error) => {
-              console.log(error.response)
-            })
-        } catch (error) {
-          console.log(error)
-        }
-        return portfolioEntriesLocal
-      },
-    ) */
-
     const rawPortfolioEntries: PortfolioEntry[] = [];
     const storyblokApi = useStoryblokApi();
     await storyblokApi.get("cdn/stories", {
       starts_with: "portfolio/",
       version: "published"
     }).then((response) => {
-      console.log(response.data.stories);
       response.data.stories.forEach((story) => {
-        console.log(story);
         rawPortfolioEntries.push({
           title: story.content.title || story.name,
           description: story.content.description,
@@ -62,7 +28,6 @@ export default defineNuxtComponent({
           size: story.content.size
         });
       });
-      console.log(rawPortfolioEntries);
     });
 
     const bigPortfolioEntries = computed<PortfolioEntry[]>(

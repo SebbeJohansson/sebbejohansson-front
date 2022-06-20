@@ -18,7 +18,8 @@
     "@marvr/storyblok-rich-text-vue-renderer": "^3.2.1",
     "@storyblok/nuxt": "^4.0.1",
     "axios": "^0.27.2",
-    "nuxt": "3.0.0-rc.3",
+    "nuxt": "^3.0.0-rc.4",
+    "postcss-custom-media": "^8.0.2",
     "typescript": "^4.7.2",
     "vite-plugin-eslint": "^1.6.1"
   }

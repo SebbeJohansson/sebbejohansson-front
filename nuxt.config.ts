@@ -57,6 +57,28 @@ export default defineNuxtConfig({
     accessToken: process.env.STORYBLOK_API_TOKEN
   },
 
+  postcss: {
+    plugins: {
+      'postcss-import': {},
+      'postcss-custom-media': {
+        importFrom: [
+          {
+            customMedia: {
+              '--phone': '(max-width: 767px)',
+              '--phoneAndTablet': '(max-width: 1023px)',
+              '--tablet': '(min-width: 768px) and (max-width: 1023px)',
+              '--tabletAndDesktop': '(min-width: 768px)',
+              '--desktop': '(min-width: 1024px)'
+            }
+          }
+        ]
+      },
+      autoprefixer: {
+        overrideBrowserslist: ['last 2 versions', 'Firefox ESR', '> 1%', 'ie >= 8', 'iOS >= 8', 'Android >= 4']
+      }
+    },
+  },
+
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
     extend(config, { isDev, isClient }) {
@@ -68,39 +90,6 @@ export default defineNuxtConfig({
           loader: 'file-loader'
         }
       )
-    },
-    postcss: {
-      postcssOptions: {
-        plugins: {
-          'postcss-import': {},
-          'postcss-css-variables': {
-            variables: {
-            },
-            preserveAtRulesOrder: true,
-            preserve: true
-          },
-          'postcss-custom-media': {
-            importFrom: [
-              {
-                customMedia: {
-                  '--phone': '(max-width: 767px)',
-                  '--phoneAndTablet': '(max-width: 1023px)',
-                  '--tablet': '(min-width: 768px) and (max-width: 1023px)',
-                  '--tabletAndDesktop': '(min-width: 768px)',
-                  '--desktop': '(min-width: 1024px)'
-                }
-              }
-            ]
-          },
-          'postcss-preset-env': {},
-          cssnano: {},
-        },
-        preset: {
-          autoprefixer: {
-            overrideBrowserslist: ['last 2 versions', 'Firefox ESR', '> 1%', 'ie >= 8', 'iOS >= 8', 'Android >= 4']
-          }
-        }
-      }
     },
     transpile: ['@marvr/storyblok-rich-text-vue-renderer'],
   },

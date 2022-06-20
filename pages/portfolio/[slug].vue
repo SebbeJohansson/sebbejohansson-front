@@ -2,15 +2,16 @@
 <script setup lang="ts">
 const route = useRoute()
 let story = {} as any;
-await useStoryblok(`portfolio/${route.params.slug}`, { version: "published" }).then((response) => {
+const version = route.query._storyblok && route.query._storyblok != "" ? "published" : "draft";
+await useStoryblok(`portfolio/${route.params.slug}`, { version: version }).then((response) => {
   story = response.value;
 });
-const title2 = computed((): string => {
+const portfolioTitle = computed((): string => {
   return story.content?.title || story.name || 'wow'
 });
 
 useHead({
-  titleTemplate: (title) => `${title2.value} - ${title}`,
+  titleTemplate: (title) => `${portfolioTitle.value} - ${title}`,
 });
 </script>
 

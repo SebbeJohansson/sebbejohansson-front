@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { RichTextRenderer } from '@marvr/storyblok-rich-text-vue-renderer';
 const props = defineProps({ blok: Object, rawBlog: Object });
 const nuxtApp = useNuxtApp();
 
@@ -11,18 +10,14 @@ const duration = computed((): string | null => null);
 const role = computed((): string | null => null);
 const link = computed((): string => props.blok.link?.url || props.blok.link?.url || null);
 const code = computed((): string | null => null);
-const content = computed((): {} | string => props.blok.content?.[0].text || props.blok.description);
-console.log(props.blok.content?.[0].text);
-console.log(props.blok.content?.[0].text?.type === 'doc');
-
+const content = computed((): [] | string => props.blok.content && Array.isArray(props.blok.content) && props.blok.content.length > 0 ? props.blok.content : props.blok.description);
 </script>
 
 <template>
   <div v-editable="blok">
-    {{ blok }}
     <content-block>
       <div v-if="blok" class="portfolio">
-        <div class="portfolio__content">
+        <div class="portfolio__content-wrapper">
           <h3 v-if="title" class="portfolio__title">
             {{ title }}
           </h3>
@@ -39,20 +34,21 @@ console.log(props.blok.content?.[0].text?.type === 'doc');
               </div>
               <div v-if="link" class="portfolio__sidebar-line">
                 <span class="portfolio__sidebar-line-title">View</span>
-                <a :href="link" target="_blank" class="portfolio__sidebar-line-link">
+                <NuxtLink :href="link" target="_blank" class="portfolio__sidebar-line-link">
                   Click Here
-                </a>
+                </NuxtLink>
               </div>
               <div v-if="code" class="portfolio__sidebar-line">
                 <span class="portfolio__sidebar-line-title">Code</span>
-                <a :href="code" target="_blank" class="portfolio__sidebar-line-link">
+                <NuxtLink :href="code" target="_blank" class="portfolio__sidebar-line-link">
                   Click Here
-                </a>
+                </NuxtLink>
               </div>
             </div>
           </div>
-          <div class="portfolio__text">
-            <RichTextRenderer v-if="blok.content?.[0].text?.type === 'doc'" :document="(content as DocumentNode)" />
+          <div class="portfolio__content">
+            <StoryblokComponent v-if="blok.content && Array.isArray(blok.content) && blok.content.length > 0"
+              v-for="block in blok.content" :key="block._uid" :blok="block" />
             <div v-else v-html="content" />
           </div>
         </div>
@@ -80,22 +76,23 @@ console.log(props.blok.content?.[0].text?.type === 'doc');
   grid-row: 1;
 }
 
-.portfolio__content {
+.portfolio__content-wrapper {
   flex-grow: 1;
   display: grid;
   grid-template-rows: auto;
   grid-template-columns: repeat(4, 1fr);
 }
 
-.portfolio__content p {
+.portfolio__content-wrapper p {
   margin: 0 0 10px 0;
   font-size: 16px;
   line-height: 1.618em;
 }
 
-.portfolio__text {
+.portfolio__content {
   grid-column: 1 / 4;
   grid-row: 2/5;
+  margin-right: 30px;
 }
 
 .portfolio__sidebar {
@@ -142,20 +139,16 @@ console.log(props.blok.content?.[0].text?.type === 'doc');
     grid-column: 1/5;
   }
 
-  .portfolio__text {
+  .portfolio__content {
     grid-column: 1/5;
     grid-row: 3;
+    margin-right: 0;
   }
 
   .portfolio__sidebar {
     grid-column: 1/5;
     grid-row: 2;
-    display: flex;
     margin-bottom: 10px;
-  }
-
-  .portfolio__image {
-    max-width: 31%;
   }
 
   .portfolio__info-box {

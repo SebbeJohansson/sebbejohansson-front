@@ -6,7 +6,7 @@ interface BlogEntry {
   id: string;
   title: string;
   slug: string;
-  content: string;
+  content: {};
   author: string;
   date: string;
   cat: string;
@@ -21,110 +21,100 @@ interface BlogCategories {
   entries: BlogCategory[];
 }
 
-interface BlogEntries {
-  entries: BlogEntry[];
-}
-
 export default defineNuxtComponent({
-  setup() {
-    const pageId = ref('default');
-    const rawBlogEntries = useState<BlogEntries>(
-      'rawBlogEntries',
-      () => {
-        const blogEntriesLocal: BlogEntries = {
-          entries: [],
-        };
-        const data = [
-          'fields id,title,slug,content,author,date,cat;',
-          'filter status=1;',
-          'sort date desc;',
-        ];
+  async setup() {
+    const rawBlogEntries: BlogEntry[] = [];
+    const storyblokApi = useStoryblokApi();
 
-        /*try {
-          await axios
-            .post('/blogs/get', data.join(''))
-            .then((response) => {
-              const entries = response.data as BlogEntry[];
-              entries.forEach((entry) => {
-                blogEntriesLocal.entries.push(entry);
-              });
-            })
-            .catch((error) => {
-              console.log(error.response);
-            });
-        } catch (error) {
-          console.log(error);
-        }*/
-        return blogEntriesLocal;
-      }
-    );
-    const blogEntries = computed<BlogEntry[]>((): BlogEntry[] => rawBlogEntries.value?.entries as BlogEntry[]);
-
-    const unselectedCategories = ref(<string[]>[]);
-
-    const rawBlogCategories = useState<BlogCategories>(
-      'rawBlogCategories',
-      () => {
-        const blogCategoriesLocal: BlogCategories = {
-          entries: [],
-        };
-        const data = ['fields name,about;'];
-
-        /*try {
-          await axios
-            .post('/blogcats/get', data.join(''))
-            .then((response) => {
-              const entries = response.data as BlogCategory[];
-              entries.forEach((entry) => {
-                blogCategoriesLocal.entries.push(entry);
-              });
-            })
-            .catch((error) => {
-              console.log(error.response);
-            });
-        } catch (error) {
-          console.log(error);
-        }*/
-        return blogCategoriesLocal;
-      },
-    );
-
-    const blogCategories = computed<BlogCategory[]>((): BlogCategory[] => rawBlogCategories.value?.entries as BlogCategory[]);
-
-    const unselectedCategoriesStyling = computed((): string => {
-      let style = '';
-      unselectedCategories.value.forEach((category) => {
-        style += `.blog-post-list__entry.blog-post-list__entry--${category} { display: none; }`;
+    await storyblokApi.get("cdn/stories", {
+      starts_with: "blog/",
+      version: "published",
+      content_type: "blog-entry",
+      resolve_relations: "blog-entry.categories",
+      sort_by: "content.date:desc",
+    }).then((response) => {
+      response.data.stories.forEach((story) => {
+        rawBlogEntries.push({
+          id: story.id,
+          title: story.content.title || story.name,
+          slug: story.full_slug || story.content.slug || story.slug,
+          author: '',
+          date: story.content.date,
+          cat: story.content.link?.url || story.content.link?.url || null,
+          content: story.content.content || [],
+        });
       });
-      return style;
     });
 
-    function isCategoryChecked(category: string): boolean {
-      return !(unselectedCategories.value.includes(category));
-    }
+    const blogEntries = computed<BlogEntry[]>(
+      (): BlogEntry[] => rawBlogEntries as BlogEntry[]
+    )
 
-    function toggleCategory(category: string) {
-      if (isCategoryChecked(category)) {
-        unselectedCategories.value.push(category);
-      } else {
-        const index = unselectedCategories.value.indexOf(category);
-        if (index > -1) {
-          unselectedCategories.value.splice(index, 1);
-        }
-      }
+    // const unselectedCategories = ref(<string[]>[]);
 
-      unselectedCategories.value = unselectedCategories.value.filter(
-        (item, index) => unselectedCategories.value.indexOf(item) === index,
-      );
-    }
+    // const rawBlogCategories = useState<BlogCategories>(
+    //   'rawBlogCategories',
+    //   () => {
+    //     const blogCategoriesLocal: BlogCategories = {
+    //       entries: [],
+    //     };
+    //     const data = ['fields name,about;'];
+
+    //     /*try {
+    //       await axios
+    //         .post('/blogcats/get', data.join(''))
+    //         .then((response) => {
+    //           const entries = response.data as BlogCategory[];
+    //           entries.forEach((entry) => {
+    //             blogCategoriesLocal.entries.push(entry);
+    //           });
+    //         })
+    //         .catch((error) => {
+    //           console.log(error.response);
+    //         });
+    //     } catch (error) {
+    //       console.log(error);
+    //     }*/
+    //     return blogCategoriesLocal;
+    //   },
+    // );
+
+    // const blogCategories = computed<BlogCategory[]>((): BlogCategory[] => rawBlogCategories.value?.entries as BlogCategory[]);
+
+    // const unselectedCategoriesStyling = computed((): string => {
+    //   let style = '';
+    //   unselectedCategories.value.forEach((category) => {
+    //     style += `.blog-post-list__entry.blog-post-list__entry--${category} { display: none; }`;
+    //   });
+    //   return style;
+    // });
+
+    // function isCategoryChecked(category: string): boolean {
+    //   return !(unselectedCategories.value.includes(category));
+    // }
+
+    // function toggleCategory(category: string) {
+    //   if (isCategoryChecked(category)) {
+    //     unselectedCategories.value.push(category);
+    //   } else {
+    //     const index = unselectedCategories.value.indexOf(category);
+    //     if (index > -1) {
+    //       unselectedCategories.value.splice(index, 1);
+    //     }
+    //   }
+
+    //   unselectedCategories.value = unselectedCategories.value.filter(
+    //     (item, index) => unselectedCategories.value.indexOf(item) === index,
+    //   );
+    // }
 
     return {
       blogEntries,
-      blogCategories,
-      unselectedCategories,
-      unselectedCategoriesStyling,
-      isCategoryChecked,
-      toggleCategory,
+      // blogCategories,
+      // unselectedCategories,
+      // unselectedCategoriesStyling,
+      // isCategoryChecked,
+      // toggleCategory,
     };
   },
 });
@@ -139,7 +129,7 @@ export default defineNuxtComponent({
             :class="`blog-post-list__entry--` + entry.cat" :title="entry.title" :content="entry.content || null"
             :slug="entry.slug" :date="entry.date" />
         </div>
-        <div class="blog-post-list__categories">
+        <!--div class="blog-post-list__categories">
           <h2 class="blog-post-list__categories-title">
             Categories
           </h2>
@@ -150,12 +140,12 @@ export default defineNuxtComponent({
               {{ entry.about }}
             </span>
           </div>
-        </div>
+        </div-->
       </div>
     </content-with-title>
-    <component :is="'style'" v-if="unselectedCategoriesStyling != ''" type="text/css">
+    <!--component :is="'style'" v-if="unselectedCategoriesStyling != ''" type="text/css">
       {{ unselectedCategoriesStyling }}
-    </component>
+    </!--component-->
   </div>
 </template>
 
@@ -219,6 +209,10 @@ export default defineNuxtComponent({
     margin: 0;
     width: 100%;
     padding: 10px 4em;
+  }
+
+  .blog-post-list__list {
+    margin-right: 0;
   }
 
   .blog-entry__content img {
