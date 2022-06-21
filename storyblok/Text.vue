@@ -1,10 +1,11 @@
 <script setup lang="ts">
-import { RichTextRenderer } from '@marvr/storyblok-rich-text-vue-renderer';
-defineProps({ blok: Object });
+const props = defineProps({ blok: Object });
+const storyblokApi = useStoryblokApi();
+const text = computed((): string => storyblokApi.richTextResolver.render(props.blok.text));
 </script>
 
 <template>
   <div v-editable="blok" class="text">
-    <RichTextRenderer :document="(blok.text as DocumentNode)" />
+    <div v-html="text" />
   </div>
 </template>

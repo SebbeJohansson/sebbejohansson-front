@@ -1,9 +1,7 @@
 <script lang="ts">
 import { defineNuxtComponent } from "#app";
-import { RichTextRenderer } from '@marvr/storyblok-rich-text-vue-renderer';
 
 export default defineNuxtComponent({
-  components: { RichTextRenderer },
   props: {
     title: {
       type: String,

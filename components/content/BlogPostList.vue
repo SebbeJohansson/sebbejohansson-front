@@ -159,6 +159,7 @@ export default defineNuxtComponent({
 .blog-post-list__list {
   margin-right: 0.5rem;
   flex-grow: 1;
+  max-width: 100%;
 }
 
 .blog-post-list__entry {
