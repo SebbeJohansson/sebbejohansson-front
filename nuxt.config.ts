@@ -1,5 +1,4 @@
 import { defineNuxtConfig } from 'nuxt'
-import eslintPlugin from 'vite-plugin-eslint'
 
 export default defineNuxtConfig({
   telemetry: false,
@@ -81,16 +80,6 @@ export default defineNuxtConfig({
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
-    extend(config, { isDev, isClient }) {
-      config.resolve.extensions.push('.ts', '.tsx', '.js')
-
-      config.module.rules.push(
-        {
-          test: /\.(svg|woff|woff2|eot|ttf)$/,
-          loader: 'file-loader'
-        }
-      )
-    },
     transpile: ['@marvr/storyblok-rich-text-vue-renderer'],
   },
 })
