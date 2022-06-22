@@ -1,41 +1,23 @@
-<script setup lang="ts">
-import { defineComponent } from '@nuxtjs/composition-api';
-
-export default defineComponent({});
-</script>
-
 <template>
   <div class="desktop-menu">
     <div class="desktop-menu__container-wrapper">
       <div class="desktop-menu__container">
         <div class="desktop-menu__logo-wrapper">
-          <nuxt-link
-            class="desktop-menu__logo"
-            to="/#"
-          >
+          <NuxtLink href="/#" class="desktop-menu__logo">
             Sebastian Johansson
-          </nuxt-link>
+          </NuxtLink>
         </div>
 
         <div class="desktop-menu__departments">
-          <nuxt-link
-            to="/#portfolio"
-            class="desktop-menu__department"
-          >
+          <NuxtLink href="/#portfolio" class="desktop-menu__department">
             Portfolio
-          </nuxt-link>
-          <nuxt-link
-            to="/#contact"
-            class="desktop-menu__department"
-          >
+          </NuxtLink>
+          <NuxtLink href="/#contact" class="desktop-menu__department">
             Contact
-          </nuxt-link>
-          <nuxt-link
-            to="/blog/"
-            class="desktop-menu__department"
-          >
+          </NuxtLink>
+          <NuxtLink to="/blog/" class="desktop-menu__department">
             Blog
-          </nuxt-link>
+          </NuxtLink>
         </div>
       </div>
     </div>
@@ -55,6 +37,7 @@ export default defineComponent({});
   position: relative;
   z-index: 10;
   background-color: rgba(219, 219, 219, 0.49);
+  padding: 0 1rem;
 }
 
 .desktop-menu__container {
@@ -103,6 +86,7 @@ export default defineComponent({});
   top: 0;
   z-index: 5;
 }
+
 .desktop-menu__background-image {
   background-image: url(/images/picnr7.jpg);
   height: 100%;
@@ -115,6 +99,7 @@ export default defineComponent({});
   .desktop-menu__container {
     flex-direction: column;
   }
+
   .desktop-menu__logo-wrapper {
     margin: 1.5rem 0;
     text-align: center;

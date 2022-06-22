@@ -1,7 +1,7 @@
-<script setup lang="ts">
-import { defineComponent } from '@nuxtjs/composition-api';
+<script lang="ts">
+import { defineNuxtComponent } from "#app";
 
-export default defineComponent({
+export default defineNuxtComponent({
   components: {},
   props: {
     title: {
@@ -10,21 +10,22 @@ export default defineComponent({
     },
     link: {
       type: String,
+      required: true,
     },
   },
   methods: {
-    method() {},
+    method() { },
   },
 });
 </script>
 
 <template>
   <div v-if="link" class="small-portfolio-entry">
-    <a :href="link" target="_blank" class="small-portfolio-entry__container">
+    <NuxtLink :href="link" target="_blank" class="small-portfolio-entry__container">
       <span class="small-portfolio-entry__title">
         {{ title }}
       </span>
-    </a>
+    </NuxtLink>
   </div>
 </template>
 
@@ -32,6 +33,7 @@ export default defineComponent({
 .small-portfolio-entry {
   padding: 0.2em;
 }
+
 .small-portfolio-entry__title {
   text-align: center;
   font-family: Roboto, Helvetica, Arial, Verdana, sans-serif;

@@ -1,18 +1,13 @@
-<script setup lang="ts">
-import { defineComponent, PropType } from '@nuxtjs/composition-api';
-import ContentBlock from '~/components/content/ContentBlock.vue';
-
-export default defineComponent({
-  components: {
-    ContentBlock,
-  },
+<script lang="ts">
+import { defineNuxtComponent } from '#app'
+export default defineNuxtComponent({
   props: {
     title: {
       type: String as PropType<string>,
-      required: true,
-    },
-  },
-});
+      required: true
+    }
+  }
+})
 </script>
 
 <template>
@@ -36,6 +31,7 @@ export default defineComponent({
   font-size: 4em;
   margin: 30px 0 15px;
 }
+
 .content-with-title__content {
   text-align: center;
 }

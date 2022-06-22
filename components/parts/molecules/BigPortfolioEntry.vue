@@ -1,7 +1,9 @@
-<script setup lang="ts">
-import { defineComponent, computed, useContext } from '@nuxtjs/composition-api';
+<script lang="ts">
+import { defineNuxtComponent, useNuxtApp } from "#app";
+import { ConcreteComponent } from "vue";
+const NuxtLink = resolveComponent('NuxtLink')
 
-export default defineComponent({
+export default defineNuxtComponent({
   components: {},
   props: {
     title: {
@@ -20,38 +22,29 @@ export default defineComponent({
     },
   },
   setup(props) {
-    const context = useContext();
+    const nuxtApp = useNuxtApp();
     const imageUrl = computed((): string | undefined => (props.picture
-      ? context.$toMediaUrl(props.picture, { maxHeight: 100, maxWidth: 100 })
+      ? nuxtApp.$toMediaUrl(props.picture, {})
       : undefined));
 
-    const entryUrl = computed((): string | undefined => (props.slug ? `portfolio/${props.slug}/` : undefined));
+    const entryUrl = computed((): string | undefined => (props.slug ? `/${props.slug}/` : undefined));
 
     return {
       imageUrl,
       entryUrl,
-      componentType: computed((): string => (entryUrl.value ? 'nuxt-link' : 'div')),
+      componentType: computed((): string | ConcreteComponent => (entryUrl.value ? NuxtLink : 'div')),
     };
   },
   methods: {
-    method() {},
+    method() { },
   },
 });
 </script>
 
 <template>
   <div class="big-portfolio-entry">
-    <component
-      :is="componentType"
-      :to="entryUrl"
-      class="big-portfolio-entry__container"
-    >
-      <img
-        class="big-portfolio-entry__image"
-        :alt="title"
-        :src="imageUrl"
-        loading="lazy"
-      >
+    <component :is="componentType" :href="entryUrl" class="big-portfolio-entry__container">
+      <img class="big-portfolio-entry__image" :alt="title" :src="imageUrl" loading="lazy">
       <div class="big-portfolio-entry__content">
         <h3 v-if="title" class="big-portfolio-entry__title">
           {{ title }}
@@ -68,6 +61,7 @@ export default defineComponent({
 .big-portfolio-entry {
   padding: 0.5em;
 }
+
 .big-portfolio-entry__container {
   display: flex;
   flex-direction: column;
@@ -81,6 +75,7 @@ export default defineComponent({
   text-decoration: none;
   color: black;
 }
+
 .big-portfolio-entry__image {
   width: 100%;
   margin: 0 0 10px;
@@ -89,15 +84,18 @@ export default defineComponent({
   object-fit: cover;
   object-position: bottom;
 }
+
 .big-portfolio-entry__content {
   flex-grow: 1;
 }
+
 .big-portfolio-entry__title {
   text-align: center;
   font-family: Roboto, Helvetica, Arial, Verdana, sans-serif;
   font-weight: 400;
   margin: 0 0 5px;
 }
+
 .big-portfolio-entry__description {
   line-height: 1.5em;
   color: #999;

@@ -1,14 +1,8 @@
 <script lang="ts">
 import { MetaInfo } from 'vue-meta';
-import { defineComponent } from '@nuxtjs/composition-api';
-import DesktopMenu from '~/components/parts/organisms/DesktopMenu.vue';
-import Footer from '~/components/parts/organisms/Footer.vue';
+import { defineNuxtComponent } from "#app";
 
-export default defineComponent({
-  components: {
-    DesktopMenu,
-    Footer,
-  },
+export default defineNuxtComponent({
   head(): MetaInfo {
     const link = [];
 
@@ -51,9 +45,9 @@ export default defineComponent({
 
 <template>
   <div class="default-layout">
-    <desktop-menu />
-    <Nuxt class="default-layout__content" />
-    <Footer />
+    <parts-organisms-desktop-menu />
+    <slot />
+    <parts-organisms-footer />
   </div>
 </template>
 
@@ -66,7 +60,7 @@ export default defineComponent({
   background-color: #f9f6f6;
 }
 
-.default-layout__content {
+.default-layout .page {
   flex-grow: 1;
   display: flex;
   flex-direction: column;

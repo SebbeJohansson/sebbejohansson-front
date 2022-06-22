@@ -1,15 +1,14 @@
-<script setup lang="ts">
-import { defineComponent, computed } from '@nuxtjs/composition-api';
+<script lang="ts">
+import { defineNuxtComponent } from "#app";
 
-export default defineComponent({
-  components: {},
+export default defineNuxtComponent({
   props: {
     title: {
       type: String,
       required: true,
     },
     content: {
-      type: String,
+      type: Object,
     },
     slug: {
       type: String,
@@ -26,7 +25,7 @@ export default defineComponent({
     };
   },
   methods: {
-    method() {},
+    method() { },
   },
 });
 </script>
@@ -41,7 +40,8 @@ export default defineComponent({
         <h5 v-if="date" class="blog-entry__date">
           - {{ date }}
         </h5>
-        <div v-if="content" class="blog-entry__content" v-html="content" />
+        <StoryblokComponent v-if="content && Array.isArray(content) && content.length > 0" v-for="block in content"
+          :key="block._uid" :blok="block" />
       </div>
     </div>
   </div>
@@ -61,21 +61,25 @@ export default defineComponent({
   text-decoration: none;
   color: black;
 }
+
 .blog-entry__content {
   flex-grow: 1;
 }
+
 .blog-entry__title {
   text-align: left;
   font-family: Roboto, Helvetica, Arial, Verdana, sans-serif;
   font-weight: 400;
   margin: 0 0 5px;
 }
+
 .blog-entry__date {
   text-align: left;
   font-family: Roboto, Helvetica, Arial, Verdana, sans-serif;
   font-weight: 400;
   margin: 0 0 5px;
 }
+
 .blog-entry__content {
   line-height: 1.5em;
   text-align: left;

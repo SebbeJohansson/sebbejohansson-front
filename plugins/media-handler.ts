@@ -1,47 +1,25 @@
-import { Plugin } from '@nuxt/types';
-
-declare module '@nuxt/types' {
-  interface NuxtAppOptions {
-    $toMediaUrl(slug: string, args: MediaArguments): string
-  }
-  interface Context {
-    $toMediaUrl(slug: string, args: MediaArguments): string
-  }
-}
-
-interface MediaArguments {
-  maxHeight: number;
-  maxWidth: number;
-  skipAutoFormat?: boolean | undefined;
-}
-
-function toMediaUrl(slug: string, { maxHeight, maxWidth, skipAutoFormat = false }: MediaArguments) {
-  const qs = [];
-
-  /* if (maxWidth) {
-    qs.push(`maxWidth=${Math.round(maxWidth)}`);
+export default defineNuxtPlugin(useNuxtApp => {
+  interface MediaArguments {
+    maxHeight: number;
+    maxWidth: number;
+    skipAutoFormat?: boolean | undefined;
   }
 
-  if (maxHeight) {
-    qs.push(`maxHeight=${Math.round(maxHeight)}`);
-  } */
+  function toMediaUrl(url: string, { maxHeight = null, maxWidth = null, skipAutoFormat = false }: MediaArguments) {
+    const qs = [];
 
-  if (!skipAutoFormat) {
-    qs.push('auto=format');
+    if (!skipAutoFormat) {
+      qs.push('m/');
+    }
+
+    let imageUrl = url;
+
+    if (qs.length) {
+      imageUrl += `/${qs.join('/')}`;
+    }
+
+    return imageUrl;
   }
-
-  let imageUrl = `https://sebbejohansson.imgix.net/${slug}`;
-
-  if (qs.length) {
-    imageUrl += `?${qs.join('&')}`;
-  }
-
-  return imageUrl;
-}
-
-const mediaHandler: Plugin = (context, inject) => {
-  context.$toMediaUrl = toMediaUrl;
-  inject('toMediaUrl', toMediaUrl);
-};
-
-export default mediaHandler;
+  // accessible directly with useNuxtApp()
+  useNuxtApp.provide('toMediaUrl', toMediaUrl);
+})
