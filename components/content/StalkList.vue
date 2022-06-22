@@ -7,34 +7,29 @@ interface StalkEntry {
 }
 
 export default defineNuxtComponent({
-  setup() {
-    const stalkEntries = reactive<StalkEntry[]>(<StalkEntry[]>[]);
-    const fetchEntries = async () => {
-      const data = [
-        'fields entryPic,link;',
-        'filter status=1;',
-        'sort orderID asc;',
-      ];
+  async setup() {
+    const route = useRoute();
+    const version = route.query._storyblok && route.query._storyblok != "" ? "draft" : "published";
 
-      /* try {
-         await axios
-           .post('/stalk/get', data.join(''))
-           .then((response) => {
-             const entries = response.data as StalkEntry[];
-             entries.forEach((entry) => {
-               stalkEntries.push(entry);
-             });
-           })
-           .catch((error) => {
-             console.log(error.response);
-           });
-       } catch (error) {
-         console.log(error);
-       } */
-    };
-    onMounted(fetchEntries);
+    const rawStalkEntries: StalkEntry[] = [];
+    const storyblokApi = useStoryblokApi();
+    await storyblokApi.get("cdn/stories", {
+      starts_with: "contact/",
+      version: version,
+    }).then((response) => {
+      response.data.stories.forEach((story) => {
+        rawStalkEntries.push({
+          entryPic: story.content.image?.filename,
+          link: story.content.link?.url || story.content.link?.url || null,
+        });
+      });
+    });
 
-    return { stalkEntries, fetchEntries };
+    const stalkEntries = computed<StalkEntry[]>(
+      (): StalkEntry[] => rawStalkEntries as StalkEntry[]
+    )
+
+    return { stalkEntries };
   },
 });
 </script>
