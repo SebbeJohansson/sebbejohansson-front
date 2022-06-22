@@ -1,6 +1,6 @@
-# Nuxt 3 Minimal Starter
+# SebbeJohansson Front
 
-Look at the [nuxt 3 documentation](https://v3.nuxtjs.org) to learn more.
+Uses [nuxt3](https://v3.nuxtjs.org) and [storyblok](https://www.storyblok.com/).
 
 ## Setup
 
