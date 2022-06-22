@@ -23,31 +23,47 @@ interface BlogCategories {
 
 export default defineNuxtComponent({
   async setup() {
-    const rawBlogEntries: BlogEntry[] = [];
-    const storyblokApi = useStoryblokApi();
+    const route = useRoute();
+    const rawBlogEntries = ref(<BlogEntry[]>[]);
 
-    await storyblokApi.get("cdn/stories", {
-      starts_with: "blog/",
-      version: "published",
-      content_type: "blog-entry",
-      resolve_relations: "blog-entry.categories",
-      sort_by: "content.date:desc",
-    }).then((response) => {
-      response.data.stories.forEach((story) => {
-        rawBlogEntries.push({
-          id: story.id,
-          title: story.content.title || story.name,
-          slug: story.full_slug || story.content.slug || story.slug,
-          author: '',
-          date: story.content.date,
-          cat: story.content.link?.url || story.content.link?.url || null,
-          content: story.content.content || [],
+    const version = route.query._storyblok && route.query._storyblok != "" ? "draft" : "published";
+    console.log(route.query._storyblok && route.query._storyblok != "" ? "draft" : "published");
+
+    async function getBlogEntries(page: number, per_page: number) {
+      let totalEntries = 0;
+      const storyblokApi = useStoryblokApi();
+
+      await storyblokApi.get("cdn/stories", {
+        starts_with: "blog/",
+        version: version,
+        content_type: "blog-entry",
+        resolve_relations: "blog-entry.categories",
+        sort_by: "content.date:desc",
+        page: page,
+        per_page: per_page,
+      }).then((response) => {
+        totalEntries = response.headers.total;
+        response.data.stories.forEach((story) => {
+          rawBlogEntries.value.push({
+            id: story.id,
+            title: story.content.title || story.name,
+            slug: story.full_slug || story.content.slug || story.slug,
+            author: '',
+            date: story.content.date,
+            cat: story.content.link?.url || story.content.link?.url || null,
+            content: story.content.content || [],
+          });
         });
       });
-    });
+      if (totalEntries > rawBlogEntries.value.length) {
+        getBlogEntries(page + 1, per_page);
+      }
+    }
+
+    await getBlogEntries(1, 25);
 
     const blogEntries = computed<BlogEntry[]>(
-      (): BlogEntry[] => rawBlogEntries as BlogEntry[]
+      (): BlogEntry[] => rawBlogEntries.value as BlogEntry[]
     )
 
     // const unselectedCategories = ref(<string[]>[]);
@@ -110,6 +126,7 @@ export default defineNuxtComponent({
 
     return {
       blogEntries,
+      getBlogEntries,
       // blogCategories,
       // unselectedCategories,
       // unselectedCategoriesStyling,

@@ -9,3 +9,9 @@ const text = computed((): string => storyblokApi.richTextResolver.render(props.b
     <div v-html="text" />
   </div>
 </template>
+
+<style>
+.text img {
+  max-width: 100%;
+}
+</style>

@@ -2,7 +2,7 @@
 <script setup lang="ts">
 const route = useRoute()
 let story = {} as any;
-const version = route.query._storyblok && route.query._storyblok != "" ? "published" : "draft";
+const version = route.query._storyblok && route.query._storyblok != "" ? "draft" : "published";
 await useStoryblok(`portfolio/${route.params.slug}`, { version: version }).then((response) => {
   story = response.value;
 });

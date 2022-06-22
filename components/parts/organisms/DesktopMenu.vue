@@ -37,6 +37,7 @@
   position: relative;
   z-index: 10;
   background-color: rgba(219, 219, 219, 0.49);
+  padding: 0 1rem;
 }
 
 .desktop-menu__container {
