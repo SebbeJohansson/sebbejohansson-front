@@ -17,6 +17,6 @@ useHead({
 
 <template>
   <div>
-    <StoryblokComponent :blok="story.content" :rawBlog="story" />
+    <StoryblokComponent :blok="story.content" :raw="story" />
   </div>
 </template>

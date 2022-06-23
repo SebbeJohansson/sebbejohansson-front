@@ -6,7 +6,7 @@ useHead({
 </script>
 
 <template>
-  <div class="index">
+  <div class="page blog-page">
     <content-blog-post-list />
   </div>
 </template>

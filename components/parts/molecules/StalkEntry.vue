@@ -14,10 +14,7 @@ export default defineNuxtComponent({
     },
   },
   setup(props) {
-    const nuxtApp = useNuxtApp();
-    const imageUrl = computed((): string => (props.picture
-      ? nuxtApp.$toMediaUrl(props.picture, { maxHeight: 100, maxWidth: 100 })
-      : 'null'));
+    const imageUrl = computed((): string => (props.picture ? props.picture : 'null'));
 
     const entryUrl = computed((): string | undefined => (props.link ? `https://${props.link}` : undefined));
 
@@ -35,7 +32,8 @@ export default defineNuxtComponent({
 <template>
   <div v-if="entryUrl" class="stalk-entry">
     <a :href="entryUrl" target="_blank" class="stalk-entry__container">
-      <img :src="imageUrl" class="stalk-entry__image" loading="lazy">
+      <parts-atoms-image class="stalk-entry__image" :image="imageUrl" :mobile-size="100" :tablet-size="100"
+        :desktop-size="100" />
     </a>
   </div>
 </template>

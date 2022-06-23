@@ -27,7 +27,6 @@ export default defineNuxtComponent({
     const rawBlogEntries = ref(<BlogEntry[]>[]);
 
     const version = route.query._storyblok && route.query._storyblok != "" ? "draft" : "published";
-    console.log(route.query._storyblok && route.query._storyblok != "" ? "draft" : "published");
 
     async function getBlogEntries(page: number, per_page: number) {
       let totalEntries = 0;
@@ -44,7 +43,7 @@ export default defineNuxtComponent({
       }).then((response) => {
         totalEntries = response.headers.total;
         response.data.stories.forEach((story) => {
-          rawBlogEntries.value.push({
+          /* rawBlogEntries.value.push({
             id: story.id,
             title: story.content.title || story.name,
             slug: story.full_slug || story.content.slug || story.slug,
@@ -52,7 +51,8 @@ export default defineNuxtComponent({
             date: story.content.date,
             cat: story.content.link?.url || story.content.link?.url || null,
             content: story.content.content || [],
-          });
+          });*/
+          rawBlogEntries.value.push(story);
         });
       });
       if (totalEntries > rawBlogEntries.value.length) {
@@ -139,12 +139,11 @@ export default defineNuxtComponent({
 
 <template>
   <div class="blog-post-list">
-    <content-with-title :title="'Blog'">
+    <content-with-title title="Blog">
       <div class="blog-post-list__content">
         <div class="blog-post-list__list">
-          <parts-molecules-blog-entry v-for="entry in blogEntries" :key="entry.id" class="blog-post-list__entry"
-            :class="`blog-post-list__entry--` + entry.cat" :title="entry.title" :content="entry.content || null"
-            :slug="entry.slug" :date="entry.date" />
+          <StoryblokComponent class="blog-post-list__entry" :class="`blog-post-list__entry--` + entry.cat"
+            v-for="entry in blogEntries" :blok="entry.content" :raw="entry" :key="entry._uid" />
         </div>
         <!--div class="blog-post-list__categories">
           <h2 class="blog-post-list__categories-title">

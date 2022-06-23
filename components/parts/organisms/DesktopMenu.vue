@@ -22,7 +22,7 @@
       </div>
     </div>
     <div class="desktop-menu__background">
-      <div class="desktop-menu__background-image" />
+      <parts-atoms-image class="desktop-menu__background-image" image="images/picnr7.jpg" />
     </div>
   </div>
 </template>
@@ -88,11 +88,10 @@
 }
 
 .desktop-menu__background-image {
-  background-image: url(/images/picnr7.jpg);
   height: 100%;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center center;
+  width: 100%;
+  object-fit: cover;
+  object-position: center;
 }
 
 @media (--phone) {

@@ -1,7 +1,8 @@
 <template>
   <div class="footer">
     <div id="contact" class="footer__left">
-      <img class="footer__left-icon" src="/images/icon.png" loading="lazy">
+      <parts-atoms-image class="footer__left-icon" image="images/icon.png" :mobile-size="60" :tablet-size="60"
+        :desktop-size="60" />
       <a class="footer__address" href="mailto:hello@sebbejohansson.com">hello@sebbejohansson.com</a>
     </div>
     <div class="footer__right">

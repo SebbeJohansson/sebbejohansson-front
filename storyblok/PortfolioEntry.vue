@@ -1,11 +1,8 @@
 <script setup lang="ts">
-const props = defineProps({ blok: Object, rawBlog: Object });
-const nuxtApp = useNuxtApp();
+const props = defineProps({ blok: Object, raw: Object });
 
-const imageUrl = computed((): string => (props.blok.cover?.filename
-  ? nuxtApp.$toMediaUrl(props.blok.cover?.filename, {})
-  : 'null'));
-const title = computed((): string => props.blok.title || props.rawBlog.name);
+const imageUrl = computed((): string => (props.blok.cover?.filename ? props.blok.cover?.filename : 'null'));
+const title = computed((): string => props.blok.title || props.raw.name);
 const duration = computed((): string | null => props.blok.duration);
 const role = computed((): string | null => props.blok.role);
 const link = computed((): string => props.blok.link?.url || props.blok.link?.cached_url || null);
@@ -22,7 +19,8 @@ const content = computed((): [] | string => props.blok.content && Array.isArray(
             {{ title }}
           </h3>
           <div class="portfolio__sidebar">
-            <img v-if="imageUrl" class="portfolio__image" :src="imageUrl" :alt="title">
+            <parts-atoms-image class="portfolio__image" :image="imageUrl" :alt="title" :mobile-size="300"
+              :tablet-size="157" :desktop-size="270" />
             <div class="portfolio__info-box">
               <div v-if="duration" class="portfolio__sidebar-line">
                 <span class="portfolio__sidebar-line-title">Duration</span>

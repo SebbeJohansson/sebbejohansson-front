@@ -12,11 +12,14 @@ interface PortfolioEntry {
 
 export default defineNuxtComponent({
   async setup() {
+    const route = useRoute();
+    const version = route.query._storyblok && route.query._storyblok != "" ? "draft" : "published";
+
     const rawPortfolioEntries: PortfolioEntry[] = [];
     const storyblokApi = useStoryblokApi();
     await storyblokApi.get("cdn/stories", {
       starts_with: "portfolio/",
-      version: "published"
+      version: version,
     }).then((response) => {
       response.data.stories.forEach((story) => {
         rawPortfolioEntries.push({
