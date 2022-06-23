@@ -20,7 +20,7 @@ const content = computed((): [] | string => props.blok.content && Array.isArray(
           </h3>
           <div class="portfolio__sidebar">
             <parts-atoms-image class="portfolio__image" :image="imageUrl" :alt="title" :mobile-size="300"
-              :tablet-size="157" :desktop-size="270" />
+              :tablet-size="157" :desktop-size="270" loading="eager" />
             <div class="portfolio__info-box">
               <div v-if="duration" class="portfolio__sidebar-line">
                 <span class="portfolio__sidebar-line-title">Duration</span>

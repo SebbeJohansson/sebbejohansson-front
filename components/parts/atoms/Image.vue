@@ -14,6 +14,10 @@ const props = defineProps({
     type: Number,
     default: 2000,
   },
+  loading: {
+    type: String,
+    default: "lazy",
+  }
 });
 const nuxtApp = useNuxtApp();
 const mobileImageUrl = computed((): string => nuxtApp.$toMediaUrl(props.image, { maxWidth: props.mobileSize }));
@@ -26,7 +30,7 @@ const desktopImageUrl = computed((): string => nuxtApp.$toMediaUrl(props.image, 
     <picture class="image__picture">
       <source :srcset="desktopImageUrl" media="(min-width: 1200px)">
       <source :srcset="tabletImageUrl" media="(min-width: 800px)">
-      <img class="image__img" :src="mobileImageUrl" :alt="alt" loading="lazy">
+      <img class="image__img" :src="mobileImageUrl" :alt="alt" :loading="loading">
     </picture>
   </div>
 </template>

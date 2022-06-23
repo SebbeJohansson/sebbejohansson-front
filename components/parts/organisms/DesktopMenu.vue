@@ -22,7 +22,7 @@
       </div>
     </div>
     <div class="desktop-menu__background">
-      <parts-atoms-image class="desktop-menu__background-image" image="images/picnr7.jpg" />
+      <parts-atoms-image class="desktop-menu__background-image" image="images/picnr7.jpg" loading="eager" />
     </div>
   </div>
 </template>
