@@ -51,6 +51,8 @@ export default defineNuxtConfig({
     //'@nuxtjs/axios',
     '@storyblok/nuxt',
     'nuxt-jsonld',
+    // Always keep nuxtjs-sitemap at the end of the list
+    '~/modules/sitemap',
   ],
 
   storyblok: {
@@ -77,6 +79,11 @@ export default defineNuxtConfig({
         overrideBrowserslist: ['last 2 versions', 'Firefox ESR', '> 1%', 'ie >= 8', 'iOS >= 8', 'Android >= 4']
       }
     },
+  },
+
+  sitemap: {
+    hostname: 'https://sebbejohansson.com',
+    gzip: true,
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
