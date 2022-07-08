@@ -50,6 +50,7 @@ export default defineNuxtConfig({
   modules: [
     //'@nuxtjs/axios',
     '@storyblok/nuxt',
+    'nuxt-jsonld',
   ],
 
   storyblok: {

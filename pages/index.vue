@@ -1,15 +1,18 @@
 <script lang="ts">
 import { MetaInfo } from 'vue-meta';
 import { defineNuxtComponent } from "#app";
-import PortfolioList from '~~/components/content/PortfolioList.vue';
 
 export default defineNuxtComponent({
   head(): MetaInfo {
     return {
       title: "SebbeJohansson",
+      meta: [{
+        vmid: 'description',
+        name: 'description',
+        content: 'Full-stack software engineer focusing on Web and Games.',
+      }]
     };
   },
-  components: { PortfolioList }
 });
 </script>
 

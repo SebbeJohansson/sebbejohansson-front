@@ -1,40 +1,39 @@
-<script lang="ts">
-import { defineNuxtComponent, useNuxtApp } from "#app";
+<script setup lang="ts">
 import { ConcreteComponent } from "vue";
 const NuxtLink = resolveComponent('NuxtLink')
 
-export default defineNuxtComponent({
-  components: {},
-  props: {
-    title: {
-      type: String,
-      required: true,
-    },
-    description: {
-      type: String,
-    },
-    picture: {
-      type: String,
-      default: 'fallback',
-    },
-    slug: {
-      type: String,
-    },
+const props = defineProps({
+  title: {
+    type: String,
+    required: true,
   },
-  setup(props) {
-    const imageUrl = computed((): string | undefined => (props.picture ? props.picture : undefined));
-    const entryUrl = computed((): string | undefined => (props.slug ? `/${props.slug}/` : undefined));
-
-    return {
-      imageUrl,
-      entryUrl,
-      componentType: computed((): string | ConcreteComponent => (entryUrl.value ? NuxtLink : 'div')),
-    };
+  description: {
+    type: String,
   },
-  methods: {
-    method() { },
+  picture: {
+    type: String,
+    default: 'fallback',
+  },
+  slug: {
+    type: String,
   },
 });
+
+const imageUrl = computed((): string | undefined => (props.picture ? props.picture : undefined));
+const entryUrl = computed((): string | undefined => (props.slug ? `/${props.slug}/` : undefined));
+const componentType = computed((): string | ConcreteComponent => (entryUrl.value ? NuxtLink : 'div'));
+
+useJsonld(() => ({
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: props.title,
+  image: {
+    '@type': 'ImageObject',
+    url: imageUrl.value,
+    caption: props.title,
+  },
+  abstract: props.description,
+}));
 </script>
 
 <template>

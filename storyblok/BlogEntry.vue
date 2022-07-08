@@ -2,9 +2,22 @@
 const props = defineProps({ blok: Object, raw: Object });
 
 const title = computed((): string => props.blok.title || props.raw.name);
-const slug = computed((): string => props.blok.slug || props.raw.slug);
+const slug = computed((): string => `/blog/${props.blok.slug || props.raw.slug}`);
 const date = computed((): string | null => props.blok.date);
 const content = computed((): [] | string => props.blok.content && Array.isArray(props.blok.content) && props.blok.content.length > 0 ? props.blok.content : props.blok.description);
+
+useJsonld(() => ({
+  '@context': 'https://schema.org',
+  '@type': 'TechArticle',
+  headline: title.value,
+  author: {
+    '@type': 'Person',
+    name: 'Sebastian Johansson',
+    url: 'https://sebbejohansson.com',
+  },
+  dateCreated: date.value,
+  articleBody: content.value,
+}));
 </script>
 
 <template>
