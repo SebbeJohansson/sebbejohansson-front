@@ -24,7 +24,7 @@ interface BlogCategories {
 export default defineNuxtComponent({
   async setup() {
     const route = useRoute();
-    const rawBlogEntries = ref(<BlogEntry[]>[]);
+    const rawBlogEntries: BlogEntry[] = [];
 
     const version = route.query._storyblok && route.query._storyblok != "" ? "draft" : "published";
 
@@ -43,19 +43,13 @@ export default defineNuxtComponent({
       }).then((response) => {
         totalEntries = response.headers.total;
         response.data.stories.forEach((story) => {
-          /* rawBlogEntries.value.push({
-            id: story.id,
-            title: story.content.title || story.name,
-            slug: story.full_slug || story.content.slug || story.slug,
-            author: '',
-            date: story.content.date,
-            cat: story.content.link?.url || story.content.link?.url || null,
-            content: story.content.content || [],
-          });*/
-          rawBlogEntries.value.push(story);
+          rawBlogEntries.push({
+            ...story,
+            classes: story.content.categories.map((category) => `blog-post-list__entry--${category.uuid}`),
+          });
         });
       });
-      if (totalEntries > rawBlogEntries.value.length) {
+      if (totalEntries > rawBlogEntries.length) {
         getBlogEntries(page + 1, per_page);
       }
     }
@@ -63,7 +57,7 @@ export default defineNuxtComponent({
     await getBlogEntries(1, 25);
 
     const blogEntries = computed<BlogEntry[]>(
-      (): BlogEntry[] => rawBlogEntries.value as BlogEntry[]
+      (): BlogEntry[] => rawBlogEntries as BlogEntry[]
     )
 
     // const unselectedCategories = ref(<string[]>[]);
@@ -142,7 +136,7 @@ export default defineNuxtComponent({
     <content-with-title title="Blog">
       <div class="blog-post-list__content">
         <div class="blog-post-list__list">
-          <StoryblokComponent class="blog-post-list__entry" :class="`blog-post-list__entry--` + entry.cat"
+          <StoryblokComponent class="blog-post-list__entry" :class="entry.classes"
             v-for="entry in blogEntries" :blok="entry.content" :raw="entry" :key="entry._uid" />
         </div>
         <!--div class="blog-post-list__categories">

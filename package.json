@@ -5,7 +5,8 @@
     "build": "nuxt build",
     "generate": "nuxt generate",
     "start": "nuxt start",
-    "preview": "nuxt preview"
+    "preview": "nuxt preview",
+    "deploy": "nuxt build && nuxt start"
   },
   "devDependencies": {
     "@nuxtjs/eslint-config-typescript": "^10.0.0",
