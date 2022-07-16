@@ -1,7 +1,4 @@
-<script lang="ts">
-import { defineNuxtComponent } from "#app";
-
-
+<script async setup lang="ts">
 interface BlogEntry {
   id: string;
   title: string;
@@ -21,114 +18,100 @@ interface BlogCategories {
   entries: BlogCategory[];
 }
 
-export default defineNuxtComponent({
-  async setup() {
-    const route = useRoute();
-    const rawBlogEntries: BlogEntry[] = [];
+const route = useRoute();
+const rawBlogEntries: BlogEntry[] = [];
 
-    const version = route.query._storyblok && route.query._storyblok != "" ? "draft" : "published";
+const version = route.query._storyblok && route.query._storyblok != "" ? "draft" : "published";
 
-    async function getBlogEntries(page: number, per_page: number) {
-      let totalEntries = 0;
-      const storyblokApi = useStoryblokApi();
+async function getBlogEntries(page: number, per_page: number) {
+  let totalEntries = 0;
+  const storyblokApi = useStoryblokApi();
 
-      await storyblokApi.get("cdn/stories", {
-        starts_with: "blog/",
-        version: version,
-        content_type: "blog-entry",
-        resolve_relations: "blog-entry.categories",
-        sort_by: "content.date:desc",
-        page: page,
-        per_page: per_page,
-      }).then((response) => {
-        totalEntries = response.headers.total;
-        response.data.stories.forEach((story) => {
-          rawBlogEntries.push({
-            ...story,
-            classes: story.content.categories.map((category) => `blog-post-list__entry--${category.uuid}`),
-          });
-        });
+  await storyblokApi.get("cdn/stories", {
+    starts_with: "blog/",
+    version: version,
+    content_type: "blog-entry",
+    resolve_relations: "blog-entry.categories",
+    sort_by: "content.date:desc",
+    page: 1,
+    per_page: 25,
+  }).then((response) => {
+    totalEntries = response.headers.total;
+    response.data.stories.forEach((story) => {
+      rawBlogEntries.push({
+        ...story,
+        classes: story.content.categories.map((category) => `blog-post-list__entry--${category.uuid}`),
       });
-      if (totalEntries > rawBlogEntries.length) {
-        getBlogEntries(page + 1, per_page);
-      }
-    }
+    });
+  });
+  if (totalEntries > rawBlogEntries.length) {
+    getBlogEntries(page + 1, per_page);
+  }
+}
 
-    await getBlogEntries(1, 25);
+await getBlogEntries(1, 25);
 
-    const blogEntries = computed<BlogEntry[]>(
-      (): BlogEntry[] => rawBlogEntries as BlogEntry[]
-    )
+const blogEntries = computed<BlogEntry[]>(
+  (): BlogEntry[] => rawBlogEntries as BlogEntry[]
+)
 
-    // const unselectedCategories = ref(<string[]>[]);
+// const unselectedCategories = ref(<string[]>[]);
 
-    // const rawBlogCategories = useState<BlogCategories>(
-    //   'rawBlogCategories',
-    //   () => {
-    //     const blogCategoriesLocal: BlogCategories = {
-    //       entries: [],
-    //     };
-    //     const data = ['fields name,about;'];
+// const rawBlogCategories = useState<BlogCategories>(
+//   'rawBlogCategories',
+//   () => {
+//     const blogCategoriesLocal: BlogCategories = {
+//       entries: [],
+//     };
+//     const data = ['fields name,about;'];
 
-    //     /*try {
-    //       await axios
-    //         .post('/blogcats/get', data.join(''))
-    //         .then((response) => {
-    //           const entries = response.data as BlogCategory[];
-    //           entries.forEach((entry) => {
-    //             blogCategoriesLocal.entries.push(entry);
-    //           });
-    //         })
-    //         .catch((error) => {
-    //           console.log(error.response);
-    //         });
-    //     } catch (error) {
-    //       console.log(error);
-    //     }*/
-    //     return blogCategoriesLocal;
-    //   },
-    // );
+//     /*try {
+//       await axios
+//         .post('/blogcats/get', data.join(''))
+//         .then((response) => {
+//           const entries = response.data as BlogCategory[];
+//           entries.forEach((entry) => {
+//             blogCategoriesLocal.entries.push(entry);
+//           });
+//         })
+//         .catch((error) => {
+//           console.log(error.response);
+//         });
+//     } catch (error) {
+//       console.log(error);
+//     }*/
+//     return blogCategoriesLocal;
+//   },
+// );
 
-    // const blogCategories = computed<BlogCategory[]>((): BlogCategory[] => rawBlogCategories.value?.entries as BlogCategory[]);
+// const blogCategories = computed<BlogCategory[]>((): BlogCategory[] => rawBlogCategories.value?.entries as BlogCategory[]);
 
-    // const unselectedCategoriesStyling = computed((): string => {
-    //   let style = '';
-    //   unselectedCategories.value.forEach((category) => {
-    //     style += `.blog-post-list__entry.blog-post-list__entry--${category} { display: none; }`;
-    //   });
-    //   return style;
-    // });
+// const unselectedCategoriesStyling = computed((): string => {
+//   let style = '';
+//   unselectedCategories.value.forEach((category) => {
+//     style += `.blog-post-list__entry.blog-post-list__entry--${category} { display: none; }`;
+//   });
+//   return style;
+// });
 
-    // function isCategoryChecked(category: string): boolean {
-    //   return !(unselectedCategories.value.includes(category));
-    // }
+// function isCategoryChecked(category: string): boolean {
+//   return !(unselectedCategories.value.includes(category));
+// }
 
-    // function toggleCategory(category: string) {
-    //   if (isCategoryChecked(category)) {
-    //     unselectedCategories.value.push(category);
-    //   } else {
-    //     const index = unselectedCategories.value.indexOf(category);
-    //     if (index > -1) {
-    //       unselectedCategories.value.splice(index, 1);
-    //     }
-    //   }
+// function toggleCategory(category: string) {
+//   if (isCategoryChecked(category)) {
+//     unselectedCategories.value.push(category);
+//   } else {
+//     const index = unselectedCategories.value.indexOf(category);
+//     if (index > -1) {
+//       unselectedCategories.value.splice(index, 1);
+//     }
+//   }
 
-    //   unselectedCategories.value = unselectedCategories.value.filter(
-    //     (item, index) => unselectedCategories.value.indexOf(item) === index,
-    //   );
-    // }
-
-    return {
-      blogEntries,
-      getBlogEntries,
-      // blogCategories,
-      // unselectedCategories,
-      // unselectedCategoriesStyling,
-      // isCategoryChecked,
-      // toggleCategory,
-    };
-  },
-});
+//   unselectedCategories.value = unselectedCategories.value.filter(
+//     (item, index) => unselectedCategories.value.indexOf(item) === index,
+//   );
+// }
 </script>
 
 <template>
