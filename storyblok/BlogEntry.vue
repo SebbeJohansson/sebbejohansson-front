@@ -30,8 +30,8 @@ useJsonld(() => ({
         <h5 v-if="date" class="blog-entry__date">
           - {{ date }}
         </h5>
-        <StoryblokComponent v-if="content && Array.isArray(content) && content.length > 0" v-for="block in content"
-          :key="block._uid" :blok="block" />
+        <component v-if="content && Array.isArray(content) && content.length > 0" v-for="block in content"
+          :is="$resolveStoryBlokComponent(block)" :blok="block" :key="block._uid" />
       </div>
     </div>
   </div>

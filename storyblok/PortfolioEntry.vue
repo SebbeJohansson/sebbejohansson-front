@@ -20,7 +20,6 @@ useJsonld(() => ({
   },
   articleBody: content.value,
 }));
-
 </script>
 
 <template>
@@ -58,7 +57,8 @@ useJsonld(() => ({
             </div>
           </div>
           <div class="portfolio__content">
-            <StoryblokComponent v-if="blok.content && Array.isArray(blok.content) && blok.content.length > 0"
+            <component :is="$resolveStoryBlokComponent(block)"
+              v-if="blok.content && Array.isArray(blok.content) && blok.content.length > 0"
               v-for="block in blok.content" :key="block._uid" :blok="block" />
             <div v-else v-html="content" />
           </div>

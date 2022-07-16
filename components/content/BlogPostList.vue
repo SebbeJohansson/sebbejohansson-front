@@ -119,8 +119,8 @@ const blogEntries = computed<BlogEntry[]>(
     <content-with-title title="Blog">
       <div class="blog-post-list__content">
         <div class="blog-post-list__list">
-          <StoryblokComponent class="blog-post-list__entry" :class="entry.classes"
-            v-for="entry in blogEntries" :blok="entry.content" :raw="entry" :key="entry._uid" />
+          <component class="blog-post-list__entry" :class="entry.classes" v-for="entry in blogEntries"
+            :is="$resolveStoryBlokComponent(entry)" :blok="entry.content" :raw="entry" :key="entry._uid" />
         </div>
         <!--div class="blog-post-list__categories">
           <h2 class="blog-post-list__categories-title">

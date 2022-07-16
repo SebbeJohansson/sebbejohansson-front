@@ -17,7 +17,7 @@ useHead({
 
 <template>
   <div class="page blog-entry-page">
-    <StoryblokComponent :blok="story.content" :raw="story" />
+    <component :is="$resolveStoryBlokComponent(story)" :blok="story.content" :raw="story" />
   </div>
 </template>
 
