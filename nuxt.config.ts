@@ -1,4 +1,5 @@
 import { defineNuxtConfig } from 'nuxt'
+import dynamicRoutes from './helpers/dynamicRoutes'
 
 export default defineNuxtConfig({
   telemetry: false,
@@ -48,12 +49,11 @@ export default defineNuxtConfig({
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
-    //'@nuxtjs/axios',
     '@storyblok/nuxt',
     'nuxt-jsonld',
-    // Always keep nuxtjs-sitemap at the end of the list
-    '~/modules/sitemap',
+    '@funken-studio/sitemap-nuxt-3',
   ],
+
 
   storyblok: {
     accessToken: process.env.STORYBLOK_API_TOKEN
@@ -84,6 +84,11 @@ export default defineNuxtConfig({
   sitemap: {
     hostname: 'https://sebbejohansson.com',
     gzip: true,
+    cacheTime: 1,
+    routes: dynamicRoutes,
+    defaults: {
+      lastmod: new Date().toISOString(),
+    },
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
