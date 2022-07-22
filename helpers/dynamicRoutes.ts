@@ -3,7 +3,6 @@
  * all our routes from a custom API endpoint where we can use imports
  */
 export default async () => {
-  console.log("dynamic routes");
   return await $fetch('/api/sitemap_routes', {
     method: 'POST',
     headers: {

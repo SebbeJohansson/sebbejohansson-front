@@ -91,8 +91,9 @@ export default defineNuxtConfig({
     },
   },
 
-  // Build Configuration: https://go.nuxtjs.dev/config-build
-  build: {
-    transpile: ['@marvr/storyblok-rich-text-vue-renderer'],
+  nitro: {
+    prerender: {
+      crawlLinks: true,
+    },
   },
 })
