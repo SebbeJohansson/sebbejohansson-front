@@ -33,8 +33,8 @@ async function getBlogEntries(page: number, per_page: number) {
     content_type: "blog-entry",
     resolve_relations: "blog-entry.categories",
     sort_by: "content.date:desc",
-    page: 1,
-    per_page: 25,
+    page: page,
+    per_page: per_page,
   }).then((response) => {
     totalEntries = response.headers.total;
     response.data.stories.forEach((story) => {
