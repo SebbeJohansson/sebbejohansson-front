@@ -1,11 +1,11 @@
-import { defineNuxtConfig } from 'nuxt'
-import dynamicRoutes from './helpers/dynamicRoutes'
+import { defineNuxtConfig } from 'nuxt';
+import dynamicRoutes from './helpers/dynamicRoutes';
 
 export default defineNuxtConfig({
   telemetry: false,
 
   // Disable servenr-side rendering: https://go.nuxtjs.dev/ssr-mode
-  ssr: true,
+  ssr: false,
 
   // Target: https://go.nuxtjs.dev/config-target
   target: 'static',
@@ -18,15 +18,15 @@ export default defineNuxtConfig({
     head: {
       title: 'SebbeJohansson',
       htmlAttrs: {
-        lang: 'en'
+        lang: 'en',
       },
       meta: [
         { charset: 'utf-8' },
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-        { hid: 'description', name: 'description', content: '' }
+        { hid: 'description', name: 'description', content: '' },
       ],
       link: [
-        { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+        { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
       ],
       script: [
         {
@@ -36,10 +36,10 @@ export default defineNuxtConfig({
         j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
         })(window,document,'script','dataLayer','${process.env.GTM_ID}');`,
-          type: 'text/javascript'
-        }
+          type: 'text/javascript',
+        },
       ],
-    }
+    },
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
@@ -54,9 +54,8 @@ export default defineNuxtConfig({
     '@funken-studio/sitemap-nuxt-3',
   ],
 
-
   storyblok: {
-    accessToken: process.env.STORYBLOK_API_TOKEN
+    accessToken: process.env.STORYBLOK_API_TOKEN,
   },
 
   postcss: {
@@ -70,14 +69,14 @@ export default defineNuxtConfig({
               '--phoneAndTablet': '(max-width: 1023px)',
               '--tablet': '(min-width: 768px) and (max-width: 1023px)',
               '--tabletAndDesktop': '(min-width: 768px)',
-              '--desktop': '(min-width: 1024px)'
-            }
-          }
-        ]
+              '--desktop': '(min-width: 1024px)',
+            },
+          },
+        ],
       },
       autoprefixer: {
-        overrideBrowserslist: ['last 2 versions', 'Firefox ESR', '> 1%', 'ie >= 8', 'iOS >= 8', 'Android >= 4']
-      }
+        overrideBrowserslist: ['last 2 versions', 'Firefox ESR', '> 1%', 'ie >= 8', 'iOS >= 8', 'Android >= 4'],
+      },
     },
   },
 
@@ -85,15 +84,27 @@ export default defineNuxtConfig({
     hostname: 'https://sebbejohansson.com',
     gzip: true,
     cacheTime: 1,
-    routes: dynamicRoutes,
+    // routes: dynamicRoutes,
     defaults: {
       lastmod: new Date().toISOString(),
+    },
+  },
+
+  hooks: {
+    'nitro:config': async function (nitroConfig) {
+      console.log(nitroConfig);
+      if (nitroConfig.dev) { return; }
+      // ..Async logic..
+      nitroConfig.prerender.routes.push('/custom');
+      nitroConfig.prerender.routes.push(...(await dynamicRoutes(process.env.STORYBLOK_API_TOKEN)));
+      console.log(nitroConfig.prerender.routes);
     },
   },
 
   nitro: {
     prerender: {
       crawlLinks: true,
+      routes: ['/help', '/prerender'],
     },
   },
-})
+});

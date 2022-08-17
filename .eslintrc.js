@@ -9,6 +9,7 @@ module.exports = {
     "plugin:vue/essential",
     "plugin:@typescript-eslint/recommended",
     "@nuxtjs/eslint-config-typescript",
+    "airbnb-base",
   ],
   parserOptions: {
     ecmaVersion: "latest",
@@ -26,5 +27,8 @@ module.exports = {
         peerDependencies: false,
       },
     ],
+    "vue/multi-word-component-names": "off",
+    "import/extensions": [2, "never"],
+    "eslint-disable linebreak-style": "off",
   },
 };
