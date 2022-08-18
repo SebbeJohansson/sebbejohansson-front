@@ -5,18 +5,20 @@ module.exports = {
     node: true,
   },
   extends: [
-    "eslint:recommended",
-    "plugin:vue/essential",
-    "plugin:@typescript-eslint/recommended",
+    "./node_modules/eslint-config-airbnb-base/rules/best-practices.js",
+    "./node_modules/eslint-config-airbnb-base/rules/errors.js",
+    "./node_modules/eslint-config-airbnb-base/rules/es6.js",
+    "./node_modules/eslint-config-airbnb-base/rules/imports.js",
+    "./node_modules/eslint-config-airbnb-base/rules/node.js",
+    // './node_modules/eslint-config-airbnb-base/rules/strict.js',
+    "./node_modules/eslint-config-airbnb-base/rules/variables.js",
     "@nuxtjs/eslint-config-typescript",
-    "airbnb-base",
+    "./node_modules/eslint-config-airbnb-base/rules/style.js",
   ],
   parserOptions: {
     ecmaVersion: "latest",
-    parser: "@typescript-eslint/parser",
     sourceType: "module",
   },
-  plugins: ["vue", "@typescript-eslint"],
   rules: {
     "max-len": ["error", { code: 240 }],
     "import/no-extraneous-dependencies": [
@@ -29,7 +31,7 @@ module.exports = {
     ],
     "vue/multi-word-component-names": "off",
     "import/extensions": [2, "never"],
-    "eslint-disable linebreak-style": "off",
+    "linebreak-style": "off",
     "no-underscore-dangle": "off",
   },
 };

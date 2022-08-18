@@ -52,7 +52,7 @@ export default defineNuxtConfig({
     '@storyblok/nuxt',
     'nuxt-jsonld',
     'nuxt-full-static',
-    '@funken-studio/sitemap-nuxt-3',
+    // '@funken-studio/sitemap-nuxt-3',
   ],
 
   storyblok: {
@@ -81,15 +81,15 @@ export default defineNuxtConfig({
     },
   },
 
-  sitemap: {
-    hostname: 'https://sebbejohansson.com',
-    gzip: true,
-    cacheTime: 1,
-    // routes: dynamicRoutes,
-    defaults: {
-      lastmod: new Date().toISOString(),
-    },
-  },
+  // sitemap: {
+  //   hostname: 'https://sebbejohansson.com',
+  //   gzip: true,
+  //   cacheTime: 1,
+  //   // routes: dynamicRoutes,
+  //   defaults: {
+  //     lastmod: new Date().toISOString(),
+  //   },
+  // },
 
   hooks: {
     'nitro:config': async function (nitroConfig) {
