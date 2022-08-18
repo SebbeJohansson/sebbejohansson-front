@@ -21,26 +21,26 @@ interface BlogCategories {
 const route = useRoute();
 const rawBlogEntries: BlogEntry[] = [];
 
-const version = route.query._storyblok && route.query._storyblok != "" ? "draft" : "published";
+const version = route.query._storyblok && route.query._storyblok != '' ? 'draft' : 'published';
 
 async function getBlogEntries(page: number, per_page: number) {
   let totalEntries = 0;
   const storyblokApi = useStoryblokApi();
 
-  await storyblokApi.get("cdn/stories", {
-    starts_with: "blog/",
-    version: version,
-    content_type: "blog-entry",
-    resolve_relations: "blog-entry.categories",
-    sort_by: "content.date:desc",
-    page: page,
-    per_page: per_page,
+  await storyblokApi.get('cdn/stories', {
+    starts_with: 'blog/',
+    version,
+    content_type: 'blog-entry',
+    resolve_relations: 'blog-entry.categories',
+    sort_by: 'content.date:desc',
+    page,
+    per_page,
   }).then((response) => {
     totalEntries = response.headers.total;
     response.data.stories.forEach((story) => {
       rawBlogEntries.push({
         ...story,
-        classes: story.content.categories.map((category) => `blog-post-list__entry--${category.uuid}`),
+        classes: story.content.categories.map(category => `blog-post-list__entry--${category.uuid}`),
       });
     });
   });
@@ -52,8 +52,8 @@ async function getBlogEntries(page: number, per_page: number) {
 await getBlogEntries(1, 25);
 
 const blogEntries = computed<BlogEntry[]>(
-  (): BlogEntry[] => rawBlogEntries as BlogEntry[]
-)
+  (): BlogEntry[] => rawBlogEntries as BlogEntry[],
+);
 
 // const unselectedCategories = ref(<string[]>[]);
 
@@ -119,8 +119,15 @@ const blogEntries = computed<BlogEntry[]>(
     <content-with-title title="Blog">
       <div class="blog-post-list__content">
         <div class="blog-post-list__list">
-          <component class="blog-post-list__entry" :class="entry.classes" v-for="entry in blogEntries"
-            :is="$resolveStoryBlokComponent(entry)" :blok="entry.content" :raw="entry" :key="entry._uid" />
+          <component
+            :is="$resolveStoryBlokComponent(entry)"
+            v-for="entry in blogEntries"
+            :key="entry._uid"
+            class="blog-post-list__entry"
+            :class="entry.classes"
+            :blok="entry.content"
+            :raw="entry"
+          />
         </div>
         <!--div class="blog-post-list__categories">
           <h2 class="blog-post-list__categories-title">

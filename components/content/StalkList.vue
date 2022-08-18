@@ -1,5 +1,5 @@
 <script lang="ts">
-import { defineNuxtComponent } from "#app";
+import { defineNuxtComponent } from '#app';
 
 interface StalkEntry {
   link: string;
@@ -9,13 +9,13 @@ interface StalkEntry {
 export default defineNuxtComponent({
   async setup() {
     const route = useRoute();
-    const version = route.query._storyblok && route.query._storyblok != "" ? "draft" : "published";
+    const version = route.query._storyblok && route.query._storyblok != '' ? 'draft' : 'published';
 
     const rawStalkEntries: StalkEntry[] = [];
     const storyblokApi = useStoryblokApi();
-    await storyblokApi.get("cdn/stories", {
-      starts_with: "contact/",
-      version: version,
+    await storyblokApi.get('cdn/stories', {
+      starts_with: 'contact/',
+      version,
     }).then((response) => {
       response.data.stories.forEach((story) => {
         rawStalkEntries.push({
@@ -26,8 +26,8 @@ export default defineNuxtComponent({
     });
 
     const stalkEntries = computed<StalkEntry[]>(
-      (): StalkEntry[] => rawStalkEntries as StalkEntry[]
-    )
+      (): StalkEntry[] => rawStalkEntries as StalkEntry[],
+    );
 
     return { stalkEntries };
   },
@@ -40,8 +40,12 @@ export default defineNuxtComponent({
       Contact me
     </h3>
     <div class="stalk-list__grid">
-      <parts-molecules-stalk-entry v-for="entry in stalkEntries" :key="entry.id" :link="entry.link"
-        :picture="entry.entryPic" />
+      <parts-molecules-stalk-entry
+        v-for="entry in stalkEntries"
+        :key="entry.id"
+        :link="entry.link"
+        :picture="entry.entryPic"
+      />
     </div>
   </div>
 </template>

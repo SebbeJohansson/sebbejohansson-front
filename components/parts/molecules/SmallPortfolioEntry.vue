@@ -1,5 +1,5 @@
 <script lang="ts">
-import { defineNuxtComponent } from "#app";
+import { defineNuxtComponent } from '#app';
 
 export default defineNuxtComponent({
   components: {},

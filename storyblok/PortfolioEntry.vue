@@ -7,7 +7,7 @@ const duration = computed((): string | null => props.blok.duration);
 const role = computed((): string | null => props.blok.role);
 const link = computed((): string => props.blok.link?.url || props.blok.link?.cached_url || null);
 const code = computed((): string | null => props.blok.code?.url || props.blok.code?.cached_url || null);
-const content = computed((): [] | string => props.blok.content && Array.isArray(props.blok.content) && props.blok.content.length > 0 ? props.blok.content : props.blok.description);
+const content = computed((): [] | string => (props.blok.content && Array.isArray(props.blok.content) && props.blok.content.length > 0 ? props.blok.content : props.blok.description));
 
 useJsonld(() => ({
   '@context': 'https://schema.org',
@@ -31,8 +31,15 @@ useJsonld(() => ({
             {{ title }}
           </h3>
           <div class="portfolio__sidebar">
-            <parts-atoms-image class="portfolio__image" :image="imageUrl" :alt="title" :mobile-size="300"
-              :tablet-size="157" :desktop-size="270" loading="eager" />
+            <parts-atoms-image
+              class="portfolio__image"
+              :image="imageUrl"
+              :alt="title"
+              :mobile-size="300"
+              :tablet-size="157"
+              :desktop-size="270"
+              loading="eager"
+            />
             <div class="portfolio__info-box">
               <div v-if="duration" class="portfolio__sidebar-line">
                 <span class="portfolio__sidebar-line-title">Duration</span>
@@ -57,9 +64,13 @@ useJsonld(() => ({
             </div>
           </div>
           <div class="portfolio__content">
-            <component :is="$resolveStoryBlokComponent(block)"
+            <component
+              :is="$resolveStoryBlokComponent(block)"
+              v-for="block in blok.content"
               v-if="blok.content && Array.isArray(blok.content) && blok.content.length > 0"
-              v-for="block in blok.content" :key="block._uid" :blok="block" />
+              :key="block._uid"
+              :blok="block"
+            />
             <div v-else v-html="content" />
           </div>
         </div>
