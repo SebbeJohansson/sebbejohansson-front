@@ -30,5 +30,6 @@ module.exports = {
     "vue/multi-word-component-names": "off",
     "import/extensions": [2, "never"],
     "eslint-disable linebreak-style": "off",
+    "no-underscore-dangle": "off",
   },
 };

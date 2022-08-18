@@ -5,7 +5,7 @@ export default defineNuxtConfig({
   telemetry: false,
 
   // Disable servenr-side rendering: https://go.nuxtjs.dev/ssr-mode
-  ssr: false,
+  // ssr: false,
 
   // Target: https://go.nuxtjs.dev/config-target
   target: 'static',
@@ -51,6 +51,7 @@ export default defineNuxtConfig({
   modules: [
     '@storyblok/nuxt',
     'nuxt-jsonld',
+    'nuxt-full-static',
     '@funken-studio/sitemap-nuxt-3',
   ],
 

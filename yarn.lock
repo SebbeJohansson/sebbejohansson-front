@@ -4462,6 +4462,14 @@ nuxi@3.0.0-rc.8:
   optionalDependencies:
     fsevents "~2.3.2"
 
+nuxt-full-static@^0.2.1:
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/nuxt-full-static/-/nuxt-full-static-0.2.1.tgz#fc69a45edbd7d8fda0295fe291dfb6e8e57ff35e"
+  integrity sha512-UhzVx78cZJlpUanpY4ltpsBpog9nKTAW7VXxyLm7UsSu1wRvTGxvKeqAmgWsCJIsr+YOxGeocrdn6BxEKHcQzw==
+  dependencies:
+    "@nuxt/kit" "3.0.0-rc.8"
+    pathe "^0.3.4"
+
 nuxt-jsonld@^2.0.3:
   version "2.0.3"
   resolved "https://registry.yarnpkg.com/nuxt-jsonld/-/nuxt-jsonld-2.0.3.tgz#89a3d1f5c0966bca8f2b706788b1400bf07da5a2"
