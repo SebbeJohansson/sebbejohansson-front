@@ -1,34 +1,36 @@
 <script setup lang="ts">
 const route = useRoute();
-// let story = {} as any;
-const version = route.query._storyblok && route.query._storyblok != '' ? 'draft' : 'published';
-/* await useStoryblok(`blog/${route.params.slug}`, { version }).then((response) => {
-  story = response.value;
-}); */
-console.log(version);
-const story = ref(null);
 
-// TODO:
-// if in preview, pull using normal useStoryblok
-// otherwise pull using useAsyncData straight from the api instead so that we are doing it on the server.
+const version = route.query._storyblok && route.query._storyblok != ''
+  ? 'draft'
+  : 'published';
 
+// const {
+//   data: story,
+//   pending,
+//   error,
+//   refresh,
+// } = await useAsyncData(
+//   `blog-${route.params.slug}`,
+//   async () => await useStoryblok(`blog/${route.params.slug}`, { version }),
+// );
 
-// const storyblokApi = useStoryblokApi();
-// const { data } = await storyblokApi.get(`cdn/stories/blog/${route.params.slug}`, {
-//   version: version
-// });
-// console.log(data);
-// story.value = data.story;
-const blogTitle = computed((): string => story.content?.title || story.name || 'wow');
+const { data: blok, pending, refresh } = await useAsyncData(() => $fetch(`https://api.storyblok.com/v2/cdn/stories/blog/${route.params.slug}?token=ee04k73GERZuvgzbdMDHqQtt&version=published`));
 
-useHead({
-  titleTemplate: title => `${blogTitle.value} - ${title}`,
-});
 </script>
 
 <template>
-  <div class="page blog-entry-page" v-if="story">
-    <component :is="$resolveStoryBlokComponent(story)" :blok="story.content" :raw="story" />
+  <div class="page blog-entry-page">
+    <StoryblokComponent
+      :blok="blok.story.content"
+      :raw="blok.story"
+    />
+    <component
+      :is="$resolveStoryBlokComponent(blok.story)"
+      v-if="blok.story.content"
+      :blok="blok.story.content"
+      :raw="blok.story"
+    />
   </div>
 </template>
 
