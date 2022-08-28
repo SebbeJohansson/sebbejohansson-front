@@ -33,5 +33,7 @@ module.exports = {
     "import/extensions": [2, "never"],
     "linebreak-style": "off",
     "no-underscore-dangle": "off",
+    "import/prefer-default-export": "off",
+    "import/no-extraneous-dependencies": "off",
   },
 };
