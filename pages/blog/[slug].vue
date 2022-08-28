@@ -35,7 +35,17 @@ interface Blok {
 // }) || {};
 
 const route = useRoute();
-const story = await useManualStoryblokFetch(`blog/${route.params.slug}`);
+
+const isPreview = route.query._storyblok && route.query._storyblok !== '' ? 'draft' : 'published';
+const version = isPreview ? 'draft' : 'published';
+
+let story = await useStoryblokFetch(`blog/${route.params.slug}`, version);
+
+console.log(story);
+
+onMounted(() => {
+  useStoryblokBridge(story.id, evStory => (story = evStory));
+});
 
 // const story = computed<StoryData>((): StoryData =>
 // //   console.log(blok.value);
@@ -50,7 +60,9 @@ const portfolioTitle = computed((): string => 'wow');
   <div class="page blog-entry-page">
     {{ portfolioTitle }}
     {{ story }}
-    <StoryblokComponent
+    <component
+      :is="$resolveStoryBlokComponent(story)"
+      v-if="story.content"
       :blok="story.content"
       :raw="story"
     />

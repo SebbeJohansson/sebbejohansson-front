@@ -7,7 +7,7 @@
     "start": "nuxt start",
     "preview": "nuxt preview",
     "deploy": "nuxt build && nuxt start",
-    "test": "npx serve .output/public"
+    "static-deploy": "npx serve .output/public"
   },
   "devDependencies": {
     "@nuxtjs/eslint-config-typescript": "^10.0.0",
