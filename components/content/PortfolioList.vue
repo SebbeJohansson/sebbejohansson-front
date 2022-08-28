@@ -1,4 +1,4 @@
-<script lang="ts">
+<script setup lang="ts">
 import { defineNuxtComponent } from '#app';
 
 interface PortfolioEntry {
@@ -10,44 +10,38 @@ interface PortfolioEntry {
   size: string;
 }
 
-export default defineNuxtComponent({
-  async setup() {
-    const route = useRoute();
-    const version = route.query._storyblok && route.query._storyblok != '' ? 'draft' : 'published';
+const route = useRoute();
+const version = route.query._storyblok && route.query._storyblok != '' ? 'draft' : 'published';
 
-    const rawPortfolioEntries: PortfolioEntry[] = [];
-    const storyblokApi = useStoryblokApi();
-    await storyblokApi.get('cdn/stories', {
-      starts_with: 'portfolio/',
-      version,
-    }).then((response) => {
-      response.data.stories.forEach((story) => {
-        rawPortfolioEntries.push({
-          title: story.content.title || story.name,
-          description: story.content.description,
-          slug: story.full_slug || story.content.slug || story.slug,
-          entryPic: story.content.cover?.filename,
-          link: story.content.link?.url || story.content.link?.url || null,
-          size: story.content.size,
-        });
-      });
+const rawPortfolioEntries: PortfolioEntry[] = [];
+const storyblokApi = useStoryblokApi();
+await storyblokApi.get('cdn/stories', {
+  starts_with: 'portfolio/',
+  version,
+}).then((response) => {
+  response.data.stories.forEach((story) => {
+    rawPortfolioEntries.push({
+      title: story.content.title || story.name,
+      description: story.content.description,
+      slug: story.full_slug || story.content.slug || story.slug,
+      entryPic: story.content.cover?.filename,
+      link: story.content.link?.url || story.content.link?.url || null,
+      size: story.content.size,
     });
-
-    const bigPortfolioEntries = computed<PortfolioEntry[]>(
-      (): PortfolioEntry[] => rawPortfolioEntries.filter(
-        entry => entry.size === 'big',
-      ) as PortfolioEntry[],
-    );
-
-    const smallPortfolioEntries = computed<PortfolioEntry[]>(
-      (): PortfolioEntry[] => rawPortfolioEntries.filter(
-        entry => entry.size === 'small',
-      ) as PortfolioEntry[],
-    );
-
-    return { bigPortfolioEntries, smallPortfolioEntries };
-  },
+  });
 });
+
+const bigPortfolioEntries = computed<PortfolioEntry[]>(
+  (): PortfolioEntry[] => rawPortfolioEntries.filter(
+    entry => entry.size === 'big',
+  ) as PortfolioEntry[],
+);
+
+const smallPortfolioEntries = computed<PortfolioEntry[]>(
+  (): PortfolioEntry[] => rawPortfolioEntries.filter(
+    entry => entry.size === 'small',
+  ) as PortfolioEntry[],
+);
 </script>
 
 <template>
