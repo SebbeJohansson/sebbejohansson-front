@@ -6,23 +6,6 @@ interface StalkEntry {
   entryPic: string;
 }
 
-// const route = useRoute();
-// const version = route.query._storyblok && route.query._storyblok != '' ? 'draft' : 'published';
-
-// const rawStalkEntries: StalkEntry[] = [];
-// const storyblokApi = useStoryblokApi();
-// await storyblokApi.get('cdn/stories', {
-//   starts_with: 'contact/',
-//   version,
-// }).then((response) => {
-//   response.data.stories.forEach((story) => {
-//     rawStalkEntries.push({
-//       entryPic: story.content.image?.filename,
-//       link: story.content.link?.url || story.content.link?.url || null,
-//     });
-//   });
-// });
-
 const route = useRoute();
 
 const isPreview = !!(route.query._storyblok && route.query._storyblok !== '');
@@ -34,7 +17,6 @@ await useStoryblokFetch('', {
   starts_with: 'contact/',
   version,
 }).then((response) => {
-  console.log(response);
   response.stories.forEach((story) => {
     rawStalkEntries.push({
       id: story.id,
