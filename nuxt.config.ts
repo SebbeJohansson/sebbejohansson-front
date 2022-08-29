@@ -7,6 +7,12 @@ export default defineNuxtConfig({
   // Disable servenr-side rendering: https://go.nuxtjs.dev/ssr-mode
   // ssr: false,
 
+  runtimeConfig: {
+    public: {
+      STORYBLOK_API_TOKEN: process.env.STORYBLOK_API_TOKEN,
+    },
+  },
+
   generate: {
     crawler: true,
   },
