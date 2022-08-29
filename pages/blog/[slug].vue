@@ -1,14 +1,23 @@
 <script setup lang="ts">
+import { StoryData } from '@storyblok/vue/dist';
 
 const route = useRoute();
 
-const isPreview = route.query._storyblok && route.query._storyblok !== '' ? 'draft' : 'published';
+const isPreview = !!(route.query._storyblok && route.query._storyblok !== '');
 const version = isPreview ? 'draft' : 'published';
 
-const story = ref(await useStoryblokFetch(`blog/${route.params.slug}`, version));
+let story = {} as StoryData;
+
+await useStoryblokFetch(`blog/${route.params.slug}`, {
+  version,
+}).then((response) => {
+  story = response.story;
+});
 
 onMounted(() => {
-  useStoryblokBridge(story.value.id, evStory => (story.value = evStory));
+  if (isPreview) {
+    useStoryblokBridge(story.id, evStory => (story = evStory));
+  }
 });
 
 </script>

@@ -1,7 +1,7 @@
-<script setup lang="ts">
-import { defineNuxtComponent } from '#app';
+<script setup async lang="ts">
 
 interface PortfolioEntry {
+  id: number,
   title: string;
   description: string;
   slug: string;
@@ -11,16 +11,19 @@ interface PortfolioEntry {
 }
 
 const route = useRoute();
-const version = route.query._storyblok && route.query._storyblok != '' ? 'draft' : 'published';
+
+const isPreview = !!(route.query._storyblok && route.query._storyblok !== '');
+const version = isPreview ? 'draft' : 'published';
 
 const rawPortfolioEntries: PortfolioEntry[] = [];
-const storyblokApi = useStoryblokApi();
-await storyblokApi.get('cdn/stories', {
+
+await useStoryblokFetch('', {
   starts_with: 'portfolio/',
   version,
 }).then((response) => {
-  response.data.stories.forEach((story) => {
+  response.stories.forEach((story) => {
     rawPortfolioEntries.push({
+      id: story.id,
       title: story.content.title || story.name,
       description: story.content.description,
       slug: story.full_slug || story.content.slug || story.slug,
