@@ -11,14 +11,14 @@ let story = {} as StoryData;
 await useStoryblokFetch(`blog/${route.params.slug}`, {
   version,
 }).then((response) => {
+  if (!response) { return; }
   story = response.story;
 });
-
-onMounted(() => {
-  if (isPreview) {
-    useStoryblokBridge(story.id, evStory => (story = evStory));
-  }
-});
+// onMounted(() => {
+//   if (isPreview) {
+//     useStoryblokBridge(story.id, evStory => (story = evStory));
+//   }
+// });
 
 </script>
 

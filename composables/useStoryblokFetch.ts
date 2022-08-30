@@ -16,6 +16,8 @@ export const useStoryblokFetch = async (slug: string, params?: any) => {
       const stories: StoryData[] = [];
 
       await $fetch.raw(`https://api.storyblok.com/v2/cdn/stories/${slug}?token=${config.public.STORYBLOK_API_TOKEN}&${new URLSearchParams(params)}`).then((res) => {
+        console.log(res);
+        if (!res._data) { return; }
         if (res._data.story) {
           stories.push(res._data.story);
         } else {
