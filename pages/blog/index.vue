@@ -1,7 +1,7 @@
 <script setup lang="ts">
 
 useHead({
-  titleTemplate: (title) => `Blog - ${title}`,
+  titleTemplate: title => `Blog - ${title}`,
 });
 </script>
 

@@ -1,37 +1,36 @@
-<script lang="ts">
-import { defineNuxtComponent } from "#app";
+<script setup async lang="ts">
 
 interface StalkEntry {
+  id: number;
   link: string;
   entryPic: string;
+  name: string;
 }
 
-export default defineNuxtComponent({
-  async setup() {
-    const route = useRoute();
-    const version = route.query._storyblok && route.query._storyblok != "" ? "draft" : "published";
+const route = useRoute();
 
-    const rawStalkEntries: StalkEntry[] = [];
-    const storyblokApi = useStoryblokApi();
-    await storyblokApi.get("cdn/stories", {
-      starts_with: "contact/",
-      version: version,
-    }).then((response) => {
-      response.data.stories.forEach((story) => {
-        rawStalkEntries.push({
-          entryPic: story.content.image?.filename,
-          link: story.content.link?.url || story.content.link?.url || null,
-        });
-      });
+const isPreview = !!(route.query._storyblok && route.query._storyblok !== '');
+const version = isPreview ? 'draft' : 'published';
+
+const rawStalkEntries: StalkEntry[] = [];
+
+await useStoryblokFetch('', {
+  starts_with: 'contact/',
+  version,
+}).then((response) => {
+  response.stories.forEach((story) => {
+    rawStalkEntries.push({
+      id: story.id,
+      entryPic: story.content.image?.filename,
+      link: story.content.link?.url || story.content.link?.url || null,
+      name: story.name,
     });
-
-    const stalkEntries = computed<StalkEntry[]>(
-      (): StalkEntry[] => rawStalkEntries as StalkEntry[]
-    )
-
-    return { stalkEntries };
-  },
+  });
 });
+
+const stalkEntries = computed<StalkEntry[]>(
+  (): StalkEntry[] => rawStalkEntries as StalkEntry[],
+);
 </script>
 
 <template>
@@ -40,8 +39,13 @@ export default defineNuxtComponent({
       Contact me
     </h3>
     <div class="stalk-list__grid">
-      <parts-molecules-stalk-entry v-for="entry in stalkEntries" :key="entry.id" :link="entry.link"
-        :picture="entry.entryPic" />
+      <parts-molecules-stalk-entry
+        v-for="entry in stalkEntries"
+        :key="entry.id"
+        :link="entry.link"
+        :picture="entry.entryPic"
+        :name="entry.name"
+      />
     </div>
   </div>
 </template>

@@ -1,6 +1,6 @@
 <script lang="ts">
 import { MetaInfo } from 'vue-meta';
-import { defineNuxtComponent } from "#app";
+import { defineNuxtComponent } from '#app';
 
 export default defineNuxtComponent({
   head(): MetaInfo {

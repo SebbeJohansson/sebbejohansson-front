@@ -1,8 +1,7 @@
 <script setup lang="ts">
 import VueEmbedGist from "vue-embed-gist";
 
-
-const props = defineProps({ blok: Object });
+defineProps({ blok: Object });
 </script>
 
 <template>
@@ -13,7 +12,4 @@ const props = defineProps({ blok: Object });
 </template>
 
 <style>
-.text img {
-  max-width: 100%;
-}
 </style>

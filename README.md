@@ -2,6 +2,8 @@
 
 Uses [nuxt3](https://v3.nuxtjs.org) and [storyblok](https://www.storyblok.com/).
 
+Now static with prerender using [nuxt-full-static](https://github.com/danielroe/nuxt-full-static/) from [@danielroe](https://github.com/danielroe).
+
 ## Setup
 
 Make sure to install the dependencies:

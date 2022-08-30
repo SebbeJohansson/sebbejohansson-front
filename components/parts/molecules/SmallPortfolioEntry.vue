@@ -1,5 +1,5 @@
 <script lang="ts">
-import { defineNuxtComponent } from "#app";
+import { defineNuxtComponent } from '#app';
 
 export default defineNuxtComponent({
   components: {},
@@ -31,7 +31,13 @@ export default defineNuxtComponent({
 
 <style scoped>
 .small-portfolio-entry {
-  padding: 0.2em;
+  padding-top: 0.5em;
+}
+
+@media (pointer: fine) {
+  .small-portfolio-entry {
+    padding-top: 0.9em;
+  }
 }
 
 .small-portfolio-entry__title {

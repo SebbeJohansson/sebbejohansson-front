@@ -1,5 +1,5 @@
 <script lang="ts">
-import { defineNuxtComponent } from "#app";
+import { defineNuxtComponent } from '#app';
 
 export default defineNuxtComponent({
   components: {},
@@ -9,6 +9,10 @@ export default defineNuxtComponent({
       required: true,
     },
     link: {
+      type: String,
+      required: true,
+    },
+    name: {
       type: String,
       required: true,
     },
@@ -23,17 +27,20 @@ export default defineNuxtComponent({
       imageUrl,
     };
   },
-  methods: {
-    method() { },
-  },
 });
 </script>
 
 <template>
   <div v-if="entryUrl" class="stalk-entry">
     <a :href="entryUrl" target="_blank" class="stalk-entry__container">
-      <parts-atoms-image class="stalk-entry__image" :image="imageUrl" :mobile-size="100" :tablet-size="100"
-        :desktop-size="100" />
+      <parts-atoms-image
+        class="stalk-entry__image"
+        :image="imageUrl"
+        :alt="`${name} Icon`"
+        :mobile-size="100"
+        :tablet-size="100"
+        :desktop-size="100"
+      />
     </a>
   </div>
 </template>

@@ -1,4 +1,4 @@
-export default defineNuxtPlugin(useNuxtApp => {
+export default defineNuxtPlugin((useNuxtApp) => {
   interface MediaArguments {
     maxHeight: number | undefined;
     maxWidth: number | undefined;
@@ -6,7 +6,6 @@ export default defineNuxtPlugin(useNuxtApp => {
   }
 
   function toMediaUrl(url: string, { maxHeight = null, maxWidth = null, skipAutoFormat = false }: MediaArguments) {
-
     if (url.startsWith('https://') || url.startsWith('http://')) {
       return formatStoryblokImage(url);
     }
@@ -55,11 +54,10 @@ export default defineNuxtPlugin(useNuxtApp => {
     }
   }
 
-
   function formatRichText(richText: string) {
-    if (!richText) return null;
+    if (!richText) { return null; }
     const formattedText = richText;
-    if (typeof formattedText.replace !== 'function') return null;
+    if (typeof formattedText.replace !== 'function') { return null; }
     const regex = /(?<start><img)(?<middle>.*?)(?<end>\/>)/ig;
     const newText = formattedText.replace(regex, (match, p1, p2, p3, offset, string, namedGroups) => `${namedGroups.start} loading="lazy" ${namedGroups.middle} ${namedGroups.end}`);
     return newText;
@@ -69,6 +67,6 @@ export default defineNuxtPlugin(useNuxtApp => {
     provide: {
       formatRichText,
       toMediaUrl,
-    }
-  }
-})
+    },
+  };
+});
