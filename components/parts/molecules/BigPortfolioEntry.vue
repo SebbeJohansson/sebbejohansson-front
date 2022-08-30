@@ -99,7 +99,7 @@ useJsonld(() => ({
 
 .big-portfolio-entry__description {
   line-height: 1.5em;
-  color: #838181;
+  color: black;
 }
 
 @media (--phoneAndTablet) {
