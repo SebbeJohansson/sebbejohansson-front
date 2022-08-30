@@ -14,11 +14,12 @@ const props = defineProps({
 const gistUrl: string = 'https://gist.github.com/';
 const gistErr: boolean = false;
 
-const { data: result } = await useAsyncData(
+const { data: gistData = 'Loading...' } = await useAsyncData(
   `gist-${props.gistId}-${props.file}`,
-  () => {
+  // eslint-disable-next-line require-await
+  async () => {
     const params = props.file.length > 0 ? `?file=${props.file}` : '';
-    return $fetch(`${gistUrl}${props.gistId}.json${params}`);
+    return $fetch(`${gistUrl}${props.gistId}.json${params}`).then(res => res.div);
   },
 );
 </script>
@@ -34,7 +35,7 @@ const { data: result } = await useAsyncData(
         alt="404"
       >
     </div>
-    <div v-else v-html="result.div" />
+    <div v-else v-html="gistData" />
   </div>
 </template>
 
