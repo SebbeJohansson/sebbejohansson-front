@@ -16,8 +16,8 @@ const props = defineProps({
   },
   loading: {
     type: String,
-    default: "lazy",
-  }
+    default: 'lazy',
+  },
 });
 const nuxtApp = useNuxtApp();
 const mobileImageUrl = computed((): string => nuxtApp.$toMediaUrl(props.image, { maxWidth: props.mobileSize }));

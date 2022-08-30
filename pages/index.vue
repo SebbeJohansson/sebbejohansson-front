@@ -1,16 +1,16 @@
 <script lang="ts">
 import { MetaInfo } from 'vue-meta';
-import { defineNuxtComponent } from "#app";
+import { defineNuxtComponent } from '#app';
 
 export default defineNuxtComponent({
   head(): MetaInfo {
     return {
-      title: "SebbeJohansson",
+      title: 'SebbeJohansson',
       meta: [{
         vmid: 'description',
         name: 'description',
         content: 'Full-stack software engineer focusing on Web and Games.',
-      }]
+      }],
     };
   },
 });
@@ -29,8 +29,14 @@ export default defineNuxtComponent({
     <content-portfolio-list id="portfolio" />
     <div class="index__trakt">
       <a target="_blank" href="https://trakt.tv/users/redeyeddragon" class="index__trakt-link">
-        <img class="index__trakt-image" width="500" height="133" alt="redeyeddragon"
-          src="https://widgets.trakt.tv/users/176286ec5d57f496186c5954408a9ddc/watched/banner@2x.jpg" loading="lazy">
+        <img
+          class="index__trakt-image"
+          width="500"
+          height="133"
+          alt="redeyeddragon"
+          src="https://widgets.trakt.tv/users/176286ec5d57f496186c5954408a9ddc/watched/banner@2x.jpg"
+          loading="lazy"
+        >
       </a>
     </div>
     <content-stalk-list id="contact" class="index__stalk" />

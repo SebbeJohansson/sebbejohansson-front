@@ -4,8 +4,13 @@ defineProps({ blok: Object });
 
 <template>
   <div v-editable="blok" class="columns">
-    <component v-if="blok.content && Array.isArray(blok.content) && blok.content.length > 0"
-      v-for="block in blok.content" :is="$resolveStoryBlokComponent(block)" :blok="block.content" :key="block._uid" />
+    <component
+      :is="$resolveStoryBlokComponent(block)"
+      v-for="block in blok.content"
+      v-if="blok.content && Array.isArray(blok.content) && blok.content.length > 0"
+      :key="block._uid"
+      :blok="block.content"
+    />
   </div>
 </template>
 

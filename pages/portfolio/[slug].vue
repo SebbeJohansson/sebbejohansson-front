@@ -1,17 +1,29 @@
-
 <script setup lang="ts">
-const route = useRoute()
-let story = {} as any;
-const version = route.query._storyblok && route.query._storyblok != "" ? "draft" : "published";
-await useStoryblok(`portfolio/${route.params.slug}`, { version: version }).then((response) => {
-  story = response.value;
+import { StoryData } from '@storyblok/vue/dist';
+
+const route = useRoute();
+
+const isPreview = !!(route.query._storyblok && route.query._storyblok !== '');
+const version = isPreview ? 'draft' : 'published';
+
+let story = {} as StoryData;
+
+await useStoryblokFetch(`portfolio/${route.params.slug}`, {
+  version,
+}).then((response) => {
+  story = response.story;
 });
-const portfolioTitle = computed((): string => {
-  return story.content?.title || story.name || 'wow'
+
+onMounted(() => {
+  if (isPreview) {
+    useStoryblokBridge(story.id, evStory => (story = evStory));
+  }
 });
+
+const portfolioTitle = computed((): string => story.content?.title || story.name || 'wow');
 
 useHead({
-  titleTemplate: (title) => `${portfolioTitle.value} - ${title}`,
+  titleTemplate: title => `${portfolioTitle.value} - ${title}`,
 });
 </script>
 

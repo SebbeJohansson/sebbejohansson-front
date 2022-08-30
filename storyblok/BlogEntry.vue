@@ -4,7 +4,7 @@ const props = defineProps({ blok: Object, raw: Object });
 const title = computed((): string => props.blok.title || props.raw.name);
 const slug = computed((): string => `/blog/${props.blok.slug || props.raw.slug}`);
 const date = computed((): string | null => props.blok.date);
-const content = computed((): [] | string => props.blok.content && Array.isArray(props.blok.content) && props.blok.content.length > 0 ? props.blok.content : props.blok.description);
+const content = computed((): [] | string => (props.blok.content && Array.isArray(props.blok.content) && props.blok.content.length > 0 ? props.blok.content : props.blok.description));
 
 useJsonld(() => ({
   '@context': 'https://schema.org',
@@ -21,17 +21,24 @@ useJsonld(() => ({
 </script>
 
 <template>
-  <div class="blog-entry" v-editable="blok">
+  <div v-editable="blok" class="blog-entry">
     <div class="blog-entry__container">
       <div class="blog-entry__content">
         <h3 v-if="title" class="blog-entry__title">
-          <NuxtLink :to="slug" class="blog-entry__title-link">{{ title }}</NuxtLink>
+          <NuxtLink :to="slug" class="blog-entry__title-link">
+            {{ title }}
+          </NuxtLink>
         </h3>
         <h5 v-if="date" class="blog-entry__date">
           - {{ date }}
         </h5>
-        <component v-if="content && Array.isArray(content) && content.length > 0" v-for="block in content"
-          :is="$resolveStoryBlokComponent(block)" :blok="block" :key="block._uid" />
+        <component
+          :is="$resolveStoryBlokComponent(block)"
+          v-for="block in content"
+          v-if="content && Array.isArray(content) && content.length > 0"
+          :key="block._uid"
+          :blok="block"
+        />
       </div>
     </div>
   </div>
