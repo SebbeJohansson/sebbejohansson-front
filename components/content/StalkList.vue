@@ -4,6 +4,7 @@ interface StalkEntry {
   id: number;
   link: string;
   entryPic: string;
+  name: string;
 }
 
 const route = useRoute();
@@ -22,6 +23,7 @@ await useStoryblokFetch('', {
       id: story.id,
       entryPic: story.content.image?.filename,
       link: story.content.link?.url || story.content.link?.url || null,
+      name: story.name,
     });
   });
 });
@@ -42,6 +44,7 @@ const stalkEntries = computed<StalkEntry[]>(
         :key="entry.id"
         :link="entry.link"
         :picture="entry.entryPic"
+        :name="entry.name"
       />
     </div>
   </div>

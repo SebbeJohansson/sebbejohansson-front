@@ -12,6 +12,10 @@ export default defineNuxtComponent({
       type: String,
       required: true,
     },
+    name: {
+      type: String,
+      required: true,
+    },
   },
   setup(props) {
     const imageUrl = computed((): string => (props.picture ? props.picture : 'null'));
@@ -23,9 +27,6 @@ export default defineNuxtComponent({
       imageUrl,
     };
   },
-  methods: {
-    method() { },
-  },
 });
 </script>
 
@@ -35,6 +36,7 @@ export default defineNuxtComponent({
       <parts-atoms-image
         class="stalk-entry__image"
         :image="imageUrl"
+        :alt="`${name} Icon`"
         :mobile-size="100"
         :tablet-size="100"
         :desktop-size="100"
