@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import { ConcreteComponent } from "vue";
-const NuxtLink = resolveComponent('NuxtLink')
+import { ConcreteComponent } from 'vue';
+
+const NuxtLink = resolveComponent('NuxtLink');
 
 const props = defineProps({
   title: {
@@ -39,8 +40,14 @@ useJsonld(() => ({
 <template>
   <div class="big-portfolio-entry">
     <component :is="componentType" :href="entryUrl" class="big-portfolio-entry__container">
-      <parts-atoms-image class="big-portfolio-entry__image" :image="imageUrl" :alt="title" :mobile-size="300"
-        :tablet-size="400" :desktop-size="600" />
+      <parts-atoms-image
+        class="big-portfolio-entry__image"
+        :image="imageUrl"
+        :alt="title"
+        :mobile-size="300"
+        :tablet-size="400"
+        :desktop-size="600"
+      />
       <div class="big-portfolio-entry__content">
         <h3 v-if="title" class="big-portfolio-entry__title">
           {{ title }}

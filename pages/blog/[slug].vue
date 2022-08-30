@@ -1,23 +1,35 @@
-
 <script setup lang="ts">
-const route = useRoute()
-let story = {} as any;
-const version = route.query._storyblok && route.query._storyblok != "" ? "draft" : "published";
-await useStoryblok(`blog/${route.params.slug}`, { version: version }).then((response) => {
-  story = response.value;
-});
-const blogTitle = computed((): string => {
-  return story.content?.title || story.name || 'wow'
+import { StoryData } from '@storyblok/vue/dist';
+
+const route = useRoute();
+
+const isPreview = !!(route.query._storyblok && route.query._storyblok !== '');
+const version = isPreview ? 'draft' : 'published';
+
+let story = {} as StoryData;
+
+await useStoryblokFetch(`blog/${route.params.slug}`, {
+  version,
+}).then((response) => {
+  story = response.story;
 });
 
-useHead({
-  titleTemplate: (title) => `${blogTitle.value} - ${title}`,
+onMounted(() => {
+  if (isPreview) {
+    useStoryblokBridge(story.id, evStory => (story = evStory));
+  }
 });
+
 </script>
 
 <template>
   <div class="page blog-entry-page">
-    <component :is="$resolveStoryBlokComponent(story)" :blok="story.content" :raw="story" />
+    <component
+      :is="$resolveStoryBlokComponent(story)"
+      v-if="story.content"
+      :blok="story.content"
+      :raw="story"
+    />
   </div>
 </template>
 
