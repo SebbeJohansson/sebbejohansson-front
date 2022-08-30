@@ -4,6 +4,7 @@
       <parts-atoms-image
         class="footer__left-icon"
         image="images/icon.png"
+        alt="SebbeJohansson Icon"
         :mobile-size="60"
         :tablet-size="60"
         :desktop-size="60"
