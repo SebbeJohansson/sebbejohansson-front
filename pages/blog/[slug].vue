@@ -8,17 +8,30 @@ const version = isPreview ? 'draft' : 'published';
 
 let story = {} as StoryData;
 
-await useStoryblokFetch(`blog/${route.params.slug}`, {
-  version,
-}).then((response) => {
-  if (!response) { return; }
-  story = response.story;
-});
-// onMounted(() => {
-//   if (isPreview) {
-//     useStoryblokBridge(story.id, evStory => (story = evStory));
-//   }
-// });
+if (isPreview) {
+  // We are in preview so lets fetch it with the normal module.
+  await useStoryblok(`blog/${route.params.slug}`, {
+    version,
+  }).then((response) => {
+    if (!response) { return; }
+    story = response.value;
+  });
+} else {
+  // Custom fetch for full static support.
+  await useStoryblokFetch(`blog/${route.params.slug}`, {
+    version,
+  }).then((response) => {
+    if (!response) { return; }
+    story = response.story;
+  });
+}
+
+// Disabled until we know if we can use useStoryblokFetch for preview.
+/* onMounted(() => {
+  if (isPreview) {
+    useStoryblokBridge(story.id, evStory => (story = evStory));
+  }
+}); */
 
 </script>
 
