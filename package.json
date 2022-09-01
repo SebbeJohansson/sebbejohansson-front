@@ -18,6 +18,7 @@
   },
   "dependencies": {
     "@funken-studio/sitemap-nuxt-3": "^3.2.0",
+    "@storyblok/js": "^1.7.2",
     "@storyblok/nuxt": "^4.0.1",
     "axios": "^0.27.2",
     "eslint-config-airbnb-base": "^15.0.0",

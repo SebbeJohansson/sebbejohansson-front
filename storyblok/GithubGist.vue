@@ -1,15 +1,12 @@
 <script setup lang="ts">
-const props = defineProps({ blok: Object });
+defineProps({ blok: Object });
 </script>
 
 <template>
   <div v-editable="blok" class="github-gist">
-    {{ blok }}
+    <content-github-gist-embed :gist-id="blok.gist_id" :file="blok.file_name" :fetch-key="blok._uid" />
   </div>
 </template>
 
 <style>
-.text img {
-  max-width: 100%;
-}
 </style>
