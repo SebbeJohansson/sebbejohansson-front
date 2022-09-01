@@ -4,7 +4,7 @@ defineProps({ blok: Object });
 
 <template>
   <div v-editable="blok" class="github-gist">
-    <content-github-gist-embed gist-id="9a6b863e3a3cfc0a79df457b0392b5d5" file="StoryblokDateTimeField.js" />
+    <content-github-gist-embed :gist-id="blok.gist_id" :file="blok.file_name" :fetch-key="blok._uid" />
   </div>
 </template>
 
