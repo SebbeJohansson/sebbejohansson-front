@@ -9,13 +9,18 @@ const props = defineProps({
     required: false,
     default: '',
   },
+  fetchKey: {
+    type: String,
+    required: false,
+    default: '',
+  },
 });
 
 const gistUrl: string = 'https://gist.github.com/';
 const gistErr: boolean = false;
 
 const { data: gistData = 'Loading...' } = await useAsyncData(
-  `gist-${props.gistId}-${props.file}`,
+  `gist-${props.gistId}-${props.file}-${props.fetchKey}`,
   // eslint-disable-next-line require-await
   async () => {
     const params = props.file.length > 0 ? `?file=${props.file}` : '';
@@ -25,7 +30,7 @@ const { data: gistData = 'Loading...' } = await useAsyncData(
 </script>
 
 <template>
-  <div>
+  <div :id="`gist-${gistId}-${file}-${fetchKey}`">
     <div v-if="gistErr">
       <img
         id="notFound"
@@ -35,7 +40,7 @@ const { data: gistData = 'Loading...' } = await useAsyncData(
         alt="404"
       >
     </div>
-    <div v-else v-html="gistData" />
+    <div v-else class="gist" v-html="gistData" />
   </div>
 </template>
 
