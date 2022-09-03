@@ -1,18 +1,11 @@
-<script lang="ts">
-import { MetaInfo } from 'vue-meta';
-import { defineNuxtComponent } from '#app';
-
-export default defineNuxtComponent({
-  head(): MetaInfo {
-    return {
-      title: 'SebbeJohansson',
-      meta: [{
-        vmid: 'description',
-        name: 'description',
-        content: 'Full-stack software engineer focusing on Web and Games.',
-      }],
-    };
-  },
+<script setup lang="ts">
+useHead({
+  title: 'SebbeJohansson',
+  meta: [{
+    vmid: 'description',
+    name: 'description',
+    content: 'Full-stack software engineer focusing on Web and Games.',
+  }],
 });
 </script>
 

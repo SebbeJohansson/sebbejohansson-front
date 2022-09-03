@@ -10,6 +10,7 @@ const props = defineProps({
   },
   description: {
     type: String,
+    default: '',
   },
   picture: {
     type: String,
@@ -17,6 +18,7 @@ const props = defineProps({
   },
   slug: {
     type: String,
+    default: undefined,
   },
 });
 

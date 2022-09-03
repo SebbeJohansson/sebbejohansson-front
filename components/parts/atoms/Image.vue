@@ -1,7 +1,13 @@
 <script setup lang="ts">
 const props = defineProps({
-  image: String,
-  alt: String,
+  image: {
+    type: String,
+    required: true,
+  },
+  alt: {
+    type: String,
+    required: true,
+  },
   mobileSize: {
     type: Number,
     default: 800,
