@@ -1,33 +1,21 @@
-<script lang="ts">
-import { defineNuxtComponent } from '#app';
-
-export default defineNuxtComponent({
-  components: {},
-  props: {
-    picture: {
-      type: String,
-      required: true,
-    },
-    link: {
-      type: String,
-      required: true,
-    },
-    name: {
-      type: String,
-      required: true,
-    },
+<script setup lang="ts">
+const props = defineProps({
+  picture: {
+    type: String,
+    required: true,
   },
-  setup(props) {
-    const imageUrl = computed((): string => (props.picture ? props.picture : 'null'));
-
-    const entryUrl = computed((): string | undefined => (props.link ? `https://${props.link}` : undefined));
-
-    return {
-      entryUrl,
-      imageUrl,
-    };
+  link: {
+    type: String,
+    required: true,
+  },
+  name: {
+    type: String,
+    required: true,
   },
 });
+
+const imageUrl = computed((): string => (props.picture ? props.picture : 'null'));
+const entryUrl = computed((): string | undefined => (props.link ? `https://${props.link}` : undefined));
 </script>
 
 <template>
