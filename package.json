@@ -22,7 +22,7 @@
     "@storyblok/nuxt": "^4.0.1",
     "axios": "^0.27.2",
     "eslint-config-airbnb-base": "^15.0.0",
-    "nuxt": "^3.0.0-rc.8",
+    "nuxt": "npm:nuxt3@latest",
     "nuxt-full-static": "^0.2.1",
     "nuxt-jsonld": "^2.0.3",
     "postcss-custom-media": "^8.0.2",
