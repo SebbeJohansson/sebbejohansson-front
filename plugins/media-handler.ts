@@ -1,7 +1,7 @@
 export default defineNuxtPlugin((useNuxtApp) => {
   interface MediaArguments {
-    maxHeight: number | undefined;
-    maxWidth: number | undefined;
+    maxHeight?: number | undefined;
+    maxWidth?: number | undefined;
     skipAutoFormat?: boolean | undefined;
   }
 
