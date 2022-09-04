@@ -29,9 +29,9 @@ useJsonld(() => ({
             {{ title }}
           </NuxtLink>
         </h3>
-        <h5 v-if="date" class="blog-entry__date">
+        <h4 v-if="date" class="blog-entry__date">
           - {{ date }}
-        </h5>
+        </h4>
         <component
           :is="$resolveStoryBlokComponent(block)"
           v-for="block in content"
