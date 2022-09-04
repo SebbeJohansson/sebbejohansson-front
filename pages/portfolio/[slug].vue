@@ -20,10 +20,16 @@ onMounted(() => {
   }
 });
 
-const portfolioTitle = computed((): string => story.content?.title || story.name || 'wow');
+const portfolioTitle = computed((): string => story.content?.title || story.name || 'Portfolio entry');
+const portfolioDescription = computed((): string => story.content?.description || `${story.content?.role} - ${story.content?.title}` || story.name || 'wow');
 
 useHead({
-  titleTemplate: title => `${portfolioTitle.value} - ${title}`,
+  titleTemplate: title => `${(story.content.role ? `${story.content?.role} at ` : '')}${portfolioTitle.value} - ${title}`,
+  meta: [{
+    vmid: 'description',
+    name: 'description',
+    content: portfolioDescription.value,
+  }],
 });
 </script>
 

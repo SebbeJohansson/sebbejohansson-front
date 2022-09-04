@@ -12,6 +12,7 @@ if (isPreview) {
   // We are in preview so lets fetch it with the normal module.
   await useStoryblok(`blog/${route.params.slug}`, {
     version,
+    resolve_relations: 'blog-entry.categories',
   }).then((response) => {
     if (!response) { return; }
     story = response.value;
@@ -20,11 +21,23 @@ if (isPreview) {
   // Custom fetch for full static support.
   await useStoryblokFetch(`blog/${route.params.slug}`, {
     version,
+    resolve_relations: 'blog-entry.categories',
   }).then((response) => {
     if (!response) { return; }
     story = response.story;
   });
 }
+
+const blogPostTitle = computed((): string => story.content?.title || story.name || 'wow');
+
+useHead({
+  titleTemplate: title => `${blogPostTitle.value} - Blog - ${title}`,
+  meta: [{
+    vmid: 'description',
+    name: 'description',
+    content: `Blog post about ${blogPostTitle.value}`,
+  }],
+});
 
 // Disabled until we know if we can use useStoryblokFetch for preview.
 /* onMounted(() => {
