@@ -52,13 +52,13 @@ useJsonld(() => ({
               <div v-if="link" class="portfolio__sidebar-line">
                 <span class="portfolio__sidebar-line-title">View</span>
                 <NuxtLink :href="link" target="_blank" class="portfolio__sidebar-line-link">
-                  Click Here
+                  Click here to look at {{ title }}
                 </NuxtLink>
               </div>
               <div v-if="code" class="portfolio__sidebar-line">
                 <span class="portfolio__sidebar-line-title">Code</span>
                 <NuxtLink :href="code" target="_blank" class="portfolio__sidebar-line-link">
-                  Click Here
+                  Click here for the code to {{ title }}
                 </NuxtLink>
               </div>
             </div>
