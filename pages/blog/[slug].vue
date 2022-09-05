@@ -6,7 +6,7 @@ const route = useRoute();
 const isPreview = !!(route.query._storyblok && route.query._storyblok !== '');
 const version = isPreview ? 'draft' : 'published';
 
-let story = {} as StoryData;
+const story = ref({} as StoryData);
 
 if (isPreview) {
   // We are in preview so lets fetch it with the normal module.
@@ -15,7 +15,24 @@ if (isPreview) {
     resolve_relations: 'blog-entry.categories',
   }).then((response) => {
     if (!response) { return; }
-    story = response.value;
+    story.value = response.value;
+  });
+  // We are in preview so lets fetch it with the normal module.
+  const storyblokApi = useStoryblokApi();
+  await storyblokApi.get(`cdn/stories/blog/${route.params.slug}`, {
+    version,
+    resolve_relations: 'blog-entry.categories',
+  }).then((response) => {
+    if (!response) { return; }
+    story.value = response.data.story;
+  });
+
+  onMounted(() => {
+    const { StoryblokBridge } = window;
+    const storyblokInstance = new StoryblokBridge();
+    storyblokInstance.on(['published', 'change', 'input'], (event) => {
+      story.value = event.story;
+    });
   });
 } else {
   // Custom fetch for full static support.
@@ -24,11 +41,11 @@ if (isPreview) {
     resolve_relations: 'blog-entry.categories',
   }).then((response) => {
     if (!response) { return; }
-    story = response.story;
+    story.value = response.story;
   });
 }
 
-const blogPostTitle = computed((): string => story.content?.title || story.name || 'wow');
+const blogPostTitle = computed((): string => story.value.content?.title || story.value.name || 'wow');
 
 useHead({
   titleTemplate: title => `${blogPostTitle.value} - Blog - ${title}`,
