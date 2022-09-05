@@ -8,17 +8,23 @@ const version = isPreview ? 'draft' : 'published';
 
 let story = {} as StoryData;
 
-await useStoryblokFetch(`portfolio/${route.params.slug}`, {
-  version,
-}).then((response) => {
-  story = response.story;
-});
-
-onMounted(() => {
-  if (isPreview) {
-    useStoryblokBridge(story.id, evStory => (story = evStory));
-  }
-});
+if (isPreview) {
+  // We are in preview so lets fetch it with the normal module.
+  await useStoryblok(`portfolio/${route.params.slug}`, {
+    version,
+  }).then((response) => {
+    if (!response) { return; }
+    story = response.value;
+  });
+} else {
+  // Custom fetch for full static support.
+  await useStoryblokFetch(`portfolio/${route.params.slug}`, {
+    version,
+  }).then((response) => {
+    if (!response) { return; }
+    story = response.story;
+  });
+}
 
 const portfolioTitle = computed((): string => story.content?.title || story.name || 'Portfolio entry');
 const portfolioDescription = computed((): string => story.content?.description || `${story.content?.role} - ${story.content?.title}` || story.name || 'wow');
