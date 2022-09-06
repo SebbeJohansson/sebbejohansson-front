@@ -50,7 +50,6 @@ useHead({
 
 <template>
   <div>
-    {{ story.content.role }}
     <component :is="$resolveStoryBlokComponent(story)" :blok="story.content" :raw="story" />
   </div>
 </template>
