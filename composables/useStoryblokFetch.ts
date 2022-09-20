@@ -1,6 +1,6 @@
 import { StoryData } from '@storyblok/vue/dist';
 
-interface Blok {
+export interface Blok {
   story: StoryData;
   stories: StoryData[];
   cv: number,
