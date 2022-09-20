@@ -57,7 +57,7 @@ export default defineNuxtPlugin((useNuxtApp) => {
   function formatRichText(richText: string) {
     if (!richText) { return null; }
     const formattedText = richText;
-    if (typeof formattedText.replace !== 'function') { return null; }
+    if (typeof formattedText?.replace !== 'function') { return null; }
     const regex = /(?<start><img)(?<middle>.*?)(?<end>\/>)/ig;
     const newText = formattedText.replace(regex, (match, p1, p2, p3, offset, string, namedGroups) => `${namedGroups.start} loading="lazy" ${namedGroups.middle} ${namedGroups.end}`);
     return newText;

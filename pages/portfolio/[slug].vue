@@ -39,7 +39,7 @@ const portfolioTitle = computed((): string => story.value.content?.title || stor
 const portfolioDescription = computed((): string => story.value.content?.description || `${story.value.content?.role} - ${story.value.content?.title}` || story.value.name || 'wow');
 
 useHead({
-  titleTemplate: title => `${(story.value.content.role ? `${story.value.content?.role} at ` : '')}${portfolioTitle.value} - ${title}`,
+  titleTemplate: title => `${(story.value.content?.role ? `${story.value.content?.role} at ` : '')}${portfolioTitle.value} - ${title}`,
   meta: [{
     vmid: 'description',
     name: 'description',

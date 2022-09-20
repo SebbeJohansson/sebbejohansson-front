@@ -13,10 +13,6 @@ export default defineNuxtConfig({
     },
   },
 
-  generate: {
-    crawler: true,
-  },
-
   app: {
     head: {
       title: 'SebbeJohansson',
@@ -54,7 +50,6 @@ export default defineNuxtConfig({
   modules: [
     '@storyblok/nuxt',
     'nuxt-jsonld',
-    'nuxt-full-static',
     // '@funken-studio/sitemap-nuxt-3',
   ],
 
@@ -99,8 +94,7 @@ export default defineNuxtConfig({
       // console.log(nitroConfig);
       if (nitroConfig.dev) { return; }
       // ..Async logic..
-      nitroConfig.prerender.routes.push('/custom');
-      nitroConfig.prerender.routes.push(...(await dynamicRoutes(process.env.STORYBLOK_API_TOKEN)));
+      nitroConfig.prerender.routes.push(.../*  */(await dynamicRoutes(process.env.STORYBLOK_API_TOKEN)));
       // console.log(nitroConfig.prerender.routes);
     },
   },
@@ -108,7 +102,6 @@ export default defineNuxtConfig({
   nitro: {
     prerender: {
       crawlLinks: true,
-      routes: ['/help', '/prerender'],
     },
   },
 });
