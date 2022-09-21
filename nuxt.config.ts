@@ -89,19 +89,10 @@ export default defineNuxtConfig({
   //   },
   // },
 
-  hooks: {
-    'nitro:config': async function (nitroConfig) {
-      // console.log(nitroConfig);
-      if (nitroConfig.dev) { return; }
-      // ..Async logic..
-      nitroConfig.prerender.routes.push(.../*  */(await dynamicRoutes(process.env.STORYBLOK_API_TOKEN)));
-      // console.log(nitroConfig.prerender.routes);
-    },
-  },
-
   nitro: {
     prerender: {
       crawlLinks: true,
+      routes: ['/'],
     },
   },
 });
