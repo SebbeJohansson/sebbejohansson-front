@@ -1,4 +1,3 @@
-import { defineNuxtConfig } from 'nuxt';
 import dynamicRoutes from './helpers/dynamicRoutes';
 
 export default defineNuxtConfig({
