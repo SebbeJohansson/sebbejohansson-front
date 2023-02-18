@@ -1,0 +1,25 @@
+@use './global-vars.scss';
+
+@mixin content-width()
+{
+  max-width: calc($content-width + 2rem);
+  margin-right: auto;
+  margin-left: auto;
+  padding: 0 1rem;
+}
+
+@mixin for-phone-only {
+  @media (max-width: 767px) { @content; }
+}
+@mixin for-tablet-only {
+  @media (min-width: 768px) and (max-width: 1023px) { @content; }
+}
+@mixin for-phone-and-tablet-only {
+  @media (max-width: 1023px) { @content; }
+}
+@mixin for-desktop-only {
+  @media (min-width: 1024px) { @content; }
+}
+@mixin for-tablet-and-desktop-only {
+  @media (min-width: 768px) { @content; }
+}
