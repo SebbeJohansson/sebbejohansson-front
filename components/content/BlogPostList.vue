@@ -1,49 +1,49 @@
 <script async setup lang="ts">
-interface BlogEntry {
-  id: string;
-  title: string;
-  slug: string;
-  content: {};
-  author: string;
-  date: string;
-  cat: string;
-  classes: [];
-}
+  interface BlogEntry {
+    id: string;
+    title: string;
+    slug: string;
+    content: {};
+    author: string;
+    date: string;
+    cat: string;
+    classes: [];
+  }
 
-interface BlogCategory {
-  name: string;
-  about: string;
-}
+  interface BlogCategory {
+    name: string;
+    about: string;
+  }
 
-interface BlogCategories {
-  entries: BlogCategory[];
-}
+  interface BlogCategories {
+    entries: BlogCategory[];
+  }
 
-const route = useRoute();
+  const route = useRoute();
 
-const isPreview = !!(route.query._storyblok && route.query._storyblok !== '');
-const version = isPreview ? 'draft' : 'published';
+  const isPreview = !!(route.query._storyblok && route.query._storyblok !== '');
+  const version = isPreview ? 'draft' : 'published';
 
-const rawBlogEntries: BlogEntry[] = [];
+  const rawBlogEntries: BlogEntry[] = [];
 
-await useStoryblokFetch('', {
-  starts_with: 'blog/',
-  version,
-  content_type: 'blog-entry',
-  resolve_relations: 'blog-entry.categories',
-  sort_by: 'content.date:desc',
-}).then((response) => {
-  response.stories.forEach((story) => {
-    rawBlogEntries.push({
-      ...story,
-      classes: story.content.categories.map(category => `blog-post-list__entry--${category.uuid}`),
+  await useStoryblokFetch('', {
+    starts_with: 'blog/',
+    version,
+    content_type: 'blog-entry',
+    resolve_relations: 'blog-entry.categories',
+    sort_by: 'content.date:desc',
+  }).then((response) => {
+    response.stories.forEach((story) => {
+      rawBlogEntries.push({
+        ...story,
+        classes: story.content.categories.map(category => `blog-post-list__entry--${category.uuid}`),
+      });
     });
   });
-});
 
-const blogEntries = computed<BlogEntry[]>(
-  (): BlogEntry[] => rawBlogEntries as BlogEntry[],
-);
+  const blogEntries = computed<BlogEntry[]>(
+    (): BlogEntry[] => rawBlogEntries as BlogEntry[],
+  );
 
 // const unselectedCategories = ref(<string[]>[]);
 

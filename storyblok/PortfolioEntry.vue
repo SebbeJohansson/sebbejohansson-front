@@ -1,25 +1,25 @@
 <script setup lang="ts">
-const props = defineProps({ blok: Object, raw: Object });
+  const props = defineProps({ blok: Object, raw: Object });
 
-const imageUrl = computed((): string => (props.blok.cover?.filename ? props.blok.cover?.filename : 'null'));
-const title = computed((): string => props.blok.title || props.raw.name);
-const duration = computed((): string | null => props.blok.duration);
-const role = computed((): string | null => props.blok.role || null);
-const link = computed((): string => props.blok.link?.url || props.blok.link?.cached_url || null);
-const code = computed((): string | null => props.blok.code?.url || props.blok.code?.cached_url || null);
-const content = computed((): [] | string => (props.blok.content && Array.isArray(props.blok.content) && props.blok.content.length > 0 ? props.blok.content : props.blok.description));
+  const imageUrl = computed((): string => (props.blok.cover?.filename ? props.blok.cover?.filename : 'null'));
+  const title = computed((): string => props.blok.title || props.raw.name);
+  const duration = computed((): string | null => props.blok.duration);
+  const role = computed((): string | null => props.blok.role || null);
+  const link = computed((): string => props.blok.link?.url || props.blok.link?.cached_url || null);
+  const code = computed((): string | null => props.blok.code?.url || props.blok.code?.cached_url || null);
+  const content = computed((): [] | string => (props.blok.content && Array.isArray(props.blok.content) && props.blok.content.length > 0 ? props.blok.content : props.blok.description));
 
-useJsonld(() => ({
-  '@context': 'https://schema.org',
-  '@type': 'Article',
-  headline: title.value,
-  image: {
-    '@type': 'ImageObject',
-    url: imageUrl.value,
-    caption: title.value,
-  },
-  articleBody: content.value,
-}));
+  useJsonld(() => ({
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: title.value,
+    image: {
+      '@type': 'ImageObject',
+      url: imageUrl.value,
+      caption: title.value,
+    },
+    articleBody: content.value,
+  }));
 </script>
 
 <template>

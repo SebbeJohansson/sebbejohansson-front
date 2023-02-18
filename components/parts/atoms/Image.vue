@@ -1,34 +1,34 @@
 <script setup lang="ts">
-const props = defineProps({
-  image: {
-    type: String,
-    required: true,
-  },
-  alt: {
-    type: String,
-    required: true,
-  },
-  mobileSize: {
-    type: Number,
-    default: 800,
-  },
-  tabletSize: {
-    type: Number,
-    default: 1600,
-  },
-  desktopSize: {
-    type: Number,
-    default: 2000,
-  },
-  loading: {
-    type: String,
-    default: 'lazy',
-  },
-});
-const nuxtApp = useNuxtApp();
-const mobileImageUrl = computed((): string => nuxtApp.$toMediaUrl(props.image, { maxWidth: props.mobileSize }));
-const tabletImageUrl = computed((): string => nuxtApp.$toMediaUrl(props.image, { maxWidth: props.tabletSize }));
-const desktopImageUrl = computed((): string => nuxtApp.$toMediaUrl(props.image, { maxWidth: props.desktopSize }));
+  const props = defineProps({
+    image: {
+      type: String,
+      required: true,
+    },
+    alt: {
+      type: String,
+      required: true,
+    },
+    mobileSize: {
+      type: Number,
+      default: 800,
+    },
+    tabletSize: {
+      type: Number,
+      default: 1600,
+    },
+    desktopSize: {
+      type: Number,
+      default: 2000,
+    },
+    loading: {
+      type: String,
+      default: 'lazy',
+    },
+  });
+  const nuxtApp = useNuxtApp();
+  const mobileImageUrl = computed((): string => nuxtApp.$toMediaUrl(props.image, { maxWidth: props.mobileSize }));
+  const tabletImageUrl = computed((): string => nuxtApp.$toMediaUrl(props.image, { maxWidth: props.tabletSize }));
+  const desktopImageUrl = computed((): string => nuxtApp.$toMediaUrl(props.image, { maxWidth: props.desktopSize }));
 </script>
 
 <template>

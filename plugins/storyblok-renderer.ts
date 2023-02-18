@@ -1,4 +1,4 @@
-export default defineNuxtPlugin((useNuxtApp) => {
+export default defineNuxtPlugin(() => {
   /* Resolves the storyblok component */
   // It is needed so that the components are rendered on the server instead of the client.
   function resolveStoryBlokComponent(story) {

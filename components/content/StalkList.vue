@@ -1,36 +1,36 @@
 <script setup async lang="ts">
 
-interface StalkEntry {
-  id: number;
-  link: string;
-  entryPic: string;
-  name: string;
-}
+  interface StalkEntry {
+    id: number;
+    link: string;
+    entryPic: string;
+    name: string;
+  }
 
-const route = useRoute();
+  const route = useRoute();
 
-const isPreview = !!(route.query._storyblok && route.query._storyblok !== '');
-const version = isPreview ? 'draft' : 'published';
+  const isPreview = !!(route.query._storyblok && route.query._storyblok !== '');
+  const version = isPreview ? 'draft' : 'published';
 
-const rawStalkEntries: StalkEntry[] = [];
+  const rawStalkEntries: StalkEntry[] = [];
 
-await useStoryblokFetch('', {
-  starts_with: 'contact/',
-  version,
-}).then((response) => {
-  response.stories.forEach((story) => {
-    rawStalkEntries.push({
-      id: story.id,
-      entryPic: story.content.image?.filename,
-      link: story.content.link?.url || story.content.link?.url || null,
-      name: story.name,
+  await useStoryblokFetch('', {
+    starts_with: 'contact/',
+    version,
+  }).then((response) => {
+    response.stories.forEach((story) => {
+      rawStalkEntries.push({
+        id: story.id,
+        entryPic: story.content.image?.filename,
+        link: story.content.link?.url || story.content.link?.url || null,
+        name: story.name,
+      });
     });
   });
-});
 
-const stalkEntries = computed<StalkEntry[]>(
-  (): StalkEntry[] => rawStalkEntries as StalkEntry[],
-);
+  const stalkEntries = computed<StalkEntry[]>(
+    (): StalkEntry[] => rawStalkEntries as StalkEntry[],
+  );
 </script>
 
 <template>

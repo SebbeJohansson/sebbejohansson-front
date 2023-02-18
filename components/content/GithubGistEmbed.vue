@@ -1,32 +1,32 @@
 <script setup lang="ts">
-const props = defineProps({
-  gistId: {
-    type: String,
-    required: true,
-  },
-  file: {
-    type: String,
-    required: false,
-    default: '',
-  },
-  fetchKey: {
-    type: String,
-    required: false,
-    default: '',
-  },
-});
+  const props = defineProps({
+    gistId: {
+      type: String,
+      required: true,
+    },
+    file: {
+      type: String,
+      required: false,
+      default: '',
+    },
+    fetchKey: {
+      type: String,
+      required: false,
+      default: '',
+    },
+  });
 
-const gistUrl: string = 'https://gist.github.com/';
-const gistErr: boolean = false;
+  const gistUrl: string = 'https://gist.github.com/';
+  const gistErr: boolean = false;
 
-const { data: gistData = 'Loading...' } = await useAsyncData(
-  `gist-${props.gistId}-${props.file}-${props.fetchKey}`,
-  // eslint-disable-next-line require-await
-  async () => {
-    const params = props.file.length > 0 ? `?file=${props.file}` : '';
-    return $fetch(`${gistUrl}${props.gistId}.json${params}`).then(res => res.div);
-  },
-);
+  const { data: gistData = 'Loading...' } = await useAsyncData(
+    `gist-${props.gistId}-${props.file}-${props.fetchKey}`,
+    // eslint-disable-next-line require-await
+    async () => {
+      const params = props.file.length > 0 ? `?file=${props.file}` : '';
+      return $fetch(`${gistUrl}${props.gistId}.json${params}`).then(res => res.div);
+    },
+  );
 </script>
 
 <template>

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-defineProps({ blok: Object });
+  defineProps({ blok: Object });
 </script>
 
 <template>

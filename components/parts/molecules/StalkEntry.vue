@@ -1,21 +1,21 @@
 <script setup lang="ts">
-const props = defineProps({
-  picture: {
-    type: String,
-    required: true,
-  },
-  link: {
-    type: String,
-    required: true,
-  },
-  name: {
-    type: String,
-    required: true,
-  },
-});
+  const props = defineProps({
+    picture: {
+      type: String,
+      required: true,
+    },
+    link: {
+      type: String,
+      required: true,
+    },
+    name: {
+      type: String,
+      required: true,
+    },
+  });
 
-const imageUrl = computed((): string => (props.picture ? props.picture : 'null'));
-const entryUrl = computed((): string | undefined => (props.link ? `https://${props.link}` : undefined));
+  const imageUrl = computed((): string => (props.picture ? props.picture : 'null'));
+  const entryUrl = computed((): string | undefined => (props.link ? `https://${props.link}` : undefined));
 </script>
 
 <template>

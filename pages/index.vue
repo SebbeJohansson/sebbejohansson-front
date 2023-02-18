@@ -1,12 +1,12 @@
 <script setup lang="ts">
-useHead({
-  title: 'SebbeJohansson',
-  meta: [{
-    vmid: 'description',
-    name: 'description',
-    content: 'Full-stack software engineer focusing on Web and Games.',
-  }],
-});
+  useHead({
+    title: 'SebbeJohansson',
+    meta: [{
+      vmid: 'description',
+      name: 'description',
+      content: 'Full-stack software engineer focusing on Web and Games.',
+    }],
+  });
 </script>
 
 <template>
