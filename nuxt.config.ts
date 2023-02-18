@@ -1,5 +1,3 @@
-import dynamicRoutes from './helpers/dynamicRoutes';
-
 export default defineNuxtConfig({
   telemetry: false,
 
@@ -49,7 +47,6 @@ export default defineNuxtConfig({
   modules: [
     '@storyblok/nuxt',
     'nuxt-jsonld',
-    // '@funken-studio/sitemap-nuxt-3',
   ],
 
   storyblok: {
@@ -78,15 +75,6 @@ export default defineNuxtConfig({
     },
   },
 
-  // sitemap: {
-  //   hostname: 'https://sebbejohansson.com',
-  //   gzip: true,
-  //   cacheTime: 1,
-  //   // routes: dynamicRoutes,
-  //   defaults: {
-  //     lastmod: new Date().toISOString(),
-  //   },
-  // },
 
   nitro: {
     prerender: {
