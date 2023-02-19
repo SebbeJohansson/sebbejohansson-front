@@ -1,4 +1,7 @@
 <script setup lang="ts">
+  definePageMeta({
+    layout: 'blank',
+  });
   useHead({
     title: 'SebbeJohansson',
     meta: [{
@@ -19,6 +22,7 @@
       </p>
       <p>Anyway... I hope you enjoy your stay.</p>
     </content-with-title>
+    <parts-organisms-desktop-menu />
     <content-portfolio-list id="portfolio" />
     <div class="index__trakt">
       <a target="_blank" href="https://trakt.tv/users/redeyeddragon" class="index__trakt-link">
@@ -33,6 +37,7 @@
       </a>
     </div>
     <content-stalk-list id="contact" class="index__stalk" />
+    <parts-organisms-footer />
   </div>
 </template>
 

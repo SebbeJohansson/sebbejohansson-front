@@ -21,7 +21,7 @@
   </div>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
 .small-portfolio-entry {
   padding-top: 0.5em;
 }
@@ -37,7 +37,7 @@
   font-family: Roboto, Helvetica, Arial, Verdana, sans-serif;
   font-weight: 400;
   margin: 0 0 5px;
-  color: black;
+  color: $text-color;
   text-decoration: none;
 }
 

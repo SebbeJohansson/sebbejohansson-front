@@ -62,7 +62,7 @@
   </div>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
 .big-portfolio-entry {
   padding: 0.5em;
 }
@@ -78,7 +78,7 @@
   vertical-align: top;
   box-shadow: 0 0 5px #ddd;
   text-decoration: none;
-  color: black;
+  color: $text-color;
 }
 
 .big-portfolio-entry__image {
@@ -101,7 +101,7 @@
 
 .big-portfolio-entry__description {
   line-height: 1.5em;
-  color: black;
+  color: $text-color;
 }
 
 @media (--phoneAndTablet) {

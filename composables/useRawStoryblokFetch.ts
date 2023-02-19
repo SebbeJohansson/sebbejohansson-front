@@ -2,8 +2,6 @@
 import { ISbStoryData } from '@storyblok/vue/dist';
 import { apiPlugin } from '@storyblok/vue';
 
-import { acceptedPageTypes } from './usePageFetch';
-
 export interface Blok {
   story: ISbStoryData;
   stories: ISbStoryData[];
@@ -40,11 +38,6 @@ export const useRawStoryblokFetchDynamicRoutes = async (storyblokApiToken: strin
     storyblokApiToken,
     {
       version: 'published',
-      filter_query: {
-        component: {
-          in: acceptedPageTypes.map(pageType => `sb-${pageType}`).join(','),
-        },
-      },
     },
   );
   return data.map((story) => {

@@ -24,7 +24,7 @@
   </div>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
 .content-with-title__title {
   font-family: raleway, Helvetica, Arial, Verdana, sans-serif;
   font-weight: 200;

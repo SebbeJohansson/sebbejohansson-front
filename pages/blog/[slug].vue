@@ -76,7 +76,7 @@
   </div>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
 .blog-entry-page {
   width: 100%;
   max-width: 1300px;

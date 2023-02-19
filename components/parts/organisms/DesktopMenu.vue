@@ -27,9 +27,10 @@
   </div>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
 .desktop-menu {
-  position: relative;
+  position: sticky;
+  top: 0;
   padding: 1rem 0;
 }
 

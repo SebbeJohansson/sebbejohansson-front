@@ -19,7 +19,7 @@
   </div>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
 .footer {
   background: #1f1f1f;
   min-height: 100px;

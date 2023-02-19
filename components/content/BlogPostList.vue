@@ -139,7 +139,7 @@
   </div>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
 .blog-post-list__content {
   display: flex;
   flex-direction: row;
@@ -164,7 +164,7 @@
   border: 1px solid #ddd;
   box-shadow: 0 0 5px #ddd;
   text-decoration: none;
-  color: black;
+  color: $text-color;
 }
 
 .blog-post-list__categories-title {

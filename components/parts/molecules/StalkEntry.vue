@@ -33,7 +33,7 @@
   </div>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
 .stalk-entry {
   width: 5em;
   margin: 0.8em;

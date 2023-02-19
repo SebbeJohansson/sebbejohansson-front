@@ -41,7 +41,7 @@
   </div>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
 .image__picture {
   width: 100%;
   height: 100%;

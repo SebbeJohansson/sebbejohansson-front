@@ -56,7 +56,7 @@
   vertical-align: top;
   box-shadow: 0 0 5px #ddd;
   text-decoration: none;
-  color: black;
+  color: $text-color;
 }
 
 .blog-entry__content {
@@ -72,7 +72,7 @@
 
 .blog-entry__title-link {
   text-decoration: none;
-  color: black;
+  color: $text-color;
 }
 
 .blog-entry__date {

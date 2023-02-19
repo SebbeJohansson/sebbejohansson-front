@@ -74,7 +74,7 @@
   </div>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
 .portfolio-list__grid {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;

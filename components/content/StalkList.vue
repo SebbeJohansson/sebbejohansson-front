@@ -50,7 +50,7 @@
   </div>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
 .stalk-list {
   border-bottom: none;
   max-width: 50%;

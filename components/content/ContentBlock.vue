@@ -4,16 +4,16 @@
   </div>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
+@use "@/assets/styles/foundation/mixins.scss";
 .content-block {
-  width: 100%;
-  max-width: 1300px;
+  @include mixins.content-width();
   padding: 30px;
   margin: 10px auto 10px;
   font-family: Roboto, Helvetica, Arial, Verdana, sans-serif;
-  background-color: white;
-  border-bottom: 1px solid rgb(206, 206, 206);
-  box-shadow: 0 0 3px #c0c1c2;
+  background-color: $cover-color;
+  border-bottom: 1px solid $border-dark;
+  box-shadow: 0 0 3px $shadow-dark;
 }
 
 @media (--phoneAndTablet) {

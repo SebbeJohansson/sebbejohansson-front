@@ -37,16 +37,14 @@
 </script>
 
 <template>
-  <div class="default-layout">
-    <parts-organisms-desktop-menu />
+  <div class="homepage-layout">
     <slot />
-    <parts-organisms-footer />
   </div>
 </template>
 
 <style scoped lang="scss">
 @use "@/assets/styles/foundation/global-vars";
-.default-layout {
+.homepage-layout {
   margin: 0 auto;
   min-height: 100vh;
   display: flex;
@@ -55,7 +53,7 @@
   color: $text-color;
 }
 
-.default-layout :deep(.page) {
+.homepage-layout :deep(.page) {
   flex-grow: 1;
   display: flex;
   flex-direction: column;

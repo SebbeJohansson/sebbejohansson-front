@@ -146,7 +146,7 @@
 }
 
 .portfolio__sidebar-line-link {
-  color: black;
+  color: $text-color;
   text-decoration: none;
 }
 
