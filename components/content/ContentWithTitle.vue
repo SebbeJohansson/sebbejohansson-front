@@ -30,7 +30,7 @@
   font-weight: 200;
   text-align: center;
   font-size: 4em;
-  margin: 30px 0 15px;
+  margin: 0 15px;
 }
 
 .content-with-title__content {

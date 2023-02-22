@@ -55,7 +55,7 @@
 }
 
 .index__trakt {
-  margin: 0 auto;
+  margin: 1rem auto 0;
 }
 
 .index__trakt-link {

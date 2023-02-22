@@ -51,7 +51,7 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  background-color: $background-color;
+  background-color: $background-dark;
   color: $text-color;
 }
 

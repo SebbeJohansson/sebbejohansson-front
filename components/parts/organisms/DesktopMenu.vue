@@ -32,6 +32,7 @@
   position: sticky;
   top: 0;
   padding: 1rem 0;
+  z-index: 10;
 }
 
 .desktop-menu__container-wrapper {

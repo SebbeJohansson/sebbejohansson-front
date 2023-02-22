@@ -72,11 +72,11 @@
   flex-direction: column;
   height: 100%;
   padding: 10px;
-  background: #fff;
-  border: 1px solid #ddd;
+  background: transparent;
+  border: 1px solid $border-dark;
   font-size: 1rem;
   vertical-align: top;
-  box-shadow: 0 0 5px #ddd;
+  box-shadow: 0 0 5px $shadow-dark;
   text-decoration: none;
   color: $text-color;
 }
@@ -86,6 +86,7 @@
   margin: 0 0 10px;
   border-radius: 10px;
   height: 27em;
+  overflow: hidden;
 }
 
 .big-portfolio-entry__content {

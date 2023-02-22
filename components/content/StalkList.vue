@@ -51,6 +51,7 @@
 </template>
 
 <style scoped lang="scss">
+@use "sass:color";
 .stalk-list {
   border-bottom: none;
   max-width: 50%;
@@ -58,8 +59,8 @@
   border-top-right-radius: 60px;
   padding: 30px;
   margin: 0 auto;
-  box-shadow: 0 0 3px #c0c1c2;
-  background-color: white;
+  box-shadow: 0 0 3px color.invert($shadow-dark, $weight: 100%);
+  background-color: color.invert($background-dark, $weight: 100%);
   margin-top: 30px;
   margin-bottom: -10px;
 }
@@ -71,6 +72,7 @@
   font-size: 2em;
   font-weight: 200;
   margin-top: 10px;
+  color: color.invert($text-color, $weight: 100%);
 }
 
 .stalk-list__grid {
