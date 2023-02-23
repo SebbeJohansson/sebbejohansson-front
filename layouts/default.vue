@@ -59,7 +59,5 @@
   flex-grow: 1;
   display: flex;
   flex-direction: column;
-  margin-bottom: 10px;
-  margin-top: 10px;
 }
 </style>

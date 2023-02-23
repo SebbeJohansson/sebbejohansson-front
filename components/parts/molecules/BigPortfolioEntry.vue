@@ -65,49 +65,49 @@
 <style scoped lang="scss">
 .big-portfolio-entry {
   padding: 0.5em;
-}
 
-.big-portfolio-entry__container {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  padding: 10px;
-  background: transparent;
-  border: 1px solid $border-dark;
-  font-size: 1rem;
-  vertical-align: top;
-  box-shadow: 0 0 5px $shadow-dark;
-  text-decoration: none;
-  color: $text-color;
-}
+  &__container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding: 10px;
+    background: transparent;
+    border: 1px solid $border-dark;
+    box-shadow: 0 0 5px $shadow-dark;
+    font-size: 1rem;
+    vertical-align: top;
+    text-decoration: none;
+    color: $text-color;
+  }
 
-.big-portfolio-entry__image {
-  width: 100%;
-  margin: 0 0 10px;
-  border-radius: 10px;
-  height: 27em;
-  overflow: hidden;
-}
+  &__image {
+    width: 100%;
+    margin: 0 0 10px;
+    border-radius: 10px;
+    height: 27em;
+    overflow: hidden;
+  }
 
-.big-portfolio-entry__content {
-  flex-grow: 1;
-}
+  &__content {
+    flex-grow: 1;
+  }
 
-.big-portfolio-entry__title {
-  text-align: center;
-  font-family: Roboto, Helvetica, Arial, Verdana, sans-serif;
-  font-weight: 400;
-  margin: 0 0 5px;
-}
+  &__title {
+    text-align: center;
+    font-family: Roboto, Helvetica, Arial, Verdana, sans-serif;
+    font-weight: 400;
+    margin: 0 0 5px;
+  }
 
-.big-portfolio-entry__description {
-  line-height: 1.5em;
-  color: $text-color;
-}
+  &__description {
+    line-height: 1.5em;
+    color: $text-color;
+  }
 
-@media (--phoneAndTablet) {
-  .big-portfolio-entry__image {
-    height: 16em;
+  @media (--phoneAndTablet) {
+    &__image {
+      height: 16em;
+    }
   }
 }
 </style>

@@ -44,47 +44,49 @@
   </div>
 </template>
 
-<style>
-.blog-entry__container {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  padding: 10px;
-  background: #fff;
-  border: 1px solid #ddd;
-  font-size: 1rem;
-  vertical-align: top;
-  box-shadow: 0 0 5px #ddd;
-  text-decoration: none;
-  color: $text-color;
-}
+<style scoped lang="scss">
+.blog-entry {
+  &__container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding: 10px;
+    background: transparent;
+    border: 1px solid $border-dark;
+    box-shadow: 0 0 5px $shadow-dark;
+    font-size: 1rem;
+    vertical-align: top;
+    text-decoration: none;
+    color: $text-color;
+  }
 
-.blog-entry__content {
-  flex-grow: 1;
-}
+  &__content {
+    flex-grow: 1;
+  }
 
-.blog-entry__title {
-  text-align: left;
-  font-family: Roboto, Helvetica, Arial, Verdana, sans-serif;
-  font-weight: 400;
-  margin: 0 0 5px;
-}
+  &__title {
+    text-align: left;
+    font-family: Roboto, Helvetica, Arial, Verdana, sans-serif;
+    font-weight: 400;
+    margin: 0 0 5px;
+  }
 
-.blog-entry__title-link {
-  text-decoration: none;
-  color: $text-color;
-}
+  &__title-link {
+    text-decoration: none;
+    color: $text-color;
+  }
 
-.blog-entry__date {
-  text-align: left;
-  font-family: Roboto, Helvetica, Arial, Verdana, sans-serif;
-  font-weight: 400;
-  margin: 0 0 5px;
-}
+  &__date {
+    text-align: left;
+    font-family: Roboto, Helvetica, Arial, Verdana, sans-serif;
+    font-weight: 400;
+    margin: 0 0 5px;
+  }
 
-.blog-entry__content {
-  line-height: 1.5em;
-  text-align: left;
-  font-family: Roboto, Helvetica, Arial, Verdana, sans-serif;
+  &__content {
+    line-height: 1.5em;
+    text-align: left;
+    font-family: Roboto, Helvetica, Arial, Verdana, sans-serif;
+  }
 }
 </style>

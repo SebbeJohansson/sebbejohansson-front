@@ -9,7 +9,7 @@
 .content-block {
   @include mixins.content-width();
   padding: 1rem;
-  margin: 0 1rem;
+  margin: 1rem 1rem;
   font-family: Roboto, Helvetica, Arial, Verdana, sans-serif;
   background-color: $cover-dark;
   border-bottom: 1px solid $border-dark;

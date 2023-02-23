@@ -24,26 +24,26 @@
 <style scoped lang="scss">
 .small-portfolio-entry {
   padding-top: 0.5em;
-}
 
-@media (pointer: fine) {
-  .small-portfolio-entry {
+  @media (pointer: fine) {
     padding-top: 0.9em;
   }
-}
 
-.small-portfolio-entry__title {
-  text-align: center;
-  font-family: Roboto, Helvetica, Arial, Verdana, sans-serif;
-  font-weight: 400;
-  margin: 0 0 5px;
-  color: $text-color;
-  text-decoration: none;
-}
+  &__container {
+    color: $text-color;
+    text-decoration: none;
+  }
 
-.small-portfolio-entry__container:hover,
-.small-portfolio-entry__container:focus {
-  color: #1084ff;
-  text-decoration: underline;
+  &__container:hover,
+  &__container:focus {
+    text-decoration: underline;
+  }
+
+  &__title {
+    text-align: center;
+    font-family: Roboto, Helvetica, Arial, Verdana, sans-serif;
+    font-weight: 400;
+    margin: 0 0 5px;
+  }
 }
 </style>

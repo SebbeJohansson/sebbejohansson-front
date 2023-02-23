@@ -1,6 +1,7 @@
 {
   "private": true,
   "scripts": {
+    "prepare": "npx nuxi prepare",
     "dev": "npx nuxi dev",
     "build": "npx nuxi build",
     "generate": "npx nuxi generate",

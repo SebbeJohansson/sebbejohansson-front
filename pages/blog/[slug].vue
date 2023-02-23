@@ -77,11 +77,9 @@
 </template>
 
 <style scoped lang="scss">
+@use "@/assets/styles/foundation/mixins.scss";
 .blog-entry-page {
-  width: 100%;
-  max-width: 1300px;
-  margin: 10px auto;
-  padding-top: 10px;
-  padding-bottom: 10px;
+  @include mixins.content-width();
+  padding: 1rem;
 }
 </style>
