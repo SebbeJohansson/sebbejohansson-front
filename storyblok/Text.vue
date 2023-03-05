@@ -3,33 +3,35 @@
 
   const props = defineProps({ blok: Object });
   const nuxtApp = useNuxtApp();
-  const textObject = { ...props.blok.text };
-  const nodes = [];
-  // Proof of concept for custom handling of inline blok nodes.
-  Object.entries(textObject.content).forEach(([key, node]) => {
-    if (node.type === 'blok') {
-      const blok = {
-        content: node.attrs?.body?.[0],
-      };
-      nodes.push({
-        key,
-        type: 'blok',
-        content: {
-          blok,
-        },
-      });
-    } else {
-      nodes.push({
-        key,
-        type: 'html',
-        content: nuxtApp.$formatRichText(useStoryblokApi().richTextResolver.render({
-          type: 'doc',
-          content: [
-            node,
-          ],
-        } as Richtext)),
-      });
-    }
+  const nodes = computed((): any[] => {
+    const nodes = <any>[];
+    // Proof of concept for custom handling of inline blok nodes.
+    Object.entries(props.blok?.text.content).forEach(([key, node]) => {
+      if (node.type === 'blok') {
+        const blok = {
+          content: node.attrs?.body?.[0],
+        };
+        nodes.push({
+          key,
+          type: 'blok',
+          content: {
+            blok,
+          },
+        });
+      } else {
+        nodes.push({
+          key,
+          type: 'html',
+          content: nuxtApp.$formatRichText(useStoryblokApi().richTextResolver.render({
+            type: 'doc',
+            content: [
+              node,
+            ],
+          } as Richtext)),
+        });
+      }
+    });
+    return nodes;
   });
 </script>
 
@@ -49,5 +51,8 @@
 <style>
 .text img {
   max-width: 100%;
+}
+.text p {
+  margin-bottom: .5rem;
 }
 </style>

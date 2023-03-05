@@ -10,14 +10,6 @@
 
   if (isPreview) {
     // We are in preview so lets fetch it with the normal module.
-    await useStoryblok(`blog/${route.params.slug}`, {
-      version,
-      resolve_relations: 'blog-entry.categories',
-    }).then((response) => {
-      if (!response) { return; }
-      story.value = response.value;
-    });
-    // We are in preview so lets fetch it with the normal module.
     const storyblokApi = useStoryblokApi();
     await storyblokApi.get(`cdn/stories/blog/${route.params.slug}`, {
       version,
@@ -55,13 +47,6 @@
       content: `Blog post about ${blogPostTitle.value}`,
     }],
   });
-
-// Disabled until we know if we can use useStoryblokFetch for preview.
-/* onMounted(() => {
-  if (isPreview) {
-    useStoryblokBridge(story.id, evStory => (story = evStory));
-  }
-}); */
 
 </script>
 

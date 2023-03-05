@@ -21,7 +21,7 @@
         </div>
       </div>
     </div>
-    <div class="desktop-menu__background">
+    <div v-if="false" class="desktop-menu__background">
       <parts-atoms-image class="desktop-menu__background-image" image="images/picnr7.jpg" loading="eager" alt="Landscape Background" />
     </div>
   </div>
@@ -31,14 +31,14 @@
 .desktop-menu {
   position: sticky;
   top: 0;
-  padding: 1rem 0;
+  padding: 0;
   z-index: 10;
 }
 
 .desktop-menu__container-wrapper {
   position: relative;
   z-index: 10;
-  background-color: rgba(219, 219, 219, 0.49);
+  background-color: black;
   padding: 0 1rem;
 }
 

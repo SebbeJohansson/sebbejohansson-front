@@ -14,14 +14,78 @@
 
 <template>
   <div class="page index">
-    <content-with-title :title="'Who am I?'">
-      <p>
-        My name is Sebastian Johansson. I am a web developer/designer,
-        game developer and all around geek. My greatest interest is of
-        course computers and the internet, and I love tech and gadgets.
-      </p>
-      <p>Anyway... I hope you enjoy your stay.</p>
-    </content-with-title>
+    <div class="index__hero">
+      <content-with-title title="🐉 Sebastian &quot;Dragon&quot; Johansson 🐉">
+        <div>
+          <div class="index__hero-content">
+            <h3>Developer and Mentor</h3>
+            <i>storyblok and nuxt fanatic</i>
+            <p>After working as a developer for many years I have many times found myself being a mentor for other developers with technical and career guidance.</p>
+            <p>I offer support both with of these topics.</p>
+            <div class="index__topics">
+              <div class="index__topic">
+                <h4>Technical</h4>
+                <ul>
+                  <li>Vue.js</li>
+                  <li>Nuxt.js</li>
+                  <li>Storyblok</li>
+                  <li>Node.js</li>
+                  <li>Express.js</li>
+                  <li>GraphQL</li>
+                  <li>Unity</li>
+                  <li>Unreal</li>
+                  <li>much more...</li>
+                </ul>
+              </div>
+              <div class="index__topic">
+                <h4>Career</h4>
+                <ul>
+                  <li>Job Hunting</li>
+                  <li>Interviews</li>
+                  <li>CVs</li>
+                  <li>Portfolio</li>
+                  <li>Personal Branding</li>
+                </ul>
+              </div>
+            </div>
+            <p>
+              My name is Sebastian Johansson. I am a web developer/designer,
+              game developer and all around geek. My greatest interest is of
+              course computers and the internet, and I love tech and gadgets.
+            </p>
+            <p>Anyway... I hope you enjoy your stay.</p>
+            <div id="user-content-toc">
+              <ul>
+                <summary>
+                  <h2 style="display: inline-block;">
+                    🗨️ 7 odd ways to reach me 💬
+                  </h2>
+                </summary>
+              </ul>
+            </div>
+            <div>
+              <span>(discord is always prefered)</span>
+              <ul>
+                <li>
+                  <a href="https://discord.com/channels/@me/Sebastian#0002/" rel="me">Discord (Sebastian#0002)</a>
+                </li><li>
+                  <a href="mailto:hello@sebbejohansson.com" rel="me">Mail</a>
+                </li><li>
+                  <a href="https://www.linkedin.com/in/sebbejohansson/" rel="me">Linkedin</a>
+                </li><li>
+                  <a href="https://steamcommunity.com/id/redeyeddragon/" rel="me">Steam</a>
+                </li><li>
+                  <a href="https://twitter.com/supersebban" rel="me">Twitter</a>
+                </li><li>
+                  <a href="https://www.instagram.com/supersebban/" rel="me">Instagram DM</a>
+                </li><li>Call</li>
+              </ul>
+              <div />
+            </div>
+          </div>
+        </div>
+      </content-with-title>
+    </div>
     <parts-organisms-desktop-menu />
     <content-portfolio-list id="portfolio" />
     <div class="index__trakt">
@@ -41,30 +105,60 @@
   </div>
 </template>
 
-<style>
-.index__title {
-  font-family: "Montserrat", sans-serif;
-  font-size: 6rem;
-  line-height: 6rem;
-  margin: 0;
-}
+<style scoped lang="scss">
+.index {
+  &__hero {
+    min-height: calc(100vh - 68px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    &-content {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 1rem;
+      .index__topic ul {
+        margin: 0;
+        padding: 0;
+        list-style: disc;
+        li {
+          margin: 0;
+          padding: 0;
+          text-align: left;
+        }
+      }
+    }
+  }
+  &__topics {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 2rem;
+  }
 
-.index__about {
-  font-family: "Montserrat", sans-serif;
-  margin: 0;
-}
+  &__title {
+    font-family: "Montserrat", sans-serif;
+    font-size: 6rem;
+    line-height: 6rem;
+    margin: 0;
+  }
 
-.index__trakt {
-  margin: 1rem auto 0;
-}
+  &__about {
+    font-family: "Montserrat", sans-serif;
+    margin: 0;
+  }
 
-.index__trakt-link {
-  display: block;
-}
+  &__trakt {
+    margin: 1rem auto 0;
+  }
 
-.index__trakt-image {
-  max-width: 100%;
-  height: auto;
-  display: block;
+  &__trakt-link {
+    display: block;
+  }
+
+  &__trakt-image {
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }
 }
 </style>
