@@ -9,7 +9,7 @@
         </div>
 
         <div class="desktop-menu__departments">
-          <NuxtLink href="/#portfolio" class="desktop-menu__department">
+          <NuxtLink href="/portfolio" class="desktop-menu__department">
             Portfolio
           </NuxtLink>
           <NuxtLink href="/#contact" class="desktop-menu__department">
@@ -28,6 +28,7 @@
 </template>
 
 <style scoped lang="scss">
+@use "@/assets/styles/foundation/mixins.scss";
 .desktop-menu {
   position: sticky;
   top: 0;
@@ -96,7 +97,7 @@
   object-position: center;
 }
 
-@media (--phone) {
+@include mixins.for-phone-only() {
   .desktop-menu__container {
     flex-direction: column;
   }

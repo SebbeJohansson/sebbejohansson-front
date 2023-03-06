@@ -140,6 +140,7 @@
 </template>
 
 <style scoped lang="scss">
+@use "@/assets/styles/foundation/mixins.scss";
 .blog-post-list__content {
   display: flex;
   flex-direction: row;
@@ -190,7 +191,7 @@
   white-space: nowrap;
 }
 
-@media (--phoneAndTablet) {
+@include mixins.for-phone-and-tablet-only() {
   .blog-post-list__content {
     flex-direction: column-reverse;
     align-items: normal;

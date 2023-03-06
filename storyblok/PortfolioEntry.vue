@@ -80,6 +80,7 @@
 </template>
 
 <style scoped lang="scss">
+@use "@/assets/styles/foundation/mixins.scss";
 .portfolio {
   display: flex;
   flex-direction: row;
@@ -156,7 +157,7 @@
     text-decoration: underline;
   }
 
-  @media (--phone) {
+  @include mixins.for-phone-only() {
     &__title {
       grid-column: 1/5;
     }

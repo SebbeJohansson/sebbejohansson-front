@@ -25,6 +25,7 @@
 </template>
 
 <style scoped lang="scss">
+@use "@/assets/styles/foundation/mixins.scss";
 .content-with-title__title {
   font-family: raleway, Helvetica, Arial, Verdana, sans-serif;
   font-weight: 200;
@@ -37,7 +38,7 @@
   text-align: center;
 }
 
-@media (--phoneAndTablet) {
+@include mixins.for-phone-and-tablet-only() {
   .content-with-title__title {
     font-size: 3em;
   }

@@ -75,6 +75,7 @@
 </template>
 
 <style scoped lang="scss">
+@use "@/assets/styles/foundation/mixins.scss";
 .portfolio-list__grid {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
@@ -89,13 +90,13 @@
   margin-top: 10px;
 }
 
-@media (--phone) {
+@include mixins.for-phone-only() {
   .portfolio-list__grid {
     grid-template-columns: 1fr;
   }
 }
 
-@media (--tablet) {
+@include mixins.for-tablet-only() {
   .portfolio-list__grid {
     grid-template-columns: 1fr 1fr;
   }

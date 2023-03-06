@@ -36,7 +36,7 @@
 <template>
   <div class="stalk-list">
     <h3 class="stalk-list__title">
-      Contact me
+      Find me
     </h3>
     <div class="stalk-list__grid">
       <parts-molecules-stalk-entry
@@ -52,6 +52,7 @@
 
 <style scoped lang="scss">
 @use "sass:color";
+@use "@/assets/styles/foundation/mixins.scss";
 .stalk-list {
   border-bottom: none;
   max-width: 50%;
@@ -79,7 +80,7 @@
   display: flex;
 }
 
-@media (--phoneAndTablet) {
+@include mixins.for-phone-and-tablet-only() {
   .stalk-list {
     max-width: 100%;
     padding: 6px;

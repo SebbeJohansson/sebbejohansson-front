@@ -26,16 +26,16 @@
               <div class="index__topic">
                 <h4>Technical</h4>
                 <ul>
-                  <li>Vue.js</li>
-                  <li>Nuxt.js</li>
-                  <li>Storyblok</li>
-                  <li>Node.js</li>
-                  <li>Express.js</li>
-                  <li>GraphQL</li>
+                  <li>Vue/Nuxt</li>
+                  <li>CMSs</li>
+                  <li>Ecommerce</li>
                   <li>Unity</li>
                   <li>Unreal</li>
                   <li>much more...</li>
                 </ul>
+                <NuxtLink class="index__button" to="/#technicalsupport">
+                  Learn more...
+                </NuxtLink>
               </div>
               <div class="index__topic">
                 <h4>Career</h4>
@@ -45,15 +45,30 @@
                   <li>CVs</li>
                   <li>Portfolio</li>
                   <li>Personal Branding</li>
+                  <li>much more...</li>
                 </ul>
+                <NuxtLink class="index__button" to="/#careersupport">
+                  Learn more...
+                </NuxtLink>
               </div>
             </div>
+          </div>
+        </div>
+      </content-with-title>
+      <content-block>
+        <div class="index__about">
+          <div>
+            <h2>
+              About me
+            </h2>
             <p>
               My name is Sebastian Johansson. I am a web developer/designer,
               game developer and all around geek. My greatest interest is of
               course computers and the internet, and I love tech and gadgets.
             </p>
             <p>Anyway... I hope you enjoy your stay.</p>
+          </div>
+          <div>
             <div id="user-content-toc">
               <ul>
                 <summary>
@@ -68,26 +83,32 @@
               <ul>
                 <li>
                   <a href="https://discord.com/channels/@me/Sebastian#0002/" rel="me">Discord (Sebastian#0002)</a>
-                </li><li>
+                </li>
+                <li>
                   <a href="mailto:hello@sebbejohansson.com" rel="me">Mail</a>
-                </li><li>
+                </li>
+                <li>
                   <a href="https://www.linkedin.com/in/sebbejohansson/" rel="me">Linkedin</a>
-                </li><li>
+                </li>
+                <li>
                   <a href="https://steamcommunity.com/id/redeyeddragon/" rel="me">Steam</a>
-                </li><li>
+                </li>
+                <li>
                   <a href="https://twitter.com/supersebban" rel="me">Twitter</a>
-                </li><li>
+                </li>
+                <li>
                   <a href="https://www.instagram.com/supersebban/" rel="me">Instagram DM</a>
-                </li><li>Call</li>
+                </li>
+                <li>
+                  Call
+                </li>
               </ul>
-              <div />
             </div>
           </div>
         </div>
-      </content-with-title>
+      </content-block>
     </div>
     <parts-organisms-desktop-menu />
-    <content-portfolio-list id="portfolio" />
     <div class="index__trakt">
       <a target="_blank" href="https://trakt.tv/users/redeyeddragon" class="index__trakt-link">
         <img
@@ -106,6 +127,8 @@
 </template>
 
 <style scoped lang="scss">
+@use "@/assets/styles/elements/buttons.scss";
+@use "@/assets/styles/foundation/mixins.scss";
 .index {
   &__hero {
     min-height: calc(100vh - 68px);
@@ -117,22 +140,46 @@
       max-width: 800px;
       margin: 0 auto;
       padding: 0 1rem;
-      .index__topic ul {
-        margin: 0;
-        padding: 0;
-        list-style: disc;
-        li {
-          margin: 0;
-          padding: 0;
-          text-align: left;
-        }
-      }
     }
   }
   &__topics {
     display: flex;
     justify-content: space-around;
-    margin-bottom: 2rem;
+    margin-top: 1rem;
+    gap: 1rem;
+    @include mixins.for-phone-only() {
+      flex-direction: column;
+      align-items: center;
+    }
+    .index__topic ul {
+      margin: 0;
+      padding: 0;
+      list-style: disc;
+      li {
+        margin: 0;
+        padding: 0;
+        text-align: left;
+      }
+    }
+    .index__button {
+      margin-top: .5rem;
+      @include buttons.btn-primary();
+      &:hover {
+        @include buttons.btn-primary-hover();
+      }
+      &:disabled {
+        @include buttons.btn-primary-disabled();
+      }
+    }
+  }
+
+  &__about {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    @include mixins.for-phone-only() {
+    grid-template-columns: 1fr;
+    }
   }
 
   &__title {
@@ -142,7 +189,7 @@
     margin: 0;
   }
 
-  &__about {
+  &__find {
     font-family: "Montserrat", sans-serif;
     margin: 0;
   }

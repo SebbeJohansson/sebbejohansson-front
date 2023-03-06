@@ -20,6 +20,7 @@
 </template>
 
 <style scoped lang="scss">
+@use "@/assets/styles/foundation/mixins.scss";
 .footer {
   background-color: $cover-dark;
   border-bottom: 1px solid $border-dark;
@@ -78,7 +79,7 @@
   text-decoration: underline;
 }
 
-@media (--phone) {
+@include mixins.for-phone-only() {
   .footer {
     flex-direction: column;
   }

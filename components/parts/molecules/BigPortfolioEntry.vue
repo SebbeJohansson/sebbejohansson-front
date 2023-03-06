@@ -63,6 +63,7 @@
 </template>
 
 <style scoped lang="scss">
+@use "@/assets/styles/foundation/mixins.scss";
 .big-portfolio-entry {
   padding: 0.5em;
 
@@ -104,7 +105,7 @@
     color: $text-color;
   }
 
-  @media (--phoneAndTablet) {
+  @include mixins.for-phone-and-tablet-only() {
     &__image {
       height: 16em;
     }

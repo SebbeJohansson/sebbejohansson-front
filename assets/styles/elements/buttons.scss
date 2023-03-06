@@ -1,0 +1,26 @@
+@use '../foundation/global-vars.scss' as *;
+
+@mixin btn-primary()
+{
+  display: inline-block;
+  background-color: $cover-lighter;
+  text-decoration: none;
+  text-align: center;
+  border-radius: 2px;
+  padding: 16px 2rem;
+  font-size: 16px;
+  line-height: 18px;
+  border: none;
+  cursor: pointer;
+  outline: none;
+}
+
+@mixin btn-primary-hover()
+{
+  background-color: $background-dark;
+}
+
+@mixin btn-primary-disabled()
+{
+  pointer-events: none;
+}
