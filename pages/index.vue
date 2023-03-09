@@ -29,8 +29,8 @@
             <i>storyblok and nuxt fanatic</i>
           </div>
           <div class="intro">
-            <p>After working as a developer for many years I have many times found myself being a mentor for other developers with technical and career guidance.</p>
-            <p>I offer support both with of these topics.</p>
+            <p>After working as a developer for many years, I have many times found myself being a mentor for other developers with technical and career guidance.</p>
+            <p>I offer support and guidance for both of these topics.</p>
             <div class="index__topics">
               <div class="index__topic">
                 <h4>Technical</h4>
@@ -71,20 +71,16 @@
               About me
             </h2>
             <p>
-              My name is Sebastian Johansson. I am a web developer/designer,
-              game developer and all around geek. My greatest interest is of
-              course computers and the internet, and I love tech and gadgets.
+              My name is Sebastian Johansson. I am a web developer/designer, game developer, and all-around geek. My main interests are computers and the internet; I love tech and gadgets.
             </p>
             <p>Anyway... I hope you enjoy your stay.</p>
           </div>
           <div>
-            <div class="title">
-              <h2>🗨️</h2>
-              <h2>7 odd ways to reach me</h2>
-              <h2>🗨️</h2>
-            </div>
+            <h2>
+              🗨️ 7 ways to reach me 🗨️
+            </h2>
             <div>
-              <span>(discord is always prefered)</span>
+              <p>(discord is always prefered)</p>
               <ul>
                 <li>
                   <a href="https://discord.com/channels/@me/Sebastian#0002/" rel="me">Discord (Sebastian#0002)</a>
@@ -114,6 +110,145 @@
       </content-block>
     </div>
     <parts-organisms-desktop-menu />
+    <content-with-title :title="'Career mentorship & support'" class="index__career">
+      <p>
+        As a side-effect of working as, with, and for developers for the past years, I have learned much about getting a developer job and progressing in a software development career.
+      </p>
+      <p>
+        I have helped countless developers choose education paths, how to write a resume, what titles help when looking for new jobs, and much more.
+      </p>
+      <p v-if="false">
+        Below you can see the services I offer and whether I take a fee for them or not.
+      </p>
+      <div v-if="false">
+        <ul class="service-list">
+          <li>
+            <span class="service-title">
+              Overview check of CV/Resume
+            </span>
+            <span class="service-fee">
+              Free! (one-time)
+            </span>
+          </li>
+          <li>
+            <span class="service-title">
+              Help getting your first job (max 2 hours)
+            </span>
+            <span class="service-fee">
+              Free! (one-time)
+            </span>
+          </li>
+          <li>
+            <span class="service-title">
+              Help with writing a CV/Resume
+            </span>
+            <span class="service-fee">
+              10€ per hour
+            </span>
+          </li>
+          <li>
+            <span class="service-title">
+              Help with writing a personal/cover letter
+            </span>
+            <span class="service-fee">
+              24€ per hour
+            </span>
+          </li>
+          <li>
+            <span class="service-title">
+              Long term mentorship (1-2 hours per week)
+            </span>
+            <span class="service-fee">
+              30€ per week
+            </span>
+          </li>
+          <li>
+            <span class="service-title">
+              Additional support and guidance
+            </span>
+            <span class="service-fee">
+              Please contact for quote
+            </span>
+          </li>
+        </ul>
+        <p>(note: prices are 50% off if you can prove you are a student)</p>
+      </div>
+    </content-with-title>
+    <content-with-title :title="'Development mentorship & support'" class="index__tech">
+      <p>
+        After over ten years as a developer, I have extensive experience with many languages and frameworks. Since I started to develop software, I have also helped others learn how to do it.
+      </p>
+      <p>
+        You can check my portfolio and my GitHub to learn more about my knowledge of specific languages and systems.
+      </p>
+      <p>
+        If you have an issue that you need help with, the easiest way to reach out is on Discord. My handle is Sebastian#0002.
+      </p>
+      <p v-if="false">
+        Below you can see the services I offer and whether I take a fee for them or not. The price often depends on how much active coding it involves.
+      </p>
+      <div v-if="false">
+        <ul class="service-list">
+          <li>
+            <span class="service-title">
+              Hints and guidance with specific small issue
+            </span>
+            <span class="service-fee">
+              Free!
+            </span>
+          </li>
+          <li>
+            <span class="service-title">
+              Help with specific issue (until fixed)
+            </span>
+            <span class="service-fee">
+              50€ per hour
+            </span>
+          </li>
+          <li>
+            <span class="service-title">
+              Assist with a specific feature from start to finish within an existing project
+            </span>
+            <span class="service-fee">
+              120€ per hour
+            </span>
+          </li>
+          <li>
+            <span class="service-title">
+              Develop a feature from start to finish within an existing project
+            </span>
+            <span class="service-fee">
+              Please contact for quote
+            </span>
+          </li>
+          <li>
+            <span class="service-title">
+              Develop a website or application from start to finish
+            </span>
+            <span class="service-fee">
+              Please contact for quote
+            </span>
+          </li>
+        </ul>
+        <p v-if="false">
+          (note: prices are 50% off if you can prove you are a student)
+        </p>
+      </div>
+
+      <NuxtLink class="index__button" to="/portfolio">
+        Checkout my portfolio
+      </NuxtLink>
+      <NuxtLink class="index__button" to="https://github.com/SebbeJohansson">
+        Checkout my github
+      </NuxtLink>
+    </content-with-title>
+
+    <div class="index__support-me">
+      <p>Support me by fuiling my caffein addiction.</p>
+      <a href="https://www.buymeacoffee.com/sebbejohansson">
+        <img src="https://img.buymeacoffee.com/button-api/?text=Buy me a Monster&emoji=🐉&slug=sebbejohansson&button_colour=000000&font_colour=48e704&font_family=Bree&outline_colour=48e704&coffee_colour=48e704" height="40px">
+      </a>
+    </div>
     <div class="index__trakt">
       <a target="_blank" href="https://trakt.tv/users/redeyeddragon" class="index__trakt-link">
         <img
@@ -133,8 +268,20 @@
 
 <style scoped lang="scss">
 @use "@/assets/styles/elements/buttons.scss";
+@use "@/assets/styles/elements/lists.scss";
 @use "@/assets/styles/foundation/mixins.scss";
 .index {
+  .index__button {
+    @include buttons.btn-primary();
+    margin: 0.5rem;
+    &:hover {
+      @include buttons.btn-primary-hover();
+    }
+    &:disabled {
+      @include buttons.btn-primary-disabled();
+    }
+  }
+
   &__hero {
     min-height: calc(100vh - 68px);
     display: flex;
@@ -150,7 +297,8 @@
     .title {
       display: inline-flex;
       flex-direction: column;
-      margin: 1rem;
+      margin: 1rem 0;
+      width: 100%;
       @include mixins.for-tablet-and-desktop-only() {
         flex-direction: row;
         justify-content: center;
@@ -159,6 +307,10 @@
         text-align: center;
         font-family: "Montserrat", sans-serif;
         margin: 0;
+        line-height: 1;
+      }
+      h2 {
+        text-align: center;
         line-height: 1;
       }
     }
@@ -194,16 +346,6 @@
         margin-left: 1.2rem;
       }
     }
-    .index__button {
-      margin-top: .5rem;
-      @include buttons.btn-primary();
-      &:hover {
-        @include buttons.btn-primary-hover();
-      }
-      &:disabled {
-        @include buttons.btn-primary-disabled();
-      }
-    }
   }
 
   :deep(.desktop-menu__logo-wrapper){
@@ -216,6 +358,7 @@
     gap: 4rem;
     @include mixins.for-phone-only() {
       grid-template-columns: 1fr;
+      gap: 1rem;
     }
 
     .title {
@@ -223,9 +366,14 @@
     }
   }
 
-  &__find {
-    font-family: "Montserrat", sans-serif;
-    margin: 0;
+  .service-list {
+    @include lists.service-list();
+    margin-top: 1rem;
+  }
+
+  &__support-me {
+    margin: 1rem auto;
+    text-align: center;
   }
 
   &__trakt {

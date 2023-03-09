@@ -3,7 +3,8 @@ $background-dark: #0f1117;
 $cover-dark: #18181b;
 $border-dark: darken($cover-dark, 10%);
 $shadow-dark: darken($cover-dark, 20%);
-$cover-lighter: lighten($cover-dark, 10%);
+$cover-light: lighten($cover-dark, 10%);
+$cover-lighter: lighten($cover-dark, 20%);
 
 $text-color: white;
 $title-color: black;

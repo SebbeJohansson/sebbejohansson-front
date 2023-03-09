@@ -52,7 +52,4 @@
 .text img {
   max-width: 100%;
 }
-.text p {
-  margin-bottom: .5rem;
-}
 </style>
