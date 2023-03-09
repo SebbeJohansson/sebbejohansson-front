@@ -15,11 +15,20 @@
 <template>
   <div class="page index">
     <div class="index__hero">
-      <content-with-title title="🐉 Sebastian &quot;Dragon&quot; Johansson 🐉">
-        <div>
-          <div class="index__hero-content">
-            <h3>Developer and Mentor</h3>
+      <div class="index__hero-top">
+        <div class="title">
+          <h1>🐉</h1>
+          <h1>Sebastian &quot;Dragon&quot; Johansson</h1>
+          <h1>🐉</h1>
+        </div>
+        <div class="index__hero-content">
+          <div class="heading">
+            <h2>
+              Developer and Mentor
+            </h2>
             <i>storyblok and nuxt fanatic</i>
+          </div>
+          <div class="intro">
             <p>After working as a developer for many years I have many times found myself being a mentor for other developers with technical and career guidance.</p>
             <p>I offer support both with of these topics.</p>
             <div class="index__topics">
@@ -54,7 +63,7 @@
             </div>
           </div>
         </div>
-      </content-with-title>
+      </div>
       <content-block>
         <div class="index__about">
           <div>
@@ -69,14 +78,10 @@
             <p>Anyway... I hope you enjoy your stay.</p>
           </div>
           <div>
-            <div id="user-content-toc">
-              <ul>
-                <summary>
-                  <h2 style="display: inline-block;">
-                    🗨️ 7 odd ways to reach me 💬
-                  </h2>
-                </summary>
-              </ul>
+            <div class="title">
+              <h2>🗨️</h2>
+              <h2>7 odd ways to reach me</h2>
+              <h2>🗨️</h2>
             </div>
             <div>
               <span>(discord is always prefered)</span>
@@ -136,6 +141,33 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    .index__hero-top {
+      flex-grow: 1;;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .title {
+      display: inline-flex;
+      flex-direction: column;
+      margin: 1rem;
+      @include mixins.for-tablet-and-desktop-only() {
+        flex-direction: row;
+        justify-content: center;
+      }
+      h1 {
+        text-align: center;
+        font-family: "Montserrat", sans-serif;
+        margin: 0;
+        line-height: 1;
+      }
+    }
+    .heading {
+      font-family: math, serif;
+      h2 {
+        line-height: 1;
+      }
+    }
     &-content {
       max-width: 800px;
       margin: 0 auto;
@@ -149,7 +181,7 @@
     gap: 1rem;
     @include mixins.for-phone-only() {
       flex-direction: column;
-      align-items: center;
+      align-items: flex-start;
     }
     .index__topic ul {
       margin: 0;
@@ -159,6 +191,7 @@
         margin: 0;
         padding: 0;
         text-align: left;
+        margin-left: 1.2rem;
       }
     }
     .index__button {
@@ -173,20 +206,21 @@
     }
   }
 
+  :deep(.desktop-menu__logo-wrapper){
+    display: none;
+  }
+
   &__about {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 4rem;
     @include mixins.for-phone-only() {
-    grid-template-columns: 1fr;
+      grid-template-columns: 1fr;
     }
-  }
 
-  &__title {
-    font-family: "Montserrat", sans-serif;
-    font-size: 6rem;
-    line-height: 6rem;
-    margin: 0;
+    .title {
+      margin: 0;
+    }
   }
 
   &__find {

@@ -34,6 +34,7 @@
   top: 0;
   padding: 0;
   z-index: 10;
+  bottom: 0;
 }
 
 .desktop-menu__container-wrapper {
