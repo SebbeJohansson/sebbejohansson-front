@@ -9,7 +9,7 @@
         </div>
 
         <div class="desktop-menu__departments">
-          <NuxtLink href="/#portfolio" class="desktop-menu__department">
+          <NuxtLink href="/portfolio" class="desktop-menu__department">
             Portfolio
           </NuxtLink>
           <NuxtLink href="/#contact" class="desktop-menu__department">
@@ -21,22 +21,26 @@
         </div>
       </div>
     </div>
-    <div class="desktop-menu__background">
+    <div v-if="false" class="desktop-menu__background">
       <parts-atoms-image class="desktop-menu__background-image" image="images/picnr7.jpg" loading="eager" alt="Landscape Background" />
     </div>
   </div>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
+@use "@/assets/styles/foundation/mixins.scss";
 .desktop-menu {
-  position: relative;
-  padding: 1rem 0;
+  position: sticky;
+  top: 0;
+  padding: 0;
+  z-index: 10;
+  bottom: 0;
 }
 
 .desktop-menu__container-wrapper {
   position: relative;
   z-index: 10;
-  background-color: rgba(219, 219, 219, 0.49);
+  background-color: black;
   padding: 0 1rem;
 }
 
@@ -94,7 +98,7 @@
   object-position: center;
 }
 
-@media (--phone) {
+@include mixins.for-phone-only() {
   .desktop-menu__container {
     flex-direction: column;
   }

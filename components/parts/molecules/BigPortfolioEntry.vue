@@ -1,42 +1,42 @@
 <script setup lang="ts">
-import { ConcreteComponent } from 'vue';
+  import { ConcreteComponent } from 'vue';
 
-const NuxtLink = resolveComponent('NuxtLink');
+  const NuxtLink = resolveComponent('NuxtLink');
 
-const props = defineProps({
-  title: {
-    type: String,
-    required: true,
-  },
-  description: {
-    type: String,
-    default: '',
-  },
-  picture: {
-    type: String,
-    default: 'fallback',
-  },
-  slug: {
-    type: String,
-    default: undefined,
-  },
-});
+  const props = defineProps({
+    title: {
+      type: String,
+      required: true,
+    },
+    description: {
+      type: String,
+      default: '',
+    },
+    picture: {
+      type: String,
+      default: 'fallback',
+    },
+    slug: {
+      type: String,
+      default: undefined,
+    },
+  });
 
-const imageUrl = computed((): string | undefined => (props.picture ? props.picture : undefined));
-const entryUrl = computed((): string | undefined => (props.slug ? `/${props.slug}/` : undefined));
-const componentType = computed((): string | ConcreteComponent => (entryUrl.value ? NuxtLink : 'div'));
+  const imageUrl = computed((): string | undefined => (props.picture ? props.picture : undefined));
+  const entryUrl = computed((): string | undefined => (props.slug ? `/${props.slug}/` : undefined));
+  const componentType = computed((): string | ConcreteComponent => (entryUrl.value ? NuxtLink : 'div'));
 
-useJsonld(() => ({
-  '@context': 'https://schema.org',
-  '@type': 'Article',
-  headline: props.title,
-  image: {
-    '@type': 'ImageObject',
-    url: imageUrl.value,
-    caption: props.title,
-  },
-  abstract: props.description,
-}));
+  useJsonld(() => ({
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: props.title,
+    image: {
+      '@type': 'ImageObject',
+      url: imageUrl.value,
+      caption: props.title,
+    },
+    abstract: props.description,
+  }));
 </script>
 
 <template>
@@ -62,51 +62,53 @@ useJsonld(() => ({
   </div>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
+@use "@/assets/styles/foundation/mixins.scss";
 .big-portfolio-entry {
   padding: 0.5em;
-}
 
-.big-portfolio-entry__container {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  padding: 10px;
-  background: #fff;
-  border: 1px solid #ddd;
-  font-size: 1rem;
-  vertical-align: top;
-  box-shadow: 0 0 5px #ddd;
-  text-decoration: none;
-  color: black;
-}
+  &__container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding: 10px;
+    background: transparent;
+    border: 1px solid $border-dark;
+    box-shadow: 0 0 5px $shadow-dark;
+    font-size: 1rem;
+    vertical-align: top;
+    text-decoration: none;
+    color: $text-color;
+  }
 
-.big-portfolio-entry__image {
-  width: 100%;
-  margin: 0 0 10px;
-  border-radius: 10px;
-  height: 27em;
-}
+  &__image {
+    width: 100%;
+    margin: 0 0 10px;
+    border-radius: 10px;
+    height: 27em;
+    overflow: hidden;
+  }
 
-.big-portfolio-entry__content {
-  flex-grow: 1;
-}
+  &__content {
+    flex-grow: 1;
+  }
 
-.big-portfolio-entry__title {
-  text-align: center;
-  font-family: Roboto, Helvetica, Arial, Verdana, sans-serif;
-  font-weight: 400;
-  margin: 0 0 5px;
-}
+  &__title {
+    text-align: center;
+    font-family: Roboto, Helvetica, Arial, Verdana, sans-serif;
+    font-weight: 400;
+    margin: 0 0 5px;
+  }
 
-.big-portfolio-entry__description {
-  line-height: 1.5em;
-  color: black;
-}
+  &__description {
+    line-height: 1.5em;
+    color: $text-color;
+  }
 
-@media (--phoneAndTablet) {
-  .big-portfolio-entry__image {
-    height: 16em;
+  @include mixins.for-phone-and-tablet-only() {
+    &__image {
+      height: 16em;
+    }
   }
 }
 </style>

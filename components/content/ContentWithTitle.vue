@@ -1,14 +1,14 @@
 <script lang="ts">
-import { defineNuxtComponent } from '#app';
+  import { defineNuxtComponent } from '#app';
 
-export default defineNuxtComponent({
-  props: {
-    title: {
-      type: String as PropType<string>,
-      required: true,
+  export default defineNuxtComponent({
+    props: {
+      title: {
+        type: String as PropType<string>,
+        required: true,
+      },
     },
-  },
-});
+  });
 </script>
 
 <template>
@@ -24,20 +24,21 @@ export default defineNuxtComponent({
   </div>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
+@use "@/assets/styles/foundation/mixins.scss";
 .content-with-title__title {
   font-family: raleway, Helvetica, Arial, Verdana, sans-serif;
   font-weight: 200;
   text-align: center;
   font-size: 4em;
-  margin: 30px 0 15px;
+  margin: 0 15px;
 }
 
 .content-with-title__content {
   text-align: center;
 }
 
-@media (--phoneAndTablet) {
+@include mixins.for-phone-and-tablet-only() {
   .content-with-title__title {
     font-size: 3em;
   }

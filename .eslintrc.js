@@ -35,5 +35,18 @@ module.exports = {
     "no-underscore-dangle": "off",
     "import/prefer-default-export": "off",
     "import/no-extraneous-dependencies": "off",
+    "vue/script-indent": ["error", 2, {
+      "baseIndent": 1,
+      "switchCase": 1,
+      "ignores": []
+    }],
   },
+  overrides: [
+    {
+      "files": ["*.vue"],
+      "rules": {
+        "indent": "off"
+      }
+    }
+  ],
 };

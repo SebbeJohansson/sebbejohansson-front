@@ -1,42 +1,42 @@
 <script setup async lang="ts">
 
-interface StalkEntry {
-  id: number;
-  link: string;
-  entryPic: string;
-  name: string;
-}
+  interface StalkEntry {
+    id: number;
+    link: string;
+    entryPic: string;
+    name: string;
+  }
 
-const route = useRoute();
+  const route = useRoute();
 
-const isPreview = !!(route.query._storyblok && route.query._storyblok !== '');
-const version = isPreview ? 'draft' : 'published';
+  const isPreview = !!(route.query._storyblok && route.query._storyblok !== '');
+  const version = isPreview ? 'draft' : 'published';
 
-const rawStalkEntries: StalkEntry[] = [];
+  const rawStalkEntries: StalkEntry[] = [];
 
-await useStoryblokFetch('', {
-  starts_with: 'contact/',
-  version,
-}).then((response) => {
-  response.stories.forEach((story) => {
-    rawStalkEntries.push({
-      id: story.id,
-      entryPic: story.content.image?.filename,
-      link: story.content.link?.url || story.content.link?.url || null,
-      name: story.name,
+  await useStoryblokFetch('', {
+    starts_with: 'contact/',
+    version,
+  }).then((response) => {
+    response.stories.forEach((story) => {
+      rawStalkEntries.push({
+        id: story.id,
+        entryPic: story.content.image?.filename,
+        link: story.content.link?.url || story.content.link?.url || null,
+        name: story.name,
+      });
     });
   });
-});
 
-const stalkEntries = computed<StalkEntry[]>(
-  (): StalkEntry[] => rawStalkEntries as StalkEntry[],
-);
+  const stalkEntries = computed<StalkEntry[]>(
+    (): StalkEntry[] => rawStalkEntries as StalkEntry[],
+  );
 </script>
 
 <template>
   <div class="stalk-list">
     <h3 class="stalk-list__title">
-      Contact me
+      Find me
     </h3>
     <div class="stalk-list__grid">
       <parts-molecules-stalk-entry
@@ -50,7 +50,9 @@ const stalkEntries = computed<StalkEntry[]>(
   </div>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
+@use "sass:color";
+@use "@/assets/styles/foundation/mixins.scss";
 .stalk-list {
   border-bottom: none;
   max-width: 50%;
@@ -58,8 +60,8 @@ const stalkEntries = computed<StalkEntry[]>(
   border-top-right-radius: 60px;
   padding: 30px;
   margin: 0 auto;
-  box-shadow: 0 0 3px #c0c1c2;
-  background-color: white;
+  box-shadow: 0 0 3px color.invert($shadow-dark, $weight: 100%);
+  background-color: color.invert($background-dark, $weight: 100%);
   margin-top: 30px;
   margin-bottom: -10px;
 }
@@ -71,13 +73,14 @@ const stalkEntries = computed<StalkEntry[]>(
   font-size: 2em;
   font-weight: 200;
   margin-top: 10px;
+  color: color.invert($text-color, $weight: 100%);
 }
 
 .stalk-list__grid {
   display: flex;
 }
 
-@media (--phoneAndTablet) {
+@include mixins.for-phone-and-tablet-only() {
   .stalk-list {
     max-width: 100%;
     padding: 6px;

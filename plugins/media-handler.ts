@@ -1,4 +1,4 @@
-export default defineNuxtPlugin((useNuxtApp) => {
+export default defineNuxtPlugin(() => {
   interface MediaArguments {
     maxHeight?: number | undefined;
     maxWidth?: number | undefined;

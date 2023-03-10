@@ -1,13 +1,13 @@
 {
   "private": true,
   "scripts": {
-    "dev": "nuxt dev",
-    "build": "nuxt build",
-    "generate": "nuxt generate",
-    "start": "nuxt start",
-    "preview": "nuxt preview",
-    "deploy": "nuxt build && nuxt start",
-    "static-deploy": "npx serve -s .output/public"
+    "prepare": "npx nuxi prepare",
+    "dev": "npx nuxi dev",
+    "build": "npx nuxi build",
+    "generate": "npx nuxi generate",
+    "preview": "npx nuxi preview",
+    "deploy": "npx nuxi build && node .output/server/index.mjs",
+    "static-deploy": "npx nuxi generate && npx serve -s .output/public"
   },
   "devDependencies": {
     "@nuxtjs/eslint-config-typescript": "^10.0.0",
@@ -17,14 +17,13 @@
     "eslint-plugin-vue": "^9.0.1"
   },
   "dependencies": {
-    "@funken-studio/sitemap-nuxt-3": "^3.2.0",
-    "@storyblok/js": "^1.7.2",
-    "@storyblok/nuxt": "^4.0.1",
+    "@storyblok/js": "latest",
+    "@storyblok/nuxt": "latest",
     "axios": "^0.27.2",
     "eslint-config-airbnb-base": "^15.0.0",
     "nuxt": "npm:nuxt3@latest",
     "nuxt-jsonld": "^2.0.3",
-    "postcss-custom-media": "^8.0.2",
+    "sass": "^1.58.3",
     "typescript": "^4.7.2",
     "vite-plugin-eslint": "^1.6.1"
   }
