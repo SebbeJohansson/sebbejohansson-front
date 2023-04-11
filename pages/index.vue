@@ -117,10 +117,10 @@
       <p>
         I have helped countless developers choose education paths, how to write a resume, what titles help when looking for new jobs, and much more.
       </p>
-      <p v-if="false">
+      <p v-if="true">
         Below you can see the services I offer and whether I take a fee for them or not.
       </p>
-      <div v-if="false">
+      <div v-if="true">
         <ul class="service-list">
           <li>
             <span class="service-title">
@@ -184,10 +184,10 @@
       <p>
         If you have an issue that you need help with, the easiest way to reach out is on Discord. My handle is Sebastian#0002.
       </p>
-      <p v-if="false">
+      <p v-if="true">
         Below you can see the services I offer and whether I take a fee for them or not. The price often depends on how much active coding it involves.
       </p>
-      <div v-if="false">
+      <div v-if="true">
         <ul class="service-list">
           <li>
             <span class="service-title">
@@ -230,7 +230,7 @@
             </span>
           </li>
         </ul>
-        <p v-if="false">
+        <p v-if="true">
           (note: prices are 50% off if you can prove you are a student)
         </p>
       </div>
