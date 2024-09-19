@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import { ConcreteComponent } from 'vue';
+  // import { ConcreteComponent } from 'vue';
 
   const NuxtLink = resolveComponent('NuxtLink');
 
@@ -24,7 +24,7 @@
 
   const imageUrl = computed((): string | undefined => (props.picture ? props.picture : undefined));
   const entryUrl = computed((): string | undefined => (props.slug ? `/${props.slug}/` : undefined));
-  const componentType = computed((): string | ConcreteComponent => (entryUrl.value ? NuxtLink : 'div'));
+  const componentType = computed((): string /* | ConcreteComponent */ => (entryUrl.value ? NuxtLink : 'div'));
 
   useJsonld(() => ({
     '@context': 'https://schema.org',

@@ -1,12 +1,12 @@
 <script setup lang="ts">
-  import { StoryData } from '@storyblok/vue/dist';
+  import { type ISbStoryData } from '@storyblok/vue';
 
   const route = useRoute();
 
   const isPreview = !!(route.query._storyblok && route.query._storyblok !== '');
   const version = isPreview ? 'draft' : 'published';
 
-  const story = ref({} as StoryData);
+  const story = ref({} as ISbStoryData);
 
   if (isPreview) {
     // We are in preview so lets fetch it with the normal module.
