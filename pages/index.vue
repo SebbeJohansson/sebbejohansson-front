@@ -110,17 +110,85 @@
       </content-block>
     </div>
     <parts-organisms-desktop-menu />
-    <content-with-title :title="'Career mentorship & support'" class="index__career">
+    <content-with-title :title="'Development mentorship & support'" class="index__tech" id="technicalsupport">
+      <p>
+        After over ten years as a developer, I have extensive experience with many languages and frameworks. Since I started to develop software, I have also helped others learn how to do it.
+      </p>
+      <p>
+        You can check my portfolio and my GitHub to learn more about my knowledge of specific languages and systems.
+      </p>
+      <p>
+        If you have an issue that you need help with, the easiest way to reach out is on Discord. My handle is Sebastian#0002.
+      </p>
+      <p v-if="false">
+        Below you can see the services I offer and whether I take a fee for them or not. The price often depends on how much active coding it involves.
+      </p>
+      <div v-if="false">
+        <ul class="service-list">
+          <li>
+            <span class="service-title">
+              Hints and guidance with specific small issue
+            </span>
+            <span class="service-fee">
+              Free!
+            </span>
+          </li>
+          <li>
+            <span class="service-title">
+              Help with specific issue (until fixed)
+            </span>
+            <span class="service-fee">
+              50€ per hour
+            </span>
+          </li>
+          <li>
+            <span class="service-title">
+              Assist with a specific feature from start to finish within an existing project
+            </span>
+            <span class="service-fee">
+              120€ per hour
+            </span>
+          </li>
+          <li>
+            <span class="service-title">
+              Develop a feature from start to finish within an existing project
+            </span>
+            <span class="service-fee">
+              Please contact for quote
+            </span>
+          </li>
+          <li>
+            <span class="service-title">
+              Develop a website or application from start to finish
+            </span>
+            <span class="service-fee">
+              Please contact for quote
+            </span>
+          </li>
+        </ul>
+        <p v-if="false">
+          (note: prices are 50% off if you can prove you are a student)
+        </p>
+      </div>
+
+      <NuxtLink class="index__button" to="/portfolio">
+        Checkout my portfolio
+      </NuxtLink>
+      <NuxtLink class="index__button" to="https://github.com/SebbeJohansson">
+        Checkout my github
+      </NuxtLink>
+    </content-with-title>
+    <content-with-title :title="'Career mentorship & support'" class="index__career" id="careersupport">
       <p>
         As a side-effect of working as, with, and for developers for the past years, I have learned much about getting a developer job and progressing in a software development career.
       </p>
       <p>
         I have helped countless developers choose education paths, how to write a resume, what titles help when looking for new jobs, and much more.
       </p>
-      <p v-if="true">
+      <p v-if="false">
         Below you can see the services I offer and whether I take a fee for them or not.
       </p>
-      <div v-if="true">
+      <div v-if="false">
         <ul class="service-list">
           <li>
             <span class="service-title">
@@ -173,74 +241,6 @@
         </ul>
         <p>(note: prices are 50% off if you can prove you are a student)</p>
       </div>
-    </content-with-title>
-    <content-with-title :title="'Development mentorship & support'" class="index__tech">
-      <p>
-        After over ten years as a developer, I have extensive experience with many languages and frameworks. Since I started to develop software, I have also helped others learn how to do it.
-      </p>
-      <p>
-        You can check my portfolio and my GitHub to learn more about my knowledge of specific languages and systems.
-      </p>
-      <p>
-        If you have an issue that you need help with, the easiest way to reach out is on Discord. My handle is Sebastian#0002.
-      </p>
-      <p v-if="true">
-        Below you can see the services I offer and whether I take a fee for them or not. The price often depends on how much active coding it involves.
-      </p>
-      <div v-if="true">
-        <ul class="service-list">
-          <li>
-            <span class="service-title">
-              Hints and guidance with specific small issue
-            </span>
-            <span class="service-fee">
-              Free!
-            </span>
-          </li>
-          <li>
-            <span class="service-title">
-              Help with specific issue (until fixed)
-            </span>
-            <span class="service-fee">
-              50€ per hour
-            </span>
-          </li>
-          <li>
-            <span class="service-title">
-              Assist with a specific feature from start to finish within an existing project
-            </span>
-            <span class="service-fee">
-              120€ per hour
-            </span>
-          </li>
-          <li>
-            <span class="service-title">
-              Develop a feature from start to finish within an existing project
-            </span>
-            <span class="service-fee">
-              Please contact for quote
-            </span>
-          </li>
-          <li>
-            <span class="service-title">
-              Develop a website or application from start to finish
-            </span>
-            <span class="service-fee">
-              Please contact for quote
-            </span>
-          </li>
-        </ul>
-        <p v-if="true">
-          (note: prices are 50% off if you can prove you are a student)
-        </p>
-      </div>
-
-      <NuxtLink class="index__button" to="/portfolio">
-        Checkout my portfolio
-      </NuxtLink>
-      <NuxtLink class="index__button" to="https://github.com/SebbeJohansson">
-        Checkout my github
-      </NuxtLink>
     </content-with-title>
 
     <div class="index__support-me">
