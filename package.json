@@ -14,7 +14,7 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "typecheck": "nuxt typecheck",
-    "static-deploy": "nuxt generate && npx serve -s .output/public"
+    "static-deploy": "nuxt generate && npx serve dist"
   },
   "devDependencies": {
     "@nuxt/eslint": "^1.17.0",

@@ -1,6 +1,8 @@
 [build]
   command = "yarn generate"
-  publish = ".output/public"
+  # The nitro preset is pinned to netlify-static in nuxt.config.ts, which writes here.
+  # Do not change one without the other.
+  publish = "dist"
 
 [build.environment]
   # Node 24 is the current Active LTS; 22 is in maintenance.
