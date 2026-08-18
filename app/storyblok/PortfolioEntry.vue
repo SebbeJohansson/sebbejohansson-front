@@ -1,13 +1,13 @@
 <script setup lang="ts">
-  const props = defineProps({ blok: Object, raw: Object });
+  const props = defineProps<{ blok: Record<string, any>; raw?: Record<string, any> }>();
 
-  const imageUrl = computed((): string => (props.blok.cover?.filename ? props.blok.cover?.filename : 'null'));
-  const title = computed((): string => props.blok.title || props.raw.name);
-  const duration = computed((): string | null => props.blok.duration);
+  const imageUrl = computed((): string => props.blok.cover?.filename || 'null');
+  const title = computed((): string => props.blok.title || props.raw?.name);
+  const duration = computed((): string | null => props.blok.duration ?? null);
   const role = computed((): string | null => props.blok.role || null);
-  const link = computed((): string => props.blok.link?.url || props.blok.link?.cached_url || null);
+  const link = computed((): string | null => props.blok.link?.url || props.blok.link?.cached_url || null);
   const code = computed((): string | null => props.blok.code?.url || props.blok.code?.cached_url || null);
-  const content = computed((): [] | string => (props.blok.content && Array.isArray(props.blok.content) && props.blok.content.length > 0 ? props.blok.content : props.blok.description));
+  const content = computed((): any[] | string => (Array.isArray(props.blok.content) && props.blok.content.length > 0 ? props.blok.content : props.blok.description));
 
   useJsonld(() => ({
     '@context': 'https://schema.org',
@@ -64,13 +64,15 @@
             </div>
           </div>
           <div class="portfolio__content">
-            <component
-              :is="$resolveStoryBlokComponent(block)"
-              v-for="block in blok.content"
-              v-if="blok.content && Array.isArray(blok.content) && blok.content.length > 0"
-              :key="block._uid"
-              :blok="block"
-            />
+            <template v-if="Array.isArray(content)">
+              <component
+                :is="$resolveStoryBlokComponent(block)"
+                v-for="block in content"
+                :key="block._uid"
+                :blok="block"
+              />
+            </template>
+            <!-- eslint-disable-next-line vue/no-v-html -->
             <div v-else v-html="content" />
           </div>
         </div>
@@ -180,5 +182,4 @@
     }
   }
 }
-
 </style>

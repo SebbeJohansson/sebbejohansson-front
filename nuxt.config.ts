@@ -1,14 +1,26 @@
+import { fetchStoryblokPageRoutes } from './shared/utils/storyblok';
+
+const storyblokApiToken = process.env.STORYBLOK_API_TOKEN ?? '';
+const hostname = process.env.HOSTNAME ?? 'https://sebbejohansson.com';
+
+// Static routes that are not backed by Storyblok. `/200.html` and `/404.html`
+// are the SPA fallback / not-found documents used by the static host.
+const staticPrerenderRoutes = [
+  '/',
+  '/blog/',
+  '/portfolio/',
+  '/privacy/',
+  '/sitemap.xml',
+  '/200.html',
+  '/404.html',
+];
+
 export default defineNuxtConfig({
-  telemetry: false,
-
-  // Disable servenr-side rendering: https://go.nuxtjs.dev/ssr-mode
-  // ssr: false,
-
-  runtimeConfig: {
-    public: {
-      STORYBLOK_API_TOKEN: process.env.STORYBLOK_API_TOKEN,
-    },
-  },
+  modules: [
+    '@storyblok/nuxt',
+    'nuxt-jsonld',
+    '@nuxt/eslint',
+  ],
 
   app: {
     head: {
@@ -19,46 +31,58 @@ export default defineNuxtConfig({
       meta: [
         { charset: 'utf-8' },
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-        { hid: 'description', name: 'description', content: '' },
+        { name: 'description', content: '' },
       ],
       link: [
         { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
       ],
-      script: [
-        {
-          hid: 'gtm',
-          children: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+      script: process.env.GTM_ID
+        ? [
+            {
+              key: 'gtm',
+              innerHTML: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
         new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
         j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
         })(window,document,'script','dataLayer','${process.env.GTM_ID}');`,
-          type: 'text/javascript',
-        },
-      ],
+              type: 'text/javascript',
+            },
+          ]
+        : [],
     },
   },
 
-  // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
     '~/assets/styles/index.css',
   ],
 
-  // Modules: https://go.nuxtjs.dev/config-modules
-  modules: [
-    '@storyblok/nuxt',
-    'nuxt-jsonld',
-  ],
-
-  storyblok: {
-    accessToken: process.env.STORYBLOK_API_TOKEN,
+  runtimeConfig: {
+    public: {
+      STORYBLOK_API_TOKEN: storyblokApiToken,
+      HOSTNAME: hostname,
+    },
   },
 
-  postcss: {
-    plugins: {
-      'postcss-import': {},
-      autoprefixer: {
-        overrideBrowserslist: ['last 2 versions', 'Firefox ESR', '> 1%', 'ie >= 8', 'iOS >= 8', 'Android >= 4'],
-      },
+  future: {
+    compatibilityVersion: 4,
+  },
+  compatibilityDate: '2025-08-18',
+
+  nitro: {
+    prerender: {
+      // Link crawling is deliberately off: editorial content in Storyblok can contain
+      // broken or unrendered links (e.g. a literal `{{ revealButtonHref }}` href, or a
+      // slug with the wrong casing), and a crawled dead link fails the whole build.
+      // The route list is derived from Storyblok instead, so it only ever contains
+      // routes that are known to exist.
+      crawlLinks: false,
+      failOnError: true,
+      routes: staticPrerenderRoutes,
+      // Storyblok rate-limits its CDN API, and every prerendered page hits it at least
+      // once. Keep the request rate low enough that the retries in shared/utils/storyblok
+      // stay a safety net rather than the normal path.
+      concurrency: 3,
+      interval: 150,
     },
   },
 
@@ -72,10 +96,44 @@ export default defineNuxtConfig({
     },
   },
 
-  nitro: {
-    prerender: {
-      crawlLinks: true,
-      routes: ['/', '/404.html', '/200.html'],
+  postcss: {
+    plugins: {
+      'postcss-import': {},
+      autoprefixer: {
+        overrideBrowserslist: ['last 2 versions', 'Firefox ESR', '> 1%', 'iOS >= 12', 'Android >= 6'],
+      },
     },
+  },
+  telemetry: false,
+
+  hooks: {
+    // Runs only when routes are actually being prerendered, so `nuxt prepare`/`nuxt dev`
+    // never touch the Storyblok API. A failure here fails the build on purpose: shipping
+    // a static site that is silently missing every blog post is worse than not shipping.
+    async 'prerender:routes'({ routes }) {
+      if (!storyblokApiToken) {
+        console.warn('[prerender] STORYBLOK_API_TOKEN is not set — skipping Storyblok routes.');
+        return;
+      }
+      const storyblokRoutes = await fetchStoryblokPageRoutes(storyblokApiToken);
+      console.info(`[prerender] Adding ${storyblokRoutes.length} Storyblok routes.`);
+      storyblokRoutes.forEach(route => routes.add(route));
+    },
+  },
+
+  eslint: {
+    config: {
+      stylistic: {
+        indent: 2,
+        semi: true,
+        quotes: 'single',
+        commaDangle: 'always-multiline',
+      },
+    },
+  },
+
+  storyblok: {
+    accessToken: storyblokApiToken,
+    componentsDir: '~/storyblok',
   },
 });

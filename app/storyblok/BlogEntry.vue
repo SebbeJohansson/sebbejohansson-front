@@ -1,10 +1,10 @@
 <script setup lang="ts">
-  const props = defineProps({ blok: Object, raw: Object });
+  const props = defineProps<{ blok: Record<string, any>; raw?: Record<string, any> }>();
 
-  const title = computed((): string => props.blok.title || props.raw.name);
-  const slug = computed((): string => `/blog/${props.blok.slug || props.raw.slug}`);
-  const date = computed((): string | null => props.blok.date);
-  const content = computed((): [] | string => (props.blok.content && Array.isArray(props.blok.content) && props.blok.content.length > 0 ? props.blok.content : props.blok.description));
+  const title = computed((): string => props.blok.title || props.raw?.name);
+  const slug = computed((): string => `/blog/${props.blok.slug || props.raw?.slug}/`);
+  const date = computed((): string | undefined => props.blok.date || undefined);
+  const content = computed((): any[] | string => (Array.isArray(props.blok.content) && props.blok.content.length > 0 ? props.blok.content : props.blok.description));
 
   useJsonld(() => ({
     '@context': 'https://schema.org',
@@ -32,13 +32,14 @@
         <h4 v-if="date" class="blog-entry__date">
           - {{ date }}
         </h4>
-        <component
-          :is="$resolveStoryBlokComponent(block)"
-          v-for="block in content"
-          v-if="content && Array.isArray(content) && content.length > 0"
-          :key="block._uid"
-          :blok="block"
-        />
+        <template v-if="Array.isArray(content)">
+          <component
+            :is="$resolveStoryBlokComponent(block)"
+            v-for="block in content"
+            :key="block._uid"
+            :blok="block"
+          />
+        </template>
       </div>
     </div>
   </div>

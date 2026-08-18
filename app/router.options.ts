@@ -1,4 +1,5 @@
 import type { RouterConfig } from '@nuxt/schema';
+
 // https://router.vuejs.org/api/#routeroptions
 export default <RouterConfig>{
   scrollBehavior(to, from, savedPosition) {
@@ -10,7 +11,6 @@ export default <RouterConfig>{
       return savedPosition;
     }
 
-    return { x: 0, y: 0 };
+    return { left: 0, top: 0 };
   },
-  trailingSlash: true,
 };

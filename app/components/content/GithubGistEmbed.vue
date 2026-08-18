@@ -1,37 +1,30 @@
 <script setup lang="ts">
-  const props = defineProps({
-    gistId: {
-      type: String,
-      required: true,
-    },
-    file: {
-      type: String,
-      required: false,
-      default: '',
-    },
-    fetchKey: {
-      type: String,
-      required: false,
-      default: '',
-    },
+  const props = withDefaults(defineProps<{
+    gistId: string;
+    file?: string;
+    fetchKey?: string;
+  }>(), {
+    file: '',
+    fetchKey: '',
   });
 
-  const gistUrl: string = 'https://gist.github.com/';
-  const gistErr: boolean = false;
+  const gistUrl = 'https://gist.github.com/';
 
-  const { data: gistData = 'Loading...' } = await useAsyncData(
+  // A failing gist must never take the prerender down with it, so the error is swallowed
+  // and rendered as a placeholder instead.
+  const { data: gistData, error: gistError } = await useAsyncData(
     `gist-${props.gistId}-${props.file}-${props.fetchKey}`,
-    // eslint-disable-next-line require-await
-    async () => {
+    () => {
       const params = props.file.length > 0 ? `?file=${props.file}` : '';
-      return $fetch(`${gistUrl}${props.gistId}.json${params}`).then(res => res.div);
+      return $fetch<{ div: string }>(`${gistUrl}${props.gistId}.json${params}`).then(res => res.div);
     },
+    { default: () => '' },
   );
 </script>
 
 <template>
   <div :id="`gist-${gistId}-${file}-${fetchKey}`">
-    <div v-if="gistErr">
+    <div v-if="gistError">
       <img
         id="notFound"
         height="100%"
@@ -40,6 +33,7 @@
         alt="404"
       >
     </div>
+    <!-- eslint-disable-next-line vue/no-v-html -- gist markup comes straight from GitHub -->
     <div v-else class="gist" v-html="gistData" />
   </div>
 </template>

@@ -1,16 +1,17 @@
 <script setup lang="ts">
-  defineProps({ blok: Object });
+  defineProps<{ blok: Record<string, any> }>();
 </script>
 
 <template>
   <div v-editable="blok" class="columns">
-    <component
-      :is="$resolveStoryBlokComponent(block)"
-      v-for="block in blok.content"
-      v-if="blok.content && Array.isArray(blok.content) && blok.content.length > 0"
-      :key="block._uid"
-      :blok="block.content"
-    />
+    <template v-if="Array.isArray(blok.content)">
+      <component
+        :is="$resolveStoryBlokComponent(block)"
+        v-for="block in blok.content"
+        :key="block._uid"
+        :blok="block.content"
+      />
+    </template>
   </div>
 </template>
 

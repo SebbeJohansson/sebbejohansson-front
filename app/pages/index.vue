@@ -5,7 +5,6 @@
   useHead({
     title: 'SebbeJohansson',
     meta: [{
-      vmid: 'description',
       name: 'description',
       content: 'Full-stack software engineer focusing on Web and Games.',
     }],
@@ -110,7 +109,7 @@
       </content-block>
     </div>
     <parts-organisms-desktop-menu />
-    <content-with-title :title="'Development mentorship & support'" class="index__tech" id="technicalsupport">
+    <content-with-title id="technicalsupport" :title="'Development mentorship & support'" class="index__tech">
       <p>
         After over ten years as a developer, I have extensive experience with many languages and frameworks. Since I started to develop software, I have also helped others learn how to do it.
       </p>
@@ -178,7 +177,7 @@
         Checkout my github
       </NuxtLink>
     </content-with-title>
-    <content-with-title :title="'Career mentorship & support'" class="index__career" id="careersupport">
+    <content-with-title id="careersupport" :title="'Career mentorship & support'" class="index__career">
       <p>
         As a side-effect of working as, with, and for developers for the past years, I have learned much about getting a developer job and progressing in a software development career.
       </p>

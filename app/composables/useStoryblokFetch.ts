@@ -1,48 +1,41 @@
-import { StoryData } from '@storyblok/vue/dist';
+import type { StoryblokStory } from '#shared/utils/storyblok';
 
-export interface Blok {
-  story: StoryData;
-  stories: StoryData[];
-  cv: number,
+export interface StoryblokFetchResult {
+  stories: StoryblokStory[];
+  story: StoryblokStory | undefined;
 }
 
-export const useStoryblokFetch = async (slug: string, params?: any) => {
+/**
+ * Fetches Storyblok content through `useAsyncData` so the result is serialised into the
+ * prerendered payload and no request is made again on the client.
+ *
+ * A missing story resolves to `story: undefined` rather than throwing — callers decide
+ * whether that is a 404 or simply an empty list.
+ */
+export async function useStoryblokFetch(
+  slug: string,
+  params: Record<string, string | number | boolean | undefined> = {},
+): Promise<StoryblokFetchResult> {
   const config = useRuntimeConfig();
+  const key = `storyblok:${slug}:${new URLSearchParams(
+    Object.entries(params).map(([k, v]) => [k, String(v ?? '')]),
+  ).toString()}`;
 
-  const { data: result } = await useAsyncData(
-    `${slug}-${new URLSearchParams(params)}`,
-    async () => {
-      let pages = 0;
-      const stories: StoryData[] = [];
-
-      await $fetch.raw(`https://api.storyblok.com/v2/cdn/stories/${slug}?token=${config.public.STORYBLOK_API_TOKEN}&${new URLSearchParams(params)}`).then((res) => {
-        if (!res._data) { return; }
-        if (res._data.story) {
-          stories.push(res._data.story);
-        } else {
-          const total = res.headers.get('total');
-          const perPage = res.headers.get('per_page') || total > 25 ? 25 : null;
-
-          if (perPage) {
-            pages = Math.ceil(total / perPage);
-          }
-
-          stories.push(...(res._data.stories as StoryData[]));
-        }
-      });
-
-      for (let page = 2; page <= pages; page += 1) {
-        await $fetch(`https://api.storyblok.com/v2/cdn/stories/${slug}?token=${config.public.STORYBLOK_API_TOKEN}&${new URLSearchParams({ ...params, page })}`).then((res) => {
-          stories.push(...(res.stories as StoryData[]));
-        });
-      }
-
-      return {
-        stories,
-        story: stories[0],
-      };
-    },
+  const { data, error } = await useAsyncData(
+    key,
+    () => fetchStoryblokStories(config.public.STORYBLOK_API_TOKEN, slug, params),
+    { default: (): StoryblokFetchResult => ({ stories: [], story: undefined }) },
   );
-  const blok = result.value as Blok;
-  return blok;
-};
+
+  // A transport/auth failure must not be silently prerendered as an empty page.
+  if (error.value) {
+    throw createError({
+      statusCode: 502,
+      statusMessage: `Storyblok request failed for "${slug}"`,
+      cause: error.value,
+      fatal: true,
+    });
+  }
+
+  return data.value as StoryblokFetchResult;
+}

@@ -1,14 +1,8 @@
 <script setup lang="ts">
-  defineProps({
-    title: {
-      type: String,
-      required: true,
-    },
-    link: {
-      type: String,
-      required: true,
-    },
-  });
+  defineProps<{
+    title: string;
+    link: string | null;
+  }>();
 </script>
 
 <template>

@@ -1,8 +1,7 @@
-<script setup async lang="ts">
-
+<script setup lang="ts">
   interface StalkEntry {
     id: number;
-    link: string;
+    link: string | null;
     entryPic: string;
     name: string;
   }
@@ -12,25 +11,17 @@
   const isPreview = !!(route.query._storyblok && route.query._storyblok !== '');
   const version = isPreview ? 'draft' : 'published';
 
-  const rawStalkEntries: StalkEntry[] = [];
-
-  await useStoryblokFetch('', {
+  const { stories } = await useStoryblokFetch('', {
     starts_with: 'contact/',
     version,
-  }).then((response) => {
-    response.stories.forEach((story) => {
-      rawStalkEntries.push({
-        id: story.id,
-        entryPic: story.content.image?.filename,
-        link: story.content.link?.url || story.content.link?.url || null,
-        name: story.name,
-      });
-    });
   });
 
-  const stalkEntries = computed<StalkEntry[]>(
-    (): StalkEntry[] => rawStalkEntries as StalkEntry[],
-  );
+  const stalkEntries = computed<StalkEntry[]>(() => stories.map(story => ({
+    id: story.id,
+    entryPic: story.content?.image?.filename,
+    link: story.content?.link?.url || story.content?.link?.cached_url || null,
+    name: story.name,
+  })));
 </script>
 
 <template>

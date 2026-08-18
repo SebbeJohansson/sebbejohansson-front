@@ -1,22 +1,8 @@
-<script async setup lang="ts">
-  interface BlogEntry {
-    id: string;
-    title: string;
-    slug: string;
-    content: {};
-    author: string;
-    date: string;
-    cat: string;
-    classes: [];
-  }
+<script setup lang="ts">
+  import type { StoryblokStory } from '#shared/utils/storyblok';
 
-  interface BlogCategory {
-    name: string;
-    about: string;
-  }
-
-  interface BlogCategories {
-    entries: BlogCategory[];
+  interface BlogEntry extends StoryblokStory {
+    classes: string[];
   }
 
   const route = useRoute();
@@ -24,84 +10,20 @@
   const isPreview = !!(route.query._storyblok && route.query._storyblok !== '');
   const version = isPreview ? 'draft' : 'published';
 
-  const rawBlogEntries: BlogEntry[] = [];
-
-  await useStoryblokFetch('', {
+  const { stories } = await useStoryblokFetch('', {
     starts_with: 'blog/',
     version,
     content_type: 'blog-entry',
     resolve_relations: 'blog-entry.categories',
     sort_by: 'content.date:desc',
-  }).then((response) => {
-    response.stories.forEach((story) => {
-      rawBlogEntries.push({
-        ...story,
-        classes: story.content.categories.map(category => `blog-post-list__entry--${category.uuid}`),
-      });
-    });
   });
 
-  const blogEntries = computed<BlogEntry[]>(
-    (): BlogEntry[] => rawBlogEntries as BlogEntry[],
-  );
-
-// const unselectedCategories = ref(<string[]>[]);
-
-// const rawBlogCategories = useState<BlogCategories>(
-//   'rawBlogCategories',
-//   () => {
-//     const blogCategoriesLocal: BlogCategories = {
-//       entries: [],
-//     };
-//     const data = ['fields name,about;'];
-
-//     /*try {
-//       await axios
-//         .post('/blogcats/get', data.join(''))
-//         .then((response) => {
-//           const entries = response.data as BlogCategory[];
-//           entries.forEach((entry) => {
-//             blogCategoriesLocal.entries.push(entry);
-//           });
-//         })
-//         .catch((error) => {
-//           console.log(error.response);
-//         });
-//     } catch (error) {
-//       console.log(error);
-//     }*/
-//     return blogCategoriesLocal;
-//   },
-// );
-
-// const blogCategories = computed<BlogCategory[]>((): BlogCategory[] => rawBlogCategories.value?.entries as BlogCategory[]);
-
-// const unselectedCategoriesStyling = computed((): string => {
-//   let style = '';
-//   unselectedCategories.value.forEach((category) => {
-//     style += `.blog-post-list__entry.blog-post-list__entry--${category} { display: none; }`;
-//   });
-//   return style;
-// });
-
-// function isCategoryChecked(category: string): boolean {
-//   return !(unselectedCategories.value.includes(category));
-// }
-
-// function toggleCategory(category: string) {
-//   if (isCategoryChecked(category)) {
-//     unselectedCategories.value.push(category);
-//   } else {
-//     const index = unselectedCategories.value.indexOf(category);
-//     if (index > -1) {
-//       unselectedCategories.value.splice(index, 1);
-//     }
-//   }
-
-//   unselectedCategories.value = unselectedCategories.value.filter(
-//     (item, index) => unselectedCategories.value.indexOf(item) === index,
-//   );
-// }
+  const blogEntries = computed<BlogEntry[]>(() => stories.map(story => ({
+    ...story,
+    classes: (story.content?.categories ?? []).map(
+      (category: { uuid: string }) => `blog-post-list__entry--${category.uuid}`,
+    ),
+  })));
 </script>
 
 <template>
@@ -119,23 +41,8 @@
             :raw="entry"
           />
         </div>
-        <!--div class="blog-post-list__categories">
-          <h2 class="blog-post-list__categories-title">
-            Categories
-          </h2>
-          <div v-for="entry in blogCategories" :key="entry.id" class="blog-post-list__category-line"
-            @click="toggleCategory(entry.name)">
-            <input class="blog-post-list__category-line-box" type="checkbox" :checked="isCategoryChecked(entry.name)">
-            <span class="blog-post-list__category-line-text">
-              {{ entry.about }}
-            </span>
-          </div>
-        </div-->
       </div>
     </content-with-title>
-    <!--component :is="'style'" v-if="unselectedCategoriesStyling != ''" type="text/css">
-      {{ unselectedCategoriesStyling }}
-    </!--component-->
   </div>
 </template>
 

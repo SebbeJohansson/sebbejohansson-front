@@ -1,37 +1,37 @@
 <script setup lang="ts">
-  import { Richtext } from 'storyblok-js-client';
+  import type { SbRichTextNode } from '@storyblok/vue';
 
-  const props = defineProps({ blok: Object });
+  interface TextNode {
+    key: string;
+    type: 'blok' | 'html';
+    blok?: { content: Record<string, any> };
+    html?: string;
+  }
+
+  const props = defineProps<{ blok: Record<string, any> }>();
   const nuxtApp = useNuxtApp();
-  const nodes = computed((): any[] => {
-    const nodes = <any>[];
-    // Proof of concept for custom handling of inline blok nodes.
-    Object.entries(props.blok?.text.content).forEach(([key, node]) => {
+
+  const nodes = computed<TextNode[]>(() => {
+    const content = props.blok?.text?.content;
+    if (!content || !Array.isArray(content)) { return []; }
+
+    // Inline bloks are rendered as Vue components, everything else goes through the
+    // Storyblok rich text renderer one node at a time.
+    return content.map((node: SbRichTextNode, index: number): TextNode => {
       if (node.type === 'blok') {
-        const blok = {
-          content: node.attrs?.body?.[0],
-        };
-        nodes.push({
-          key,
+        return {
+          key: String(index),
           type: 'blok',
-          content: {
-            blok,
-          },
-        });
-      } else {
-        nodes.push({
-          key,
-          type: 'html',
-          content: nuxtApp.$formatRichText(useStoryblokApi().richTextResolver.render({
-            type: 'doc',
-            content: [
-              node,
-            ],
-          } as Richtext)),
-        });
+          blok: { content: (node.attrs as any)?.body?.[0] },
+        };
       }
+
+      return {
+        key: String(index),
+        type: 'html',
+        html: nuxtApp.$formatRichText(renderRichText({ type: 'doc', content: [node] })) ?? '',
+      };
     });
-    return nodes;
   });
 </script>
 
@@ -39,11 +39,12 @@
   <div v-editable="blok" class="text">
     <div v-for="node in nodes" :key="node.key">
       <component
-        :is="$resolveStoryBlokComponent(node.content.blok)"
-        v-if="node.type === 'blok'"
-        :blok="node.content.blok.content"
+        :is="$resolveStoryBlokComponent(node.blok)"
+        v-if="node.type === 'blok' && node.blok?.content"
+        :blok="node.blok.content"
       />
-      <div v-else v-html="node.content" />
+      <!-- eslint-disable-next-line vue/no-v-html -->
+      <div v-else v-html="node.html" />
     </div>
   </div>
 </template>

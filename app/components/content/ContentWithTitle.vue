@@ -1,14 +1,7 @@
-<script lang="ts">
-  import { defineNuxtComponent } from '#app';
-
-  export default defineNuxtComponent({
-    props: {
-      title: {
-        type: String as PropType<string>,
-        required: true,
-      },
-    },
-  });
+<script setup lang="ts">
+  defineProps<{
+    title: string;
+  }>();
 </script>
 
 <template>

@@ -1,11 +1,11 @@
 export default defineNuxtPlugin(() => {
   interface MediaArguments {
-    maxHeight?: number | undefined;
-    maxWidth?: number | undefined;
-    skipAutoFormat?: boolean | undefined;
+    maxHeight?: number | null;
+    maxWidth?: number | null;
+    skipAutoFormat?: boolean;
   }
 
-  function toMediaUrl(url: string, { maxHeight = null, maxWidth = null, skipAutoFormat = false }: MediaArguments) {
+  function toMediaUrl(url: string, { maxHeight = null, maxWidth = null, skipAutoFormat = false }: MediaArguments = {}) {
     if (url.startsWith('https://') || url.startsWith('http://')) {
       return formatStoryblokImage(url);
     }
@@ -13,7 +13,7 @@ export default defineNuxtPlugin(() => {
     return formatNativeImage(url);
 
     function formatStoryblokImage(image: string) {
-      const qs = [];
+      const qs: string[] = [];
 
       if (!skipAutoFormat) {
         qs.push('m');
@@ -32,7 +32,7 @@ export default defineNuxtPlugin(() => {
     }
 
     function formatNativeImage(slug: string) {
-      const qs = [];
+      const qs: string[] = [];
 
       if (!skipAutoFormat) {
         qs.push('auto=format');
@@ -54,13 +54,17 @@ export default defineNuxtPlugin(() => {
     }
   }
 
-  function formatRichText(richText: string) {
-    if (!richText) { return null; }
-    const formattedText = richText;
-    if (typeof formattedText?.replace !== 'function') { return null; }
-    const regex = /(?<start><img)(?<middle>.*?)(?<end>\/>)/ig;
-    const newText = formattedText.replace(regex, (match, p1, p2, p3, offset, string, namedGroups) => `${namedGroups.start} loading="lazy" ${namedGroups.middle} ${namedGroups.end}`);
-    return newText;
+  function formatRichText(richText: string | null | undefined): string | null {
+    if (!richText || typeof richText.replace !== 'function') { return null; }
+    // Lazy-load every image that comes out of the rich text renderer.
+    const regex = /(?<start><img)(?<middle>.*?)(?<end>\/?>)/gi;
+    return richText.replace(
+      regex,
+      (...args) => {
+        const namedGroups = args[args.length - 1] as Record<string, string>;
+        return `${namedGroups.start} loading="lazy" ${namedGroups.middle} ${namedGroups.end}`;
+      },
+    );
   }
 
   return {
