@@ -1,0 +1,7 @@
+[build]
+  command = "yarn generate"
+  publish = ".output/public"
+
+[build.environment]
+  # Nuxt 4.5 requires Node ^22.19 || ^24.11 || >=26.
+  NODE_VERSION = "22.19.0"

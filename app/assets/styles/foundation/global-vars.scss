@@ -1,0 +1,18 @@
+@use "sass:color";
+
+/* Colors */
+$background-dark: #0f1117;
+$cover-dark: #18181b;
+$border-dark: color.adjust($cover-dark, $lightness: -10%);
+$shadow-dark: color.adjust($cover-dark, $lightness: -20%);
+$cover-light: color.adjust($cover-dark, $lightness: 10%);
+$cover-lighter: color.adjust($cover-dark, $lightness: 20%);
+
+$text-color: white;
+$title-color: black;
+
+/* Sizes */
+$content-width: 1300px;
+
+/* Font Families */
+$base-font: Roboto, system-ui, Helvetica, Arial, sans-serif;
