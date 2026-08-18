@@ -3,5 +3,12 @@
   publish = ".output/public"
 
 [build.environment]
-  # Nuxt 4.5 requires Node ^22.19 || ^24.11 || >=26.
-  NODE_VERSION = "22.19.0"
+  # Node 24 is the current Active LTS; 22 is in maintenance.
+  #
+  # The floor is set by transitive dev dependencies, not by Nuxt itself, and
+  # yarn 1 hard-fails on any engines mismatch:
+  #   nuxt                      ^22.19.0 || ^24.11.0 || >=26.0.0
+  #   @napi-rs/lzma             ^22.20   || ^24.12   || >=25
+  #   jsdoc-type-pratt-parser   ^22.22.2 || >=24.15.0
+  # Minimum viable is 24.15.0 on this line (or 22.22.2 if you ever go back).
+  NODE_VERSION = "24.19.0"
