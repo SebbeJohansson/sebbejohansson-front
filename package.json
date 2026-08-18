@@ -3,7 +3,7 @@
   "private": true,
   "type": "module",
   "engines": {
-    "node": ">=22.19.0"
+    "node": "^22.22.2 || >=24.15.0"
   },
   "scripts": {
     "postinstall": "nuxt prepare",
@@ -18,7 +18,7 @@
   },
   "devDependencies": {
     "@nuxt/eslint": "^1.17.0",
-    "eslint": "^9.39.0",
+    "eslint": "^10.8.1",
     "sass-embedded": "^1.102.0",
     "typescript": "^5.9.3",
     "vue-tsc": "^3.2.0"
