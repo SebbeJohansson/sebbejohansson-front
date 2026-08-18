@@ -69,6 +69,14 @@ export default defineNuxtConfig({
   compatibilityDate: '2025-08-18',
 
   nitro: {
+    // Pinned explicitly rather than left to Netlify's framework detection. Detection
+    // injects NITRO_PRESET at build time, which moves the output directory out from
+    // under netlify.toml's `publish` and produced a green build that deployed nothing.
+    // Setting it here keeps a local `yarn generate` byte-identical to the deploy, and
+    // the preset also emits _headers (immutable caching for /_nuxt/*) and
+    // _redirects (/* -> /404.html 404) that the plain `static` preset does not.
+    preset: 'netlify-static',
+
     prerender: {
       // Link crawling is deliberately off: editorial content in Storyblok can contain
       // broken or unrendered links (e.g. a literal `{{ revealButtonHref }}` href, or a

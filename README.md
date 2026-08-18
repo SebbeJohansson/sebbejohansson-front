@@ -33,8 +33,16 @@ yarn typecheck    # vue-tsc
 ## Building
 
 ```bash
-yarn generate     # static build into .output/public
+yarn generate     # static build into dist/
 ```
+
+The nitro preset is pinned to `netlify-static` in `nuxt.config.ts`, so the output
+directory is `dist/` both locally and on Netlify, and the build also emits `_headers`
+(immutable caching for `/_nuxt/*`) and `_redirects` (`/*` -> `/404.html` 404).
+
+`netlify.toml` publishes `dist/`. If you ever change the preset, change `publish` with
+it: Netlify's framework detection otherwise injects `NITRO_PRESET` at build time and
+silently moves the output directory, producing a green build that deploys nothing.
 
 ## Project structure
 
