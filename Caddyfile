@@ -1,0 +1,16 @@
+# Local HTTPS proxy so the Storyblok visual editor can load the dev server.
+# Run with `yarn caddy` (scripts/caddy.sh handles install, hosts and cert trust).
+{
+	# The root cert is trusted in Windows by scripts/caddy.sh; skip Caddy's own
+	# sudo prompt for the Linux trust store.
+	skip_install_trust
+	# Keep this instance independent of any system-wide Caddy: no admin API on
+	# :2019 and no HTTP->HTTPS redirect listener on :80, so only :443 is needed.
+	admin off
+	auto_https disable_redirects
+}
+
+local.sebbejohansson.com {
+	tls internal
+	reverse_proxy localhost:3000
+}

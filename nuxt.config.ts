@@ -95,6 +95,10 @@ export default defineNuxtConfig({
   },
 
   vite: {
+    server: {
+      // Reached through the local Caddy proxy (see Caddyfile) for the Storyblok editor.
+      allowedHosts: ['local.sebbejohansson.com'],
+    },
     css: {
       preprocessorOptions: {
         scss: {
