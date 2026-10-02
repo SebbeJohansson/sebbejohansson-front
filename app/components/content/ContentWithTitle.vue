@@ -20,20 +20,16 @@
 <style scoped lang="scss">
 @use "@/assets/styles/foundation/mixins.scss";
 .content-with-title__title {
+  margin: 0 0 1.5rem;
   font-family: $body-font;
+  font-size: clamp(3rem, 2rem + 3vw, 4.5rem);
   font-weight: 200;
+  letter-spacing: -0.02em;
+  line-height: 1;
   text-align: center;
-  font-size: 4em;
-  margin: 0 15px;
 }
 
 .content-with-title__content {
   text-align: center;
-}
-
-@include mixins.for-phone-and-tablet-only() {
-  .content-with-title__title {
-    font-size: 3em;
-  }
 }
 </style>

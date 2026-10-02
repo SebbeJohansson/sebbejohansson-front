@@ -165,7 +165,7 @@
       <a href="https://www.buymeacoffee.com/sebbejohansson">
         <img src="https://img.buymeacoffee.com/button-api/?text=Buy me a Monster&emoji=🐉&slug=sebbejohansson&button_colour=000000&font_colour=48e704&font_family=Bree&outline_colour=48e704&coffee_colour=48e704" height="40px">
       </a>
-      <p>If you appreciate anything I have built, consider supporting me by fuiling my caffein addiction.</p>
+      <p>If you appreciate anything I have built, consider fueling my caffeine addiction.</p>
     </div>
     <div class="index__trakt">
       <a target="_blank" href="https://trakt.tv/users/redeyeddragon" class="index__trakt-link">
@@ -409,17 +409,55 @@
     }
   }
 
+  &__ai,
+  &__tech {
+    :deep(.content-block__content) {
+      padding: 3.5rem 2rem;
+      @include mixins.for-phone-only() {
+        padding: 2.5rem 1.25rem;
+      }
+    }
+    :deep(.content-with-title__content) {
+      max-width: 62ch;
+      margin: 0 auto;
+      font-family: $body-font;
+      font-size: 1.0625rem;
+      line-height: 1.7;
+      color: $text-muted;
+      p {
+        margin: 0 0 0.75rem;
+      }
+    }
+    .index__button {
+      margin-top: 1.25rem;
+    }
+  }
+
   &__support-me {
-    margin: 1rem auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    margin: 3rem auto 2rem;
+    padding: 0 1rem;
     text-align: center;
+    p {
+      margin: 0;
+      font-size: 0.9375rem;
+      color: $text-muted;
+    }
   }
 
   &__trakt {
-    margin: 1rem auto 0;
+    margin: 0 auto;
+    padding: 0 1rem;
   }
 
   &__trakt-link {
     display: block;
+    overflow: hidden;
+    border: 1px solid $border-dark;
+    border-radius: 10px;
   }
 
   &__trakt-image {
