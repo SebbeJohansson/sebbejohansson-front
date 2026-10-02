@@ -45,36 +45,40 @@
 @use "sass:color";
 @use "@/assets/styles/foundation/mixins.scss";
 .stalk-list {
-  border-bottom: none;
-  max-width: 50%;
-  border-top-left-radius: 60px;
-  border-top-right-radius: 60px;
-  padding: 30px;
-  margin: 0 auto;
-  box-shadow: 0 0 3px color.invert($shadow-dark, $weight: 100%);
+  position: relative;
+  z-index: 1;
+  width: fit-content;
+  max-width: calc(100% - 2rem);
+  margin: 3rem auto -1px;
+  padding: 28px 40px 32px;
+  border-radius: 28px 28px 0 0;
   background-color: color.invert($background-dark, $weight: 100%);
-  margin-top: 30px;
-  margin-bottom: -10px;
 }
 
 .stalk-list__title {
-  margin: 0px;
-  text-align: center;
+  margin: 0 0 18px;
   font-family: $body-font;
-  font-size: 2em;
+  font-size: 1.75rem;
   font-weight: 200;
-  margin-top: 10px;
+  letter-spacing: -0.01em;
+  text-align: center;
   color: color.invert($text-color, $weight: 100%);
 }
 
 .stalk-list__grid {
   display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
 }
 
-@include mixins.for-phone-and-tablet-only() {
+@include mixins.for-phone-only() {
   .stalk-list {
-    max-width: 100%;
-    padding: 6px;
+    padding: 24px 20px 28px;
+  }
+
+  .stalk-list__grid {
+    gap: 12px;
   }
 }
 </style>
