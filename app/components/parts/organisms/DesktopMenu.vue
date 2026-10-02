@@ -63,7 +63,7 @@
   display: block;
   text-decoration: none;
   color: white;
-  font-family: Montserrat, Arial, sans-serif;
+  font-family: $heading-font;
 }
 
 .desktop-menu__logo {

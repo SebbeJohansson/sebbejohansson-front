@@ -35,7 +35,7 @@
 
   &__title {
     text-align: center;
-    font-family: Roboto, Helvetica, Arial, Verdana, sans-serif;
+    font-family: $ui-font;
     font-weight: 400;
     margin: 0 0 5px;
   }

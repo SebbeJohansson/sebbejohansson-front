@@ -40,7 +40,7 @@
 
 .footer__right-text {
   margin: 0 auto;
-  font-family: Montserrat, Arial, sans-serif;
+  font-family: $heading-font;
   color: white;
   font-weight: 100;
   text-align: right;
@@ -68,7 +68,7 @@
 
 .footer__address {
   font-size: 16px;
-  font-family: Montserrat, Arial, sans-serif;
+  font-family: $heading-font;
   color: white;
   font-weight: 100;
   text-decoration: none;

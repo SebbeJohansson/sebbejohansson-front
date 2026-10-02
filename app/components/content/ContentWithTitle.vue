@@ -20,7 +20,7 @@
 <style scoped lang="scss">
 @use "@/assets/styles/foundation/mixins.scss";
 .content-with-title__title {
-  font-family: raleway, Helvetica, Arial, Verdana, sans-serif;
+  font-family: $body-font;
   font-weight: 200;
   text-align: center;
   font-size: 4em;

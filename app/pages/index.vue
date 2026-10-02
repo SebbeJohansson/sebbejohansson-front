@@ -15,48 +15,54 @@
   <div class="page index">
     <div class="index__hero">
       <div class="index__hero-top">
-        <div class="title">
-          <h1>🐉</h1>
-          <h1>Sebastian &quot;Dragon&quot; Johansson</h1>
-          <h1>🐉</h1>
-        </div>
+        <h1 class="index__title">
+          <span class="index__title-emoji" aria-hidden="true">🐉</span>
+          <span>Sebastian &quot;Dragon&quot; Johansson</span>
+          <span class="index__title-emoji" aria-hidden="true">🐉</span>
+        </h1>
         <div class="index__hero-content">
-          <div class="heading">
-            <h2>
+          <div class="index__heading">
+            <h2 class="index__role">
               AI Engineer &amp; Developer
             </h2>
-            <i>putting AI to work, backed by years of building software</i>
+            <p class="index__tagline">
+              putting AI to work, backed by years of building software
+            </p>
           </div>
-          <div class="intro">
+          <div class="index__intro">
             <p>I'm an AI Engineer with over ten years of experience as a full-stack developer.</p>
             <p>I help companies get real value out of AI, and build the software around it.</p>
-            <div class="index__topics">
-              <div class="index__topic">
-                <h4>AI</h4>
-                <ul>
-                  <li>LLM integrations</li>
-                  <li>AI agents &amp; automation</li>
-                  <li>AI-assisted development</li>
-                  <li>Workflows &amp; tooling</li>
-                  <li>Strategy &amp; adoption</li>
-                </ul>
-                <NuxtLink class="index__button" to="/#ai">
-                  Learn more...
-                </NuxtLink>
-              </div>
-              <div class="index__topic">
-                <h4>Software development</h4>
-                <ul>
-                  <li>Vue/Nuxt</li>
-                  <li>Headless CMS (Storyblok)</li>
-                  <li>Ecommerce</li>
-                  <li>APIs &amp; integrations</li>
-                  <li>Unity/Unreal</li>
-                </ul>
-                <NuxtLink class="index__button" to="/#development">
-                  Learn more...
-                </NuxtLink>
-              </div>
+          </div>
+          <div class="index__topics">
+            <div class="index__topic">
+              <h3 class="index__topic-title">
+                AI
+              </h3>
+              <ul>
+                <li>LLM integrations</li>
+                <li>AI agents &amp; automation</li>
+                <li>AI-assisted development</li>
+                <li>Workflows &amp; tooling</li>
+                <li>Strategy &amp; adoption</li>
+              </ul>
+              <NuxtLink class="index__button" to="/#ai">
+                Learn more...
+              </NuxtLink>
+            </div>
+            <div class="index__topic">
+              <h3 class="index__topic-title">
+                Software development
+              </h3>
+              <ul>
+                <li>Vue/Nuxt</li>
+                <li>Headless CMS (Storyblok)</li>
+                <li>Ecommerce</li>
+                <li>APIs &amp; integrations</li>
+                <li>Unity/Unreal</li>
+              </ul>
+              <NuxtLink class="index__button" to="/#development">
+                Learn more...
+              </NuxtLink>
             </div>
           </div>
         </div>
@@ -185,64 +191,115 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    padding-bottom: 1rem;
     .index__hero-top {
-      flex-grow: 1;;
+      flex-grow: 1;
       display: flex;
       flex-direction: column;
       justify-content: center;
-    }
-    .title {
-      display: inline-flex;
-      flex-direction: column;
-      margin: 1rem 0;
       width: 100%;
-      @include mixins.for-tablet-and-desktop-only() {
-        flex-direction: row;
-        justify-content: center;
-      }
-      h1 {
-        text-align: center;
-        font-family: "Montserrat", sans-serif;
-        margin: 0;
-        line-height: 1;
-      }
-      h2 {
-        text-align: center;
-        line-height: 1;
-      }
-    }
-    .heading {
-      font-family: math, serif;
-      h2 {
-        line-height: 1;
-      }
+      padding: 3rem 0 2rem;
     }
     &-content {
-      max-width: 800px;
+      max-width: 760px;
+      width: 100%;
       margin: 0 auto;
       padding: 0 1rem;
+      text-align: center;
     }
   }
-  &__topics {
+
+  &__title {
     display: flex;
-    justify-content: space-around;
-    margin-top: 1rem;
-    gap: 1rem;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 0.35em;
+    margin: 0 0 1.5rem;
+    padding: 0 1rem;
+    font-family: $heading-font;
+    font-size: clamp(1.75rem, 1rem + 3.2vw, 3.25rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+    text-align: center;
+    text-wrap: balance;
     @include mixins.for-phone-only() {
-      flex-direction: column;
-      align-items: flex-start;
+      .index__title-emoji {
+        display: none;
+      }
     }
-    .index__topic ul {
+  }
+
+  &__heading {
+    margin-bottom: 1.25rem;
+  }
+
+  &__role {
+    margin: 0;
+    font-family: $heading-font;
+    font-size: clamp(1.15rem, 0.9rem + 1vw, 1.5rem);
+    font-weight: 500;
+    line-height: 1.3;
+  }
+
+  &__tagline {
+    margin: 0.35rem 0 0;
+    font-style: italic;
+    font-size: 1rem;
+    color: $text-muted;
+  }
+
+  &__intro {
+    font-size: 1.125rem;
+    line-height: 1.6;
+    color: $text-muted;
+    p {
       margin: 0;
+    }
+  }
+
+  &__topics {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-top: 2.25rem;
+    text-align: left;
+    @include mixins.for-phone-only() {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  &__topic {
+    display: flex;
+    flex-direction: column;
+    padding: 1.5rem;
+    background-color: $cover-dark;
+    border: 1px solid $border-dark;
+    border-radius: 10px;
+    box-shadow: 0 4px 16px $shadow-dark;
+    ul {
+      flex-grow: 1;
+      margin: 0 0 1.5rem;
       padding: 0;
       list-style: disc;
       li {
-        margin: 0;
+        margin: 0 0 0.4rem 1.2rem;
         padding: 0;
-        text-align: left;
-        margin-left: 1.2rem;
+        line-height: 1.4;
       }
     }
+    .index__button {
+      margin: 0;
+      width: 100%;
+    }
+  }
+
+  &__topic-title {
+    margin: 0 0 0.85rem;
+    font-family: $heading-font;
+    font-size: 1.1rem;
+    font-weight: 600;
   }
 
   :deep(.desktop-menu__logo-wrapper){

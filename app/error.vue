@@ -53,7 +53,7 @@
 }
 
 .error-page__code {
-  font-family: Montserrat, Arial, sans-serif;
+  font-family: $heading-font;
   font-size: 5em;
   margin: 0;
   line-height: 1;

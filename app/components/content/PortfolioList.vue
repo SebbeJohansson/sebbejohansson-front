@@ -75,7 +75,7 @@
 .portfolio-list__title {
   margin: 0px;
   text-align: center;
-  font-family: raleway, Helvetica, Arial, Verdana, sans-serif;
+  font-family: $body-font;
   font-size: 2em;
   font-weight: 400;
   margin-top: 10px;

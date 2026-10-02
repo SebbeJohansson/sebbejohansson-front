@@ -77,7 +77,7 @@
 
 .blog-post-list__categories-title {
   margin: 1rem 0;
-  font-family: raleway, Helvetica, Arial, Verdana, sans-serif;
+  font-family: $body-font;
   font-weight: 200;
   text-align: center;
 }

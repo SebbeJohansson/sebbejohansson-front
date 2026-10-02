@@ -4,20 +4,34 @@
 {
   display: inline-block;
   background-color: $cover-light;
+  color: $text-color;
   text-decoration: none;
   text-align: center;
-  border-radius: 2px;
-  padding: 16px 2rem;
+  border-radius: 6px;
+  padding: 14px 1.75rem;
+  font-family: $body-font;
   font-size: 16px;
+  font-weight: 500;
   line-height: 18px;
-  border: none;
+  border: 1px solid $cover-lighter;
   cursor: pointer;
   outline: none;
+  transition: background-color 0.15s ease, border-color 0.15s ease, transform 0.15s ease;
+
+  &:focus-visible {
+    outline: 2px solid $text-color;
+    outline-offset: 2px;
+  }
+
+  &:active {
+    transform: translateY(1px);
+  }
 }
 
 @mixin btn-primary-hover()
 {
   background-color: $background-dark;
+  border-color: $cover-light;
 }
 
 @mixin btn-primary-disabled()

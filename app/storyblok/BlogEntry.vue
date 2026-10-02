@@ -67,7 +67,7 @@
 
   &__title {
     text-align: left;
-    font-family: Roboto, Helvetica, Arial, Verdana, sans-serif;
+    font-family: $ui-font;
     font-weight: 400;
     margin: 0 0 5px;
   }
@@ -79,7 +79,7 @@
 
   &__date {
     text-align: left;
-    font-family: Roboto, Helvetica, Arial, Verdana, sans-serif;
+    font-family: $ui-font;
     font-weight: 400;
     margin: 0 0 5px;
   }
@@ -87,7 +87,7 @@
   &__content {
     line-height: 1.5em;
     text-align: left;
-    font-family: Roboto, Helvetica, Arial, Verdana, sans-serif;
+    font-family: $ui-font;
   }
 }
 </style>

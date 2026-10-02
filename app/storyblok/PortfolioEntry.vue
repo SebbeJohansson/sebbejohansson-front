@@ -92,7 +92,7 @@
   width: 100%;
 
   &__title {
-    font-family: Roboto, Helvetica, Arial, Verdana, sans-serif;
+    font-family: $ui-font;
     font-size: 2em;
     font-weight: 400;
     margin: 0 0 10px;
