@@ -31,7 +31,7 @@ export default defineNuxtConfig({
       meta: [
         { charset: 'utf-8' },
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-        { name: 'description', content: '' },
+        { name: 'description', content: 'Sebastian Johansson - AI Engineer and developer helping companies with AI and software development.' },
       ],
       link: [
         { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },

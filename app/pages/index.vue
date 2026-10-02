@@ -6,7 +6,7 @@
     title: 'SebbeJohansson',
     meta: [{
       name: 'description',
-      content: 'Full-stack software engineer focusing on Web and Games.',
+      content: 'AI Engineer and developer helping companies with AI and software development.',
     }],
   });
 </script>
@@ -23,39 +23,37 @@
         <div class="index__hero-content">
           <div class="heading">
             <h2>
-              Developer and Mentor
+              AI Engineer &amp; Developer
             </h2>
-            <i>storyblok and nuxt fanatic</i>
+            <i>putting AI to work, backed by years of building software</i>
           </div>
           <div class="intro">
-            <p>After working as a developer for many years, I have many times found myself being a mentor for other developers with technical and career guidance.</p>
-            <p>I offer support and guidance for both of these topics.</p>
+            <p>I'm an AI Engineer with over ten years of experience as a full-stack developer.</p>
+            <p>I help companies get real value out of AI, and build the software around it.</p>
             <div class="index__topics">
               <div class="index__topic">
-                <h4>Technical</h4>
+                <h4>AI</h4>
                 <ul>
-                  <li>Vue/Nuxt</li>
-                  <li>CMSs</li>
-                  <li>Ecommerce</li>
-                  <li>Unity</li>
-                  <li>Unreal</li>
-                  <li>much more...</li>
+                  <li>LLM integrations</li>
+                  <li>AI agents &amp; automation</li>
+                  <li>AI-assisted development</li>
+                  <li>Workflows &amp; tooling</li>
+                  <li>Strategy &amp; adoption</li>
                 </ul>
-                <NuxtLink class="index__button" to="/#technicalsupport">
+                <NuxtLink class="index__button" to="/#ai">
                   Learn more...
                 </NuxtLink>
               </div>
               <div class="index__topic">
-                <h4>Career</h4>
+                <h4>Software development</h4>
                 <ul>
-                  <li>Job Hunting</li>
-                  <li>Interviews</li>
-                  <li>CVs</li>
-                  <li>Portfolio</li>
-                  <li>Personal Branding</li>
-                  <li>much more...</li>
+                  <li>Vue/Nuxt</li>
+                  <li>Headless CMS (Storyblok)</li>
+                  <li>Ecommerce</li>
+                  <li>APIs &amp; integrations</li>
+                  <li>Unity/Unreal</li>
                 </ul>
-                <NuxtLink class="index__button" to="/#careersupport">
+                <NuxtLink class="index__button" to="/#development">
                   Learn more...
                 </NuxtLink>
               </div>
@@ -70,9 +68,11 @@
               About me
             </h2>
             <p>
-              My name is Sebastian Johansson. I am a web developer/designer, game developer, and all-around geek. My main interests are computers and the internet; I love tech and gadgets.
+              My name is Sebastian Johansson. I work as an AI Engineer, with a background of more than ten years as a full-stack developer across web, ecommerce, and games.
             </p>
-            <p>Anyway... I hope you enjoy your stay.</p>
+            <p>
+              Today I help companies bring AI into their products and workflows, and build the software that makes it work. Outside of work I'm an all-around geek who loves tech and gadgets.
+            </p>
           </div>
           <div>
             <h2>
@@ -93,7 +93,7 @@
                 <li>
                   <a href="https://steamcommunity.com/id/redeyeddragon/" rel="me">Steam</a>
                 </li>
-                <li>
+                <li v-if="false">
                   <a href="https://twitter.com/supersebban" rel="me">Twitter</a>
                 </li>
                 <li>
@@ -109,67 +109,31 @@
       </content-block>
     </div>
     <parts-organisms-desktop-menu />
-    <content-with-title id="technicalsupport" :title="'Development mentorship & support'" class="index__tech">
+    <content-with-title id="ai" :title="'AI'" class="index__ai">
       <p>
-        After over ten years as a developer, I have extensive experience with many languages and frameworks. Since I started to develop software, I have also helped others learn how to do it.
-      </p>
-      <p>
-        You can check my portfolio and my GitHub to learn more about my knowledge of specific languages and systems.
+        I work as an AI Engineer, helping teams figure out where AI actually makes a difference and then building it.
       </p>
       <p>
-        If you have an issue that you need help with, the easiest way to reach out is on Discord. My handle is Sebastian#0002.
+        That can mean integrating LLMs into a product, setting up agents that automate repetitive work, or getting a dev team productive with AI-assisted coding.
       </p>
-      <p v-if="false">
-        Below you can see the services I offer and whether I take a fee for them or not. The price often depends on how much active coding it involves.
+      <p>
+        If you want to talk about what AI could do for your company, reach out.
       </p>
-      <div v-if="false">
-        <ul class="service-list">
-          <li>
-            <span class="service-title">
-              Hints and guidance with specific small issue
-            </span>
-            <span class="service-fee">
-              Free!
-            </span>
-          </li>
-          <li>
-            <span class="service-title">
-              Help with specific issue (until fixed)
-            </span>
-            <span class="service-fee">
-              50€ per hour
-            </span>
-          </li>
-          <li>
-            <span class="service-title">
-              Assist with a specific feature from start to finish within an existing project
-            </span>
-            <span class="service-fee">
-              120€ per hour
-            </span>
-          </li>
-          <li>
-            <span class="service-title">
-              Develop a feature from start to finish within an existing project
-            </span>
-            <span class="service-fee">
-              Please contact for quote
-            </span>
-          </li>
-          <li>
-            <span class="service-title">
-              Develop a website or application from start to finish
-            </span>
-            <span class="service-fee">
-              Please contact for quote
-            </span>
-          </li>
-        </ul>
-        <p v-if="false">
-          (note: prices are 50% off if you can prove you are a student)
-        </p>
-      </div>
+      <NuxtLink class="index__button" to="mailto:hello@sebbejohansson.com">
+        Get in touch
+      </NuxtLink>
+    </content-with-title>
 
+    <content-with-title id="development" :title="'Software development'" class="index__tech">
+      <p>
+        After over ten years as a developer, I have worked with many languages, frameworks, and platforms, from web and ecommerce to games.
+      </p>
+      <p>
+        I help companies build new products, extend existing ones, and solve the technical problems that slow teams down.
+      </p>
+      <p>
+        You can check my portfolio and my GitHub to see what I have built.
+      </p>
       <NuxtLink class="index__button" to="/portfolio">
         Checkout my portfolio
       </NuxtLink>
@@ -177,71 +141,6 @@
         Checkout my github
       </NuxtLink>
     </content-with-title>
-    <content-with-title id="careersupport" :title="'Career mentorship & support'" class="index__career">
-      <p>
-        As a side-effect of working as, with, and for developers for the past years, I have learned much about getting a developer job and progressing in a software development career.
-      </p>
-      <p>
-        I have helped countless developers choose education paths, how to write a resume, what titles help when looking for new jobs, and much more.
-      </p>
-      <p v-if="false">
-        Below you can see the services I offer and whether I take a fee for them or not.
-      </p>
-      <div v-if="false">
-        <ul class="service-list">
-          <li>
-            <span class="service-title">
-              Overview check of CV/Resume
-            </span>
-            <span class="service-fee">
-              Free! (one-time)
-            </span>
-          </li>
-          <li>
-            <span class="service-title">
-              Help getting your first job (max 2 hours)
-            </span>
-            <span class="service-fee">
-              Free! (one-time)
-            </span>
-          </li>
-          <li>
-            <span class="service-title">
-              Help with writing a CV/Resume
-            </span>
-            <span class="service-fee">
-              10€ per hour
-            </span>
-          </li>
-          <li>
-            <span class="service-title">
-              Help with writing a personal/cover letter
-            </span>
-            <span class="service-fee">
-              24€ per hour
-            </span>
-          </li>
-          <li>
-            <span class="service-title">
-              Long term mentorship (1-2 hours per week)
-            </span>
-            <span class="service-fee">
-              30€ per week
-            </span>
-          </li>
-          <li>
-            <span class="service-title">
-              Additional support and guidance
-            </span>
-            <span class="service-fee">
-              Please contact for quote
-            </span>
-          </li>
-        </ul>
-        <p>(note: prices are 50% off if you can prove you are a student)</p>
-      </div>
-    </content-with-title>
-
     <div class="index__support-me">
       <p>Support me by fuiling my caffein addiction.</p>
       <a href="https://www.buymeacoffee.com/sebbejohansson">
@@ -267,7 +166,6 @@
 
 <style scoped lang="scss">
 @use "@/assets/styles/elements/buttons.scss";
-@use "@/assets/styles/elements/lists.scss";
 @use "@/assets/styles/foundation/mixins.scss";
 .index {
   .index__button {
@@ -363,11 +261,6 @@
     .title {
       margin: 0;
     }
-  }
-
-  .service-list {
-    @include lists.service-list();
-    margin-top: 1rem;
   }
 
   &__support-me {
