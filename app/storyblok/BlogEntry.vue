@@ -82,6 +82,7 @@
   }
 
   &__content {
+    min-width: 0;
     font-family: $body-font;
     font-size: 1.0625rem;
     line-height: 1.7;
@@ -100,6 +101,13 @@
       &:hover {
         text-decoration: none;
       }
+    }
+
+    // Code blocks and gists scroll on their own instead of widening the page.
+    :deep(pre),
+    :deep(.gist) {
+      max-width: 100%;
+      overflow-x: auto;
     }
 
     :deep(img) {
