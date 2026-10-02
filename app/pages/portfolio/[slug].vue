@@ -16,11 +16,12 @@
     });
     story.value = response?.data?.story;
 
+    // The bridge is bundled and loaded asynchronously, so `window.StoryblokBridge` is not
+    // there yet on mount. This waits for it, and click-to-edit only works once it exists.
     onMounted(() => {
-      const { StoryblokBridge } = window;
-      const storyblokInstance = new StoryblokBridge();
-      storyblokInstance.on(['published', 'change', 'input'], (event) => {
-        if (event?.story) { story.value = event.story; }
+      if (!story.value?.id) { return; }
+      useStoryblokBridge(story.value.id, (newStory) => {
+        story.value = newStory as StoryblokStory;
       });
     });
   }
