@@ -40,7 +40,7 @@
 
 <template>
   <div class="portfolio-list">
-    <content-with-title :title="'Portfolio'">
+    <content-with-title :title="'Portfolio'" plain>
       <div class="portfolio-list__grid">
         <parts-molecules-big-portfolio-entry
           v-for="entry in bigPortfolioEntries"
@@ -55,12 +55,14 @@
       <h3 class="portfolio-list__title">
         Other Projects
       </h3>
-      <parts-molecules-small-portfolio-entry
-        v-for="entry in smallPortfolioEntries"
-        :key="entry.id"
-        :title="entry.title"
-        :link="entry.link"
-      />
+      <div class="portfolio-list__others">
+        <parts-molecules-small-portfolio-entry
+          v-for="entry in smallPortfolioEntries"
+          :key="entry.id"
+          :title="entry.title"
+          :link="entry.link"
+        />
+      </div>
     </content-with-title>
   </div>
 </template>
@@ -69,16 +71,26 @@
 @use "@/assets/styles/foundation/mixins.scss";
 .portfolio-list__grid {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
 }
 
 .portfolio-list__title {
-  margin: 0px;
-  text-align: center;
+  margin: 4rem 0 1.25rem;
   font-family: $body-font;
-  font-size: 2em;
-  font-weight: 400;
-  margin-top: 10px;
+  font-size: 2.5rem;
+  font-weight: 200;
+  letter-spacing: -0.01em;
+  text-align: center;
+}
+
+.portfolio-list__others {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem 1.75rem;
+  max-width: 800px;
+  margin: 0 auto;
 }
 
 @include mixins.for-phone-only() {

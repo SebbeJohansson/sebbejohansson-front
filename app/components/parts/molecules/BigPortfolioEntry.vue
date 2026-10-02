@@ -55,52 +55,59 @@
 </template>
 
 <style scoped lang="scss">
-@use "@/assets/styles/foundation/mixins.scss";
 .big-portfolio-entry {
-  padding: 0.5em;
-
   &__container {
     display: flex;
     flex-direction: column;
     height: 100%;
-    padding: 10px;
-    background: transparent;
+    overflow: hidden;
+    background-color: $cover-dark;
     border: 1px solid $border-dark;
-    box-shadow: 0 0 5px $shadow-dark;
-    font-size: 1rem;
-    vertical-align: top;
-    text-decoration: none;
+    border-radius: 12px;
     color: $text-color;
+    text-align: left;
+    text-decoration: none;
+    transition: border-color 0.2s ease;
+  }
+
+  a.big-portfolio-entry__container {
+    &:hover {
+      border-color: rgba($text-color, 0.25);
+    }
+    &:focus-visible {
+      outline: 2px solid $text-color;
+      outline-offset: 2px;
+    }
   }
 
   &__image {
+    aspect-ratio: 16 / 9;
     width: 100%;
-    margin: 0 0 10px;
-    border-radius: 10px;
-    height: 27em;
     overflow: hidden;
+    :deep(img) {
+      display: block;
+      object-position: top;
+    }
   }
 
   &__content {
     flex-grow: 1;
+    padding: 1rem 1.25rem 1.25rem;
   }
 
   &__title {
-    text-align: center;
-    font-family: $ui-font;
-    font-weight: 400;
-    margin: 0 0 5px;
+    margin: 0 0 0.4rem;
+    font-family: $heading-font;
+    font-size: 1.0625rem;
+    font-weight: 600;
   }
 
   &__description {
-    line-height: 1.5em;
-    color: $text-color;
-  }
-
-  @include mixins.for-phone-and-tablet-only() {
-    &__image {
-      height: 16em;
-    }
+    margin: 0;
+    font-family: $body-font;
+    font-size: 0.9375rem;
+    line-height: 1.55;
+    color: $text-muted;
   }
 }
 </style>
