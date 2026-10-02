@@ -46,7 +46,7 @@
                 <li>Strategy &amp; adoption</li>
               </ul>
               <NuxtLink class="index__button" to="/#ai">
-                Learn more...
+                Learn more
               </NuxtLink>
             </div>
             <div class="index__topic">
@@ -61,55 +61,69 @@
                 <li>Unity/Unreal</li>
               </ul>
               <NuxtLink class="index__button" to="/#development">
-                Learn more...
+                Learn more
               </NuxtLink>
             </div>
           </div>
         </div>
       </div>
-      <content-block>
+      <content-block class="index__about-block">
         <div class="index__about">
           <div>
-            <h2>
+            <h2 class="index__about-title">
               About me
             </h2>
-            <p>
-              My name is Sebastian Johansson. I work as an AI Engineer, with a background of more than ten years as a full-stack developer across web, ecommerce, and games.
-            </p>
-            <p>
-              Today I help companies bring AI into their products and workflows, and build the software that makes it work. Outside of work I'm an all-around geek who loves tech and gadgets.
-            </p>
+            <div class="index__about-text">
+              <p>
+                My name is Sebastian Johansson. I work as an AI Engineer, with a background of more than ten years as a full-stack developer across web, ecommerce, and games.
+              </p>
+              <p>
+                Today I help companies bring AI into their products and workflows, and build the software that makes it work. Outside of work I'm an all-around geek who loves tech and gadgets.
+              </p>
+            </div>
           </div>
           <div>
-            <h2>
-              🗨️ 7 ways to reach me 🗨️
+            <h2 class="index__about-title">
+              Ways to reach me
             </h2>
-            <div>
-              <p>(discord is always prefered)</p>
-              <ul>
-                <li>
-                  <a href="https://discord.com/channels/@me/Sebastian#0002/" rel="me">Discord (Sebastian#0002)</a>
-                </li>
-                <li>
-                  <a href="mailto:hello@sebbejohansson.com" rel="me">Mail</a>
-                </li>
-                <li>
-                  <a href="https://www.linkedin.com/in/sebbejohansson/" rel="me">Linkedin</a>
-                </li>
-                <li>
-                  <a href="https://steamcommunity.com/id/redeyeddragon/" rel="me">Steam</a>
-                </li>
-                <li v-if="false">
-                  <a href="https://twitter.com/supersebban" rel="me">Twitter</a>
-                </li>
-                <li>
-                  <a href="https://www.instagram.com/supersebban/" rel="me">Instagram DM</a>
-                </li>
-                <li>
-                  Call
-                </li>
-              </ul>
-            </div>
+            <ul class="index__contacts">
+              <li>
+                <a class="index__contact" href="https://discord.com/channels/@me/Sebastian#0002/" rel="me">
+                  <span class="index__contact-name">Discord (Sebastian#0002)</span>
+                  <span class="index__contact-badge">Preferred</span>
+                </a>
+              </li>
+              <li>
+                <a class="index__contact" href="mailto:hello@sebbejohansson.com" rel="me">
+                  <span class="index__contact-name">Mail</span>
+                </a>
+              </li>
+              <li>
+                <a class="index__contact" href="https://www.linkedin.com/in/sebbejohansson/" rel="me">
+                  <span class="index__contact-name">LinkedIn</span>
+                </a>
+              </li>
+              <li>
+                <a class="index__contact" href="https://steamcommunity.com/id/redeyeddragon/" rel="me">
+                  <span class="index__contact-name">Steam</span>
+                </a>
+              </li>
+              <li v-if="false">
+                <a class="index__contact" href="https://twitter.com/supersebban" rel="me">
+                  <span class="index__contact-name">Twitter</span>
+                </a>
+              </li>
+              <li>
+                <a class="index__contact" href="https://www.instagram.com/supersebban/" rel="me">
+                  <span class="index__contact-name">Instagram DM</span>
+                </a>
+              </li>
+              <li>
+                <div class="index__contact">
+                  <span class="index__contact-name">Call</span>
+                </div>
+              </li>
+            </ul>
           </div>
         </div>
       </content-block>
@@ -176,7 +190,7 @@
 .index {
   .index__button {
     @include buttons.btn-primary();
-    margin: 0.5rem;
+    margin: 1rem 0.875rem 0;
     &:hover {
       @include buttons.btn-primary-hover();
     }
@@ -290,8 +304,8 @@
       }
     }
     .index__button {
+      align-self: flex-start;
       margin: 0;
-      width: 100%;
     }
   }
 
@@ -306,17 +320,92 @@
     display: none;
   }
 
+  &__about-block {
+    width: 100%;
+    :deep(.content-block__content) {
+      padding: 2rem;
+      @include mixins.for-phone-only() {
+        padding: 1.25rem;
+      }
+    }
+  }
+
   &__about {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1.1fr 1fr;
     gap: 4rem;
     @include mixins.for-phone-only() {
       grid-template-columns: 1fr;
-      gap: 1rem;
+      gap: 2rem;
     }
+  }
 
-    .title {
-      margin: 0;
+  &__about-title {
+    margin: 0 0 0.9rem;
+    font-family: $heading-font;
+    font-size: 1.375rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+
+  &__about-text {
+    max-width: 60ch;
+    font-family: $body-font;
+    font-size: 1rem;
+    line-height: 1.7;
+    color: $text-muted;
+    p {
+      margin: 0 0 0.75rem;
+    }
+  }
+
+  &__contacts {
+    width: fit-content;
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-family: $body-font;
+  }
+
+  &__contact {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.4rem 0;
+    color: $text-color;
+    text-decoration: none;
+  }
+
+  &__contact-name {
+    font-weight: 500;
+  }
+
+  &__contact-badge {
+    padding: 3px 8px;
+    border: 1px solid rgba($text-color, 0.3);
+    border-radius: 999px;
+    font-family: $heading-font;
+    font-size: 0.625rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    line-height: 1;
+    text-transform: uppercase;
+  }
+
+  // Only real links get the underline; "Call" is plain text on purpose.
+  a.index__contact {
+    .index__contact-name {
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+    &:hover .index__contact-name {
+      text-decoration: none;
+    }
+    &:focus-visible {
+      outline: 2px solid $text-color;
+      outline-offset: 2px;
+      border-radius: 2px;
     }
   }
 
