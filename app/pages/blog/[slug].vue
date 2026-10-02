@@ -45,6 +45,7 @@
 
 <template>
   <div class="page blog-entry-page">
+    <parts-atoms-back-link to="/blog/" label="All blog posts" />
     <component
       :is="$resolveStoryBlokComponent(story)"
       v-if="story?.content"
@@ -60,7 +61,9 @@
 
 .blog-entry-page {
   @include mixins.content-width();
-
-  padding: 1rem;
+  width: 100%;
+  padding-top: 3.5rem;
+  padding-bottom: 4rem;
+  box-sizing: border-box;
 }
 </style>

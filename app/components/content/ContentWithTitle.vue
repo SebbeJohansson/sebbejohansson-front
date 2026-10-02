@@ -3,25 +3,27 @@
     title: string;
     // Renders without the surrounding card, for content that has its own cards.
     plain?: boolean;
+    headingTag?: 'h1' | 'h2';
   }>(), {
     plain: false,
+    headingTag: 'h2',
   });
 </script>
 
 <template>
   <div class="content-with-title" :class="{ 'content-with-title--plain': plain }">
     <div v-if="plain" class="content-with-title__plain">
-      <h2 class="content-with-title__title">
+      <component :is="headingTag" class="content-with-title__title">
         {{ title }}
-      </h2>
+      </component>
       <div class="content-with-title__content">
         <slot />
       </div>
     </div>
     <content-block v-else>
-      <h2 class="content-with-title__title">
+      <component :is="headingTag" class="content-with-title__title">
         {{ title }}
-      </h2>
+      </component>
       <div class="content-with-title__content">
         <slot />
       </div>

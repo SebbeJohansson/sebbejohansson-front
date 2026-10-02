@@ -24,6 +24,7 @@
 
 <template>
   <div v-editable="blok" class="portfolio-entry">
+    <parts-atoms-back-link to="/portfolio/" label="All projects" />
     <div v-if="blok" class="portfolio">
       <h1 v-if="title" class="portfolio__title">
         {{ title }}

@@ -40,7 +40,7 @@
 
 <template>
   <div class="portfolio-list">
-    <content-with-title :title="'Portfolio'" plain>
+    <content-with-title :title="'Portfolio'" plain heading-tag="h1">
       <div class="portfolio-list__grid">
         <parts-molecules-big-portfolio-entry
           v-for="entry in bigPortfolioEntries"
