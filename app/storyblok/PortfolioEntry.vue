@@ -23,162 +23,183 @@
 </script>
 
 <template>
-  <div v-editable="blok">
-    <content-block>
-      <div v-if="blok" class="portfolio">
-        <div class="portfolio__content-wrapper">
-          <h3 v-if="title" class="portfolio__title">
-            {{ title }}
-          </h3>
-          <div class="portfolio__sidebar">
-            <parts-atoms-image
-              class="portfolio__image"
-              :image="imageUrl"
-              :alt="title"
-              :mobile-size="300"
-              :tablet-size="157"
-              :desktop-size="270"
-              loading="eager"
-            />
-            <div class="portfolio__info-box">
-              <div v-if="duration" class="portfolio__sidebar-line">
-                <span class="portfolio__sidebar-line-title">Duration</span>
-                {{ duration }}
-              </div>
-              <div v-if="role" class="portfolio__sidebar-line">
-                <span class="portfolio__sidebar-line-title">Role</span>
-                {{ role }}
-              </div>
-              <div v-if="link" class="portfolio__sidebar-line">
-                <span class="portfolio__sidebar-line-title">View</span>
-                <NuxtLink :href="link" target="_blank" class="portfolio__sidebar-line-link">
-                  Click here to look at {{ title }}
-                </NuxtLink>
-              </div>
-              <div v-if="code" class="portfolio__sidebar-line">
-                <span class="portfolio__sidebar-line-title">Code</span>
-                <NuxtLink :href="code" target="_blank" class="portfolio__sidebar-line-link">
-                  Click here for the code to {{ title }}
-                </NuxtLink>
-              </div>
-            </div>
+  <div v-editable="blok" class="portfolio-entry">
+    <parts-atoms-back-link to="/portfolio/" label="All projects" />
+    <div v-if="blok" class="portfolio">
+      <h1 v-if="title" class="portfolio__title">
+        {{ title }}
+      </h1>
+      <aside class="portfolio__sidebar">
+        <parts-atoms-image
+          class="portfolio__image"
+          :image="imageUrl"
+          :alt="title"
+          :mobile-size="400"
+          :tablet-size="400"
+          :desktop-size="800"
+          loading="eager"
+        />
+        <dl class="portfolio__info-box">
+          <div v-if="duration" class="portfolio__sidebar-line">
+            <dt class="portfolio__sidebar-line-title">
+              Duration
+            </dt>
+            <dd>{{ duration }}</dd>
           </div>
-          <div class="portfolio__content">
-            <template v-if="Array.isArray(content)">
-              <component
-                :is="$resolveStoryBlokComponent(block)"
-                v-for="block in content"
-                :key="block._uid"
-                :blok="block"
-              />
-            </template>
-            <!-- eslint-disable-next-line vue/no-v-html -->
-            <div v-else v-html="content" />
+          <div v-if="role" class="portfolio__sidebar-line">
+            <dt class="portfolio__sidebar-line-title">
+              Role
+            </dt>
+            <dd>{{ role }}</dd>
           </div>
-        </div>
+          <div v-if="link" class="portfolio__sidebar-line">
+            <dt class="portfolio__sidebar-line-title">
+              View
+            </dt>
+            <dd>
+              <NuxtLink :href="link" target="_blank" class="portfolio__sidebar-line-link">
+                Visit site
+              </NuxtLink>
+            </dd>
+          </div>
+          <div v-if="code" class="portfolio__sidebar-line">
+            <dt class="portfolio__sidebar-line-title">
+              Code
+            </dt>
+            <dd>
+              <NuxtLink :href="code" target="_blank" class="portfolio__sidebar-line-link">
+                View code
+              </NuxtLink>
+            </dd>
+          </div>
+        </dl>
+      </aside>
+      <div class="portfolio__content">
+        <template v-if="Array.isArray(content)">
+          <component
+            :is="$resolveStoryBlokComponent(block)"
+            v-for="block in content"
+            :key="block._uid"
+            :blok="block"
+          />
+        </template>
+        <!-- eslint-disable-next-line vue/no-v-html -->
+        <div v-else v-html="content" />
       </div>
-    </content-block>
+    </div>
   </div>
 </template>
 
 <style scoped lang="scss">
 @use "@/assets/styles/foundation/mixins.scss";
-.portfolio {
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 20px;
+.portfolio-entry {
+  @include mixins.content-width();
   width: 100%;
+  padding-top: 3.5rem;
+  padding-bottom: 4rem;
+  box-sizing: border-box;
+}
+
+.portfolio {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 400px;
+  grid-template-areas:
+    "title side"
+    "content side";
+  grid-template-rows: auto 1fr;
+  column-gap: 4rem;
 
   &__title {
-    font-family: Roboto, Helvetica, Arial, Verdana, sans-serif;
-    font-size: 2em;
-    font-weight: 400;
-    margin: 0 0 10px;
-    grid-column: 1 / 4;
-    grid-row: 1;
-  }
-
-  &__content-wrapper {
-    flex-grow: 1;
-    display: grid;
-    grid-template-rows: auto;
-    grid-template-columns: repeat(4, 1fr);
-  }
-
-  &__content-wrapper p {
-    margin: 0 0 10px 0;
-    font-size: 16px;
-    line-height: 1.618em;
+    grid-area: title;
+    margin: 0 0 1.75rem;
+    font-family: $body-font;
+    font-size: clamp(2.5rem, 1.75rem + 2.5vw, 3.75rem);
+    font-weight: 200;
+    letter-spacing: -0.02em;
+    line-height: 1.05;
   }
 
   &__content {
-    grid-column: 1 / 4;
-    grid-row: 2/5;
-    margin-right: 30px;
+    grid-area: content;
+    max-width: 65ch;
+    font-family: $body-font;
+    font-size: 1.0625rem;
+    line-height: 1.7;
+    color: $text-muted;
+    :deep(p) {
+      margin: 0 0 1rem;
+    }
   }
 
   &__sidebar {
-    padding: 20px;
-    background: transparent;
+    grid-area: side;
+    overflow: hidden;
+    background-color: $cover-dark;
     border: 1px solid $border-dark;
-    box-shadow: 0 0 5px $shadow-dark;
-    border-radius: 5px;
-    grid-column: 4 / 5;
-    grid-row: 1 / 8;
+    border-radius: 12px;
   }
 
+  // Fixed ratio so the box keeps its size before the image has loaded.
   &__image {
-    max-width: 100%;
-    margin: auto;
     display: block;
-    border-radius: 6px;
-
-    margin-bottom: 20px;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    background-color: $cover-light;
+    :deep(img) {
+      display: block;
+      object-position: top;
+    }
   }
 
-  &__info-box {}
-
-  &__sidebar-line {
-    margin-top: 10px;
+  &__info-box {
+    display: grid;
+    gap: 1rem;
+    margin: 0;
+    padding: 1.25rem 1.5rem 1.5rem;
+    font-family: $body-font;
+    dd {
+      margin: 0;
+      font-size: 0.9375rem;
+      font-weight: 500;
+    }
   }
 
   &__sidebar-line-title {
-    font-weight: bold;
-    margin-right: 10px;
+    margin-bottom: 0.25rem;
+    font-family: $heading-font;
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba($text-color, 0.5);
   }
 
   &__sidebar-line-link {
     color: $text-color;
-    text-decoration: none;
-  }
-
-  &__sidebar-line-link:hover,
-  &__sidebar-line-link:focus {
     text-decoration: underline;
+    text-underline-offset: 3px;
+    &:hover {
+      text-decoration: none;
+    }
+    &:focus-visible {
+      outline: 2px solid $text-color;
+      outline-offset: 2px;
+      border-radius: 2px;
+    }
   }
 
-  @include mixins.for-phone-only() {
-    &__title {
-      grid-column: 1/5;
-    }
-
-    &__content {
-      grid-column: 1/5;
-      grid-row: 3;
-      margin-right: 0;
-    }
+  @include mixins.for-phone-and-tablet-only() {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas:
+      "title"
+      "content"
+      "side";
+    grid-template-rows: auto;
 
     &__sidebar {
-      grid-column: 1/5;
-      grid-row: 2;
-      margin-bottom: 10px;
-    }
-
-    &__info-box {
-      margin-top: -10px;
-      margin-left: 10px;
+      max-width: 400px;
+      margin-top: 1rem;
     }
   }
 }

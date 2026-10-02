@@ -25,20 +25,41 @@
 </template>
 
 <style scoped lang="scss">
+@use "@/assets/styles/foundation/mixins.scss";
 .stalk-entry {
-  width: 5em;
-  margin: 0.8em;
+  width: 56px;
+  @include mixins.for-phone-only() {
+    width: 48px;
+  }
 }
 
 .stalk-entry__container {
+  display: block;
   width: 100%;
   height: 100%;
-  display: block;
+  border-radius: 100%;
+  transition: transform 0.2s cubic-bezier(0.22, 1, 0.36, 1);
+  &:hover {
+    transform: translateY(-3px);
+  }
+  &:focus-visible {
+    outline: 2px solid $background-dark;
+    outline-offset: 3px;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+  }
 }
 
 .stalk-entry__image {
-  border-radius: 100%;
   width: 100%;
   height: auto;
+  border-radius: 100%;
+  overflow: hidden;
+  :deep(img) {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
 }
 </style>

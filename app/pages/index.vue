@@ -15,95 +15,115 @@
   <div class="page index">
     <div class="index__hero">
       <div class="index__hero-top">
-        <div class="title">
-          <h1>🐉</h1>
-          <h1>Sebastian &quot;Dragon&quot; Johansson</h1>
-          <h1>🐉</h1>
-        </div>
+        <h1 class="index__title">
+          <span class="index__title-emoji" aria-hidden="true">🐉</span>
+          <span>Sebastian &quot;Dragon&quot; Johansson</span>
+          <span class="index__title-emoji" aria-hidden="true">🐉</span>
+        </h1>
         <div class="index__hero-content">
-          <div class="heading">
-            <h2>
+          <div class="index__heading">
+            <h2 class="index__role">
               AI Engineer &amp; Developer
             </h2>
-            <i>putting AI to work, backed by years of building software</i>
+            <p class="index__tagline">
+              putting AI to work, backed by years of building software
+            </p>
           </div>
-          <div class="intro">
+          <div class="index__intro">
             <p>I'm an AI Engineer with over ten years of experience as a full-stack developer.</p>
             <p>I help companies get real value out of AI, and build the software around it.</p>
-            <div class="index__topics">
-              <div class="index__topic">
-                <h4>AI</h4>
-                <ul>
-                  <li>LLM integrations</li>
-                  <li>AI agents &amp; automation</li>
-                  <li>AI-assisted development</li>
-                  <li>Workflows &amp; tooling</li>
-                  <li>Strategy &amp; adoption</li>
-                </ul>
-                <NuxtLink class="index__button" to="/#ai">
-                  Learn more...
-                </NuxtLink>
-              </div>
-              <div class="index__topic">
-                <h4>Software development</h4>
-                <ul>
-                  <li>Vue/Nuxt</li>
-                  <li>Headless CMS (Storyblok)</li>
-                  <li>Ecommerce</li>
-                  <li>APIs &amp; integrations</li>
-                  <li>Unity/Unreal</li>
-                </ul>
-                <NuxtLink class="index__button" to="/#development">
-                  Learn more...
-                </NuxtLink>
-              </div>
+          </div>
+          <div class="index__topics">
+            <div class="index__topic">
+              <h3 class="index__topic-title">
+                AI
+              </h3>
+              <ul>
+                <li>LLM integrations</li>
+                <li>AI agents &amp; automation</li>
+                <li>AI-assisted development</li>
+                <li>Workflows &amp; tooling</li>
+                <li>Strategy &amp; adoption</li>
+              </ul>
+              <NuxtLink class="index__button" to="/#ai">
+                Learn more
+              </NuxtLink>
+            </div>
+            <div class="index__topic">
+              <h3 class="index__topic-title">
+                Software development
+              </h3>
+              <ul>
+                <li>Vue/Nuxt</li>
+                <li>Headless CMS (Storyblok)</li>
+                <li>Ecommerce</li>
+                <li>APIs &amp; integrations</li>
+                <li>Unity/Unreal</li>
+              </ul>
+              <NuxtLink class="index__button" to="/#development">
+                Learn more
+              </NuxtLink>
             </div>
           </div>
         </div>
       </div>
-      <content-block>
+      <content-block class="index__about-block">
         <div class="index__about">
           <div>
-            <h2>
+            <h2 class="index__about-title">
               About me
             </h2>
-            <p>
-              My name is Sebastian Johansson. I work as an AI Engineer, with a background of more than ten years as a full-stack developer across web, ecommerce, and games.
-            </p>
-            <p>
-              Today I help companies bring AI into their products and workflows, and build the software that makes it work. Outside of work I'm an all-around geek who loves tech and gadgets.
-            </p>
+            <div class="index__about-text">
+              <p>
+                My name is Sebastian Johansson. I work as an AI Engineer, with a background of more than ten years as a full-stack developer across web, ecommerce, and games.
+              </p>
+              <p>
+                Today I help companies bring AI into their products and workflows, and build the software that makes it work. Outside of work I'm an all-around geek who loves tech and gadgets.
+              </p>
+            </div>
           </div>
           <div>
-            <h2>
-              🗨️ 7 ways to reach me 🗨️
+            <h2 class="index__about-title">
+              Ways to reach me
             </h2>
-            <div>
-              <p>(discord is always prefered)</p>
-              <ul>
-                <li>
-                  <a href="https://discord.com/channels/@me/Sebastian#0002/" rel="me">Discord (Sebastian#0002)</a>
-                </li>
-                <li>
-                  <a href="mailto:hello@sebbejohansson.com" rel="me">Mail</a>
-                </li>
-                <li>
-                  <a href="https://www.linkedin.com/in/sebbejohansson/" rel="me">Linkedin</a>
-                </li>
-                <li>
-                  <a href="https://steamcommunity.com/id/redeyeddragon/" rel="me">Steam</a>
-                </li>
-                <li v-if="false">
-                  <a href="https://twitter.com/supersebban" rel="me">Twitter</a>
-                </li>
-                <li>
-                  <a href="https://www.instagram.com/supersebban/" rel="me">Instagram DM</a>
-                </li>
-                <li>
-                  Call
-                </li>
-              </ul>
-            </div>
+            <ul class="index__contacts">
+              <li>
+                <a class="index__contact" href="https://discord.com/channels/@me/Sebastian#0002/" rel="me">
+                  <span class="index__contact-name">Discord (Sebastian#0002)</span>
+                  <span class="index__contact-badge">Preferred</span>
+                </a>
+              </li>
+              <li>
+                <a class="index__contact" href="mailto:hello@sebbejohansson.com" rel="me">
+                  <span class="index__contact-name">Mail</span>
+                </a>
+              </li>
+              <li>
+                <a class="index__contact" href="https://www.linkedin.com/in/sebbejohansson/" rel="me">
+                  <span class="index__contact-name">LinkedIn</span>
+                </a>
+              </li>
+              <li>
+                <a class="index__contact" href="https://steamcommunity.com/id/redeyeddragon/" rel="me">
+                  <span class="index__contact-name">Steam</span>
+                </a>
+              </li>
+              <li v-if="false">
+                <a class="index__contact" href="https://twitter.com/supersebban" rel="me">
+                  <span class="index__contact-name">Twitter</span>
+                </a>
+              </li>
+              <li>
+                <a class="index__contact" href="https://www.instagram.com/supersebban/" rel="me">
+                  <span class="index__contact-name">Instagram DM</span>
+                </a>
+              </li>
+              <li>
+                <div class="index__contact">
+                  <span class="index__contact-name">Call</span>
+                </div>
+              </li>
+            </ul>
           </div>
         </div>
       </content-block>
@@ -145,7 +165,7 @@
       <a href="https://www.buymeacoffee.com/sebbejohansson">
         <img src="https://img.buymeacoffee.com/button-api/?text=Buy me a Monster&emoji=🐉&slug=sebbejohansson&button_colour=000000&font_colour=48e704&font_family=Bree&outline_colour=48e704&coffee_colour=48e704" height="40px">
       </a>
-      <p>If you appreciate anything I have built, consider supporting me by fuiling my caffein addiction.</p>
+      <p>If you appreciate anything I have built, consider fueling my caffeine addiction.</p>
     </div>
     <div class="index__trakt">
       <a target="_blank" href="https://trakt.tv/users/redeyeddragon" class="index__trakt-link">
@@ -170,7 +190,7 @@
 .index {
   .index__button {
     @include buttons.btn-primary();
-    margin: 0.5rem;
+    margin: 1rem 0.875rem 0;
     &:hover {
       @include buttons.btn-primary-hover();
     }
@@ -185,95 +205,265 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    padding-bottom: 1rem;
     .index__hero-top {
-      flex-grow: 1;;
+      flex-grow: 1;
       display: flex;
       flex-direction: column;
       justify-content: center;
-    }
-    .title {
-      display: inline-flex;
-      flex-direction: column;
-      margin: 1rem 0;
       width: 100%;
-      @include mixins.for-tablet-and-desktop-only() {
-        flex-direction: row;
-        justify-content: center;
-      }
-      h1 {
-        text-align: center;
-        font-family: "Montserrat", sans-serif;
-        margin: 0;
-        line-height: 1;
-      }
-      h2 {
-        text-align: center;
-        line-height: 1;
-      }
-    }
-    .heading {
-      font-family: math, serif;
-      h2 {
-        line-height: 1;
-      }
+      padding: 3rem 0 2rem;
     }
     &-content {
-      max-width: 800px;
+      max-width: 760px;
+      width: 100%;
       margin: 0 auto;
       padding: 0 1rem;
+      text-align: center;
     }
   }
-  &__topics {
+
+  &__title {
     display: flex;
-    justify-content: space-around;
-    margin-top: 1rem;
-    gap: 1rem;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 0.35em;
+    margin: 0 0 1.5rem;
+    padding: 0 1rem;
+    font-family: $heading-font;
+    font-size: clamp(1.75rem, 1rem + 3.2vw, 3.25rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+    text-align: center;
+    text-wrap: balance;
     @include mixins.for-phone-only() {
-      flex-direction: column;
-      align-items: flex-start;
-    }
-    .index__topic ul {
-      margin: 0;
-      padding: 0;
-      list-style: disc;
-      li {
-        margin: 0;
-        padding: 0;
-        text-align: left;
-        margin-left: 1.2rem;
+      .index__title-emoji {
+        display: none;
       }
     }
   }
 
-  :deep(.desktop-menu__logo-wrapper){
+  &__heading {
+    margin-bottom: 1.25rem;
+  }
+
+  &__role {
+    margin: 0;
+    font-family: $heading-font;
+    font-size: clamp(1.15rem, 0.9rem + 1vw, 1.5rem);
+    font-weight: 500;
+    line-height: 1.3;
+  }
+
+  &__tagline {
+    margin: 0.35rem 0 0;
+    font-style: italic;
+    font-size: 1rem;
+    color: $text-muted;
+  }
+
+  &__intro {
+    font-size: 1.125rem;
+    line-height: 1.6;
+    color: $text-muted;
+    p {
+      margin: 0;
+    }
+  }
+
+  &__topics {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-top: 2.25rem;
+    text-align: left;
+    @include mixins.for-phone-only() {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  &__topic {
+    display: flex;
+    flex-direction: column;
+    padding: 1.5rem;
+    background-color: $cover-dark;
+    border: 1px solid $border-dark;
+    border-radius: 10px;
+    box-shadow: 0 4px 16px $shadow-dark;
+    ul {
+      flex-grow: 1;
+      margin: 0 0 1.5rem;
+      padding: 0;
+      list-style: disc;
+      li {
+        margin: 0 0 0.4rem 1.2rem;
+        padding: 0;
+        line-height: 1.4;
+      }
+    }
+    .index__button {
+      align-self: flex-start;
+      margin: 0;
+    }
+  }
+
+  &__topic-title {
+    margin: 0 0 0.85rem;
+    font-family: $heading-font;
+    font-size: 1.1rem;
+    font-weight: 600;
+  }
+
+  // The hero already shows the name, so the menu only has the links, centered.
+  :deep(.desktop-menu__logo-wrapper) {
     display: none;
+  }
+
+  :deep(.desktop-menu__container) {
+    justify-content: center;
+    padding-top: 0;
+  }
+
+  &__about-block {
+    width: 100%;
+    :deep(.content-block__content) {
+      padding: 2rem;
+      @include mixins.for-phone-only() {
+        padding: 1.25rem;
+      }
+    }
   }
 
   &__about {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1.1fr 1fr;
     gap: 4rem;
     @include mixins.for-phone-only() {
       grid-template-columns: 1fr;
-      gap: 1rem;
+      gap: 2rem;
     }
+  }
 
-    .title {
-      margin: 0;
+  &__about-title {
+    margin: 0 0 0.9rem;
+    font-family: $heading-font;
+    font-size: 1.375rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+
+  &__about-text {
+    max-width: 60ch;
+    font-family: $body-font;
+    font-size: 1rem;
+    line-height: 1.7;
+    color: $text-muted;
+    p {
+      margin: 0 0 0.75rem;
+    }
+  }
+
+  &__contacts {
+    width: fit-content;
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-family: $body-font;
+  }
+
+  &__contact {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.4rem 0;
+    color: $text-color;
+    text-decoration: none;
+  }
+
+  &__contact-name {
+    font-weight: 500;
+  }
+
+  &__contact-badge {
+    padding: 3px 8px;
+    border: 1px solid rgba($text-color, 0.3);
+    border-radius: 999px;
+    font-family: $heading-font;
+    font-size: 0.625rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    line-height: 1;
+    text-transform: uppercase;
+  }
+
+  // Only real links get the underline; "Call" is plain text on purpose.
+  a.index__contact {
+    .index__contact-name {
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+    &:hover .index__contact-name {
+      text-decoration: none;
+    }
+    &:focus-visible {
+      outline: 2px solid $text-color;
+      outline-offset: 2px;
+      border-radius: 2px;
+    }
+  }
+
+  &__ai,
+  &__tech {
+    :deep(.content-block__content) {
+      padding: 3.5rem 2rem;
+      @include mixins.for-phone-only() {
+        padding: 2.5rem 1.25rem;
+      }
+    }
+    :deep(.content-with-title__content) {
+      max-width: 62ch;
+      margin: 0 auto;
+      font-family: $body-font;
+      font-size: 1.0625rem;
+      line-height: 1.7;
+      color: $text-muted;
+      p {
+        margin: 0 0 0.75rem;
+      }
+    }
+    .index__button {
+      margin-top: 1.25rem;
     }
   }
 
   &__support-me {
-    margin: 1rem auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    margin: 3rem auto 2rem;
+    padding: 0 1rem;
     text-align: center;
+    p {
+      margin: 0;
+      font-size: 0.9375rem;
+      color: $text-muted;
+    }
   }
 
   &__trakt {
-    margin: 1rem auto 0;
+    margin: 0 auto;
+    padding: 0 1rem;
   }
 
   &__trakt-link {
     display: block;
+    overflow: hidden;
+    border: 1px solid $border-dark;
+    border-radius: 10px;
   }
 
   &__trakt-image {

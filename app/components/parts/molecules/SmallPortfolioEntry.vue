@@ -17,27 +17,22 @@
 
 <style scoped lang="scss">
 .small-portfolio-entry {
-  padding-top: 0.5em;
-
-  @media (pointer: fine) {
-    padding-top: 0.9em;
+  &__container {
+    font-family: $body-font;
+    font-weight: 500;
+    color: $text-color;
+    text-decoration: underline;
+    text-underline-offset: 3px;
   }
 
-  &__container {
-    color: $text-color;
+  &__container:hover {
     text-decoration: none;
   }
 
-  &__container:hover,
-  &__container:focus {
-    text-decoration: underline;
-  }
-
-  &__title {
-    text-align: center;
-    font-family: Roboto, Helvetica, Arial, Verdana, sans-serif;
-    font-weight: 400;
-    margin: 0 0 5px;
+  &__container:focus-visible {
+    outline: 2px solid $text-color;
+    outline-offset: 2px;
+    border-radius: 2px;
   }
 }
 </style>

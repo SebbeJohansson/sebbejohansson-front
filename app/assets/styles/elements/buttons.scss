@@ -1,23 +1,54 @@
 @use '../foundation/global-vars.scss' as *;
 
+$btn-ease: cubic-bezier(0.22, 1, 0.36, 1);
+$btn-duration: 0.3s;
+
+// Text link with an arrow; the underline grows in on hover.
 @mixin btn-primary()
 {
-  display: inline-block;
-  background-color: $cover-light;
-  text-decoration: none;
-  text-align: center;
-  border-radius: 2px;
-  padding: 16px 2rem;
-  font-size: 16px;
-  line-height: 18px;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+  padding: 4px 0;
+  color: $text-color;
+  background: linear-gradient(currentColor, currentColor) 0 100% / 0 1px no-repeat;
   border: none;
+  font-family: $body-font;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 18px;
+  text-decoration: none;
   cursor: pointer;
   outline: none;
+  transition: background-size $btn-duration $btn-ease;
+
+  &::after {
+    content: '→';
+    display: inline-block;
+    transition: transform $btn-duration $btn-ease;
+  }
+
+  &:focus-visible {
+    outline: 2px solid $text-color;
+    outline-offset: 4px;
+    border-radius: 2px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    &,
+    &::after {
+      transition: none;
+    }
+  }
 }
 
 @mixin btn-primary-hover()
 {
-  background-color: $background-dark;
+  background-size: 100% 1px;
+
+  &::after {
+    transform: translateX(4px);
+  }
 }
 
 @mixin btn-primary-disabled()

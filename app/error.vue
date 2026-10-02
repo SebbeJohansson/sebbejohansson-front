@@ -53,20 +53,23 @@
 }
 
 .error-page__code {
-  font-family: Montserrat, Arial, sans-serif;
-  font-size: 5em;
   margin: 0;
+  font-family: $body-font;
+  font-size: clamp(6rem, 4rem + 6vw, 9rem);
+  font-weight: 200;
+  letter-spacing: -0.03em;
   line-height: 1;
 }
 
 .error-page__message {
-  margin-bottom: 1.5rem;
+  margin: 1rem 0 1.75rem;
+  font-family: $body-font;
+  font-size: 1.125rem;
+  color: $text-muted;
 }
 
 .error-page__button {
   @include buttons.btn-primary();
-
-  color: $text-color;
 
   &:hover {
     @include buttons.btn-primary-hover();

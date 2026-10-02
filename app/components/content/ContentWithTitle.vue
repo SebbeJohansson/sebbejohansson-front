@@ -1,15 +1,29 @@
 <script setup lang="ts">
-  defineProps<{
+  withDefaults(defineProps<{
     title: string;
-  }>();
+    // Renders without the surrounding card, for content that has its own cards.
+    plain?: boolean;
+    headingTag?: 'h1' | 'h2';
+  }>(), {
+    plain: false,
+    headingTag: 'h2',
+  });
 </script>
 
 <template>
-  <div class="content-with-title">
-    <content-block>
-      <h2 class="content-with-title__title">
+  <div class="content-with-title" :class="{ 'content-with-title--plain': plain }">
+    <div v-if="plain" class="content-with-title__plain">
+      <component :is="headingTag" class="content-with-title__title">
         {{ title }}
-      </h2>
+      </component>
+      <div class="content-with-title__content">
+        <slot />
+      </div>
+    </div>
+    <content-block v-else>
+      <component :is="headingTag" class="content-with-title__title">
+        {{ title }}
+      </component>
       <div class="content-with-title__content">
         <slot />
       </div>
@@ -20,20 +34,28 @@
 <style scoped lang="scss">
 @use "@/assets/styles/foundation/mixins.scss";
 .content-with-title__title {
-  font-family: raleway, Helvetica, Arial, Verdana, sans-serif;
+  margin: 0 0 1.5rem;
+  font-family: $body-font;
+  font-size: clamp(3rem, 2rem + 3vw, 4.5rem);
   font-weight: 200;
+  letter-spacing: -0.02em;
+  line-height: 1;
   text-align: center;
-  font-size: 4em;
-  margin: 0 15px;
 }
 
 .content-with-title__content {
   text-align: center;
 }
 
-@include mixins.for-phone-and-tablet-only() {
-  .content-with-title__title {
-    font-size: 3em;
-  }
+.content-with-title__plain {
+  @include mixins.content-width();
+  width: 100%;
+  padding-top: 3.5rem;
+  padding-bottom: 3.5rem;
+  box-sizing: border-box;
+}
+
+.content-with-title--plain .content-with-title__title {
+  margin-bottom: 2.5rem;
 }
 </style>

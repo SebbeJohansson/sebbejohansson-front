@@ -14,5 +14,10 @@ $title-color: black;
 /* Sizes */
 $content-width: 1300px;
 
+/* Text */
+$text-muted: rgba($text-color, 0.7);
+
 /* Font Families */
-$base-font: Roboto, system-ui, Helvetica, Arial, sans-serif;
+$heading-font: Montserrat, Arial, sans-serif;
+$body-font: Raleway, Helvetica, Arial, Verdana, sans-serif;
+$ui-font: Roboto, Helvetica, Arial, Verdana, sans-serif;

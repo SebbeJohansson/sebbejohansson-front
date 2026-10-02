@@ -6,9 +6,9 @@
 
 <template>
   <div class="policy">
-    <div id="ppHeader">
+    <h1 id="ppHeader">
       Privacy Policy
-    </div>
+    </h1>
     <div id="ppBody">
       <div class="ppConsistencies">
         <div class="col-2">
@@ -266,19 +266,41 @@
   </div>
 </template>
 
-<style>
-#ppBody {
-  font-size: 11pt;
+<style scoped lang="scss">
+@use "@/assets/styles/foundation/mixins.scss";
+.policy {
+  @include mixins.content-width();
   width: 100%;
-  margin: 0 auto;
-  text-align: justify;
+  padding-top: 3.5rem;
+  padding-bottom: 4rem;
+  box-sizing: border-box;
+  font-family: $body-font;
+  font-size: 1.0625rem;
+  line-height: 1.7;
+  color: $text-muted;
+  overflow-wrap: break-word;
 }
 
 #ppHeader {
-  font-family: verdana;
-  font-size: 21pt;
-  width: 100%;
-  margin: 0 auto;
+  margin: 0 0 2.5rem;
+  font-family: $body-font;
+  font-size: clamp(3rem, 2rem + 3vw, 4.5rem);
+  font-weight: 200;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  text-align: center;
+  color: $text-color;
+}
+
+.grayText {
+  margin-top: 1rem;
+  font-family: $heading-font;
+  font-size: 1.125rem;
+  line-height: 1.4;
+  color: $text-color;
+  strong {
+    font-weight: 600;
+  }
 }
 
 .ppConsistencies {
