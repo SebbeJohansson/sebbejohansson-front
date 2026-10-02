@@ -142,10 +142,10 @@
       </NuxtLink>
     </content-with-title>
     <div class="index__support-me">
-      <p>Support me by fuiling my caffein addiction.</p>
       <a href="https://www.buymeacoffee.com/sebbejohansson">
         <img src="https://img.buymeacoffee.com/button-api/?text=Buy me a Monster&emoji=🐉&slug=sebbejohansson&button_colour=000000&font_colour=48e704&font_family=Bree&outline_colour=48e704&coffee_colour=48e704" height="40px">
       </a>
+      <p>If you appreciate anything I have built, consider supporting me by fuiling my caffein addiction.</p>
     </div>
     <div class="index__trakt">
       <a target="_blank" href="https://trakt.tv/users/redeyeddragon" class="index__trakt-link">

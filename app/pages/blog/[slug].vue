@@ -16,15 +16,6 @@
       resolve_relations: 'blog-entry.categories',
     });
     story.value = response?.data?.story;
-
-    // The bridge is bundled and loaded asynchronously, so `window.StoryblokBridge` is not
-    // there yet on mount. This waits for it, and click-to-edit only works once it exists.
-    onMounted(() => {
-      if (!story.value?.id) { return; }
-      useStoryblokBridge(story.value.id, (newStory) => {
-        story.value = newStory as StoryblokStory;
-      }, { resolveRelations: 'blog-entry.categories' });
-    });
   }
   else {
     // Custom fetch for full static support.
@@ -34,6 +25,8 @@
     });
     story.value = response.story;
   }
+
+  const { renderKey } = useStoryblokLivePreview(story, `blog/${route.params.slug}`, { draftLoaded: isPreview, resolveRelations: 'blog-entry.categories' });
 
   if (!story.value) {
     throw createError({ statusCode: 404, statusMessage: 'Blog post not found', fatal: true });
@@ -55,6 +48,7 @@
     <component
       :is="$resolveStoryBlokComponent(story)"
       v-if="story?.content"
+      :key="renderKey"
       :blok="story.content"
       :raw="story"
     />

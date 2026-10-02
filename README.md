@@ -30,6 +30,28 @@ yarn lint         # eslint (flat config via @nuxt/eslint)
 yarn typecheck    # vue-tsc
 ```
 
+## Storyblok Visual Editor
+
+Use a Storyblok **preview** token for `STORYBLOK_API_TOKEN` so draft responses include
+the `_editable` metadata needed by `v-editable`.
+
+Run `yarn caddy` and set the Visual Editor preview URL to
+`https://local.sebbejohansson.com/`. Open the story from Storyblok so it supplies the
+`_storyblok` and `_storyblok_tk` query parameters. The preview must use HTTPS to
+communicate with the HTTPS Storyblok editor.
+
+Blog and portfolio pages keep published content in their static payloads.
+`useStoryblokLivePreview` checks the editor URL after Nuxt hydration with `onNuxtReady`,
+fetches the draft, and remounts the block tree because `v-editable` only adds attributes
+on mount. It waits for `nextTick` before registering `useStoryblokBridge`.
+Checking only during page setup or `onMounted` is too early for prerendered previews.
+
+The Caddy proxy uses port 3000. If a static server already occupies that port,
+`yarn caddy` reuses it rather than starting Nuxt: regenerate and restart that server
+after source changes, or stop it before starting `yarn caddy` for development.
+
+See Storyblok's [Nuxt Visual Preview guide](https://www.storyblok.com/docs/guides/nuxt/visual-preview).
+
 ## Building
 
 ```bash
