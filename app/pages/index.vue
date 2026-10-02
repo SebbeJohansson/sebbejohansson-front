@@ -316,8 +316,14 @@
     font-weight: 600;
   }
 
-  :deep(.desktop-menu__logo-wrapper){
+  // The hero already shows the name, so the menu only has the links, centered.
+  :deep(.desktop-menu__logo-wrapper) {
     display: none;
+  }
+
+  :deep(.desktop-menu__container) {
+    justify-content: center;
+    padding-top: 0;
   }
 
   &__about-block {
