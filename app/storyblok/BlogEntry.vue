@@ -19,6 +19,19 @@
   });
   const content = computed((): any[] | string => (Array.isArray(props.blok.content) && props.blok.content.length > 0 ? props.blok.content : props.blok.description));
 
+  // The listing only shows a teaser, so that the page does not get very tall.
+  const excerpt = computed(() => (isPage.value ? undefined : getBlogExcerpt(content.value)));
+
+  const nuxtApp = useNuxtApp();
+  const excerptImageUrl = computed((): string | undefined => {
+    const src = excerpt.value?.image?.src;
+    // Only Storyblok assets can be resized; some old posts embed their images as data URIs.
+    if (!src?.startsWith('https://a.storyblok.com/')) { return src; }
+    // Their URLs carry the original size. Resizing a smaller image would blow it up.
+    const width = Number(src.match(/\/(\d+)x\d+\//)?.[1]);
+    return nuxtApp.$toMediaUrl(src, { maxWidth: width > 800 ? 800 : null });
+  });
+
   useJsonld(() => ({
     '@context': 'https://schema.org',
     '@type': 'TechArticle',
@@ -52,7 +65,7 @@
         <time v-if="date && isPage" class="blog-entry__date" :datetime="date">
           {{ formattedDate }}
         </time>
-        <div class="blog-entry__body">
+        <div v-if="isPage" class="blog-entry__body">
           <template v-if="Array.isArray(content)">
             <component
               :is="$resolveStoryBlokComponent(block)"
@@ -62,12 +75,28 @@
             />
           </template>
         </div>
+        <div v-else class="blog-entry__excerpt">
+          <p v-if="excerpt?.text">
+            {{ excerpt.text }}
+          </p>
+          <img
+            v-if="excerptImageUrl"
+            class="blog-entry__excerpt-image"
+            :src="excerptImageUrl"
+            :alt="excerpt?.image?.alt"
+            loading="lazy"
+          >
+          <NuxtLink :to="slug" class="blog-entry__read-more" :aria-label="`Read full post: ${title}`">
+            Read full post
+          </NuxtLink>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <style scoped lang="scss">
+@use "@/assets/styles/elements/buttons.scss";
 @use "@/assets/styles/foundation/mixins.scss";
 .blog-entry {
   &__container {
@@ -138,6 +167,20 @@
     letter-spacing: -0.01em;
     line-height: 1.25;
     color: $text-color;
+  }
+
+  // Capped so that tall screenshots do not take over the list; never cropped.
+  .blog-entry__excerpt-image {
+    width: auto;
+    max-height: 18rem;
+  }
+
+  .blog-entry__read-more {
+    @include buttons.btn-primary();
+    text-decoration: none;
+    &:hover {
+      @include buttons.btn-primary-hover();
+    }
   }
 
   // Overrides the generic link style above: titles stay plain.
